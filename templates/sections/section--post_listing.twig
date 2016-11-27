@@ -1,0 +1,34 @@
+{% embed 'sections/section.twig' %}
+  {% block section__content %}
+
+    {%
+      set query = {
+        'post_type':      section.section__post_type,
+        'posts_per_page': section.section__post_limit|default(-1),
+        'order':          section.section__post_order|default('DESC'),
+        'orderby':        section.section__post_orderby|default('date'),
+        'paged':          section.section__post_pager
+      }
+    %}
+    {# Custom query orderby field #}
+    {% if section.section__post_orderby == 'meta_value' and section.section__post_orderby_field %}
+      {% set query = query|merge({'meta_key': section.section__post_orderby_field}) %}
+    {% endif %}
+
+    <div class="section__content">
+      <div class="row row-grid flex-grow-all {{section.section__block_grid.classes|default(['small-up-1', 'medium-up-2', 'large-up-3'])|join(' ')}}">
+      {% for post in get_posts(query) %}
+        <div class="column">
+          {% include ['teasers/teaser--'~post.post_type~'.twig', 'teasers/teaser.twig'] %}
+        </div>
+      {% endfor %}
+      </div>
+
+      {% if section.section__post_pager %}
+        {% set pager = get_pager() %}
+        {% include 'parts/archive__pager.twig' with { pager: pager, anchor: 'section--'~loop.index } %}
+      {% endif %}
+
+    </div>
+  {% endblock %}
+{% endembed %}

@@ -1,0 +1,41 @@
+/**
+ * Sticky header when scrolling up.
+ *
+ * @example
+ * <header class="l-header headroom">
+ *   ...
+ * </header>
+ * <div class="l-content-wrapper"></div>
+
+ * @see http://wicky.nillia.ms/headroom.js/
+ * @see asset/scripts/components/headroom.js
+ */
+
+$c-admin-bar-breakpoint: 783px !default;
+
+.headroom {
+  // Headroom.js fixed positioned header.
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  left: 0;
+  top: 0;
+
+  // Admin bar support
+  .admin-bar & {
+    top: 46px;
+    @include breakpoint($c-admin-bar-breakpoint) { top: 32px; }
+  }
+
+  // Offset the content by the hardcoded header height. Useful to avoid a
+  // reflow as JS calculates and sets this as well.
+  @if variable-exists($c-header-sizes) {
+    & + div {
+      @each $size, $height in $c-header-sizes {
+        @include breakpoint($size) {
+          margin-top: $height;
+        }
+      }
+    }
+  }
+}

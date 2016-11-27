@@ -1,0 +1,23 @@
+{% if sidebar_footer %}
+  <div class="l-sidebar-footer column small-12">
+    <div class="row">
+      {{sidebar_footer}}
+    </div>
+  </div>
+{% endif %}
+<div class="column shrink">
+  <p><small>{{options.footer_copyright}}</small></p>
+</div>
+<div class="column shrink">
+  <ul class="menu">
+    {% if site.social.facebook_site %}
+      <li><a href="{{site.social.facebook_site}}"><i class="fa fa-facebook fa-2x"></i></a></li>
+    {% endif %}
+    {% if site.social.twitter_site %}
+      <li><a href="https://twitter.com/{{site.social.twitter_site}}"><i class="fa fa-twitter fa-2x"></i></a></li>
+    {% endif %}
+    {% if site.social.linkedin_url %}
+      <li><a href="{{site.social.linkedin_url}}"><i class="fa fa-linkedin fa-2x"></i></a></li>
+    {% endif %}
+  </ul>
+</div>

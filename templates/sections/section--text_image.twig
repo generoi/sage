@@ -1,0 +1,22 @@
+{% embed 'sections/section.twig' %}
+  {% import 'macros/image.twig' as img %}
+  {% block section %}
+    <div class="{{section_classes|join(' ')}}" {{section_attributes}}>
+      <div class="{{content_wrapper_classes|join(' ')}}" {{content_wrapper_attributes}}>
+        <div class="row {{overlay_foreground_classes|join(' ')}}">
+          {% block section__content %}
+            <div class="section__content sticky-footer column small-12 medium-6 {{section.section__image_position == 'left' ? 'medium-order-2'}}">
+              {% block section__header parent() %}
+              <div class="sticky-footer__content">
+                {{section.section__content|shortcodes}}
+              </div>
+              {% block section__footer parent() %}
+            </div>
+          {% endblock %}
+          <div class="section__image section__image--desktop show-for-medium column small-12 medium-6" style="background-image: url('{{section.section__image|resize(600, 400)}}');"></div>
+          <div class="section__image section__image--mobile hide-for-medium column small-12">{{img.image_crop(TimberImage(section.section__image), [500, 200])}}</div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% endembed %}

@@ -1,0 +1,105 @@
+{% import 'macros/gform.twig' as gform %}
+
+{% block form %}
+  <div class='gform_wrapper {{form.cssClass}} {{validation_messages|length ? 'gform_validation_error'}}' id='gform_wrapper_{{id}}'>
+    <a id='gf_{{id}}' class='gform_anchor'></a>
+    <form {{gform.form_attributes(form)}}>
+      {% block form__header %}
+        <div class='gform_heading'>
+          {% if display_title %}
+            <h3 class='gform_title'>{{title}}</h3>
+          {% endif %}
+          {% if display_description %}
+            <p class='gform_description'>{{description}}</p>
+          {% endif %}
+        </div>
+      {% endblock form__header %}
+
+      {% for message in validation_messages %}
+        <div data-abide-error="" class="alert callout" style="display: block;">
+          <p><i class="fa fa-exclamation-circle"></i> {{message}}</p>
+        </div>
+      {% endfor %}
+
+      {% block form__content %}
+        <div class='gform_body'>
+          <div id='gform_fields_{{id}}' class='row {{gform.fields_wrapper_classes(form)}}'>
+
+          {% for field in fields %}
+            {% set label_left_align = (field.labelPlacement == 'left_label') or (field.labelPlacement == 'hidden_label' and form.labelPlacement == 'left_label') %}
+
+            {% block form__field %}
+              <div id='{{gform.field_id(field)}}' class='column {{field.cssClass ?: 'small-12'}} {{gform.field_wrapper_classes(field)}}'>
+                <div class="row">
+                  <div class="column {{label_left_align ? 'small-3' : 'small-12'}}">
+                    {% block form__field_label %}
+                      <label for='{{gform.input_id(field)}}' class='{{gform.field_label_classes(field)}} {{label_left_align ? 'text-right middle'}}'>
+                        {{field.label}}
+                        {% if field.isRequired %}<span class="form-required">*</span>{% endif %}
+                      </label>
+                    {% endblock form__field_label %}
+                  </div>
+
+                  <div class='column {{label_left_align ? 'small-9' : 'small-12'}} {{gform.field_container_classes(field)}} '>
+                    {% block form__field_input %}
+                      {% if field.type in ['text', 'number', 'email', 'phone', 'website', 'hidden'] %}
+                        {{gform.text(field)}}
+                      {% elseif field.type == 'select' %}
+                        {{gform.select(field)}}
+                      {% elseif field.type == 'multiselect' %}
+                        <p>Multiselects do not work currently -Oskar</p>
+                        {# {{gform.multiselect(field)}} #}
+                      {% elseif field.type == 'checkbox' %}
+                        {{gform.checkbox(field)}}
+                      {% elseif field.type == 'radio' %}
+                        {{gform.radio(field)}}
+                      {% elseif field.type == 'textarea' %}
+                        {{gform.textarea(field)}}
+                      {% elseif field.type == 'html' %}
+                        {{field.content}}
+                      {% elseif field.type == 'section' %}
+                        {{gform.section(field)}}
+                      {% elseif field.type == 'date' %}
+                        {{gform.date(field)}}
+                      {% elseif field.type == 'fileupload' %}
+                        {{gform.fileupload(field)}}
+                      {% elseif field.type == 'honeypot' %}
+                        {{gform.honeypot(field)}}
+                      {% else %}
+                        <p>{{field.type}} do no not work currently -Oskar</p>
+                      {% endif %}
+
+                    {% endblock form__field_input %}
+
+                    {% if field.failed_validation %}
+                      <span class="form-error is-visible">{{field.validation_message}}</span>
+                    {% endif %}
+
+                    {% block form__field_description %}
+                      {% if field.description %}
+                        <p class="help-text">{{field.description}}</p>
+                      {% endif %}
+                    {% endblock form__field_description %}
+                  </div>
+                </div>
+
+              </div>
+            {% endblock form__field %}
+          {% endfor %}
+          </div>
+        </div>
+      {% endblock form__content %}
+      {% block form__footer %}
+        <div class="gform__footer row">
+          <div class="column {{form.labelPlacement == 'left_label' ? 'small-9 small-offset-3' : 'small-12'}}">
+            {{gform.submit(form)}}
+          </div>
+        </div>
+      {% endblock form__footer %}
+      {% block form__gform_footer %}
+        {{footer}}
+      {% endblock form__gform_footer %}
+    </form>
+  </div>
+  {{footer_after}}
+{% endblock form %}

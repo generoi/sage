@@ -2,7 +2,10 @@
   "root": true,
   "extends": "eslint:recommended",
   "globals": {
-    "wp": true
+    "wp": true,
+    "picturefill": true,
+    "Foundation": true,
+    "fastdom": true
   },
   "env": {
     "node": true,
@@ -38,6 +41,13 @@
       "imports": "always-multiline",
       "exports": "always-multiline",
       "functions": "ignore"
+    }]
+    "new-cap": ["error", {
+      "newIsCap": true,
+      "newIsCapExceptions": [],
+      "capIsNew": false,
+      "capIsNewExceptions": ["Immutable.Map", "Immutable.Set", "Immutable.List"],
+      "properties": false
     }]
   }
 }

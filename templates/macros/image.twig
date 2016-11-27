@@ -1,0 +1,31 @@
+{% macro image(thumbnail, size) %}
+  {# Specify the dimensions manually so we can upscale #}
+  {% set dimensions = get_image_size(size) %}
+
+  {% import _self as image %}
+  {{ image.image_crop(thumbnail, [dimensions.width, dimensions.height], dimensions.crop) }}
+{% endmacro %}
+
+{% macro image_crop(thumbnail, size, crop) %}
+  {% if thumbnail.src %}
+
+    {% set img = thumbnail.src|tojpg %}
+    {% set img_1x = img|resize(size[0],     size[1],     crop) %}
+    {% set img_2x = img|resize(size[0] * 2, size[1] * 2, crop) %}
+
+    <img
+      alt="{{thumbnail._wp_attachment_image_alt|default(thumbnail.title)|default(wp_title)}}"
+      title="{{thumbnail.title}}"
+      {% if size[0] %}width="{{size[0]}}"{% endif %}
+      {% if size[1] %}height="{{size[1]}}"{% endif %}
+      srcset="
+        {# @see https://github.com/timber/timber/issues/404 #}
+        {{img_1x}},
+        {{img_2x}} 2x
+      "
+    />
+  {# Prevent those annoying OOM and MySQL crashes when the source doesn't exist. #}
+  {% else %}
+    <img data-twig-error="no image source attribute" />
+  {% endif %}
+{% endmacro %}

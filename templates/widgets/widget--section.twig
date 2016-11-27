@@ -1,0 +1,17 @@
+{#
+ This is a catch-all template for widgets using section fieldgroups (text,
+ blockquote, post_listing etc).
+ @see Genero\Sage\Section
+ @see src/custom/acf.php
+ @see templates/widget-*.php
+#}
+{% extends 'widgets/widget.twig' %}
+
+{# No actual content exists, so would otherwise be hidden. #}
+{% set display_widget = true %}
+
+{% block widget__content %}
+  <div class="widget__content">
+    {% include ['sections/'~section_template~'.twig', 'sections/section.twig'] with { section: widget, section_template: section_template } %}
+  </div>
+{% endblock %}

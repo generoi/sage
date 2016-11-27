@@ -1,0 +1,75 @@
+/**
+ * A section component. Useful in combination with the overlay component.
+ * @example
+ * <section class="section">
+ *   <h3 class="section__title"></h3>
+ *   <div class="section__content">
+ *     <p>Lorem ipsum</p>
+ *   </div>
+ *   <div class="section__button">
+ *     <a href="#" class="button button--primary">Read more</a>
+ *   </div>
+ * </section>
+ */
+.section {
+  position: relative;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  &.column {
+    // Allow it to stretch if it's within a .row
+    height: auto;
+  }
+
+  &__title {}
+
+  &__content-wrapper {
+    // Attach spacing here rather than on .section, so we don't mess with
+    // grid gutters.
+    @extend %u-spacing-section;
+    flex: 0 0 100%;
+    // Nested rows causes IE11 to not count padding.
+    // @todo research.
+    max-width: 100%;
+  }
+  &__content {
+    p:last-child { margin-bottom: 0; }
+  }
+  &__readmore_link {
+    margin-bottom: 0;
+  }
+
+  &--blockquote {
+    .section__content { margin-bottom: 0; }
+  }
+  &--text {}
+  &--post_listing {
+    .section__content-wrapper {
+      @extend %u-no-spacing--horizontal;
+    }
+  }
+  &--text_image {
+    .section__content-wrapper {
+      @extend %u-no-spacing;
+      // Hide the overflowing background image.
+      overflow-x: hidden;
+    }
+    .section__content {
+      @extend %u-spacing-section;
+      // .collapsed causes negative margins, add them back on mobile when the
+      // content is stacked.
+      @include breakpoint(small only) {
+        margin-left: get-side(map-deep-get($c-spacings, gutter, small), left);
+        margin-right: get-side(map-deep-get($c-spacings, gutter, small), right);
+      }
+      text-align: left;
+    }
+    .section__image {
+      background-size: cover;
+    }
+  }
+}

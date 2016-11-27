@@ -1,0 +1,17 @@
+{% extends 'pages/page.twig' %}
+
+{% block post__content %}
+  <div class="post__content column small-12 medium-offset-1 medium-10 large-offset-2 large-8">
+    {{post.content}}
+  </div>
+{% endblock %}
+
+{% block post__after %}
+  <div class="post__footer row">
+    <div class="column small-12 medium-offset-1 medium-10 large-offset-2 large-8">
+      {% include 'parts/post__terms.twig' with { terms: post.terms('category') } %}
+      {% include 'parts/post__nav.twig' %}
+      {% include 'parts/post__comments.twig' %}
+    </div>
+  </div>
+{% endblock %}

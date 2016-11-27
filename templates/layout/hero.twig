@@ -1,0 +1,147 @@
+{% set object = post ? post : (term ? term : false) %}
+{% set slides = object.get_field('hero_slide') %}
+{% set force_crop = object.get_field('hero_crop') or (slides|length == 0) %}
+{% set default_video_poster = 'data:image/gif;base64,R0lGODlhAQABAIAAAP7//wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' %}
+{%
+  set sizes =  {
+    desktop: [1400, 350],
+    tablet:  [ 768, 300],
+    mobile:  [ 400, 300],
+    retina:  [ 800, 700],
+  }
+%}
+
+{% if slides|length == 0 %}
+  {% set slide_defaults = { slide_theme: 'cover', slide_type: 'image', slide_overlay: 'black', slide_title: object.name } %}
+  {# Use featured image #}
+  {% if post.get_thumbnail %}
+    {% set slide = slide_defaults|merge({ slide_image: post.thumbnail }) %}
+
+  {# Inherit from parents #}
+  {% elseif object.parent() %}
+    {% set parent = object.parent() %}
+    {% set slide = parent.get_field('hero_slide')|first %}
+
+    {% if slide %}
+      {% set slide = slide|merge({ slide_title: object.name }) %}
+      {% set force_crop = parent.get_field('hero_crop') %}
+    {% elseif parent.get_thumbnail %}
+      {% set slide = slide_defaults|merge({ slide_image: parent.thumbnail }) %}
+    {% endif %}
+  {% endif %}
+
+  {# Use fallback image #}
+  {% if not slide and options.hero_default_image %}
+     {% set slide = slide_defaults|merge({ slide_image: options.hero_default_image }) %}
+  {% endif %}
+
+  {% set slides = slide ? [slide] : [] %}
+{% endif %}
+<div
+  class="orbit orbit--hero"
+  role="region"
+  data-orbit
+  data-auto-play="false"
+>
+  {% if slides|length == 0 %}
+    <div class="orbit-replacement-title">
+      <h1 class="fade-in-down is-animating short-delay orbit">{{post.title}}</h1>
+    </div>
+  {% endif %}
+
+  <ul class="orbit-container">
+
+  {% if slides|length > 1 %}
+    <button class="orbit-previous" data-category="Hero" data-action="Slide" data-label="Previous"><span class="show-for-sr">{{__('Previous Slide', 'theme')}}</span>&#xFE0E;</button>
+    <button class="orbit-next" data-category="Hero" data-action="Slide" data-label="Next"><span class="show-for-sr">{{__('Next Slide', 'theme')}}</span>&#xFE0E;</button>
+  {% endif %}
+
+  {% for slide in slides %}
+    {% set video = slide.slide_type == 'video' and slide.slide_video ? TimberImage(slide.slide_video) %}
+    {% set image = slide.slide_type == 'image' and slide.slide_image ? TimberImage(slide.slide_image) %}
+
+    <li
+      class="orbit-slide {{loop.first ? 'is-active'}} orbit-slide--{{slide.slide_theme}} overlay overlay--{{slide.slide_overlay}}"
+      style="{{loop.first ?: 'display: none;'}}"
+      id="orbit-slide-{{loop.index}}"
+    >
+      {% if slide.slide_link %}
+        <a
+          class="orbit-link"
+          href="{{slide.slide_link}}"
+          data-category="Hero"
+          data-action="Click Link"
+          data-label="{{slide.slide_title}}"
+        >
+      {% endif %}
+
+      {% if video.src %}
+        <div class="orbit-image fade-in is-animating">
+          <div class="responsive-embed">
+            <video width="{{slide.slide_video_width}}" height="{{slide.slide_video_height}}" autoplay poster="{{default_video_poster}}">
+              <source src="{{video.src}}" type="{{video.post_mime_type}}">
+            </video>
+          </div>
+          <style>
+            #orbit-slide-{{loop.index}} .responsive-embed { padding-bottom: {{ slide.slide_video_height / slide.slide_video_width * 100 }}%; }
+          </style>
+        </div>
+      {% elseif image.src %}
+        {% set image_src = image.src|tojpg %}
+
+        {% set image_desktop = force_crop ? image_src|resize(sizes.desktop[0], sizes.desktop[1], 'center') : image_src|resize(sizes.desktop[0]) %}
+        {% set image_desktop = force_crop ? image_src|resize(sizes.desktop[0], sizes.desktop[1], 'center') : image_src|resize(sizes.desktop[0]) %}
+        {% set image_tablet  = force_crop ? image_src|resize(sizes.tablet[0],  sizes.tablet[1], 'center')  : image_src|resize(sizes.tablet[0]) %}
+        {% set image_mobile  = force_crop ? image_src|resize(sizes.mobile[0],  sizes.mobile[1], 'center')  : image_src|resize(sizes.mobile[0], sizes.mobile[1], 'center') %}
+        {% set image_retina  = force_crop ? image_src|resize(sizes.retina[0],  sizes.retina[1], 'center')  : image_src|resize(sizes.retina[0], sizes.retina[1], 'center') %}
+        <picture class="orbit-image fade-in is-animating" style="opacity:0;">
+          <source srcset="{{image_desktop}}" media="(min-width: 1000px)" />
+          <source srcset="{{image_tablet}}" media="(min-width: 700px)" />
+          <img
+            srcset="
+              {{image_mobile}} 1x,
+              {{image_retina}} 2x
+            " />
+        </picture>
+        {# If we're cropping, set the ratio on page load to prevent FOUC #}
+        {% if force_crop %}
+          <style>
+            #orbit-slide-{{loop.index}} .orbit-image { height: 0; display: block; }
+            #orbit-slide-{{loop.index}} .orbit-image { padding-bottom: {{ sizes.mobile[1] / sizes.mobile[0] * 100 }}%; }
+            @media screen and (min-width: 700px) {
+              #orbit-slide-{{loop.index}} .orbit-image { padding-bottom: {{ sizes.tablet[1] / sizes.tablet[0] * 100 }}%; }
+            }
+            @media screen and (min-width: 1000px) {
+              #orbit-slide-{{loop.index}} .orbit-image { padding-bottom: {{ sizes.desktop[1] / sizes.desktop[0] * 100 }}%; }
+            }
+          </style>
+        {% endif %}
+      {% endif %}
+
+      {% if slide.slide_title or slide.slide_content %}
+        <figcaption class="orbit-caption">
+          <div class="orbit-caption-content overlay__foreground">
+            {% block slide__title %}
+              {% if slide.slide_title %}
+                {% if loop.first %}
+                  <h1 class="fade-in-down is-animating short-delay">{{slide.slide_title}}</h1>
+                {% else %}
+                  <h3 class="fade-in-down is-animating short-delay h1">{{slide.slide_title}}</h3>
+                {% endif %}
+              {% endif %}
+            {% endblock %}
+
+            <div class="fade-in is-animating long-delay">
+              {% block slide__content %}
+                {{slide.slide_content}}
+              {% endblock %}
+            </div>
+          </div>
+        </figcaption>
+      {% endif %}
+
+      {% if slide.slide_link %}</a>{% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+</div>

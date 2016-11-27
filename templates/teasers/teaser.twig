@@ -1,0 +1,30 @@
+{% import 'macros/image.twig' as img %}
+
+{% set teaser_thumbnail_size = 'teaser' %}
+
+{% block teaser %}
+  <article class="card teaser teaser--{{post.post_type}}" id="teaser-{{post.ID}}">
+    <a class="teaser__link" href="{{post.link}}">
+      {% block teaser__thumbnail %}
+        {% if post.thumbnail %}
+          <div class="teaser__image">
+            {{img.image(post.thumbnail, teaser_thumbnail_size)}}
+          </div>
+        {% endif %}
+      {% endblock %}
+      <div class="card-section teaser__content-wrapper">
+        {% block teaser__title %}
+          <h6 class="teaser__title">{{post.title}}</h6>
+        {% endblock %}
+        {% block teaser__content %}
+          {% if post.get_preview %}
+            <div class="teaser__content">
+              <p>{{post.get_preview(30, false, false, true)}}</p>
+              <p class="teaser__readmore">{{__('Read more', 'theme')}}</p>
+            </div>
+          {% endif %}
+        {% endblock %}
+      </div>
+    </a>
+  </article>
+{% endblock %}

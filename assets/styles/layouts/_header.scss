@@ -1,6 +1,65 @@
-.banner .nav li {
-  @extend .nav-item;
-}
-.banner .nav a {
-  @extend .nav-link;
+.l-header {
+  background-color: $titlebar-background;
+
+  a { outline: none; }
+
+  &__bar--mobile {
+    position: relative;
+    z-index: 2;
+  }
+  &__bar--desktop {
+    &.top-bar {
+      padding-left: 0;
+      padding-right: 0;
+      overflow-x: hidden; // Hide the overflow on .column:last-child below.
+    }
+    .column:last-child {
+      // Align with grid.
+      margin-right: -1 * get-side($menu-item-padding, right);
+    }
+  }
+
+  &__nav-toggle {
+    outline: none;
+    // Make the target area larger.
+    padding: 2rem;
+    margin-top: -1rem;
+    margin-right: -1rem !important; // override .title-bar .menu-icon
+    > span { margin-left: -1rem; }
+
+    &.menu-icon:after { display: none; }
+
+    > span {
+      @include burger(
+        $width: rem-calc(20px),
+        $height: rem-calc(2px),
+        $gutter: $titlebar-icon-spacing,
+        $color: $titlebar-icon-color
+      );
+    }
+    &.active > span {
+      @include burger-to-cross();
+    }
+  }
+
+  &__nav--mobile {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-color: $titlebar-background;
+
+    // Prevent momentum scrolling on iOS.
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__nav--desktop {
+    .primary-menu {
+      &__item {
+        &--current {}
+      }
+      &__link {}
+    }
+  }
 }

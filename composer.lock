@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9fa5c6956d3ed29ca107f717891465c6",
-    "content-hash": "f00026ba7588607051943fd388bead9b",
+    "hash": "804c1cad52e7af6ee3ddbfe964aff8de",
+    "content-hash": "f0b82c14ce2aad384e59d1fe19f0d0f1",
     "packages": [
         {
             "name": "composer/installers",
@@ -180,6 +180,54 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "generoi/acf-genero-components",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/generoi/acf-genero-components.git",
+                "reference": "ebe440c122617e7f4f980a77b4dab18a86eee045"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/generoi/acf-genero-components/zipball/ebe440c122617e7f4f980a77b4dab18a86eee045",
+                "reference": "ebe440c122617e7f4f980a77b4dab18a86eee045",
+                "shasum": ""
+            },
+            "archive": {
+                "exclude": [
+                    ".gitignore"
+                ]
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.6.0"
+            },
+            "type": "theme-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Genero\\Component\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oskar Schöldström",
+                    "email": "public@oxy.fi"
+                }
+            ],
+            "homepage": "https://github.com/generoi/acf-genero-components",
+            "keywords": [
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/generoi/acf-genero-components/issues",
+                "source": "https://github.com/generoi/acf-genero-components/tree/v0.0.1"
+            },
+            "time": "2016-12-18 19:11:19"
         },
         {
             "name": "illuminate/config",
@@ -512,16 +560,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.7",
+            "version": "v2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "b5ea1ef3d8ff10c307ba8c5945c2f134e503278f"
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/b5ea1ef3d8ff10c307ba8c5945c2f134e503278f",
-                "reference": "b5ea1ef3d8ff10c307ba8c5945c2f134e503278f",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
                 "shasum": ""
             },
             "require": {
@@ -556,7 +604,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-02-27 17:11:23"
+            "time": "2017-03-13 16:27:32"
         },
         {
             "name": "psr/log",
@@ -607,16 +655,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.2.4",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "9b98854cb45bc59d100b7d4cc4cf9e05f21026b9"
+                "reference": "b90c9f91ad8ac37d9f114e369042d3226b34dc1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/9b98854cb45bc59d100b7d4cc4cf9e05f21026b9",
-                "reference": "9b98854cb45bc59d100b7d4cc4cf9e05f21026b9",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/b90c9f91ad8ac37d9f114e369042d3226b34dc1a",
+                "reference": "b90c9f91ad8ac37d9f114e369042d3226b34dc1a",
                 "shasum": ""
             },
             "require": {
@@ -660,20 +708,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-16 16:34:18"
+            "time": "2017-02-18 17:28:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.2.4",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "8c71141cae8e2957946b403cc71a67213c0380d6"
+                "reference": "92d7476d2df60cd851a3e13e078664b1deb8ce10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/8c71141cae8e2957946b403cc71a67213c0380d6",
-                "reference": "8c71141cae8e2957946b403cc71a67213c0380d6",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/92d7476d2df60cd851a3e13e078664b1deb8ce10",
+                "reference": "92d7476d2df60cd851a3e13e078664b1deb8ce10",
                 "shasum": ""
             },
             "require": {
@@ -709,22 +757,22 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:32:22"
+            "time": "2017-02-21 09:12:04"
         }
     ],
     "packages-dev": [
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.8.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "86dd55a522238211f9f3631e3361703578941d9a"
+                "reference": "d7cf0d894e8aa4c73712ee4a331cc1eaa37cdc7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/86dd55a522238211f9f3631e3361703578941d9a",
-                "reference": "86dd55a522238211f9f3631e3361703578941d9a",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d7cf0d894e8aa4c73712ee4a331cc1eaa37cdc7d",
+                "reference": "d7cf0d894e8aa4c73712ee4a331cc1eaa37cdc7d",
                 "shasum": ""
             },
             "require": {
@@ -789,7 +837,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-02-02 03:30:00"
+            "time": "2017-03-01 22:17:45"
         }
     ],
     "aliases": [],

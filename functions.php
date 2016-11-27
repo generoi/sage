@@ -85,3 +85,24 @@ if (basename($stylesheet = get_option('template')) !== 'templates') {
     wp_redirect($_SERVER['REQUEST_URI']);
     exit();
 }
+
+/**
+ * Custom includes.
+ */
+$custom_includes = [
+    // Site specific.
+    'src/custom/setup.php',
+    'src/custom/images.php',
+    'src/custom/timber.php',
+    'src/custom/utils.php',
+    'src/custom/acf.php',
+    'src/custom/widgets.php',
+    // 'src/custom/multilingual.php',
+    // 'src/custom/facetwp.php',
+    'src/custom/gravityform.php',
+];
+array_walk($custom_includes, function ($file) {
+    if (!locate_template($file, true, true)) {
+        trigger_error(sprintf(__('Error locating %s for inclusion', 'sage'), $file), E_USER_ERROR);
+    }
+});

@@ -1,0 +1,44 @@
+[
+    {
+        "key": "group_5841faa52ddd4",
+        "title": "Theme options",
+        "fields": [
+            {
+                "default_value": "Mitattavia tuloksia ja ainutlaatuisia tarinoita. Digitaalinen mainostoimisto.",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "key": "field_5841faafd0c8a",
+                "label": "Footer copyright",
+                "name": "footer_copyright",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "acf-options"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }
+]

@@ -1,0 +1,39 @@
+.post {
+  &__content-wrapper {}
+  &__content {
+    @extend %u-spacing-gutter--bottom;
+    p:last-child { margin-bottom: 0; }
+  }
+  &__footer {}
+
+  &__nav {}
+  &__nav_link {}
+  &__nav_item {
+    &--next .post__nav_link {
+      margin-left: -1 * get-side($menu-item-padding, left);
+    }
+    &--prev .post__nav_link {
+      margin-right: -1 * get-side($menu-item-padding, right);
+      text-align: right;
+    }
+  }
+
+  &__terms {
+    &.menu {
+      margin-left: -1 * get-side($menu-item-padding, left);
+      margin-right: -1 * get-side($menu-item-padding, right);
+    }
+  }
+  &__terms_link {}
+
+  &__comments {}
+  &__comments_title {}
+  &__comments_form {}
+  &__comments_listing {}
+
+  &--404 {}
+  &--page {}
+  &--single {
+    .post__title {}
+  }
+}

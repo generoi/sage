@@ -1,0 +1,53 @@
+<!doctype html>
+<html class="no-js" {{site.language_attributes}}>
+{% block html_head_container %}
+  <head>
+    {% include 'layout/head.twig' %}
+    {% block head %}
+    {% endblock %}
+  </head>
+{% endblock %}
+  {# Crude containment layout #}
+  {% set contained = true %}
+
+  <body class="{{body_class}} sticky-footer sticky-footer--full-height" data-template="base.twig">
+
+    <header id="header" class="l-header">
+      {% include 'layout/header.twig' %}
+    </header>
+
+    <div class="sticky-footer__content {{ contained ? 'row' }}">
+      <div class="l-hero {{ contained ? 'column small-12' }}">
+        {% block hero %}
+          {% embed 'layout/hero.twig' %}{% endembed %}
+        {% endblock %}
+      </div>
+
+      <div class="{{ contained ? 'column small-12' }}" role="document">
+        <section id="content" role="main" class="l-content-wrapper fade-in is-animating">
+        {% if password_required %}
+          {% block password %}
+            {% include 'parts/password.twig' %}
+          {% endblock %}
+        {% else %}
+          {% block content %}
+            {{__('Sorry, no content', 'theme')}}
+          {% endblock %}
+        {% endif %}
+        </section>
+      </div>
+
+    </div>
+
+    {% if sidebar_content_below %}
+      <div class="l-siderbar-content-below row align-center">
+        {{sidebar_content_below}}
+      </div>
+    {% endif %}
+
+    <footer id="footer" class="l-footer row align-center" role="contentinfo">
+      {% include 'layout/footer.twig' %}
+    </footer>
+    {{ function('wp_footer') }}
+  </body>
+</html>

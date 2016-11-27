@@ -4,20 +4,43 @@
       "./scripts/main.js",
       "./styles/main.scss"
     ],
+    "icons": [
+      "./styles/icons.scss"
+    ],
     "customizer": [
       "./scripts/customizer.js"
+    ],
+    "loadcss": [
+      "./scripts/loadcss.js"
+    ],
+    "vendor": [
+      "./scripts/vendor.js"
     ]
   },
-  "publicPath": "/app/themes/sage",
-  "devUrl": "http://example.dev",
+  "publicPath": "/app/themes/<example-project>",
+  "devUrl": "http://<example-project>.dev",
   "proxyUrl": "http://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",
   "watch": [
-    "{src,templates}/**/*.php"
+    "templates/**/*.twig",
+    "src/**/*.php",
+    "*.php"
   ],
   "browsers": [
     "last 2 versions",
-    "android 4",
-    "opera 12"
-  ]
+    "ie >= 9",
+    "Android >= 2.3",
+    "ios >= 7"
+  ],
+  "rsync": {
+    "hostname": "<example-project>.dev",
+    "username": "vagrant",
+    "destination": "/var/www/wordpress/web/app/themes/<example-project>",
+    "watch": [
+      "assets/scripts/**/*.js",
+      "templates/**/*.twig",
+      "src/**/*.php",
+      "*.php"
+    ]
+  }
 }
