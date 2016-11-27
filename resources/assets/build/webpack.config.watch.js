@@ -1,6 +1,7 @@
 const url = require('url');
 const webpack = require('webpack');
 const BrowserSyncPlugin = require('browsersync-webpack-plugin');
+const RsyncWatcher = require('./rsync-watcher');
 
 const config = require('./config');
 
@@ -29,7 +30,11 @@ module.exports = {
       open: config.open,
       proxyUrl: config.proxyUrl,
       watch: config.watch,
-      delay: 500,
+      delay: 50,
+      debouce: 800,
+      events: {
+        setup: (plugin) => (new RsyncWatcher(plugin.watcher, config.rsync)).watch(),
+      },
     }),
   ],
 };

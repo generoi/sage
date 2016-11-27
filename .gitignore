@@ -8,3 +8,10 @@ npm-debug.log
 yarn-error.log
 vendor
 resources/assets/config-local.json
+
+# Fontello build files we don't need.
+assets/fonts/fontello/animation.css
+assets/fonts/fontello/fontawesome-embedded.css
+assets/fonts/fontello/fontawesome-ie7-codes.css
+assets/fonts/fontello/fontawesome-ie7.css
+assets/fonts/fontello/fontawesome.css

@@ -1,0 +1,31 @@
+.teaser {
+  text-align: left;
+  // Support equal-height grid columns.
+  // @see .flex-grow-all in common/_helpers.scss
+  flex-grow: 1;
+
+  a { color: inherit; }
+
+  &__image {
+    img { @extend %u-img-expand; }
+  }
+
+  // Expand the wrapping link.
+  display: flex;
+  flex-direction: column;
+  &__link {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    // Override any styling, block links should never be underlined.
+    text-decoration: none !important;
+  }
+
+  &__content {
+    // Allow long words to overflow.
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    p:last-child { margin-bottom: 0; }
+  }
+}

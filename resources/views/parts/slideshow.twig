@@ -1,0 +1,68 @@
+{% import 'macros/image.twig' as img %}
+
+{% set options  = options|default({ infinite: false, dots: true, arrows: false }) %}
+{% set width    = width %}
+{% set height   = height %}
+{% set crop     = crop %}
+{% set lightbox = lightbox|default(false) %}
+
+{% if items|length %}
+  <div
+    class="{{items|length > 1 ? 'slick' : 'slick--no-slider'}} slick--grid {{slick_class}}"
+    data-slick='{{fn('json_encode', options)}}'
+  >
+  {% for item in items %}
+    <div class="slick__slide slick__slide--boxed overlay overlay--white" style="display: none;">
+      {# TimberPost objects were passed as items #}
+      {% if item.post_type %}
+
+        {% include ['teasers/teaser--'~item.post_type~'.twig', 'teasers/teaser.twig'] with { post: item } %}
+
+      {# Either a list of images or a list of objects with an image property #}
+      {% else %}
+
+        {% set image = item.image ?: item %}
+        {% set is_lightbox = lightbox and image.src %}
+        {% set is_linked = item.link or is_lightbox %}
+
+        {% if not image.src %}
+          {% set image = TimberImage(image) %}
+        {% endif %}
+
+        {% if is_linked %}
+          <a
+            class="slick__link"
+            href="{{lightbox ? image.src : item.link}}"
+            {{lightbox ? 'data-rel="prettyPhoto"'}}
+            data-category="Slideshow"
+            data-action="Click Link"
+            data-label="{{item.content}}"
+          >
+        {% endif %}
+
+        {% if image.src %}
+          <div class="slick__image">
+            {% if width and height %}
+              {{img.image(image, width, height, crop)}}
+            {% else %}
+              {{img.image(image, 400, 300, crop)}}
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if item.content %}
+        <figcaption class="slick__caption overlay__foreground">
+          <div class="slick__caption-wrapper">
+            <div class="slick__caption_content text-center">
+              <big>{{item.content}}</big>
+            </div>
+          </div>
+        </figcaption>
+        {% endif %}
+
+        {% if is_linked %}</a>{% endif %}
+      {% endif %}
+    </div>
+  {% endfor %}
+  </div>
+{% endif %}

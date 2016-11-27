@@ -1,0 +1,25 @@
+{% extends 'layout/base.twig' %}
+
+{% block content %}
+  <article class="post post--{{template_type}} post--type-{{post.post_type}} {{extra_classes}}" id="post-{{post.ID}}">
+    <div class="post__content-wrapper row align-center">
+      <div class="column small-12 large-8">
+        {% block post__header %}
+          <div class="post__title-wrapper">
+            <h1 class="post__title">{% block post__title post.title|default(wp_title) %}</h1>
+          </div>
+        {% endblock %}
+        {% block post__content %}
+          {% if post.content %}
+            <div class="post__content">
+              {{post.content}}
+            </div>
+          {% endif %}
+        {% endblock %}
+        {% block post__footer %}{% endblock %}
+      </div>
+      {% block post__after %}{% endblock %}
+    </div>
+    {% block post__row_after %}{% endblock %}
+  </article>
+{% endblock %}

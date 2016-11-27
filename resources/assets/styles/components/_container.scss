@@ -1,0 +1,20 @@
+/**
+ * Container wrapper Independent of Foundation grid which easily causes nesting
+ * issues.
+ */
+$c-container-columns: (
+  large: 8,
+  medium: 10,
+  small: 12,
+) !default;
+
+.container {
+  @include grid-row();
+  @include grid-col;
+  float: none !important;
+  @each $breakpoint, $size in $c-container-columns {
+    @include breakpoint($breakpoint) {
+      @include grid-col-size($size);
+    }
+  }
+}

@@ -48,6 +48,41 @@ if (!class_exists('Roots\\Sage\\Container')) {
 }
 
 /**
+ * Ensure plugin requirements are activated.
+ */
+foreach([
+    'Timber' => 'timber-library/timber.php',
+    'TimberExtended' => 'wp-timber-extended/wp-timber-extended.php',
+    'acf' => 'advanced-custom-fields-pro/acf.php',
+] as $class_name => $plugin) {
+    if (!class_exists($class_name)) {
+        $plugin_path = WP_CONTENT_DIR . '/plugins/' . $plugin;
+        if (!file_exists($plugin_path)) {
+            $sage_error(
+                sprintf(__('You must download the %s (%s) plugin to use this theme', 'theme-admin'), $class_name, $plugin),
+                __('Unable to find required plugin', 'theme-admin')
+            );
+        }
+        require_once ABSPATH . '/wp-admin/includes/plugin.php';
+        activate_plugin($plugin_path);
+        require_once $plugin_path;
+
+        if (class_exists($class_name)) {
+            add_action('admin_notices', function () use ($class_name) {
+                echo '<div class="notice notice-success is-dismissible">';
+                echo '<p>' . sprintf(__('Activated plugin %s', 'theme-admin'), $class_name) . '</p>';
+                echo '</div>';
+            });
+        } else {
+            $sage_error(
+                sprintf(__('Unable to activate the plugin %s. This might be due to a breaking structural plugin change.', 'theme-admin'), $plugin),
+                __('Unable to activate plugin', 'theme-admin')
+            );
+        }
+    }
+}
+
+/**
  * Sage required files
  *
  * The mapped array determines the code library included in your theme.
@@ -58,7 +93,30 @@ array_map(function ($file) use ($sage_error) {
     if (!locate_template($file, true, true)) {
         $sage_error(sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file), 'File not found');
     }
-}, ['helpers', 'setup', 'filters', 'admin']);
+}, [
+    'helpers',
+    'setup',
+    'filters',
+    'admin',
+    // Site specific.
+    'setup',
+    'images',
+    'timber',
+    'utils',
+    'acf',
+    'widgets',
+    'admin',
+    'performance',
+    // 'rewrites',
+    // 'yoast',
+    // 'multilingual',
+    // 'facetwp',
+    // 'gravityform',
+    // 'woocommerce-hooks',
+    // Custom classes
+    'classes/Post',
+    'classes/Term',
+]);
 
 /**
  * Here's what's happening with these hooks:

@@ -4,16 +4,40 @@ namespace App;
 
 use Roots\Sage\Container;
 use Roots\Sage\Assets\JsonManifest;
-use Roots\Sage\Template\Blade;
-use Roots\Sage\Template\BladeProvider;
+use Roots\Sage\Config;
 
 /**
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
+    // wp_enqueue_style('font_css', '//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800', false, null);
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
-    wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
+
+    // Scripts which are loaded synchronously
+    wp_enqueue_script('theme/js/vendor', asset_path('scripts/vendor.js'), ['jquery'], false, true);
+    wp_enqueue_script('theme/js/main', asset_path('scripts/main.js'), ['jquery', 'theme/js/vendor'], null, true);
 }, 100);
+
+/**
+ * Dequeue stylesheets.
+ */
+add_action('wp_print_styles', function () {
+     wp_dequeue_style('ext-widget-opts');
+}, 100);
+
+/**
+ * Asynchronously loaded CSS.
+ */
+add_action('wp_head', function () {
+    // Load some styles asynchronously.
+    Utils\print_async_stylesheet(asset_path('styles/icons.css'));
+    // Use loadCSS as a fallback for asynchronously loading CSS in older browsers.
+    // @see https://github.com/filamentgroup/loadCSS
+    $loadcss_path = get_stylesheet_directory() . '/dist/scripts/loadcss.js';
+    if (file_exists($loadcss_path)) {
+        echo '<script>' . file_get_contents($loadcss_path) . '</script>';
+    }
+});
 
 /**
  * Theme setup
@@ -27,13 +51,34 @@ add_action('after_setup_theme', function () {
     add_theme_support('soil-jquery-cdn');
     add_theme_support('soil-nav-walker');
     add_theme_support('soil-nice-search');
-    add_theme_support('soil-relative-urls');
+    // @todo causes issues with Timber.
+    // add_theme_support('soil-relative-urls');
 
     /**
      * Enable plugins to manage the document title
      * @link https://developer.wordpress.org/reference/functions/add_theme_support/#title-tag
      */
     add_theme_support('title-tag');
+
+    /**
+     * Use timber as a templating system.
+     * @link https://github.com/generoi/wp-timber-extended
+     */
+    add_theme_support('timber-extended-templates', [
+        /** Use double dashes as the template variation separator. */
+        'bem_templates',
+    ]);
+    /** If a post parent is password protected, so are it's children. */
+    add_theme_support('timber-extended-password-inheritance');
+    /** Add additional twig functions and filters. */
+    add_theme_support('timber-extended-twig-extensions', ['core', 'contrib', 'functional']);
+    add_theme_support('timber-extended-timber-basics');
+
+    /**
+     * Woocommerce support.
+     */
+    add_theme_support('woocommerce');
+    // add_theme_support('wc-product-gallery-lightbox');
 
     /**
      * Register navigation menus
@@ -73,27 +118,23 @@ add_action('after_setup_theme', function () {
  */
 add_action('widgets_init', function () {
     $config = [
-        'before_widget' => '<section class="widget %1$s %2$s">',
-        'after_widget'  => '</section>',
+        'before_widget' => '',
+        'after_widget'  => '',
         'before_title'  => '<h3>',
         'after_title'   => '</h3>'
     ];
     register_sidebar([
-        'name'          => __('Primary', 'sage'),
+        'name'          => __('Primary', 'theme-admin'),
         'id'            => 'sidebar-primary'
     ] + $config);
     register_sidebar([
-        'name'          => __('Footer', 'sage'),
+        'name'          => __('Footer', 'theme-admin'),
         'id'            => 'sidebar-footer'
     ] + $config);
-});
-
-/**
- * Updates the `$post` variable on each iteration of the loop.
- * Note: updated value is only available for subsequently loaded views, such as partials
- */
-add_action('the_post', function ($post) {
-    sage('blade')->share('post', $post);
+    register_sidebar([
+        'name'          => __('Below Content', 'theme-admin'),
+        'id'            => 'sidebar-content-below'
+    ] + $config);
 });
 
 /**
@@ -105,24 +146,5 @@ add_action('after_setup_theme', function () {
      */
     sage()->singleton('sage.assets', function () {
         return new JsonManifest(config('assets.manifest'), config('assets.uri'));
-    });
-
-    /**
-     * Add Blade to Sage container
-     */
-    sage()->singleton('sage.blade', function (Container $app) {
-        $cachePath = config('view.compiled');
-        if (!file_exists($cachePath)) {
-            wp_mkdir_p($cachePath);
-        }
-        (new BladeProvider($app))->register();
-        return new Blade($app['view']);
-    });
-
-    /**
-     * Create @asset() Blade directive
-     */
-    sage('blade')->compiler()->directive('asset', function ($asset) {
-        return "<?= " . __NAMESPACE__ . "\\asset_path({$asset}); ?>";
     });
 });

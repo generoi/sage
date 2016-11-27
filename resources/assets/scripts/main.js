@@ -1,24 +1,19 @@
 // import external dependencies
 import 'jquery';
+import 'picturefill';
+import 'fastdom/fastdom';
 
-// Import everything from autoload
-import "./autoload/**/*"
+// Import components
+import gform from './components/gform';
+import slick from './components/slick';
+import headroom from './components/headroom';
 
-// import local dependencies
-import Router from './util/Router';
-import common from './routes/common';
-import home from './routes/home';
-import aboutUs from './routes/about';
+// Ensure correct images are set before plugins such as orbit begins measuring
+// dimensions.
+picturefill();
+jQuery(document).foundation();
 
-/** Populate Router instance with DOM routes */
-const routes = new Router({
-  // All pages
-  common,
-  // Home page
-  home,
-  // About Us page, note the change from about-us to aboutUs.
-  aboutUs,
-});
-
-// Load Events
-jQuery(document).ready(() => routes.loadEvents());
+// Custom components
+gform.init();
+slick.init();
+headroom.init();

@@ -1,0 +1,81 @@
+{% macro image_thumbnail(thumbnail, size) %}
+  {# Specify the dimensions manually so we can upscale #}
+  {% set dimensions = get_image_size(size) %}
+
+  {% import _self as image %}
+  {{ image.image(thumbnail, dimensions.width, dimensions.height, dimensions.crop) }}
+{% endmacro %}
+
+{# Output an image tag #}
+{% macro image(thumbnail, width, height, crop, retina, smartcrop) %}
+  {% import _self as image %}
+
+  {% if not thumbnail.src %}
+    {% set thumbnail = TimberImage(thumbnail) %}
+  {% endif %}
+
+  {% if thumbnail.src %}
+
+    {% set img = thumbnail.src|tojpg %}
+    {% set is_smartcrop = smartcrop|default(thumbnail._wpsmartcrop_enabled and width and height) %}
+    {% set is_retina = retina|default(true) %}
+
+    {# Smarcrop plugin support. #}
+    {% if is_smartcrop %}
+      {% set img_1x = img|resize(width) %}
+      {% set img_2x = img_1x %}
+    {# User defined a size #}
+    {% elseif width and height %}
+      {# Serve retina image #}
+      {% if is_retina %}
+        {% set img_1x = img|resize(width,     height,     crop) %}
+        {% set img_2x = img|resize(width * 2, height * 2, crop) %}
+      {# Serve single image #}
+      {% else %}
+        {% set img_1x = img|resize(width,     height,     crop) %}
+      {% endif %}
+    {# Output image as is. #}
+    {% else %}
+      {% set img_1x = img %}
+    {% endif %}
+
+    {% if is_smartcrop and crop|default(true) %}
+      <div class="smartcrop__container" style="width:100%; height: 0; padding-bottom:{{ (height/width) * 100 }}%;">
+    {% endif %}
+
+    <img
+      alt="{{thumbnail._wp_attachment_image_alt|default(thumbnail.title)|default(wp_title)}}"
+      title="{{thumbnail.title}}"
+      {% if width %}width="{{width}}"{% endif %}
+      {% if height %}height="{{height}}"{% endif %}
+
+      {# Focus point cropping #}
+      {% if is_smartcrop %}{{image.smartcrop_attributes(thumbnail)}}{% endif %}
+
+      {# Retina image #}
+      {% if is_retina %}
+        srcset="
+          {# @see https://github.com/timber/timber/issues/404 #}
+          {{img_1x}},
+          {{img_2x}} 2x
+        "
+      {% else %}
+        src="{{img_1x}}"
+      {% endif %}
+    />
+
+    {% if is_smartcrop %}</div>{% endif %}
+  {# Prevent those annoying OOM and MySQL crashes when the source doesn't exist. #}
+  {% else %}
+    <img data-twig-error="no image source attribute" />
+  {% endif %}
+{% endmacro %}
+
+{# Add necessary smartcrop attribtues to an <img>-element. #}
+{% macro smartcrop_attributes(image) %}
+  {% if image._wpsmartcrop_enabled %}
+    {% set focus = fn('unserialize', image._wpsmartcrop_image_focus) %}
+    class="smartcrop"
+    style="object-position: {{focus.left|round(2)}}% {{focus.top|round(2)}}%;"
+  {% endif %}
+{% endmacro %}
