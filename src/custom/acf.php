@@ -4,7 +4,6 @@ namespace App;
 
 use Genero\Component\AcfFieldLoader;
 use Genero\Component\HeroComponent;
-use Genero\Component\SectionComponent;
 
 use Genero\Sage\PostTypeConnection;
 use Genero\Sage\OptionsPage;
@@ -22,12 +21,6 @@ AcfFieldLoader::addAcfFieldgroup(new PostTypeConnection());
  * display slideshows in the header.
  */
 AcfFieldLoader::addAcfFieldgroup(new HeroComponent());
-
-/**
- * A flexible content field group to create different type of sections in
- * content. Also register the ACF Widget for the fieldgroup.
- */
-AcfFieldLoader::addAcfFieldgroup(new SectionComponent());
 
 /**
  * Activate ACF Option Page.
@@ -72,4 +65,4 @@ add_filter('acf/load_field/name=slide_overlay', function ($field) {
 /**
  * Collapse ACF fields by default.
  */
-add_action('acf/input/admin_footer', ['Genero\\Sage\\Acf', 'action_collapse_fields']);
+// add_action('acf/input/admin_footer', ['Genero\\Sage\\Acf', 'action_collapse_fields']);

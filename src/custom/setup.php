@@ -38,6 +38,9 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('theme/js/main', asset_path('scripts/main.js'), ['jquery', 'theme/js/vendor'], null, true);
 }, 100);
 
+/**
+ * Asynchronously loaded CSS.
+ */
 add_action('wp_head', function () {
     // Load some styles asynchronously.
     Utils\print_async_stylesheet(asset_path('styles/icons.css'));
