@@ -3,13 +3,13 @@
 
 const spawn = require('child_process').spawn;
 
-const mergeWithConcat = require('./util/mergeWithConcat');
+const merge = require('webpack-merge');
 const config = require('./config');
 
 module.exports = class {
   constructor(watcher, options) {
     this.watcher = watcher;
-    this.options = mergeWithConcat({
+    this.options = merge({
       ssh: `ssh -o PasswordAuthentication=no -i ${process.env.HOME}/.vagrant.d/insecure_private_key`,
       flags: 'a',
       watch: [],
