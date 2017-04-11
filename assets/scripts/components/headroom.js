@@ -24,14 +24,22 @@ export default {
         pinned: 'slide-in-down',
         unpinned: 'slide-out-up',
       },
+      onPin: () => this.$headroom.trigger('headroom.pinned'),
+      onUnpin: () => this.$headroom.trigger('headroom.unpinned'),
     }, options));
 
     $(window).on('changed.zf.mediaquery', this.offsetContent.bind(this));
-    window.setTimeout(this.offsetContent.bind(this), 100);
+
+    window.setTimeout(this.offsetContent.bind(this), 500);
+    window.setInterval(this.offsetContent.bind(this), 3000);
   },
 
   offsetContent() {
-    const dimensions = Foundation.Box.GetDimensions(this.$headroom);
-    this.$content.css('margin-top', dimensions.height);
+    fastdom.mutate(() => {
+      const dimensions = Foundation.Box.GetDimensions(this.$headroom);
+      if (parseInt(this.$content.css('margin-top')) !== dimensions.height) {
+        this.$content.css('margin-top', dimensions.height);
+      }
+    });
   },
 };

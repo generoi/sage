@@ -25,7 +25,8 @@ $c-underline-hover-color: false !default;
     display: block;
     background-color: $color;
     position: absolute;
-    bottom: -1 * (rem-calc($c-border-height) + rem-calc($offset));
+    bottom: -1 * (rem-calc($c-underline-height) + rem-calc($offset));
+    height: $c-underline-height;
     width: $size;
     // Center align it.
     left: (100% - $size) / 2;

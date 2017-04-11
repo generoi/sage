@@ -1,5 +1,4 @@
 // import external dependencies
-import 'picturefill';
 import 'foundation-sites/dist/js/plugins/foundation.core';
 import 'foundation-sites/dist/js/plugins/foundation.util.box';
 import 'foundation-sites/dist/js/plugins/foundation.util.keyboard';

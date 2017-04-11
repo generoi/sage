@@ -32,7 +32,9 @@ $c-background-palette: (
     }
 
     @if map-has-key($defs, button) {
-      @extend .button--#{map-get($defs, button)};
+      .button {
+        @extend .button--#{map-get($defs, button)};
+      }
     }
 
     @if map-has-key($defs, anchor-hover) {

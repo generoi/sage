@@ -57,8 +57,10 @@
     "webpack": "^2.3.1",
     "webpack-assets-manifest": "^0.6.2",
     "webpack-dev-middleware": "^1.10.1",
+    "webpack-disk-plugin": "^0.0.2",
     "webpack-hot-middleware": "^2.17.1",
     "webpack-merge": "^4.1.0",
+    "write-file-webpack-plugin": "^4.0.0",
     "yargs": "^7.0.2"
   },
   "dependencies": {
@@ -67,7 +69,7 @@
     "fg-loadcss": "^1.2.0",
     "font-awesome": "^4.7.0",
     "fontello-cli": "^0.4.0",
-    "foundation-sites": "^6.3.0",
+    "foundation-sites": "6.3.0",
     "headroom.js": "^0.9.3",
     "jquery": "1.12.4 - 3",
     "jquery.localscroll": "^1.4.0",

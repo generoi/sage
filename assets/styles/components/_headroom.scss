@@ -29,7 +29,7 @@ $c-admin-bar-breakpoint: 783px !default;
 
   // Offset the content by the hardcoded header height. Useful to avoid a
   // reflow as JS calculates and sets this as well.
-  @if variable-exists($c-header-sizes) {
+  @if variable-exists(c-header-sizes) {
     & + div {
       @each $size, $height in $c-header-sizes {
         @include breakpoint($size) {

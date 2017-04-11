@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 /**
  * Unregister all default widgets.
  */

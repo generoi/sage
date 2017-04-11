@@ -14,6 +14,10 @@ class TimberWidget extends TimberExtended\Widget
     {
         parent::init($info, $force);
 
+        if (isset($this->{'extended_widget_opts-' . $this->widget_id})) {
+            $this->extended_widget_opts = $this->{'extended_widget_opts-' . $this->widget_id};
+        }
+
         if (!empty($this->extended_widget_opts)) {
             $this->widget_options($this->extended_widget_opts);
         }

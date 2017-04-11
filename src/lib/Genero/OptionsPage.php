@@ -24,8 +24,6 @@ class OptionsPage implements ComponentInterface
     public function addAcfFieldgroup()
     {
         if (!_acf_get_field_group_by_key(self::$groupKey)) {
-            // require_once __DIR__ . '/OptionsPage/acf.php';
-            // parent::saveFieldgroupToDatabase(self::$groupKey);
             $json = __DIR__ . '/OptionsPage/optionspage-acf.json';
             AcfFieldLoader::importFieldGroups($json, [self::$groupKey]);
         }
