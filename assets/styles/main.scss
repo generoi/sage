@@ -6,6 +6,7 @@
 @import "~foundation-sites/scss/foundation";
 @import "~motion-ui/src/motion-ui";
 @import "~sass-burger/burger";
+@import "~spinthatshit/src/loaders";
 
 // Include font-awesome variables and mixins but override it with fontello's
 // character codes.
@@ -86,6 +87,7 @@
 @import "components/archive";
 @import "components/teaser";
 @import "components/widget";
+@import "components/spinner";
 
 @import "layouts/header";
 @import "layouts/content-wrapper";
