@@ -13,7 +13,7 @@ const OUTPUT_PATH = 'resources/assets/fonts/fontello';
 const SCSS_PATH = 'resources/assets/fonts/fontello/fontello.scss';
 
 function fetchFontelloFonts(configPath, outputPath, callback) {
-  const command = `./node_modules/.bin/fontello-cli --config ${configPath} --font ${outputPath} --css ${outputPath}`;
+  const command = `./node_modules/.bin/fontello-cli install --config ${configPath} --font ${outputPath} --css ${outputPath}`;
   const childProcess = spawn('/bin/sh', ['-c', command], {
     cwd: config.paths.root,
     stdio: 'pipe',
