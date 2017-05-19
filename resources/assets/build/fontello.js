@@ -8,9 +8,9 @@ const path = require('path');
 
 const config = require('./config');
 
-const CONFIG_PATH = 'assets/fonts/fontello.json';
-const OUTPUT_PATH = 'assets/fonts/fontello';
-const SCSS_PATH = 'assets/fonts/fontello/fontello.scss';
+const CONFIG_PATH = 'resources/assets/fonts/fontello.json';
+const OUTPUT_PATH = 'resources/assets/fonts/fontello';
+const SCSS_PATH = 'resources/assets/fonts/fontello/fontello.scss';
 
 function fetchFontelloFonts(configPath, outputPath, callback) {
   const command = `./node_modules/.bin/fontello-cli --config ${configPath} --font ${outputPath} --css ${outputPath}`;
