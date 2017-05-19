@@ -58,6 +58,7 @@
 .fa-ok-circled:before { content: '\e838'; } /* '' */
 .fa-ok:before { content: '\e839'; } /* '' */
 .fa-user:before { content: '\e83a'; } /* '' */
+.fa-clock:before { content: '\e83b'; } /* '' */
 .fa-check-empty:before { content: '\f096'; } /* '' */
 .fa-bookmark-empty:before { content: '\f097'; } /* '' */
 .fa-twitter:before { content: '\f099'; } /* '' */
