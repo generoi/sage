@@ -78,6 +78,22 @@ $c-global-transition: all 0.3s ease 0s !default;
 .overlay {
   @include overlay-container();
 
+  .tailor-ui &[class*="tailor-"] {
+    > div:not(.tailor-column__helper) {
+      position: relative;
+      z-index: 2;
+    }
+    // Tailor sets the :before to have a z-index of 999.
+    &.is-hovering,
+    &.is-editing,
+    &.is-selected {
+      > div { z-index: 1000; }
+      @at-root {
+        .tailor-ui .tools .select-container { z-index: 1000; }
+      }
+    }
+  }
+
   &__foreground {
     @include overlay-foreground();
   }

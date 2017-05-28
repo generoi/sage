@@ -107,6 +107,7 @@ array_map(function ($file) use ($sage_error) {
     'widgets',
     'admin',
     'performance',
+    'tailor',
     // 'rewrites',
     // 'yoast',
     // 'multilingual',
