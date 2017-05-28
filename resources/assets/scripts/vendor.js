@@ -32,3 +32,4 @@ import 'foundation-sites/dist/js/plugins/foundation.tooltip';
 import 'foundation-sites/dist/js/plugins/foundation.zf.responsiveAccordionTabs';
 import 'motion-ui/dist/motion-ui';
 import 'slick-carousel/slick/slick';
+// import 'magnific-popup';
