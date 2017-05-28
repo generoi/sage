@@ -122,28 +122,43 @@ add_filter('get_twig', function ($twig) {
      * {% include 'parts/slideshow' with { items: posts, options: get_slick_options(3) } %}
      */
     $twig->addFunction('get_slick_options', new Twig_SimpleFunction('get_slick_options', function ($slides_to_show = 1, $extra_options = null) {
-        $slides_to_show = (int) $slides_to_show;
+        $desktop_breakpoint = 1024;
+        $tablet_breakpoint = 640;
+        $tablet_slides = $mobile_slides = $desktop_slides = 1;
+
+        if (is_array($slides_to_show)) {
+            if (isset($slides_to_show[1])) {
+                $tablet_slides = (int) $slides_to_show[1];
+            }
+            if (isset($slides_to_show[2])) {
+                $mobile_slides = (int) $slides_to_show[2];
+            }
+            $desktop_slides = (int) $slides_to_show[0];
+        } else {
+            $desktop_slides = (int) $slides_to_show;
+        }
+
         // If more than two are shown at a time, set a responsive variation for
         // mobile devices.
-        if ($slides_to_show >= 2) {
+        if ($desktop_slides > 1 || $mobile_slides > 1 || $tablet_slides > 1) {
             $options = [
-                'slidesToShow' => $slides_to_show, // 1024+
-                'slidesToScroll' => $slides_to_show,
+                'slidesToShow' => $desktop_slides, // 1024+
+                'slidesToScroll' => $desktop_slides,
                 'responsive' => [
                     [
-                        'breakpoint' => 1024, // 640 - 1023
-                        'settings' => ['slidesToShow' => 2, 'slidesToScroll' => 2],
+                        'breakpoint' => $desktop_breakpoint, // 640 - 1023
+                        'settings' => ['slidesToShow' => $tablet_slides, 'slidesToScroll' => $tablet_slides],
                     ],
                     [
-                        'breakpoint' => 640, // 0 - 639
-                        'settings' => ['slidesToShow' => 1, 'slidesToScroll' => 1],
+                        'breakpoint' => $tablet_breakpoint, // 0 - 639
+                        'settings' => ['slidesToShow' => $mobile_slides, 'slidesToScroll' => $mobile_slides],
                     ],
                 ],
             ];
         }
         else {
             $options = [
-                'slidesToShow' => (int) $slides_to_show, // 1024+
+                'slidesToShow' => (int) $desktop_slides,
             ];
         }
         if ($extra_options) {
