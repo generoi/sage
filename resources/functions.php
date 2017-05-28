@@ -106,6 +106,7 @@ array_map(function ($file) use ($sage_error) {
     'acf',
     'widgets',
     'admin',
+    'popups',
     'performance',
     'tailor',
     // 'rewrites',
