@@ -24,9 +24,28 @@ function format_phone($number)
  * Print an asynchronously loaded stylesheet.
  * @see https://github.com/filamentgroup/loadCSS
  */
-function print_async_stylesheet($path) {
+function print_async_stylesheet($path)
+{
     echo '<link rel="preload" href="' . $path . '" as="style" onload="this.rel=\'stylesheet\'">';
     echo '<noscript><link rel="stylesheet" href="' . $path . '"></noscript>';
+}
+
+/**
+ * Build a URL string based on the URL parts returned from `parse_url`.
+ * @see https://stackoverflow.com/a/35207936/319855
+ */
+function build_url($parts)
+{
+    return (isset($parts['scheme']) ? "{$parts['scheme']}:" : '') .
+        ((isset($parts['user']) || isset($parts['host'])) ? '//' : '') .
+        (isset($parts['user']) ? "{$parts['user']}" : '') .
+        (isset($parts['pass']) ? ":{$parts['pass']}" : '') .
+        (isset($parts['user']) ? '@' : '') .
+        (isset($parts['host']) ? "{$parts['host']}" : '') .
+        (isset($parts['port']) ? ":{$parts['port']}" : '') .
+        (isset($parts['path']) ? "{$parts['path']}" : '') .
+        (isset($parts['query']) ? "?{$parts['query']}" : '') .
+        (isset($parts['fragment']) ? "#{$parts['fragment']}" : '');
 }
 
 /**

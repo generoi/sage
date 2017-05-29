@@ -42,5 +42,40 @@ add_filter('excerpt_more', function () {
  * Wrap oEmbeds in foundations responsive wrapper.
  */
 add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
+    preg_match('/src="([^"]*)"/i', $cache, $sources);
+    if (!empty($sources)) {
+        $src = $sources[1];
+    }
+
+    if (!empty($src) && !empty($url)) {
+        if (strpos($url, 'youtube') !== FALSE) {
+            $args = [
+                'rel' => 0,
+                'showinfo' => 0,
+                'modestbranding' => 1,
+            ];
+        }
+        else if (strpos($url, 'vimeo') !== FALSE) {
+            $args = [
+                'title' => 0,
+                'byline' => 0,
+                'portrait' => 0,
+            ];
+        }
+
+        if (!empty($args) && ($parts = parse_url($url))) {
+            $query = !empty($parts['query']) ? wp_parse_args($parts['query']) : [];
+            // Override URL attributes with shortcode ones.
+            $query = array_merge($query, $attr);
+            // Add in defaults unless they are already defined.
+            $query = array_merge($args, $query);
+            // Use schemeless URL and re-build the query.
+            $parts['scheme'] = null;
+            $parts['query'] = build_query($query);
+            // Rebuild the URL
+            $url = Utils\build_url($parts);
+            $cache = str_replace($src, $url, $cache);
+        }
+    }
     return '<div class="responsive-embed widescreen">' . $cache . '</div>';
 }, 10, 4);
