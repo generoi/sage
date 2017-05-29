@@ -26,17 +26,14 @@ add_filter('popups-extended/positions', function ($positions) {
 /**
  * Add custom types.
  */
-add_filter('popups-extended/types', function ($positions) {
-    return $positions;
+add_filter('popups-extended/types', function ($types) {
+    return $types;
 });
 
 /**
  * Add custom themes.
  */
-add_filter('popups-extended/themes', function ($positions) {
-    $positions['primary'] = __('Primary', 'theme-admin');
-    $positions['secondary'] = __('Secondary', 'theme-admin');
-    $positions['white'] = __('Light', 'theme-admin');
-    $positions['black'] = __('Dark', 'theme-admin');
-    return $positions;
+add_filter('popups-extended/themes', function ($themes) {
+    $themes = $themes + Foundation\palette();
+    return $themes;
 });

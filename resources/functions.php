@@ -99,6 +99,7 @@ array_map(function ($file) use ($sage_error) {
     'filters',
     'admin',
     // Site specific.
+    'foundation',
     'setup',
     'images',
     'timber',

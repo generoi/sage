@@ -122,8 +122,6 @@ add_filter('get_twig', function ($twig) {
      * {% include 'parts/slideshow' with { items: posts, options: get_slick_options(3) } %}
      */
     $twig->addFunction('get_slick_options', new Twig_SimpleFunction('get_slick_options', function ($slides_to_show = 1, $extra_options = null) {
-        $desktop_breakpoint = 1024;
-        $tablet_breakpoint = 640;
         $tablet_slides = $mobile_slides = $desktop_slides = 1;
 
         if (is_array($slides_to_show)) {
@@ -146,11 +144,11 @@ add_filter('get_twig', function ($twig) {
                 'slidesToScroll' => $desktop_slides,
                 'responsive' => [
                     [
-                        'breakpoint' => $desktop_breakpoint, // 640 - 1023
+                        'breakpoint' => Foundation\breakpoint('large'), // 640 - 1023
                         'settings' => ['slidesToShow' => $tablet_slides, 'slidesToScroll' => $tablet_slides],
                     ],
                     [
-                        'breakpoint' => $tablet_breakpoint, // 0 - 639
+                        'breakpoint' => Foundation\breakpoint('medium'), // 0 - 639
                         'settings' => ['slidesToShow' => $mobile_slides, 'slidesToScroll' => $mobile_slides],
                     ],
                 ],

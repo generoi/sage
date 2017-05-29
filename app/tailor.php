@@ -3,28 +3,6 @@
 namespace App;
 
 /**
- * Return a option list of the available palette colors the theme uses.
- */
-function foundation_palette($type = 'all')
-{
-    $palette = [
-        'primary'   => __('Primary', 'theme-admin'),
-        'secondary' => __('Secondary', 'theme-admin'),
-        'white'     => __('White', 'theme-admin'),
-        'black'     => __('Black', 'theme-admin'),
-    ];
-
-    switch ($type) {
-        case 'button':
-            $colors = ['primary', 'secondary'];
-            return array_intersect_key($palette, array_combine($colors, $colors));
-        default:
-            return $palette;
-    }
-
-}
-
-/**
  * Remove duplicate or onsupported third party scripts.
  */
 add_action('wp_print_scripts', function () {
@@ -53,14 +31,14 @@ add_action('tailor_element_register_controls', function ($element) {
                 'type' => 'select',
                 'label' => __('Background', 'theme-admin'),
                 'section' => 'attributes',
-                'choices' => ['' => ''] + foundation_palette('background'),
+                'choices' => ['' => ''] + Foundation\palette('background'),
                 'priority' => 24,
             ]);
             $element->add_control('overlay_theme', [
                 'type' => 'select',
                 'label' => __('Overlay', 'theme-admin'),
                 'section' => 'attributes',
-                'choices' => ['' => ''] + foundation_palette('overlay'),
+                'choices' => ['' => ''] + Foundation\palette('overlay'),
                 'priority' => 25,
             ]);
             break;
@@ -78,16 +56,16 @@ add_action('tailor_element_register_controls', function ($element) {
         // Integrate Foundation palette styles.
         case 'tailor_button':
             $style = $element->get_control('style');
-            $style->choices = ['default'   => 'Default'] + foundation_palette('button');
+            $style->choices = ['default'   => 'Default'] + Foundation\palette('button');
             break;
         // Integrate Foundation palette styles.
         case 'tailor_hero':
             $element->add_setting('style', $setting);
             $element->add_control('style', [
                 'type' => 'select',
-                'label' => __('Style', 'tailor-foundation'),
+                'label' => __('Style', 'theme-admin'),
                 'section' => 'general',
-                'choices' => ['' => ''] + foundation_palette(),
+                'choices' => ['' => ''] + Foundation\palette(),
                 'priority' => 25,
             ]);
             break;
@@ -107,9 +85,6 @@ add_action('tailor_element_register_controls', function ($element) {
  * Output our theme's CSS classes for styles.
  */
 add_action('tailor_shortcode_html_attributes', function ($html_atts, $atts, $tag) {
-    if (!empty($atts['spacing'])) {
-        $html_atts['class'][] = 'u-spacing--' . $atts['background_theme'];
-    }
     if (!empty($atts['background_theme'])) {
         $html_atts['class'][] = 'u-bg--' . $atts['background_theme'];
     }

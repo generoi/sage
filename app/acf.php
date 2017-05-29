@@ -31,12 +31,7 @@ AcfFieldLoader::addAcfFieldgroup(new OptionsPage());
  * Add foundation palette colors for hero overlays.
  */
 add_filter('acf/load_field/name=slide_overlay', function ($field) {
-    $field['choices'] = [
-        'none' => __('None', 'theme-admin'),
-        'primary' => __('Primary color', 'theme-admin'),
-        'white' => __('Light', 'theme-admin'),
-        'black' => __('Dark', 'theme-admin'),
-    ];
+    $field['choices'] = ['none' => __('None', 'theme-admin')] + Foundation\palette('overlay');
     return $field;
 });
 
