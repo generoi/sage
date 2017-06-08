@@ -1,7 +1,10 @@
 // import external dependencies
-import 'jquery';
-import 'picturefill';
+import 'console-polyfill';
+import 'babel-polyfill';
+import $ from 'jquery';
+import picturefill from 'picturefill';
 import 'fastdom/fastdom';
+import 'motion-ui/dist/motion-ui';
 
 // Import components
 import gform from './components/gform';
@@ -11,9 +14,9 @@ import headroom from './components/headroom';
 // Ensure correct images are set before plugins such as orbit begins measuring
 // dimensions.
 picturefill();
-jQuery(document).foundation();
+$(document).foundation();
 
 // Custom components
-gform.init();
-slick.init();
-headroom.init();
+headroom('.headroom');
+gform();
+slick('.slick');

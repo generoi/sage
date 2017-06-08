@@ -57,7 +57,7 @@ add_filter('wp_resource_hints', function ($hints, $relation_type) {
 }, 10, 2);
 
 /**
- * Load scripts asynchronously
+ * Load scripts asynchronously.
  */
 add_filter('script_loader_tag', function ($tag, $handle) {
     $async_handles = [

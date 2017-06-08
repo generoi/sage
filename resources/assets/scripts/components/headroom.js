@@ -8,16 +8,16 @@
 import Headroom from 'headroom.js/dist/headroom';
 import 'headroom.js/dist/jQuery.headroom';
 
+// Expose it so jQuery.headroom can use it.
+window.Headroom = Headroom;
+
 const ESCAPE_KEYCODE = 27;
 
-export default {
-  init(options = {}) {
-    this.$headroom = $('.headroom');
+class HeadroomComponent {
+  constructor(el, options) {
+    this.$headroom = $(el);
     this.$toggler = this.$headroom.find('.l-header__nav-toggle');
     this.$content = this.$headroom.next();
-
-    // Expose it so jQuery.headroom can use it.
-    window.Headroom = Headroom;
 
     this.$headroom.headroom(Object.assign({
       offset: 205,
@@ -36,12 +36,15 @@ export default {
     $(document).on('keyup', (e) => {
       if (e.keyCode === ESCAPE_KEYCODE) this.closeMenu();
     })
-
-  },
+  }
 
   closeMenu() {
     if (this.$toggler.length && this.$toggler.is('.active')) {
       this.$toggler.trigger('click');
     }
-  },
-};
+  }
+}
+
+export default function(selector, options = {}) {
+  return new HeadroomComponent(selector, options);
+}

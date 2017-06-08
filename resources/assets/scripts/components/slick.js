@@ -3,15 +3,15 @@
  * @see http://kenwheeler.github.io/slick/
  */
 
-export default {
-  init(options = {}) {
+class SlickComponent {
+  constructor(el, options = {}) {
     this.options = Object.assign({}, options);
-    this.$slideshows = $('.slick').filter(':not(.slick--no-slider)');
+    this.$slideshow = $(el);
 
-    this.$slideshows.on('afterChange', this.autoPlayVideo);
-    this.$slideshows.on('init', this.autoPlayVideo);
-    this.$slideshows.slick(this.options);
-  },
+    this.$slideshow.on('afterChange', this.autoPlayVideo);
+    this.$slideshow.on('init', this.autoPlayVideo);
+    this.$slideshow.slick(this.options);
+  }
 
   autoPlayVideo(e, slick) {
     const $slide = slick.$slides.eq(slick.currentSlide);
@@ -19,5 +19,11 @@ export default {
     if ($video.length) {
       $video[0].play();
     }
-  },
-};
+  }
+}
+
+export default function (selector = '.slick', options = {}) {
+  $(selector)
+    .not('.slick--no-slider')
+    .each((i, el) => new SlickComponent(el, options));
+}
