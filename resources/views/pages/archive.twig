@@ -5,8 +5,8 @@
   <div class="archive archive--{{term.taxonomy}}" id="archive-{{term.ID}}">
     {% block term %}
       <article class="archive__term archive__term--{{term.taxonomy}}">
-        <div class="archive__content-wrapper row align-center">
-          <div class="column small-12 large-8">
+        <div class="archive__content-wrapper grid-x align-center">
+          <div class="cell large-8">
             {% block term__header %}
               <div class="archive__title-wrapper">
                 <h1 class="archive__title">{% block term__title term.name|default(wp_title) %}</h1>
@@ -25,10 +25,10 @@
     {% endblock %}
 
     {% block listing %}
-      <section class="archive__listing row row-grid small-up-1 medium-up-3 flex-grow-all">
+      <section class="archive__listing grid-x grid-margin-x grid-margin-y small-up-1 medium-up-3">
       {% for post in posts %}
         {% block listing__item %}
-          <div class="archive__post column">
+          <div class="archive__post cell">
             {% include ['teasers/teaser-'~post.post_type~'.twig', 'teasers/teaser.twig'] %}
           </div>
         {% endblock %}

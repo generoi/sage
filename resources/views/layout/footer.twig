@@ -1,15 +1,15 @@
-<div class="row">
+<div class="grid-x grid-margin-x align-justify">
   {% if sidebar_footer %}
-    <div class="l-sidebar-footer column small-12">
+    <div class="l-sidebar-footer cell">
       <div class="row">
         {{sidebar_footer}}
       </div>
     </div>
   {% endif %}
-  <div class="column shrink">
+  <div class="cell shrink">
     <p><small>{{options.footer_copyright}}</small></p>
   </div>
-  <div class="column shrink">
+  <div class="cell shrink">
     <ul class="menu">
       {% if site.social.facebook_site %}
         <li><a href="{{site.social.facebook_site}}"><i class="fa fa-facebook fa-2x"></i></a></li>

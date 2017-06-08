@@ -30,8 +30,5 @@ class TimberWidget extends TimberExtended\Widget
         foreach ($extra_classes as $class) {
             $this->add_class($class);
         }
-        if (empty($extra_classes)) {
-            $this->add_class('small-12');
-        }
     }
 }

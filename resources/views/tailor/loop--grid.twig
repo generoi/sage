@@ -1,9 +1,9 @@
 {% extends 'tailor/loop--list.twig' %}
 
 {% block content %}
-  <div class="row row-grid small-up-{{atts.items_per_row_mobile}} medium-up-{{atts.items_per_row_tablet}} large-up-{{atts.items_per_row}}">
+  <div class="grid-x grid-margin-x grid-margin-y small-up-{{atts.items_per_row_mobile}} medium-up-{{atts.items_per_row_tablet}} large-up-{{atts.items_per_row}}">
     {% for post in posts %}
-      <div class="column">
+      <div class="cell">
         {% include ['teasers/teaser-'~post.post_type~'.twig', 'teasers/teaser.twig'] %}
       </div>
     {% endfor %}

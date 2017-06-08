@@ -2,8 +2,8 @@
 
 {% block content %}
   <article class="post post--{{template_type}} post--type-{{post.post_type}} {{extra_classes}}" id="post-{{post.ID}}">
-    <div class="post__content-wrapper row align-center">
-      <div class="column small-12 large-8">
+    <div class="post__content-wrapper grid-x align-center">
+      <div class="cell large-8">
         {% block post__header %}
           <div class="post__title-wrapper">
             <h1 class="post__title">{% block post__title post.title|default(wp_title) %}</h1>

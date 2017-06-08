@@ -129,10 +129,13 @@ $c-slick-nav-size: 40px !default;
   // Grid variation adding gutters.
   &--grid {
     .slick-list {
-      @include grid-row-nest();
+      @include xy-grid;
+      // This is a nested padding grid, we dont want gutters on the edges.
+      @include xy-gutters($negative: true);
+      // @todo width?
     }
     .slick__slide {
-      @include grid-column-gutter();
+      @include xy-gutters($gutters: $grid-padding-gutters, $gutter-type: padding);
     }
   }
 

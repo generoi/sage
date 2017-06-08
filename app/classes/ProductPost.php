@@ -37,13 +37,13 @@ class ProductPost extends Timber\Post {
             'comment_notes_after'  => '',
             'fields'               => array(
                 'author' => ''
-                    . '<div class="row">'
-                    . '<div class="column small-12 medium-6 comment-form-author">'
+                    . '<div class="grid-x grid-margin-x">'
+                    . '<div class="cell medium-auto comment-form-author">'
                     . '<label for="author">' . esc_html__('Name', 'woocommerce') . ' <span class="form-required">*</span></label>'
                     . '<input id="author" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30" aria-required="true" required />'
                     . '</div>',
                 'email' => ''
-                    . '<div class="column small-12 medium-6 comment-form-email">'
+                    . '<div class="cell medium-auto comment-form-email">'
                     . '<label for="email">' . esc_html__('Email', 'woocommerce') . ' <span class="form-required">*</span></label>'
                     . '<input id="email" name="email" type="email" value="' . esc_attr($commenter['comment_author_email']) . '" size="30" aria-required="true" required />'
                     . '</div>'

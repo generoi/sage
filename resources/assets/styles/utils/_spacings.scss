@@ -12,7 +12,7 @@ $c-spacings: (
     medium: rem-calc(60) rem-calc(10),
     large: rem-calc(75) rem-calc(60),
   ),
-  gutter: $grid-column-gutter,
+  gutter: $grid-margin-gutters,
 ) !default;
 
 /**

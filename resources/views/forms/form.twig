@@ -23,15 +23,15 @@
 
       {% block form__content %}
         <div class='gform_body'>
-          <div id='gform_fields_{{id}}' class='row {{gform.fields_wrapper_classes(form)}}'>
+          <div id='gform_fields_{{id}}' class='grid-x grid-margin-x {{gform.fields_wrapper_classes(form)}}'>
 
           {% for field in fields %}
             {% set label_left_align = (field.labelPlacement == 'left_label') or (field.labelPlacement == 'hidden_label' and form.labelPlacement == 'left_label') %}
 
             {% block form__field %}
-              <div id='{{gform.field_id(field)}}' class='column {{field.cssClass ?: 'small-12'}} {{gform.field_wrapper_classes(field)}}'>
-                <div class="row">
-                  <div class="column {{label_left_align ? 'small-3' : 'small-12'}}">
+              <div id='{{gform.field_id(field)}}' class='cell {{field.cssClass}} {{gform.field_wrapper_classes(field)}}'>
+                <div class="grid-x grid-margin-x">
+                  <div class="cell {{label_left_align ? 'small-3'}}">
                     {% block form__field_label %}
                       <label for='{{gform.input_id(field)}}' class='{{gform.field_label_classes(field)}} {{label_left_align ? 'text-right middle'}}'>
                         {{field.label}}
@@ -40,7 +40,7 @@
                     {% endblock form__field_label %}
                   </div>
 
-                  <div class='column {{label_left_align ? 'small-9' : 'small-12'}} {{gform.field_container_classes(field)}} '>
+                  <div class='cell auto {{gform.field_container_classes(field)}} '>
                     {% block form__field_input %}
                       {% if field.type in ['text', 'number', 'email', 'phone', 'website', 'hidden'] %}
                         {{gform.text(field)}}
@@ -90,8 +90,8 @@
         </div>
       {% endblock form__content %}
       {% block form__footer %}
-        <div class="gform__footer row">
-          <div class="column {{form.labelPlacement == 'left_label' ? 'small-9 small-offset-3' : 'small-12'}}">
+        <div class="gform__footer grid-x grid-margin-x">
+          <div class="cell {{form.labelPlacement == 'left_label' ? 'auto small-offset-3'}}">
             {{gform.submit(form)}}
           </div>
         </div>

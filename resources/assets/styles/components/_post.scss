@@ -5,18 +5,18 @@
 
   &__nav_item {
     &--next .post__nav_link {
-      margin-left: -1 * get-side($menu-item-padding, left);
+      margin-left: -1 * get-side($menu-items-padding, left);
     }
     &--prev .post__nav_link {
-      margin-right: -1 * get-side($menu-item-padding, right);
+      margin-right: -1 * get-side($menu-items-padding, right);
       text-align: right;
     }
   }
 
   &__terms {
     &.menu {
-      margin-left: -1 * get-side($menu-item-padding, left);
-      margin-right: -1 * get-side($menu-item-padding, right);
+      margin-left: -1 * get-side($menu-items-padding, left);
+      margin-right: -1 * get-side($menu-items-padding, right);
     }
   }
 }

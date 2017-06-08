@@ -6,9 +6,9 @@
       {{post.comment_form({'title_reply_before': '<h3 class="post__comments_title">'})}}
     </div>
     <h3 class="post__comments_listing_title">{{__('Comments', 'theme')}}</h3>
-    <div class="post__comments_listing row grid">
+    <div class="post__comments_listing grid-x grid-margin-y">
       {% for cmt in post.get_comments() %}
-        <div class="post__comment column small-12 grid__column">
+        <div class="post__comment cell">
           {% include "parts/comment.twig" with { comment: cmt } %}
         </div>
       {% endfor %}

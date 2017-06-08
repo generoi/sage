@@ -1,22 +1,4 @@
 /**
- * Make an equal-height grid.
- * @see https://github.com/zurb/foundation-sites/pull/9215#issuecomment-264446029
- * @note for eg. a teaser to grow it should have flex-grow: 1 set as well.
- * @example
- * <div class="row small-up-2 flex-grow-all">
- *   <div class="column">
- *     <div class="card teaser"></div>
- *   </div>
- *   <div class="column">
- *     <div class="card teaser"></div>
- *   </div>
- * </div>
- */
-.flex-grow-all {
-  .column { display: flex; }
-}
-
-/**
  * Display an image as a block element spanning the containers full width.
  */
 %u-img-expand {
