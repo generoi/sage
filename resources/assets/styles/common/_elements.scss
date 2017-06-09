@@ -1,3 +1,9 @@
+html {
+  // Span the full viewport height.
+  height: 100%;
+  display: flex;
+}
+
 body {
   overflow-y: scroll;
 
