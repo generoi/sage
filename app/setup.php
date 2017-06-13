@@ -120,8 +120,8 @@ add_action('widgets_init', function () {
     $config = [
         'before_widget' => '',
         'after_widget'  => '',
-        'before_title'  => '<h3>',
-        'after_title'   => '</h3>'
+        'before_title'  => '<span class="is-hidden">',
+        'after_title'   => '</span>'
     ];
     register_sidebar([
         'name'          => __('Primary', 'theme-admin'),

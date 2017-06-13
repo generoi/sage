@@ -30,5 +30,12 @@ class TimberWidget extends TimberExtended\Widget
         foreach ($extra_classes as $class) {
             $this->add_class($class);
         }
+
+        if (!empty($options['class']['title'])) {
+            $this->hide_title = true;
+        }
+        if (!empty($options['class']['id'])) {
+            $this->id = $options['class']['id'];
+        }
     }
 }
