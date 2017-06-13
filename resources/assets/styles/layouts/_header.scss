@@ -31,18 +31,34 @@
     }
   }
 
+  // Mobile menu.
   &__nav--mobile {
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
+    top: 0;
+    bottom: 0;
     z-index: 1;
     background-color: $titlebar-background;
 
-    // Prevent momentum scrolling on iOS.
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
+    // Offset by the height of the header.
+    @if variable-exists(c-header-sizes) {
+      @each $size, $height in $c-header-sizes {
+        @include breakpoint($size) {
+          padding-top: $height;
+        }
+      }
+    }
+
+    .primary_navigation {
+      max-height: 100%;
+      // Prevent momentum scrolling on iOS.
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 
+  // Desktop menu
   &__nav--desktop {
     .primary_navigation {
       &__item {

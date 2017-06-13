@@ -1,0 +1,15 @@
+{% macro recursive_item(item, menu_class) %}
+  {% import _self as menu %}
+  {% set children = item.children %}
+
+  <li class="{{item.class}}">
+    <a href="{{item.link}}" class="{{item.link_class}}">{{item.title}}</a>
+    {% if children %}
+      <ul class="menu {{menu_class|default('vertical nested')}} {{item.current or item.current_item_ancestor ? 'is-active'}}">
+        {% for child in children %}
+          {{menu.recursive_item(child)}}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </li>
+{% endmacro %}

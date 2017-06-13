@@ -1,4 +1,6 @@
-{% set primary_menu_output %}
+{% import 'macros/menu.twig' as menu %}
+
+{% set primary_menu_desktop_output %}
   <ul class="{{primary_menu.class}} vertical large-horizontal menu">
     {% for item in primary_menu.get_items %}
       <li class="{{item.class}}">
@@ -8,55 +10,79 @@
   </ul>
 {% endset %}
 
+{% set primary_menu_mobile_output %}
+  <ul
+    class="{{primary_menu.class}} vertical menu accordion-menu cell"
+    data-accordion-menu
+    data-submenu-toggle="true"
+    data-multi-open="false"
+  >
+    {% for item in primary_menu.get_items %}
+      {{menu.recursive_item(item)}}
+    {% endfor %}
+  </ul>
+{% endset %}
+
 {% set language_menu_output %}
   <ul class="{{language_menu.class}} menu">
   {% for item in language_menu.get_items|filter('active', 0) %}
     <li class="{{item.class}}">
       <a href="{{item.url}}" class="{{item.link_class}}">{{item.native_name}}</a>
+      {% if item.get_children() %}
+        <ul class="menu">
+        </ul>
+      {% endif %}
     </li>
   {% endfor %}
   </ul>
 {% endset %}
 
 {# Mobile title bar #}
-<div class="l-header__bar--mobile title-bar hide-for-large grid-x grid-margin-x align-middle">
-  <div class="cell auto">
-    <a href="{{site.url}}" class="site-logo is-animating fade-in-left" rel="home">
-      <img src="{{asset_path('images/logo.svg')}}" height="30" width="90" alt="{{site.name}}" title="{{site.name}}">
-    </a>
-  </div>
+<div class="l-header__bar--mobile title-bar hide-for-large grid-container">
+  <div class="grid-x grid-margin-x">
+    <div class="cell auto">
+      <a href="{{site.url}}" class="site-logo is-animating fade-in-left" rel="home">
+        <img src="{{asset_path('images/logo.svg')}}" height="30" width="90" alt="{{site.name}}" title="{{site.name}}">
+      </a>
+    </div>
 
-  <div class="cell shrink">
-    {{language_menu_output}}
-  </div>
+    <div class="cell shrink">
+      {{language_menu_output}}
+    </div>
 
-  <div class="cell shrink">
-    <button
-      id="nav-toggler"
-      data-toggler=".active"
-      class="l-header__nav-toggle menu-icon"
-      type="button"
-      data-toggle="primary-menu--mobile nav-toggler"
-    >
-      <span></span>
-    </button>
+    <div class="cell shrink">
+      <button
+        id="nav-toggler"
+        data-toggler=".active"
+        class="l-header__nav-toggle menu-icon"
+        type="button"
+        data-toggle="primary-menu--mobile nav-toggler"
+      >
+        <span></span>
+      </button>
+    </div>
   </div>
 </div>
 
 {# Mobile menu #}
 <div
   id="primary-menu--mobile"
-  class="l-header__nav--mobile hide-for-large"
+  class="l-header__nav--mobile grid-y grid-margin-y hide-for-large"
   role="navigation"
   data-toggler
   data-animate="slide-in-down slide-out-up fast"
   style="display: none;"
 >
-  {{primary_menu_output}}
+  <div class="cell auto align-middle">
+    {{primary_menu_mobile_output}}
+  </div>
+  <div class="cell shrink">
+    {{language_menu_output}}
+  </div>
 </div>
 
 {# Desktop menu #}
-<div class="l-header__bar--desktop top-bar show-for-large" role="navigation">
+<div class="l-header__bar--desktop grid-container top-bar show-for-large" role="navigation">
   <div class="grid-x grid-margin-x align-middle">
     <div class="cell auto">
       <a href="{{site.url}}" class="site-logo" rel="home">
@@ -68,7 +94,7 @@
     </div>
     <div class="cell shrink">
       <div class="l-header__nav--desktop top-bar-right">
-        {{primary_menu_output}}
+        {{primary_menu_desktop_output}}
       </div>
     </div>
   </div>
