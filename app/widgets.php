@@ -13,7 +13,7 @@ add_action('widgets_init', function () {
         'WP_Widget_Links',
         'WP_Widget_Meta',
         // 'WP_Widget_Search',
-        'WP_Widget_Text',
+        // 'WP_Widget_Text',
         'WP_Widget_Categories',
         // 'WP_Widget_Recent_Posts',
         'WP_Widget_Recent_Comments',
