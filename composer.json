@@ -30,10 +30,7 @@
     }
   },
   "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/generoi/acf-genero-components.git"
-    }
+    { "type": "composer", "url": "https://packagist.minasithil.genero.fi/" }
   ],
   "require": {
     "php": ">=5.6.4",
@@ -41,7 +38,8 @@
     "illuminate/support": "~5.4",
     "roots/sage-lib": "~9.0.0-beta.3",
     "soberwp/controller": "dev-master",
-    "generoi/acf-genero-components": "^0.0.1"
+    "roots/sage-installer": "~1.0",
+    "generoi/acf-genero-components": "^1.0.0-alpha"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.8.0",

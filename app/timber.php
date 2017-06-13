@@ -7,7 +7,6 @@ use TimberExtended;
 use Twig_SimpleFunction;
 use Twig_SimpleFilter;
 use Genero\Sage\TwigExtensionLinkify;
-use Genero\Sage\PostTypeConnection;
 
 /**
  * Define where to look for twig templates.
@@ -24,12 +23,7 @@ if (class_exists('Timber')) {
  * Site components injected into every timber context.
  */
 add_filter('timber/context', function ($context) {
-    // Add your menus.
-    if (function_exists('get_field')) {
-        $context['primary_menu'] = new PostTypeConnection\Menu('primary_navigation');
-    } else {
-        $context['primary_menu'] = new TimberExtended\Menu('primary_navigation');
-    }
+    $context['primary_menu'] = new TimberExtended\Menu('primary_navigation');
     $context['language_menu'] = new TimberExtended\LanguageMenu('language-menu');
 
     // Set the page title.

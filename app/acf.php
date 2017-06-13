@@ -4,28 +4,31 @@ namespace App;
 
 use Genero\Component\AcfFieldLoader;
 use Genero\Component\HeroComponent;
+use Genero\Component\ArchivePageComponent;
 
-use Genero\Sage\PostTypeConnection;
 use Genero\Sage\OptionsPage;
-
-/**
- * Use PostTypeConnection which adds a repeater field to the ACF Options page,
- * that connects post types to pages. This can be used to detect parent menu
- * items using the PostTypeConnection\Menu class.
- * @note https://github.com/generoi/acf-post-type-chooser is a dependency.
- */
-AcfFieldLoader::addAcfFieldgroup(new PostTypeConnection());
 
 /**
  * A banner field group available on posts and terms which can be used to
  * display slideshows in the header.
  */
-AcfFieldLoader::addAcfFieldgroup(new HeroComponent());
+$hero = new HeroComponent();
+add_action('after_switch_theme', function () use ($hero) {
+    $hero->addAcfFieldgroup();
+});
+
+/**
+ * Associate pages with post types emulating archive pages.
+ */
+$archive_pages = new ArchivePageComponent();
 
 /**
  * Activate ACF Option Page.
  */
-AcfFieldLoader::addAcfFieldgroup(new OptionsPage());
+$options = new OptionsPage();
+add_action('after_switch_theme', function () use ($options) {
+    $options->addAcfFieldgroup();
+});
 
 /**
  * Add foundation palette colors for hero overlays.

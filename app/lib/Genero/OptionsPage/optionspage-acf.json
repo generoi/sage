@@ -4,15 +4,10 @@
         "title": "Theme options",
         "fields": [
             {
-                "default_value": "Mitattavia tuloksia ja ainutlaatuisia tarinoita. Digitaalinen mainostoimisto.",
-                "maxlength": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "key": "field_5841faafd0c8a",
-                "label": "Footer copyright",
-                "name": "footer_copyright",
-                "type": "text",
+                "key": "field_594041bae6a2d",
+                "label": "Footer",
+                "name": "",
+                "type": "tab",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -20,7 +15,92 @@
                     "width": "",
                     "class": "",
                     "id": ""
-                }
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5841faafd0c8a",
+                "label": "Footer copyright",
+                "name": "footer_copyright",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Mitattavia tuloksia ja ainutlaatuisia tarinoita. Digitaalinen mainostoimisto.",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 2,
+                "new_lines": "wpautop"
+            },
+            {
+                "key": "field_594040b51917d",
+                "label": "Facebook",
+                "name": "facebook",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "https://www.facebook.com/GeneroDigital/",
+                "placeholder": ""
+            },
+            {
+                "key": "field_594040ea1917e",
+                "label": "Twitter",
+                "name": "twitter",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "https://twitter.com/generodigital",
+                "placeholder": ""
+            },
+            {
+                "key": "field_594040f21917f",
+                "label": "Instagram",
+                "name": "instagram",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "https://www.instagram.com/generodigital/",
+                "placeholder": ""
+            },
+            {
+                "key": "field_5940410019180",
+                "label": "LinkedIn",
+                "name": "linkedin",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "https://www.linkedin.com/company/genero-digital-agency",
+                "placeholder": ""
             }
         ],
         "location": [
@@ -35,7 +115,7 @@
         "menu_order": 0,
         "position": "normal",
         "style": "default",
-        "label_placement": "top",
+        "label_placement": "left",
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": 1,

@@ -1,25 +1,26 @@
 {% extends 'layout/base.twig' %}
 
-{% block content %}
+{% set object = term|default(post) %}
+{% set taxonomy = object.taxonomy|default(object.archive__post_type) %}
+{% set content = term.description|default(post.content) %}
 
-  <div class="archive archive--{{term.taxonomy}}" id="archive-{{term.ID}}">
+{% block content %}
+  <div class="archive grid-container archive--{{taxonomy}}" id="archive-{{object.ID}}">
     {% block term %}
-      <article class="archive__term archive__term--{{term.taxonomy}}">
-        <div class="archive__content-wrapper grid-x align-center">
-          <div class="cell large-8">
-            {% block term__header %}
-              <div class="archive__title-wrapper">
-                <h1 class="archive__title">{% block term__title term.name|default(wp_title) %}</h1>
+      <article class="archive__term grid-x align-center">
+        <div class="archive__content-wrapper cell large-8">
+          {% block term__header %}
+            <div class="archive__title-wrapper">
+              <h1 class="archive__title">{% block term__title object.title|default(wp_title) %}</h1>
+            </div>
+          {% endblock %}
+          {% block term__content %}
+            {% if content %}
+              <div class="archive__content">
+                {{content|the_content}}
               </div>
-            {% endblock %}
-            {% block term__content %}
-              {% if term.description %}
-                <div class="archive__content">
-                  {{term.description}}
-                </div>
-              {% endif %}
-            {% endblock %}
-          </div>
+            {% endif %}
+          {% endblock %}
         </div>
       </article>
     {% endblock %}

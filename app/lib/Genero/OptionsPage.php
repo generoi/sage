@@ -9,16 +9,17 @@ class OptionsPage implements ComponentInterface
 {
     protected static $groupKey = 'group_5841faa52ddd4';
 
-    public function init()
+    public function __construct()
     {
-        add_filter('acf/init', [$this, 'addAcfFieldgroup']);
-        add_filter('acf/init', 'acf_add_options_page');
-        add_filter('timber/context', function ($context) {
-            if (function_exists('get_fields')) {
-                $context['options'] = get_fields('option');
-            }
-            return $context;
-        }, 9);
+        if ($this->validateRequirements()) {
+            add_filter('acf/init', 'acf_add_options_page');
+            add_filter('timber/context', function ($context) {
+                if (function_exists('get_fields')) {
+                    $context['options'] = get_fields('option');
+                }
+                return $context;
+            }, 9);
+        }
     }
 
     public function addAcfFieldgroup()
@@ -31,6 +32,6 @@ class OptionsPage implements ComponentInterface
 
     public function validateRequirements()
     {
-        return true;
+        return function_exists('get_fields');
     }
 }
