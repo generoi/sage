@@ -6,6 +6,10 @@ use Roots\Sage\Container;
 use Roots\Sage\Assets\JsonManifest;
 use Roots\Sage\Config;
 
+add_filter('widget-options-extended/grid', function () {
+    return 'xy-grid';
+});
+
 /**
  * Theme assets
  */
