@@ -1,5 +1,7 @@
 .l-footer {
-  p {
-    margin-bottom: 0;
+  @extend %u-strip-bottom-paddings;
+
+  &__copyright {
+    font-size: $small-font-size;
   }
 }

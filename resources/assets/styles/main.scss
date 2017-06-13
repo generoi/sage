@@ -26,7 +26,6 @@
 // @include foundation-grid;
 // @include foundation-flex-grid;
 @include foundation-xy-grid-classes;
-@import "components/foundation/grid";
 @include foundation-typography;
 @include foundation-forms;
 @include foundation-button;
@@ -65,6 +64,7 @@
 @include foundation-global-styles;
 @include foundation-flex-classes;
 // @include foundation-prototype-classes;
+@import "components/foundation/grid";
 
 // Other Sass libraries
 @include motion-ui-transitions;

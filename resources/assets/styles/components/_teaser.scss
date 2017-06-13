@@ -9,11 +9,11 @@
   // Expand full height
   display: flex;
   flex-direction: column;
-  @include xy-cell-base(full);
+  flex: 1 0 auto;
 
   &__link {
     // Expand full height
-    flex-grow: 1;
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
 

@@ -1,4 +1,26 @@
+$c-grid-container-gutter: true !default;
+
+/**
+ * Let all cells grow to the container.
+ */
 .cell {
   display: flex;
   flex-direction: column;
+  &.align-middle {
+    flex-direction: row;
+  }
+}
+
+/**
+ * @see https://github.com/zurb/foundation-sites/issues/10180
+ */
+.grid-x.grid-margin-y {
+  > .cell { height: auto; }
+}
+
+@if $c-grid-container-gutter {
+  .grid-container {
+    // Add a gutter between the grid and the viewport.
+    @include xy-gutters($gutters: $grid-padding-gutters, $gutter-type: padding);
+  }
 }

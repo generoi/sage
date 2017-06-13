@@ -1,3 +1,5 @@
+$c-paragraph-max-width: 45rem !default;
+
 /**
  * Display an image as a block element spanning the containers full width.
  */
@@ -28,4 +30,28 @@
     color: inherit !important;
     text-decoration: none;
   }
+}
+
+/**
+ * Helper to limit words per line.
+ */
+%u-paragraph {
+  max-width: $c-paragraph-max-width;
+  margin-left: auto;
+  margin-right: auto;
+
+  form & {
+    max-width: none;
+  }
+  body#tinymce & {
+    margin-left: 0;
+  }
+}
+
+/**
+ * Helper to remove all trailing whitespace from buttons and paragraphs.
+ */
+%u-strip-bottom-paddings {
+  p:last-child,
+  p > .button:last-child { margin-bottom: 0; }
 }

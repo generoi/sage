@@ -7,9 +7,9 @@
     {% endblock %}
   </head>
 {% endblock %}
-  <body class="{{body_class}} sticky-footer sticky-footer--full-height" data-template="base.twig">
+  <body class="{{body_class}} sticky-footer" data-template="base.twig">
 
-    <header id="header" class="l-header headroom">
+    <header id="header" class="l-header headroom sticky-footer__header">
       {% include 'layout/header.twig' %}
     </header>
 
@@ -20,7 +20,7 @@
         {% endblock %}
       </div>
 
-      <div role="document" class="container">
+      <div role="document">
         <section id="content" role="main" class="l-content-wrapper fade-in is-animating">
         {% if password_required %}
           {% block password %}
@@ -36,19 +36,19 @@
 
     </div>
 
-    {% if sidebar_content_below %}
-      <div class="l-siderbar-content-below container">
-        <div class="row align-center">
-          {{sidebar_content_below}}
+    <div class="sticky-footer__footer">
+      {% if sidebar_content_below %}
+        <div class="l-siderbar-content-below grid-container">
+          <div class="grid-x grid-margin-y grid-margin-x align-center">
+            {{sidebar_content_below}}
+          </div>
         </div>
-      </div>
-    {% endif %}
+      {% endif %}
 
-    <footer id="footer" class="l-footer" role="contentinfo">
-      <div class="container">
+      <footer id="footer" class="l-footer" role="contentinfo">
         {% include 'layout/footer.twig' %}
-      </div>
-    </footer>
+      </footer>
+    </div>
     {{ function('wp_footer') }}
   </body>
 </html>

@@ -1,7 +1,7 @@
 {% extends 'layout/base.twig' %}
 
 {% block content %}
-  <article class="post post--{{template_type}} post--type-{{post.post_type}} {{extra_classes}}" id="post-{{post.ID}}">
+  <article class="post grid-container post--{{template_type}} post--type-{{post.post_type}} {{extra_classes}}" id="post-{{post.ID}}">
     <div class="post__content-wrapper grid-x align-center">
       <div class="cell large-8">
         {% block post__header %}
