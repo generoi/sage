@@ -115,13 +115,13 @@
           <figcaption class="slick__caption" style="display:none;">
             <div class="slick__caption-wrapper overlay__foreground grid-container">
 
-              {% block slide__title %}
-                <div class="slick__caption-title">
+              <div class="slick__caption-title-wrapper">
+                {% block slide__title %}
                   {% if slide.slide_title %}
-                    <h3 class="fade-in-down is-animating short-delay h1">{{slide.slide_title}}</h3>
+                    <h3 class="slick__caption-title fade-in-down is-animating short-delay h1">{{slide.slide_title}}</h3>
                   {% endif %}
-                </div>
-              {% endblock %}
+                {% endblock %}
+              </div>
 
               <div class="slick__caption-content">
                 <div class="fade-in is-animating long-delay">
