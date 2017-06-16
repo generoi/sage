@@ -82,19 +82,21 @@
 </div>
 
 {# Desktop menu #}
-<div class="l-header__bar--desktop grid-container top-bar show-for-large" role="navigation">
-  <div class="grid-x grid-margin-x align-middle">
-    <div class="cell auto">
-      <a href="{{site.url}}" class="site-logo" rel="home">
-        <img class="site-logo is-animating fade-in-right slow" src="{{asset_path('images/logo.svg')}}" height="30" width="90" alt="{{site.name}}" title="{{site.name}}">
-      </a>
-    </div>
-    <div class="cell shrink">
-      {{language_menu_output}}
-    </div>
-    <div class="cell shrink">
-      <div class="l-header__nav--desktop top-bar-right">
-        {{primary_menu_desktop_output}}
+<div class="l-header__bar--desktop top-bar show-for-large" role="navigation">
+  <div class="grid-container">
+    <div class="grid-x grid-margin-x align-middle">
+      <div class="cell auto">
+        <a href="{{site.url}}" class="site-logo" rel="home">
+          <img class="site-logo is-animating fade-in-right slow" src="{{asset_path('images/logo.svg')}}" height="30" width="90" alt="{{site.name}}" title="{{site.name}}">
+        </a>
+      </div>
+      <div class="cell shrink">
+        {{language_menu_output}}
+      </div>
+      <div class="cell shrink">
+        <div class="l-header__nav--desktop top-bar-right">
+          {{primary_menu_desktop_output}}
+        </div>
       </div>
     </div>
   </div>
