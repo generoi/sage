@@ -47,7 +47,7 @@ $header-styles: (
     %u-text {
       $font-size-temp: 1rem;
       @if map-has-key($font-defs, font-size) {
-        $font-size-temp: rem-calc(map-get($font-defs, font-size));
+        $font-size-temp: rem-calc(map-get($font-defs, font-size), 16px);
         font-size: $font-size-temp;
       }
       @if map-has-key($font-defs, line-height) {
