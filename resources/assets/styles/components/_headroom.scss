@@ -21,6 +21,10 @@ $c-admin-bar-breakpoint: 783px !default;
   left: 0;
   top: 0;
 
+  &.active {
+    bottom: 0;
+  }
+
   // Admin bar support
   .admin-bar & {
     top: 46px;

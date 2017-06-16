@@ -1,5 +1,4 @@
 .l-header {
-  background-color: $titlebar-background;
 
   a { outline: none; }
 
@@ -60,6 +59,8 @@
 
   // Desktop menu
   &__nav--desktop {
+    @extend %u-spacing-gutter--vertical;
+
     .primary_navigation {
       &__item {
         &--current {}
