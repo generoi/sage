@@ -128,6 +128,9 @@ add_filter('get_twig', function ($twig) {
             $desktop_slides = (int) $slides_to_show[0];
         } else {
             $desktop_slides = (int) $slides_to_show;
+            if ($desktop_slides >= 3) {
+                $tablet_slides = 2;
+            }
         }
 
         // If more than two are shown at a time, set a responsive variation for

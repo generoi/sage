@@ -12,11 +12,26 @@ textarea[rows] { height: 100px; }
  */
 .form--horizontal {
   display: flex;
+  flex-flow: row wrap;
+
+  .gform_heading {
+    flex: 1 0 100%;
+  }
   .gform_body {
     flex: 1 0 auto;
   }
   .gform_footer .gform_button {
     border-radius: 0 $button-radius $button-radius 0;
     border-left-width: 1px;
+    // @see https://github.com/zurb/foundation-sites/blob/develop/scss/forms/_text.scss
+    $input-height: ($input-font-size * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1);
+
+    $button-size: map-get($button-sizes, tiny);
+    $padding: (($input-height - $button-size)/2) - rem-calc(.5px); // border
+
+    padding-top: $padding;
+    padding-bottom: $padding;
+    font-size: $button-size;
+    line-height: 1;
   }
 }

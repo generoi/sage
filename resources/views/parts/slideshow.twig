@@ -8,15 +8,30 @@
 
 {% if items|length %}
   <div
-    class="{{items|length > 1 ? 'slick' : 'slick--no-slider'}} slick--grid {{slick_class}}"
+    class="
+      {{items|length > 1 ? 'slick' : 'slick--no-slider'}}
+      slick--grid
+      {{options.adaptiveHeight ? 'slick--adaptive-height'}}
+      {{slick_class}}
+    "
     data-slick='{{fn('json_encode', options)}}'
   >
   {% for item in items %}
     <div class="slick__slide slick__slide--boxed overlay overlay--white" style="display: none;">
+      {# Support object ID's #}
+      {% if item matches '/^\\d+$/' %}
+        {% set item = (object_type == 'term') ? TimberTerm(item) : TimberPost(item) %}
+      {% endif %}
+
       {# TimberPost objects were passed as items #}
       {% if item.post_type %}
 
         {% include ['teasers/teaser--'~item.post_type~'.twig', 'teasers/teaser.twig'] with { post: item } %}
+
+      {# TimberTerm objects were passed as items #}
+      {% elseif item.taxonomy %}
+
+        {% include ['teasers/teaser-term--'~item.taxonomy~'.twig', 'teasers/teaser-term.twig'] with { term: item } %}
 
       {# Either a list of images or a list of objects with an image property #}
       {% else %}

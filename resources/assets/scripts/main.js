@@ -19,4 +19,4 @@ $(document).foundation();
 // Custom components
 headroom('.headroom');
 gform();
-slick('.slick');
+slick('.slick', { arrows: false, dots: true });

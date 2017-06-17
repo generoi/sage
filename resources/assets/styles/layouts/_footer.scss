@@ -1,4 +1,5 @@
 .l-footer {
+  @extend %u-spacing-section--vertical;
   @extend %u-strip-bottom-paddings;
 
   &__copyright {

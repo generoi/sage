@@ -10,7 +10,25 @@ class SlickComponent {
 
     this.$slideshow.on('afterChange', this.autoPlayVideo);
     this.$slideshow.on('init', this.autoPlayVideo);
-    this.$slideshow.slick(this.options);
+
+    if (this.checkVisibility()) {
+      this.$slideshow.slick(this.options);
+    }
+
+    $(window).on('changed.zf.mediaquery', () => {
+      if (!this.isVisible() && this.checkVisibility()) {
+        this.$slideshow.slick(this.options);
+      }
+    });
+  }
+
+  isVisible() {
+    return this._isVisible;
+  }
+
+  checkVisibility() {
+    this._isVisible = this.$slideshow.is(':visible');
+    return this.isVisible();
   }
 
   autoPlayVideo(e, slick) {
