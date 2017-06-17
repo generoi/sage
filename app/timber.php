@@ -57,12 +57,10 @@ add_filter('timber_extended/class_name', function ($class_name, $types, $widget 
  * Use custom TimberPost subclasses.
  */
 add_filter('Timber\PostClassMap', function ($post_class) {
-    // return [
-    //     'post' => __NAMESPACE__ . '\\Post',
-    //     'page' => '\\Timber\\Post',
-    //     'product' => __NAMESPACE__ . '\\ProductPost',
-    // ];
-    return __NAMESPACE__ . '\\Post';
+    foreach(get_post_types(['_builtin' => false], 'objects') as $post_type) {
+        $map[$post_type->name] = __NAMESPACE__ . '\\Post';
+    };
+    return $map;
 });
 
 /**

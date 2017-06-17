@@ -1,6 +1,14 @@
 $c-grid-container-gutter: true !default;
 
 /**
+ * Streth cell content.
+ */
+.align-stretch > .cell {
+  display: flex;
+  flex-direction: column;
+}
+
+/**
  * @see https://github.com/zurb/foundation-sites/issues/10180
  */
 .grid-x.grid-margin-y {

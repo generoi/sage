@@ -30,7 +30,7 @@
       {% for post in posts %}
         {% block listing__item %}
           <div class="archive__post cell">
-            {% include ['teasers/teaser-'~post.post_type~'.twig', 'teasers/teaser.twig'] %}
+            {% include ['teasers/teaser--'~post.post_type~'.twig', 'teasers/teaser.twig'] %}
           </div>
         {% endblock %}
       {% endfor %}

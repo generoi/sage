@@ -5,11 +5,13 @@ namespace App;
 use Timber;
 use TimberHelper;;
 
-class Post extends Timber\Post {
+class Post extends Timber\Post
+{
     /**
      * Return related posts.
      */
-    public function get_related($posts_per_page = 3) {
+    public function get_related($posts_per_page = 3)
+    {
         $cid = "related_{$this->ID}_{$posts_per_page}";
         if (!isset($this->related)) {
             $this->related = [];

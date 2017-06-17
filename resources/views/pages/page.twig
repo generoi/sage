@@ -2,13 +2,17 @@
 
 {% block content %}
   <article class="post grid-container post--{{template_type}} post--type-{{post.post_type}} {{extra_classes}}" id="post-{{post.ID}}">
-    <div class="post__content-wrapper grid-x align-center">
-      <div class="cell large-8">
+    <div class="post__content-wrapper grid-x grid-margin-x align-center">
+      <div class="cell large-9">
+
+        {# Heading #}
         {% block post__header %}
           <div class="post__title-wrapper">
             <h1 class="post__title">{% block post__title post.title|default(wp_title) %}</h1>
           </div>
         {% endblock %}
+
+        {# Content #}
         {% block post__content %}
           {% if post.content %}
             <div class="post__content">

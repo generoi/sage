@@ -10,17 +10,17 @@
   <div
     class="
       {{items|length > 1 ? 'slick' : 'slick--no-slider'}}
-      slick--grid
       {{options.adaptiveHeight ? 'slick--adaptive-height'}}
-      {{slick_class}}
+      {{slick_class?:'slick--grid'}}
     "
     data-slick='{{fn('json_encode', options)}}'
   >
   {% for item in items %}
-    <div class="slick__slide slick__slide--boxed overlay overlay--white" style="display: none;">
+    {% set is_object = (item.image or item.content or item.post_type or item.taxonomy) %}
+    <div class="slick__slide {{item.classes|default('slick__slide--boxed overlay overlay--white')}}" style="display: none;">
       {# Support object ID's #}
-      {% if item matches '/^\\d+$/' %}
-        {% set item = (object_type == 'term') ? TimberTerm(item) : TimberPost(item) %}
+      {% if (not is_object) and (item matches '/^\\d+$/') %}
+        {% set item = (object_type|default('post') == 'term') ? TimberTerm(item) : TimberPost(item) %}
       {% endif %}
 
       {# TimberPost objects were passed as items #}
