@@ -59,6 +59,9 @@ add_filter('Timber\PostClassMap', function ($post_class) {
     foreach(get_post_types(['_builtin' => false], 'objects') as $post_type) {
         $map[$post_type->name] = __NAMESPACE__ . '\\Post';
     };
+    $map['post'] = __NAMESPACE__ . '\\Post';
+    $map['page'] = __NAMESPACE__ . '\\Post';
+    // $map['product'] = __NAMESPACE__ . '\\ProductPost';
     return $map;
 });
 

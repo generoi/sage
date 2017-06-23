@@ -38,8 +38,8 @@ module.exports = class {
 
     childProcess.stderr.on('data', data => console.error(`rsync: ${data}`));
     childProcess.on('close', (code) => {
-      if (code !== 0) console.error(`rsync exited with code ${code}`);
-      console.info('rsynced: %s [%dms]', source, new Date() - start);
+      if (code !== 0) console.error(`rsync exited with code ${code} from directory ${config.paths.root}`);
+      else console.info('rsynced: %s [%dms]', source, new Date() - start);
       this.watcher.reload();
     });
   }
