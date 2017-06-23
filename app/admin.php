@@ -31,9 +31,10 @@ add_action('admin_enqueue_scripts', function () {
 });
 
 /**
- * Remove nagging WooThemes notice.
+ * Remove nagging notices.
  */
 remove_action('admin_notices', 'woothemes_updater_notice');
+remove_action('admin_notices', 'widgetopts_admin_notices');
 
 /**
  * Fix debug-bar-js.dev.js referencing jQuery without depending on it.
@@ -56,5 +57,16 @@ add_filter('default_hidden_columns', function ($hidden, $screen) {
     if (!empty($screen->post_type) && $screen->post_type == 'post') {
         $hidden[] = 'tags';
     }
+    $hidden[] = 'wpseo-score';
+    $hidden[] = 'wpseo-score-readability';
     return $hidden;
 }, 10, 2);
+
+/**
+ * Remove items from the admin bar.
+ */
+add_action('wp_before_admin_bar_render', function () {
+    global $wp_admin_bar;
+    // Yoast
+    $wp_admin_bar->remove_menu('wpseo-menu');
+});
