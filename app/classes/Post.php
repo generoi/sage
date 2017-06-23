@@ -23,16 +23,24 @@ class Post extends Timber\Post
 
         $post = $this;
         $this->related[$cid] = TimberHelper::transient($cid, function () use ($post, $posts_per_page) {
-            $terms = $post->terms('category');
-            $tids = wp_list_pluck($terms, 'ID');
-            return (new Timber\PostQuery([
-                'category__in' => $tids,
-                'post_type' => $post->post_type,
-                'post__not_in' => [$post->ID],
-                'posts_per_page' => $posts_per_page,
-                'ignore_sticky_posts' => true,
-                'orderby' => 'rand',
-            ]))->get_posts();
+            global $wpdb;
+            $terms = $post->terms();
+            $tids = implode(',', array_column($terms, 'id'));
+            $querystr = "
+                SELECT      p.*, COUNT(t.term_id) AS score
+                FROM        $wpdb->posts AS p
+                INNER JOIN  $wpdb->term_relationships AS tr ON p.ID = tr.object_id
+                INNER JOIN  $wpdb->terms AS t ON tr.term_taxonomy_id = t.term_id
+                WHERE       p.post_type = '{$post->type}'
+                            AND t.term_id IN ({$tids})
+                            AND p.ID NOT IN ({$post->ID})
+                            AND p.post_status = 'publish'
+                GROUP BY    p.ID
+                ORDER BY    score DESC
+                LIMIT       $posts_per_page
+            ";
+            $posts = $wpdb->get_results($querystr, OBJECT);
+            return (new Timber\PostQuery($posts))->get_posts();
         }, Timber::$cache ? DAY_IN_SECONDS : false);
 
         return $this->related[$cid];
