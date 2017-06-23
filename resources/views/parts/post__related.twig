@@ -1,0 +1,8 @@
+<div class="page__related">
+  {%
+    include ['parts/slideshow--teaser.twig'] with {
+      items: post.get_related(9),
+      options: get_slick_options([2, 2, 1]),
+    }
+  %}
+</div>

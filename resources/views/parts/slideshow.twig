@@ -1,9 +1,11 @@
 {% import 'macros/image.twig' as img %}
 
+{# Variables #}
 {% set options  = options|default({ infinite: false, dots: true, arrows: false }) %}
-{% set width    = width %}
-{% set height   = height %}
-{% set crop     = crop %}
+{% set width    = width|default(400) %}
+{% set height   = height|default(300) %}
+{% set crop     = crop|default(true) %}
+{% set items    = items %}
 {% set lightbox = lightbox|default(false) %}
 
 {% if items|length %}
@@ -16,33 +18,18 @@
     data-slick='{{fn('json_encode', options)}}'
   >
   {% for item in items %}
-    {% set is_object = (item.image or item.content or item.post_type or item.taxonomy) %}
+    {# item can an image path/object or an object with: #}
+    {# - item.classes #}
+    {# - item.image #}
+    {# - item.link #}
+    {# - item.content #}
+
     <div class="slick__slide {{item.classes|default('slick__slide--boxed overlay overlay--white')}}" style="display: none;">
-      {# Support object ID's #}
-      {% if (not is_object) and (item matches '/^\\d+$/') %}
-        {% set item = (object_type|default('post') == 'term') ? TimberTerm(item) : TimberPost(item) %}
-      {% endif %}
-
-      {# TimberPost objects were passed as items #}
-      {% if item.post_type %}
-
-        {% include ['teasers/teaser--'~item.post_type~'.twig', 'teasers/teaser.twig'] with { post: item } %}
-
-      {# TimberTerm objects were passed as items #}
-      {% elseif item.taxonomy %}
-
-        {% include ['teasers/teaser-term--'~item.taxonomy~'.twig', 'teasers/teaser-term.twig'] with { term: item } %}
-
-      {# Either a list of images or a list of objects with an image property #}
-      {% else %}
-
+      {% block slide %}
         {% set image = item.image ?: item %}
         {% set is_lightbox = lightbox and image.src %}
         {% set is_linked = item.link or is_lightbox %}
-
-        {% if not image.src %}
-          {% set image = TimberImage(image) %}
-        {% endif %}
+        {% set image = (image.src) ? image : TimberImage(image) %}
 
         {% if is_linked %}
           <a
@@ -51,32 +38,32 @@
             {{lightbox ? 'data-rel="prettyPhoto"'}}
             data-category="Slideshow"
             data-action="Click Link"
-            data-label="{{item.content}}"
+            data-label="{{item.content|striptags|wptrim}}"
           >
         {% endif %}
 
-        {% if image.src %}
-          <div class="slick__image">
-            {% if width and height %}
-              {{img.image(image, width, height, crop)}}
-            {% else %}
-              {{img.image(image, 400, 300, crop)}}
-            {% endif %}
-          </div>
-        {% endif %}
-
-        {% if item.content %}
-        <figcaption class="slick__caption overlay__foreground">
-          <div class="slick__caption-wrapper">
-            <div class="slick__caption_content text-center">
-              <big>{{item.content}}</big>
+        {% block slide__image %}
+          {% if image.src %}
+            <div class="slick__image">
+              {{img.image(image, [width, height], crop)}}
             </div>
-          </div>
-        </figcaption>
-        {% endif %}
+          {% endif %}
+        {% endblock %}
+
+        {% block slide__content %}
+          {% if item.content %}
+            <figcaption class="slick__caption overlay__foreground">
+              <div class="slick__caption-wrapper">
+                <div class="slick__caption_content text-center">
+                  <big>{{item.content}}</big>
+                </div>
+              </div>
+            </figcaption>
+          {% endif %}
+        {% endblock %}
 
         {% if is_linked %}</a>{% endif %}
-      {% endif %}
+      {% endblock %}
     </div>
   {% endfor %}
   </div>
