@@ -1,0 +1,60 @@
+.wp-block-image {
+  @extend .wp-caption;
+  figcaption {
+    @extend .wp-caption-text;
+  }
+}
+
+.wp-block-pullquote {
+  text-align: center;
+  border: 0;
+  p {
+    @extend %u-header;
+    @extend %u-h2;
+  }
+}
+
+.wp-block-cover-image {
+  $overlay: "black";
+  .cover-image {
+    background-size: cover;
+    height: 30vw;
+    min-height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-attachment: fixed;
+    position: relative;
+
+    &:before {
+      content: '';
+      @include overlay-background;
+      background-color: map-get($c-overlay-palette, $overlay);
+    }
+    @extend %u-bg--#{$overlay};
+
+    h2 {
+      @include overlay-foreground;
+    }
+  }
+}
+
+.wp-block-gallery {
+  @include xy-grid;
+  .blocks-gallery-image {
+    margin-left: auto;
+    margin-right: auto;
+
+    @include breakpoint(medium) {
+      @include xy-cell-base(auto);
+      @include xy-gutters($gutters: $grid-margin-gutters, $gutter-type: margin);
+    }
+  }
+}
+
+.wp-block-button {
+  > a {
+    @extend .button;
+  }
+}

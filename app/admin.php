@@ -17,10 +17,31 @@ add_action('customize_register', function (\WP_Customize_Manager $wp_customize) 
 });
 
 /**
+ * Fix gutenberg integration.
+ */
+add_filter('the_content', function ($content) {
+    if (strpos($content, '<!-- wp:core') !== FALSE) {
+        remove_filter('the_content', 'wpautop');
+    }
+    return $content;
+}, 8);
+
+/**
  * Customizer JS
  */
 add_action('customize_preview_init', function () {
     wp_enqueue_script('sage/customizer.js', asset_path('scripts/customizer.js'), ['customize-preview'], null, true);
+});
+
+/**
+ * Integrate with wp-customize-post.
+ */
+add_filter('customize_posts_partial_schema', function ($schema) {
+    $schema['post_title']['selector'] = '.page__title';
+    $schema['post_date']['selector'] = '.page__date';
+    $schema['post_content']['selector'] = '.page__content';
+    $schema['post_excerpt']['selector'] = '.teaser__excerpt';
+    return $schema;
 });
 
 /**

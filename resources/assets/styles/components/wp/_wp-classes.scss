@@ -1,0 +1,73 @@
+.wp-caption {
+  @include thumbnail;
+  // remove figure margin.
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+
+  &-text {
+    font-size: $small-font-size;
+    line-height: $global-lineheight;
+
+    $border: if(length($thumbnail-border) > 1, nth($thumbnail-border, 2), 0);
+    @if ($border == 0) and ($thumbnail-shadow != none) {
+      $border: $global-padding/2;
+    }
+    padding-left: $border;
+    padding-right: $border;
+    padding-top: if($border == 0, 4px, $border);
+  }
+}
+
+.alignfull {
+  @if $c-grid-container-gutter {
+    .grid-container .grid-margin-x &,
+    .grid-container .grid-padding-x & {
+      @include xy-gutters($gutters: $grid-padding-gutters, $negative: true);
+      @each $breakpoint, $gutter in $grid-margin-gutters {
+        max-width: calc(100% + #{get-side($gutter, left) + #{get-side($gutter, right)}});
+      }
+    }
+  }
+}
+
+.alignnone {
+  width: auto !important;
+  &, &.wp-block-image {
+    @extend %u-paragraph;
+    display: block;
+  }
+}
+
+.alignwide {
+  width: auto !important;
+  &, &.wp-block-image {
+    @extend %u-paragraph;
+    display: block;
+    max-width: calc(#{$c-paragraph-max-width} + 20%);
+  }
+}
+
+.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+@include breakpoint(medium) {
+  $width: $c-paragraph-max-width/2;
+  .alignleft {
+    float: left;
+    margin-right: $global-margin !important;
+    margin-left: calc(50% - #{$width}) !important;
+    max-width: calc(50% - #{$width/2} - #{$global-margin}) !important;
+  }
+
+  .alignright {
+    float: right;
+    margin-left: $global-margin !important;
+    margin-right: calc(50% - #{$width}) !important;
+    max-width: calc(50% - #{$width/2} - #{$global-margin}) !important;
+  }
+}
