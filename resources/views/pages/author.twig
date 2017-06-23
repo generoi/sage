@@ -1,20 +1,14 @@
 {% extends 'pages/archive.twig' %}
 
-{% block term__title %}
-  {{author.display_name}}
-{% endblock %}
+{% set object = author %}
+{% set taxonomy = 'author' %}
 
-{% block term__content %}
+{% block page__title author.display_name %}
+
+{% block page__content %}
   {% if author.description %}
-    <div class="archive__content">
+    <div class="page__content">
       {{author.description}}
     </div>
   {% endif %}
-{% endblock %}
-
-{% block content %}
-  <div class="archive archive--author" id="archive-{{author.ID}}">
-    {% block term parent() %}
-    {% block listing parent() %}
-  </div>
 {% endblock %}

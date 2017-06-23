@@ -30,9 +30,9 @@ add_filter('timber/context', function ($context) {
     $context['title'] = \App\title();
 
     // Add your sidebars.
-    $context['sidebar_primary'] = Timber::get_widgets('sidebar-primary');
-    $context['sidebar_footer'] = Timber::get_widgets('sidebar-footer');
-    $context['sidebar_content_below'] = Timber::get_widgets('sidebar-content-below');
+    $context['sidebar__primary'] = Timber::get_widgets('sidebar-primary');
+    $context['sidebar__footer'] = Timber::get_widgets('sidebar-footer');
+    $context['sidebar__content_below'] = Timber::get_widgets('sidebar-content_below');
 
     // @todo inject somehow.
     if (is_tax() || is_tag() || is_category()) {
@@ -41,7 +41,6 @@ add_filter('timber/context', function ($context) {
 
     return $context;
 });
-
 
 /**
  * Use the theme's TimberWidget class for Widgets.
@@ -93,7 +92,7 @@ add_filter('get_twig', function ($twig) {
 
     // Format a phone number string.
     // @example
-    // {{ post.phone|format_number }}
+    // {{ post.phone|format_phone }}
     $twig->addFilter('format_phone', new Twig_SimpleFilter('format_phone', function ($number) {
         return Utils\format_phone($number);
     }));

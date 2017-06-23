@@ -1,8 +1,0 @@
-.archive {
-  &__title {
-    @extend .post__title;
-  }
-  &__listing {
-    @extend %u-spacing-section--vertical;
-  }
-}

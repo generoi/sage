@@ -1,23 +1,19 @@
 {% import 'macros/image.twig' as img %}
-{% set object = post ? post : (term ? term : false) %}
-{% set slides = object.get_field('hero_slide') %}
-{% set force_crop = object.get_field('hero_crop') or (slides|length == 0) %}
-{% set default_video_poster = 'data:image/gif;base64,R0lGODlhAQABAIAAAP7//wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' %}
 
-{%
-  set sizes =  {
-    desktop: [1400, 350],
-    tablet:  [ 768, 300],
-    mobile:  [ 400, 300],
-    retina:  [ 800, 700],
-  }
-%}
+{# Variables can be overridden in templates #}
+{% set object = post ? (post) : (term ? term : false) %}
+{% set slides = slides ?: object.get_field('hero_slide') %}
+{% set force_crop = force_crop ?: (object.get_field('hero_crop') or (slides|length == 0)) %}
+{% set slide_enable_fallback = slide_enable_fallback|default(true) %}
+{% set default_video_poster = default_video_poster ?: 'data:image/gif;base64,R0lGODlhAQABAIAAAP7//wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' %}
+{% set slide_defaults = slide_defaults ?: { slide_theme: 'cover', slide_type: 'image', slide_overlay: 'black', slide_title: object.name } %}
 
-{% if slides|length == 0 %}
-  {% set slide_defaults = { slide_theme: 'cover', slide_type: 'image', slide_overlay: 'black', slide_title: object.name } %}
+{# Fallback support if no slides are set #}
+{% if slides|length == 0 and slide_enable_fallback %}
   {# Use featured image #}
   {% if post.get_thumbnail %}
     {% set slide = slide_defaults|merge({ slide_image: post.thumbnail }) %}
+    {% set force_crop = post.get_field('hero_crop') %}
 
   {# Inherit from parents #}
   {% elseif object.parent() %}
@@ -29,6 +25,7 @@
       {% set force_crop = parent.get_field('hero_crop') %}
     {% elseif parent.get_thumbnail %}
       {% set slide = slide_defaults|merge({ slide_image: parent.thumbnail }) %}
+      {% set force_crop = parent.get_field('hero_crop') %}
     {% endif %}
   {% endif %}
 
@@ -51,9 +48,9 @@
       {% set image = slide.slide_type == 'image' and slide.slide_image ? TimberImage(slide.slide_image) %}
 
       <div
-        class="slick__slide {{loop.first ? 'is-active'}} slick__slide--{{slide.slide_theme}} overlay overlay--{{slide.slide_overlay}} is-animating fade-in short-delay"
+        class="slick__slide {{loop.first ? 'is-active'}} slick__slide--{{slide.slide_theme}} overlay overlay--{{slide.slide_overlay}}"
         id="slick-slide-{{loop.index}}"
-        style="opacity: 0; {{loop.first ?: 'display: none;'}}"
+        style="{{loop.first ?: 'display: none;'}}"
       >
         {% if slide.slide_link %}
           <a
@@ -73,42 +70,91 @@
               </video>
             </div>
             <style>
+              #slick-slide-{{loop.index}} .responsive-embed { height: 0; display: block; overflow: hidden; }
               #slick-slide-{{loop.index}} .responsive-embed { padding-bottom: {{ slide.slide_video_height / slide.slide_video_width * 100 }}%; }
             </style>
           </div>
         {% elseif image.src %}
-          {% set image_src = image.src|tojpg %}
-          {% set is_smartcrop = image._wpsmartcrop_enabled and force_crop %}
+          {% set is_smartcrop = (image._wpsmartcrop_enabled) and (force_crop) %}
 
-          {% set image_desktop = force_crop and (not is_smartcrop) ? image_src|resize(sizes.desktop[0], sizes.desktop[1], 'center') : image_src|resize(sizes.desktop[0]) %}
-          {% set image_tablet  = force_crop and (not is_smartcrop) ? image_src|resize(sizes.tablet[0],  sizes.tablet[1], 'center')  : image_src|resize(sizes.tablet[0]) %}
-          {% set image_mobile  = force_crop and (not is_smartcrop) ? image_src|resize(sizes.mobile[0],  sizes.mobile[1], 'center')  : image_src|resize(sizes.mobile[0], sizes.mobile[1], 'center') %}
-          {% set image_retina  = force_crop and (not is_smartcrop) ? image_src|resize(sizes.retina[0],  sizes.retina[1], 'center')  : image_src|resize(sizes.retina[0], sizes.retina[1], 'center') %}
+          {# Image dimensions are defined in images.php #}
+          {% set dimensions_desktop = get_image_size('hero--desktop') %}
+          {% set dimensions_tablet  = get_image_size('hero--tablet') %}
+          {% set dimensions_mobile  = get_image_size('hero--mobile') %}
+
+          {# Force crop as long as smartcrop's CSS cropping isnt enabled #}
+          {% if (force_crop) and (not is_smartcrop) %}
+            {% set image_desktop = image.src('hero--desktop') %}
+            {% set image_tablet  = image.src('hero--tablet') %}
+            {% set image_mobile  = image.src('hero--mobile') %}
+
+            {# Retina images require wp-retina-2x plugin #}
+            {% set image_desktop_retina = image_desktop|retina_url %}
+            {% set image_tablet_retina  = image_tablet|retina_url %}
+            {% set image_mobile_retina  = image_mobile|retina_url %}
+
+          {# Disable WP thumbnails and use Timber to resize images instead #}
+          {% else %}
+            {% set image_desktop = image.src|resize(dimensions_desktop.width) %}
+            {% set image_tablet  = image.src|resize(dimensions_tablet.width) %}
+            {# If there's content in the slide, enforce a crop which is most like larger #}
+            {% if slide.slide_title or slide.slide_content %}
+              {% set image_mobile = image.src|resize(dimensions_mobile.width, dimensions_mobile.height) %}
+            {% else %}
+              {% set image_mobile = image.src|resize(dimensions_mobile.width) %}
+            {% endif %}
+
+            {# Re-init images so we can retrieve the new dimensions #}
+            {% set image_desktop = TimberImage(image_desktop) %}
+            {% set image_tablet  = TimberImage(image_tablet) %}
+            {% set image_mobile  = TimberImage(image_mobile) %}
+            {# @see https://github.com/timber/timber/issues/1458 #}
+            {% set image_desktop = image_desktop|obj_merge({'file_loc': image_desktop.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_desktop = image_desktop|obj_merge({'file': image_desktop.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_tablet  = image_tablet|obj_merge({'file_loc': image_tablet.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_tablet  = image_tablet|obj_merge({'file': image_tablet.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_mobile  = image_mobile|obj_merge({'file_loc': image_mobile.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_mobile  = image_mobile|obj_merge({'file': image_mobile.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+
+            {# wp-retina-2x wont know about these images #}
+            {% set image_desktop_retina = image|resize(image_desktop.width * 2, image_desktop.height * 2) %}
+            {% set image_tablet_retina  = image|resize(image_tablet.width * 2, image_tablet.height * 2) %}
+            {% set image_mobile_retina  = image|resize(image_mobile.width * 2, image_mobile.height * 2) %}
+          {% endif %}
+
+          {# Ratio used to add inline styles for preventing FOUC #}
+          {% if (force_crop) %}
+            {% set ratio_desktop = (dimensions_desktop.height / dimensions_desktop.width) %}
+            {% set ratio_tablet  = (dimensions_tablet.height / dimensions_tablet.width) %}
+            {% set ratio_mobile  = (dimensions_mobile.height / dimensions_mobile.width) %}
+          {% else %}
+            {% set ratio_desktop = (image_desktop.height / image_desktop.width) %}
+            {% set ratio_tablet  = (image_tablet.height / image_tablet.width) %}
+            {% set ratio_mobile  = (image_mobile.height / image_mobile.width) %}
+          {% endif %}
 
           <picture class="slick__image {{is_smartcrop? 'smartcrop__container'}}">
-            <source srcset="{{image_desktop}}" media="(min-width: 1000px)" />
-            <source srcset="{{image_tablet}}" media="(min-width: 700px)" />
+            <source srcset="{{image_desktop}} 1x, {{image_desktop_retina}} 2x" media="(min-width: 1000px)" />
+            <source srcset="{{image_tablet}} 1x, {{image_tablet_retina}} 2x" media="(min-width: 700px)" />
             <img
               {% if is_smartcrop %}{{img.smartcrop_attributes(image)}}{% endif %}
               srcset="
                 {{image_mobile}} 1x,
-                {{image_retina}} 2x
+                {{image_mobile_retina}} 2x
               " />
           </picture>
 
-          {# If we're cropping, set the ratio on page load to prevent FOUC #}
-          {% if force_crop %}
-            <style>
-              #slick-slide-{{loop.index}} .slick__image { height: 0; display: block; overflow: hidden; }
-              #slick-slide-{{loop.index}} .slick__image { padding-bottom: {{ sizes.mobile[1] / sizes.mobile[0] * 100 }}%; }
-              @media screen and (min-width: 700px) {
-                #slick-slide-{{loop.index}} .slick__image { padding-bottom: {{ sizes.tablet[1] / sizes.tablet[0] * 100 }}%; }
-              }
-              @media screen and (min-width: 1000px) {
-                #slick-slide-{{loop.index}} .slick__image { padding-bottom: {{ sizes.desktop[1] / sizes.desktop[0] * 100 }}%; }
-              }
-            </style>
-          {% endif %}
+          {# Prevent FOUC #}
+          <style>
+            #slick-slide-{{loop.index}} .slick__image { height: 0; display: block; overflow: hidden; }
+            #slick-slide-{{loop.index}} .slick__image { padding-bottom: {{ratio_mobile*100}}%; }
+            @media screen and (min-width: 700px) {
+              #slick-slide-{{loop.index}} .slick__image { padding-bottom: {{ratio_tablet*100}}%; }
+            }
+            @media screen and (min-width: 1000px) {
+              #slick-slide-{{loop.index}} .slick__image { padding-bottom: {{ratio_desktop*100}}%; }
+            }
+          </style>
         {% endif %}
 
         {% if slide.slide_title or slide.slide_content %}

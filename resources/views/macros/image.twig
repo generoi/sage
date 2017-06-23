@@ -3,44 +3,41 @@
   {% set dimensions = get_image_size(size) %}
 
   {% import _self as image %}
-  {{ image.image(thumbnail, dimensions.width, dimensions.height, dimensions.crop) }}
+  {{ image.image(thumbnail, [dimensions.width, dimensions.height], dimensions.crop) }}
 {% endmacro %}
 
 {# Output an image tag #}
-{% macro image(thumbnail, width, height, crop, retina, smartcrop) %}
+{% macro image(thumbnail, dimensions, crop, is_retina, is_smartcrop) %}
   {% import _self as image %}
 
-  {% if not thumbnail.src %}
-    {% set thumbnail = TimberImage(thumbnail) %}
-  {% endif %}
+  {% set thumbnail = (not thumbnail.src) ? TimberImage(thumbnail) : thumbnail %}
 
   {% if thumbnail.src %}
-
     {% set img = thumbnail.src|tojpg %}
-    {% set is_smartcrop = smartcrop|default(thumbnail._wpsmartcrop_enabled and width and height) %}
-    {% set is_retina = retina|default(true) %}
+    {% set width = dimensions[0] %}
+    {% set height = dimensions[1] %}
+    {% set is_retina = is_retina|default(true) %}
+    {% set is_smartcrop = is_smartcrop|default(thumbnail._wpsmartcrop_enabled and width and height) %}
 
-    {# Smarcrop plugin support. #}
-    {% if is_smartcrop %}
+    {# Smarcrop plugin support #}
+    {% if (is_smartcrop) %}
       {% set img_1x = img|resize(width) %}
       {% set img_2x = img_1x %}
     {# User defined a size #}
-    {% elseif width and height %}
-      {# Serve retina image #}
-      {% if is_retina %}
-        {% set img_1x = img|resize(width,     height,     crop) %}
-        {% set img_2x = img|resize(width * 2, height * 2, crop) %}
-      {# Serve single image #}
-      {% else %}
-        {% set img_1x = img|resize(width,     height,     crop) %}
+    {% elseif (width or height) %}
+      {% set img_1x = img|resize(width, height, crop) %}
+
+      {# Serve retina image. #}
+      {% if (is_retina) %}
+        {% set img_2x = img|resize(width ? (width * 2), height ? (height * 2), crop) %}
       {% endif %}
     {# Output image as is. #}
     {% else %}
       {% set img_1x = img %}
     {% endif %}
 
-    {% if is_smartcrop and crop|default(true) %}
-      <div class="smartcrop__container" style="width:100%; height: 0; padding-bottom:{{ (height/width) * 100 }}%;">
+    {% if (is_smartcrop and crop|default(true)) %}
+      <div class="smartcrop__container" style="width: 100%; height: 0; padding-bottom:{{ (height/width) * 100 }}%;">
     {% endif %}
 
     <img
@@ -78,4 +75,20 @@
     class="smartcrop"
     style="object-position: {{focus.left|round(2)}}% {{focus.top|round(2)}}%;"
   {% endif %}
+{% endmacro %}
+
+{% macro placeholder(dimensions) %}
+  {% set width = dimensions[0]|default(400) %}
+  {% set height = dimensions[1]|default(width / 1.5)|round %}
+
+  {% spaceless %}
+    <img
+      width="{{width}}"
+      height="{{height}}"
+      srcset="
+        https://unsplash.it/{{width}}/{{height}}?random 1x,
+        https://unsplash.it/{{width*2}}/{{height*2}}?random 2x
+      "
+    >
+  {% endspaceless %}
 {% endmacro %}

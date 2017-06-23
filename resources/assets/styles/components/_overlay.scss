@@ -10,10 +10,10 @@
  */
 
 $c-overlay-palette: (
-  primary: rgba(get-color(primary), 0.85),
-  secondary: rgba(get-color(secondary), 0.85),
-  white: rgba($white, 0.75),
-  black: rgba($black, 0.5),
+  "primary": rgba(get-color(primary), 0.85),
+  "secondary": rgba(get-color(secondary), 0.85),
+  "white": rgba($white, 0.75),
+  "black": rgba($black, 0.5),
 ) !default;
 
 $c-global-transition: all 0.3s ease 0s !default;

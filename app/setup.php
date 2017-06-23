@@ -6,6 +6,9 @@ use Roots\Sage\Container;
 use Roots\Sage\Assets\JsonManifest;
 use Roots\Sage\Config;
 
+/**
+ * Use Foundation XY-grid.
+ */
 add_filter('widget-options-extended/grid', function () {
     return 'xy-grid';
 });
@@ -137,7 +140,7 @@ add_action('widgets_init', function () {
     ] + $config);
     register_sidebar([
         'name'          => __('Below Content', 'theme-admin'),
-        'id'            => 'sidebar-content-below'
+        'id'            => 'sidebar-content_below'
     ] + $config);
 });
 

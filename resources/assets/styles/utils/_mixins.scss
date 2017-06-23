@@ -104,3 +104,25 @@ $c-underline-hover-color: false !default;
     margin-bottom: rem-calc($header-margin-bottom);
   }
 }
+
+@mixin admin-bar($child: true) {
+  $-admin-bar-height: 46px !global;
+
+  @if $child {
+    body.admin-bar & {
+      @content;
+      @include breakpoint($c-admin-bar-breakpoint) {
+        $-admin-bar-height: 32px !global;
+        @content;
+      }
+    }
+  }
+  @else {
+    @content;
+
+    @include breakpoint($c-admin-bar-breakpoint) {
+      $-admin-bar-height: 32px !global;
+      @content;
+    }
+  }
+}

@@ -3,8 +3,7 @@
 {% block html_head_container %}
   <head>
     {% include 'layout/head.twig' %}
-    {% block head %}
-    {% endblock %}
+    {% block head '' %}
   </head>
 {% endblock %}
   <body class="{{body_class}} sticky-footer" data-template="base.twig">
@@ -28,7 +27,7 @@
           {% endblock %}
         {% else %}
           {% block content %}
-            {{__('Sorry, no content', 'theme')}}
+            {{__('Sorry, no content', '<example-project>')}}
           {% endblock %}
         {% endif %}
         </section>
@@ -37,14 +36,6 @@
     </div>
 
     <div class="sticky-footer__footer">
-      {% if sidebar_content_below %}
-        <div class="l-siderbar-content-below grid-container">
-          <div class="grid-x grid-margin-y grid-margin-x align-center">
-            {{sidebar_content_below}}
-          </div>
-        </div>
-      {% endif %}
-
       <footer id="footer" class="l-footer" role="contentinfo">
         {% include 'layout/footer.twig' %}
       </footer>

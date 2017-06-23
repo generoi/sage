@@ -54,21 +54,18 @@ $contrast-warnings:         false;
 // // @see utils/spacing
 // $c-spacings: (
 //   section: (
-//     small:  rem-calc(30) rem-calc(20),
-//     medium: rem-calc(60) rem-calc(40),
-//     large:  rem-calc(60),
+//     small:  rem-calc(30) rem-calc(10),
+//     medium: 5vw rem-calc(40),
+//     large:  7vw,
 //   ),
-//   // Set $grid-column-gutter: map-get($cspacings, gutter);
-//   gutter: (
-//     small: rem-calc(20),
-//     large: rem-calc(25),
-//   )
+//   gutter: $grid-margin-gutters,
 // );
 
 // Hard coded header sizes.
 // @see components/headroom
 $c-header-sizes: (
-  small: 61px,
+  small: 64px,
+  large: 61px,
 );
 
 // // Responsive base font sizes.

@@ -1,5 +1,6 @@
 .teaser {
   text-align: left;
+
   a { color: inherit; }
 
   &__image {
@@ -27,6 +28,15 @@
     // Allow long words to overflow.
     overflow: hidden;
     text-overflow: ellipsis;
+  }
 
+  // Post type: Post
+  // ---------------
+  &--post {
+  }
+
+  // Term type: Category
+  // -------------------
+  &--category {
   }
 }

@@ -1,0 +1,47 @@
+.page {
+  &__title {
+    // Gutters are taken care of by the grid.
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__content {
+    @extend %u-strip-bottom-paddings;
+  }
+
+  &__content,
+  &__footer,
+  &__title-wrapper {
+    > *:not(img):not(video) {
+      @extend %u-paragraph;
+    }
+  }
+
+  &__nav_item {
+    &--next .page__nav_link {
+      margin-left: -1 * get-side($menu-items-padding, left);
+    }
+    &--prev .page__nav_link {
+      margin-right: -1 * get-side($menu-items-padding, right);
+      text-align: right;
+    }
+  }
+
+  &__listing {
+  }
+
+  // Post type: Page
+  // ---------------
+  &--type-page {
+  }
+
+  // Post type: Post
+  // ---------------
+  &--type-post {
+  }
+
+  // Term type: Category
+  // -------------------
+  &--type-category {
+  }
+}

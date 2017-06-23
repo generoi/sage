@@ -1,9 +1,25 @@
 {% extends 'pages/page.twig' %}
 
-{% block post__footer %}
-  <div class="post__footer">
-    {% include 'parts/post__terms.twig' with { terms: post.terms('category') } %}
-    {% include 'parts/post__comments.twig' %}
-    {% include 'parts/post__nav.twig' %}
+{% set slide_defaults = { slide_type: 'image' } %}
+{% set slide_enable_fallback = false %}
+
+{% block page__footer %}
+  <div class="page__footer cell">
+    <div class="grid-x grid-margin-y">
+      {% block sidebar__content_below parent() %}
+
+      <div class="cell">
+        {% include 'parts/post__terms.twig' with { terms: post.terms('category') } %}
+      </div>
+      <div class="cell">
+        {% include 'parts/post__comments.twig' %}
+      </div>
+      <div class="cell">
+        {% include 'parts/post__related.twig' %}
+      </div>
+      <div class="cell">
+        {% include 'parts/post__nav.twig' %}
+      </div>
+    </div>
   </div>
 {% endblock %}

@@ -42,6 +42,11 @@ $header-styles: (
   ),
 ) !default;
 
+/**
+ * Limit paragraph lengths.
+ */
+$c-paragraph-max-width: 45rem !default;
+
 @each $breakpoint, $font-defs in $c-font-styles {
   @include breakpoint($breakpoint) {
     %u-text {
@@ -74,5 +79,21 @@ $header-styles: (
         @include header-style($header-defs);
       }
     }
+  }
+}
+
+/**
+ * Helper to limit words per line.
+ */
+%u-paragraph {
+  max-width: $c-paragraph-max-width;
+  margin-left: auto;
+  margin-right: auto;
+
+  form & {
+    max-width: none;
+  }
+  body#tinymce & {
+    margin-left: 0;
   }
 }

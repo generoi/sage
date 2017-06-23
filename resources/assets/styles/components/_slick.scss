@@ -72,6 +72,8 @@ $c-slick-nav-size: 40px !default;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @extend %u-strip-bottom-paddings;
   }
 
   // Caption is always absolutely positioned on top of image.
@@ -143,6 +145,18 @@ $c-slick-nav-size: 40px !default;
   // Do not expand slick slides, let the height be adaptive.
   &--adaptive-height {
     .slick-list, .slick-track { align-items: flex-start; }
+  }
+
+  // Hero style
+  // ----------
+  &--hero {
+    // Move dots within the slider.
+    &.slick-dotted {
+      margin-bottom: 0;
+    }
+    .slick-dots {
+      bottom: $global-margin;
+    }
   }
 
 }

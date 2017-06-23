@@ -8,20 +8,16 @@ $c-admin-bar-breakpoint: 783px !default;
 }
 
 // Make room for admin bar.
-body.admin-bar > .reveal.full {
-  margin-top: 46px !important;
-  min-height: calc(100vh - 46px);
-  height: calc(100vh - 46px);
-  @include breakpoint($c-admin-bar-breakpoint) {
-    margin-top: 32px !important;
-    min-height: calc(100vh - 32px);
-    height: calc(100vh - 32px);
+.reveal.full {
+  @include admin-bar() {
+    margin-top: $-admin-bar-height !important;
+    min-height: calc(100vh - #{$-admin-bar-height}) !important;
+    height: calc(100vh - #{$-admin-bar-height}) !important;
   }
 }
 
-body.admin-bar.sticky-footer {
-  min-height: calc(100vh - 46px);
-  @include breakpoint($c-admin-bar-breakpoint) {
-    min-height: calc(100vh - 32px);
+.admin-bar.sticky-footer {
+  @include admin-bar(false) {
+    min-height: calc(100vh - #{$-admin-bar-height});
   }
 }

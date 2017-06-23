@@ -1,29 +1,61 @@
+{# Main page template re-used across posts, pages and archives #}
 {% extends 'layout/base.twig' %}
 
+{%
+  set page_classes = page_classes ?: [
+    'page',
+    'page--'~template_type,
+    'page--type-'~post.post_type,
+    'post',
+    'grid-container',
+  ]
+%}
+
 {% block content %}
-  <article class="post grid-container post--{{template_type}} post--type-{{post.post_type}} {{extra_classes}}" id="post-{{post.ID}}">
-    <div class="post__content-wrapper grid-x grid-margin-x align-center">
-      <div class="cell large-9">
-
-        {# Heading #}
-        {% block post__header %}
-          <div class="post__title-wrapper">
-            <h1 class="post__title">{% block post__title post.title|default(wp_title) %}</h1>
-          </div>
-        {% endblock %}
-
-        {# Content #}
-        {% block post__content %}
-          {% if post.content %}
-            <div class="post__content">
-              {{post.content}}
+  <article class="{{page_classes|join(' ')}}" id="post-{{post.ID}}">
+    <div class="grid-x grid-margin-x grid-margin-y align-center">
+      <div class="cell auto">
+        <div class="page__content-wrapper grid-x grid-margin-x grid-margin-y">
+          {# Heading #}
+          {% block page__header %}
+            <div class="page__title-wrapper cell">
+              <h1 class="page__title">{% block page__title post.title|default(wp_title) %}</h1>
             </div>
-          {% endif %}
-        {% endblock %}
-        {% block post__footer %}{% endblock %}
-      </div>
-      {% block post__after %}{% endblock %}
-    </div>
-    {% block post__row_after %}{% endblock %}
+          {% endblock %}
+
+          {# Content #}
+          {% block page__content %}
+            {% if post.content %}
+              <div class="page__content cell">
+                {{post.content}}
+              </div>
+            {% endif %}
+          {% endblock %}
+
+          {# Footer #}
+          {% block page__footer %}
+            {% if sidebar__content_below %}
+              <div class="page__footer cell">
+                <div class="grid-x grid-margin-y">
+                  {% block sidebar__content_below include ['layout/sidebar--content_below.twig'] %}
+                </div>
+              </div>
+            {% endif %}
+          {% endblock %}
+        </div><!-- .page__content-wrapper -->
+      </div><!-- .cell.auto -->
+
+      {# Sidebar #}
+      {% block page__sidebar %}
+        {% if sidebar__primary %}
+          <div class="page__sidebar cell large-3">
+            {% block sidebar__primary include ['layout/sidebar--primary.twig'] %}
+          </div>
+        {% endif %}
+      {% endblock %}
+
+      {% block page__after '' %}
+    </div><!-- .grid-x -->
+    {% block page__grid_after '' %}
   </article>
 {% endblock %}

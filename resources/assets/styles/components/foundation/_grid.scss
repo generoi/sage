@@ -9,10 +9,10 @@ $c-grid-container-gutter: true !default;
 }
 
 /**
- * @see https://github.com/zurb/foundation-sites/issues/10180
+ * Allow cells content to flex.
  */
-.grid-x.grid-margin-y {
-  > .cell { height: auto; }
+.cell.align-middle {
+  display: flex;
 }
 
 @if $c-grid-container-gutter {

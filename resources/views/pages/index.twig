@@ -1,9 +1,4 @@
 {% extends 'pages/archive.twig' %}
 
-{% block content %}
-  <div class="archive archive--index" id="archive-index">
-    {% block term '' %}
-
-    {% block listing parent() %}
-  </div>
-{% endblock %}
+{% set taxonomy = 'index' %}
+{% block term '' %}

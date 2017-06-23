@@ -2,17 +2,74 @@
 
   a { outline: none; }
 
+  // Static header bar on desktop
+  // ----------------------------
+  &__bar--desktop {
+    // Let the grid take care of paddings.
+    &.top-bar {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  // Static header bar on mobile
+  // ----------------------------
   &__bar--mobile {
     position: relative;
     z-index: 2;
   }
 
+  // Mobile menu
+  // -----------
+  &__nav--mobile {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: $titlebar-background;
+
+    @include admin-bar() {
+      top: $-admin-bar-height;
+    }
+
+    // Offset by the height of the header.
+    @if variable-exists(c-header-sizes) {
+      @each $size, $height in $c-header-sizes {
+        @include breakpoint($size) {
+          padding-top: $height;
+        }
+      }
+    }
+
+    .primary_navigation {
+      max-height: 100%;
+      // Prevent momentum scrolling on iOS. Scrollbars are not visible on mobile.
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  // Desktop menu
+  // ------------
+  &__nav--desktop {
+    .primary_navigation {
+      &__item {
+        &--current {}
+      }
+      &__link {}
+    }
+  }
+
+  // Toggle button
+  // -------------
   &__nav-toggle {
     outline: none;
     // Make the target area larger.
     padding: 2rem;
     margin-top: -1rem;
-    margin-right: -1rem !important; // override .title-bar .menu-icon
+    margin-right: -2rem !important; // override .title-bar .menu-icon
     > span { margin-left: -1rem; }
 
     &.menu-icon:after { display: none; }
@@ -30,42 +87,4 @@
     }
   }
 
-  // Mobile menu.
-  &__nav--mobile {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 1;
-    background-color: $titlebar-background;
-
-    // Offset by the height of the header.
-    @if variable-exists(c-header-sizes) {
-      @each $size, $height in $c-header-sizes {
-        @include breakpoint($size) {
-          padding-top: $height;
-        }
-      }
-    }
-
-    .primary_navigation {
-      max-height: 100%;
-      // Prevent momentum scrolling on iOS.
-      overflow: scroll;
-      -webkit-overflow-scrolling: touch;
-    }
-  }
-
-  // Desktop menu
-  &__nav--desktop {
-    @extend %u-spacing-gutter--vertical;
-
-    .primary_navigation {
-      &__item {
-        &--current {}
-      }
-      &__link {}
-    }
-  }
 }
