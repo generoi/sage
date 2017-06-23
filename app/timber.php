@@ -103,7 +103,24 @@ add_filter('get_twig', function ($twig) {
      * <a href="tel:{{post.phone|tel}}">
      */
     $twig->addFilter('tel', new Twig_SimpleFilter('tel', function ($number) {
-        return preg_replace('/[^0-9]/', '', $number);
+        return preg_replace('/[^\+0-9]/', '', $number);
+    }));
+
+    /**
+     * Return the value of a breakpoint in pixels without the unit.
+     */
+    $twig->addFunction('breakpoint', new Twig_SimpleFunction('breakpoint', function ($breakpoint) {
+        return Foundation\breakpoint($breakpoint);
+    }));
+
+    /**
+     * Return the retina image URL as set by wp-retina-2x.
+     */
+    $twig->addFilter('retina_url', new Twig_SimpleFilter('retina_url', function ($image) {
+        if (function_exists('wr2x_get_retina_from_url')) {
+            return wr2x_get_retina_from_url($image);
+        }
+        return $image;
     }));
 
     /**

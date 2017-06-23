@@ -29,6 +29,11 @@ add_action('after_setup_theme', function () {
         update_option('large_size_h', round($content_width/1.5));
     }
 
+    // Hero image sizes.
+    add_image_size('hero--desktop', 1400, 350, 1);
+    add_image_size('hero--tablet', 768, 400, 1);
+    add_image_size('hero--mobile', 400, 350, 1);
+
     // Tablet version
     add_image_size('tablet', 768, 400);
     // Mobile version
