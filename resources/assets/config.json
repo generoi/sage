@@ -5,6 +5,7 @@
       "./styles/main.scss"
     ],
     "admin": [
+      "./scripts/admin.js",
       "./styles/admin.scss"
     ],
     "icons": [

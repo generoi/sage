@@ -3,6 +3,16 @@
 namespace App;
 
 /**
+ * Remove leading and trailing whitespace.
+ */
+add_filter('the_content', function ($content) {
+    // @see https://stackoverflow.com/a/22004695/319855
+    $whitespace = '<br\s*/?>|\s|&nbsp;|<p>&nbsp;</p>';
+    $content = preg_replace('#^(' . $whitespace . ')*(.+?)(' . $whitespace . ')*$#mi', '$2', $content);
+    return trim($content);
+});
+
+/**
  * Add <body> classes
  */
 add_filter('body_class', function (array $classes) {

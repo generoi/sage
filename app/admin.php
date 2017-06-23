@@ -28,6 +28,7 @@ add_action('customize_preview_init', function () {
  */
 add_action('admin_enqueue_scripts', function () {
     wp_enqueue_style('theme/css/admin', asset_path('styles/admin.css'));
+    wp_enqueue_script('theme/js/admin', asset_path('scripts/admin.js'), ['jquery'], null, true);
 });
 
 /**
@@ -61,6 +62,59 @@ add_filter('default_hidden_columns', function ($hidden, $screen) {
     $hidden[] = 'wpseo-score-readability';
     return $hidden;
 }, 10, 2);
+
+/**
+ * Add Foundation styling classes to TinyMCE.
+ */
+add_filter('tiny_mce_before_init', function ($settings) {
+    $style_formats = [
+        [
+            'title' => 'Buttons',
+            'items' => [
+                ['title' => 'Buttons', 'selector' => 'a', 'classes' => 'button'],
+                ['title' => 'Primary Color (Button)', 'selector' => 'a.button', 'classes' => 'primary'],
+                ['title' => 'Secondary Color (Button)', 'selector' => 'a.button', 'classes' => 'secondary'],
+                ['title' => 'Tiny (Button)', 'selector' => 'a.button', 'classes' => 'tiny'],
+                ['title' => 'Small (Button)', 'selector' => 'a.button', 'classes' => 'small'],
+                ['title' => 'Large (Button)', 'selector' => 'a.button', 'classes' => 'large'],
+            ],
+        ],
+        [
+            'title' => 'Callout',
+            'items' => [
+                ['title' => 'Callout box', 'block' => 'div', 'classes' => 'callout' ],
+                ['title' => 'Primary (Callout)', 'selector' => 'div.callout', 'classes' => 'primary'],
+                ['title' => 'Secondary (Callout)', 'selector' => 'div.callout', 'classes' => 'secondary'],
+                ['title' => 'Success (Callout)', 'selector' => 'div.callout', 'classes' => 'success'],
+                ['title' => 'Warning (Callout)', 'selector' => 'div.callout', 'classes' => 'warning'],
+                ['title' => 'Alert (Callout)', 'selector' => 'div.callout', 'classes' => 'alert'],
+            ],
+        ],
+    ];
+    $settings['style_formats'] = json_encode($style_formats);
+    $settings['style_formats_merge'] = true;
+
+    // Fix constantly growing editor.
+    if (!isset($settings['content_style'])) {
+        $settings['content_style'] = '';
+    }
+    $settings['content_style'] = 'html { height: auto !important; min-height: initial !important; max-height: initial !important; }';
+
+    return $settings;
+});
+
+/**
+ * Modify buttons in TinyMCE's second row.
+ */
+add_filter('mce_buttons_2', function ($buttons) {
+    // Unless TinyMCE Advanced is enabled, we need to specifically add the style button.
+    array_splice($buttons, 1, 0, 'styleselect');
+
+    $remove = [
+        'forecolor', // text color
+    ];
+    return array_diff($buttons, $remove);
+});
 
 /**
  * Remove items from the admin bar.
