@@ -14,6 +14,39 @@ add_action('wp_print_scripts', function () {
 });
 
 /**
+ * Block the WP Editor when Tailor is active.
+ */
+add_action('admin_notices', function () {
+    $screen = get_current_screen();
+    if ($screen->base !== 'post') {
+        return;
+    }
+    $post = get_post();
+    if (get_post_meta($post->ID, '_tailor_layout', true) == false) {
+        return;
+    }
+    echo "<style>
+        .wp-editor-container:before,
+        .mce-edit-area:before {
+            content: '" . __('This page is managed by tailor and should not be edited directly. Click "Tailor this Page" in the toolbar.', 'theme-admin') . "';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2vw;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.5;
+        }
+    </style>";
+});
+
+/**
  * Integrate theme options with Tailor elements.
  */
 add_action('tailor_element_register_controls', function ($element) {
