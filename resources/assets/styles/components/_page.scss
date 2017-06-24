@@ -5,14 +5,26 @@
     margin-bottom: 0;
   }
 
-  &__content {
-    @extend %u-strip-bottom-paddings;
-  }
-
-  &__content,
   &__footer,
   &__title-wrapper {
     > *:not(img):not(video) {
+      @extend %u-paragraph;
+    }
+  }
+  &__content {
+    > *:not(img):not(video):not(.no-container) {
+      @extend %u-paragraph;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  // Tailor edit UI
+  #canvas {
+    max-width: none;
+    > div > *:not(img):not(video):not(.no-container) {
       @extend %u-paragraph;
     }
   }

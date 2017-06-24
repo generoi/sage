@@ -23,7 +23,7 @@
       {# Archive term or post #}
       {% block term %}
         <article class="page__term cell grid-x align-center">
-          <div class="cell large-9">
+          <div class="cell auto">
             <div class="page__content-wrapper grid-x grid-margin-x grid-margin-y">
 
               {# Heading #}
@@ -43,7 +43,7 @@
               {% endblock %}
               {% block page__footer parent() %}
             </div><!-- .page__content-wrapper -->
-          </div><!-- .cell.large-9 -->
+          </div><!-- .cell.auto -->
 
           {% block page__sidebar parent() %}
           {% block page__after parent() %}
@@ -55,10 +55,10 @@
         {% block listing__loop %}
           <section class="page__listing cell">
             <div class="grid-x grid-margin-x grid-margin-y small-up-1 medium-up-2 large-up-3 align-stretch align-center">
-              {% for post in posts %}
+              {% for archive_post in posts %}
                 {% block listing__item %}
                   <div class="cell">
-                    {% include ['teasers/teaser--'~post.post_type~'.twig', 'teasers/teaser.twig'] %}
+                    {% include ['teasers/teaser--'~archive_post.post_type~'.twig', 'teasers/teaser.twig'] with { post: archive_post } %}
                   </div>
                 {% endblock %}
               {% endfor %}

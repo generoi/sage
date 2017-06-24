@@ -27,19 +27,21 @@ add_action('tailor_element_register_controls', function ($element) {
         case 'tailor_content':
             $element->add_setting('background_theme', $setting);
             $element->add_setting('overlay_theme', $setting);
+
+            $priority = 24;
             $element->add_control('background_theme', [
                 'type' => 'select',
                 'label' => __('Background', 'theme-admin'),
                 'section' => 'attributes',
                 'choices' => ['' => ''] + Foundation\palette('background'),
-                'priority' => 24,
+                'priority' => $priority++,
             ]);
             $element->add_control('overlay_theme', [
                 'type' => 'select',
                 'label' => __('Overlay', 'theme-admin'),
                 'section' => 'attributes',
                 'choices' => ['' => ''] + Foundation\palette('overlay'),
-                'priority' => 25,
+                'priority' => $priority++,
             ]);
             break;
         default:
@@ -50,6 +52,18 @@ add_action('tailor_element_register_controls', function ($element) {
                 $element->remove_setting($key);
             }
             break;
+    }
+
+    switch ($element->tag) {
+        case 'tailor_section':
+            $element->add_setting('container', $setting + ['default' => '1']);
+            $element->add_control('container', [
+                'label' => __('Contain content to predefined width'),
+                'type' => 'switch',
+                'choices' => ['1' => __('Contain content to grid')],
+                'section' => 'general',
+                'priority' => 25,
+            ]);
     }
 
     switch ($element->tag) {
@@ -90,6 +104,9 @@ add_action('tailor_shortcode_html_attributes', function ($html_atts, $atts, $tag
     }
     if (!empty($atts['style'])) {
         $html_atts['class'][] = $atts['style'];
+    }
+    if ($tag == 'tailor_section' && empty($atts['container'])) {
+        $html_atts['class'][] = 'no-container';
     }
     if (!empty($atts['overlay_theme'])) {
         $html_atts['class'][] = 'overlay';

@@ -12,6 +12,9 @@ use Roots\Sage\Config;
 add_filter('widget-options-extended/grid', function () {
     return 'xy-grid';
 });
+add_filter('tailor-foundation/grid', function () {
+    return 'xy-grid';
+});
 
 /**
  * Theme assets
