@@ -100,7 +100,6 @@ array_map(function ($file) use ($sage_error) {
     'admin',
     // Site specific.
     'foundation',
-    'setup',
     'images',
     'timber',
     'utils',
@@ -111,7 +110,7 @@ array_map(function ($file) use ($sage_error) {
     'performance',
     'tailor',
     // 'rewrites',
-    // 'yoast',
+    'yoast',
     // 'multilingual',
     // 'facetwp',
     // 'gravityform',
