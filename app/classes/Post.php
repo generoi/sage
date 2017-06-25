@@ -14,7 +14,7 @@ class Post extends Timber\Post
      */
     public function get_related($posts_per_page = 3, $args = [])
     {
-        $cid = $this->generated_cid('related', func_get_args());
+        $cid = $this->generate_cid('related', func_get_args());
         if (!isset($this->related)) {
             $this->related = [];
         }
@@ -68,7 +68,7 @@ class Post extends Timber\Post
         return (new Timber\PostQuery($posts))->get_posts();
     }
 
-    protected function generated_cid($prefix, $args = []) {
+    protected function generate_cid($prefix, $args = []) {
         return $prefix . '_' . $this->ID . '_' . substr(md5(json_encode($args)), 0, 6);
     }
 }

@@ -77,7 +77,7 @@ class ProductPost extends Post {
             return $this->upsell_products;
         }
 
-        $cid = $this->generated_cid('upsell');
+        $cid = $this->generate_cid('upsell');
         $product = $this->product;
 
         $this->upsell_products = TimberHelper::transient($cid, function () use ($product) {
@@ -88,7 +88,7 @@ class ProductPost extends Post {
     }
 
     public function get_related_products($posts_per_page = 4, $orderby = 'rand', $order = 'desc') {
-        $cid = $this->generated_cid('related', func_get_args());
+        $cid = $this->generate_cid('related', func_get_args());
 
         if (!isset($this->related_products)) {
             $this->related_products = [];
@@ -145,7 +145,7 @@ class ProductPost extends Post {
         return $this->attributes;
     }
 
-    protected function generated_cid($prefix, $args = []) {
+    protected function generate_cid($prefix, $args = []) {
         return $prefix . '_' . $this->product_get_id() . '_' . substr(md5(json_encode($args)), 0, 6);
     }
 }
