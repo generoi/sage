@@ -3,6 +3,11 @@
 namespace App;
 
 /**
+ * Remove slow function that repeatedly runs get_theme_mod().
+ */
+remove_action('tailor_control_args_colorpicker', 'tailor_modify_colorpicker');
+
+/**
  * Remove duplicate or onsupported third party scripts.
  */
 add_action('wp_print_scripts', function () {
