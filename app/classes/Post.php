@@ -7,6 +7,8 @@ use TimberHelper;;
 
 class Post extends Timber\Post
 {
+    public $cache_duration = DAY_IN_SECONDS;
+
     /**
      * Return related posts.
      */
@@ -28,7 +30,7 @@ class Post extends Timber\Post
             } else {
                 return $post->get_related_by_terms($posts_per_page);
             }
-        }, Timber::$cache ? DAY_IN_SECONDS : false);
+        }, Timber::$cache ? $this->cache_duration : false);
 
         return $this->related[$cid];
     }

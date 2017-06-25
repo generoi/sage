@@ -6,7 +6,7 @@ use Timber;
 use TimberHelper;
 use WC_Product_Variable;
 
-class ProductPost extends Timber\Post {
+class ProductPost extends Post {
 
     public $product;
     public $variations;
@@ -81,8 +81,8 @@ class ProductPost extends Timber\Post {
         $product = $this->product;
 
         $this->upsell_products = TimberHelper::transient($cid, function () use ($product) {
-            return Timber\PostGetter::get_posts($product->get_upsell_ids());
-        }, Timber::$cache ? DAY_IN_SECONDS : false);
+            return (new Timber\PostQuery($product->get_upsell_ids()))->get_posts();
+        }, Timber::$cache ? $this->cache_duration : false);
 
         return $this->upsell_products;
     }
@@ -106,7 +106,7 @@ class ProductPost extends Timber\Post {
                 $related_products[$idx] = Timber\PostGetter::get_post($related->get_id());
             }
             return $related_products;
-        }, Timber::$cache ? DAY_IN_SECONDS : false);
+        }, Timber::$cache ? $this->cache_duration : false);
 
         return $this->related_products[$cid];
     }
