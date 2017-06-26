@@ -6,10 +6,10 @@
  * .contact-form { @extend %u-bg--secondary; }
  */
 $c-background-palette: (
-  primary:   (color: $white, background: get-color(primary), button: secondary),
-  secondary: (color: $white, background: get-color(secondary)),
-  white:     (color: $black, background: $white, anchor-decoration: underline),
-  black:     (color: $white, background: $black, anchor-decoration: underline),
+  "primary":   (color: $white, background: get-color(primary), button: secondary),
+  "secondary": (color: $white, background: get-color(secondary)),
+  "white":     (color: $black, background: $white, anchor-decoration: underline),
+  "black":     (color: $white, background: $black, anchor-decoration: underline),
 ) !default;
 
 @each $name, $defs in $c-background-palette {
