@@ -24,7 +24,7 @@
     {# - item.link #}
     {# - item.content #}
 
-    <div class="slick__slide {{item.classes|default('slick__slide--boxed overlay overlay--white')}}" style="display: none;">
+    <figure class="slick__slide {{item.classes|default('slick__slide--boxed overlay overlay--white')}}" style="display: none;">
       {% block slide %}
         {% set image = item.image ?: item %}
         {% set is_lightbox = lightbox and image.src %}
@@ -64,7 +64,7 @@
 
         {% if is_linked %}</a>{% endif %}
       {% endblock %}
-    </div>
+    </figure>
   {% endfor %}
   </div>
 {% endif %}

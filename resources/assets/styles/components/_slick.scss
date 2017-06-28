@@ -90,6 +90,7 @@ $c-slick-nav-size: 40px !default;
     height: auto; // Safari height not expanding to containsers size.
     flex: 1 0 auto; // IE11 fits all slides into the row otherwise.
     position: relative;
+    margin: 0; // reset figure styling.
 
     &--cover {
     }

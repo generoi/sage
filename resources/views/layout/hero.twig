@@ -47,7 +47,7 @@
       {% set video = slide.slide_type == 'video' and slide.slide_video ? TimberImage(slide.slide_video) %}
       {% set image = slide.slide_type == 'image' and slide.slide_image ? TimberImage(slide.slide_image) %}
 
-      <div
+      <figure
         class="slick__slide {{loop.first ? 'is-active'}} slick__slide--{{slide.slide_theme}} overlay overlay--{{slide.slide_overlay}}"
         id="slick-slide-{{loop.index}}"
         style="{{loop.first ?: 'display: none;'}}"
@@ -182,7 +182,7 @@
         {% endif %}
 
         {% if slide.slide_link %}</a>{% endif %}
-      </div>
+      </figure>
     {% endfor %}
   </div>
 {% endif %}
