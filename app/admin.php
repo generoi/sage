@@ -17,16 +17,6 @@ add_action('customize_register', function (\WP_Customize_Manager $wp_customize) 
 });
 
 /**
- * Fix gutenberg integration.
- */
-add_filter('the_content', function ($content) {
-    if (strpos($content, '<!-- wp:core') !== FALSE) {
-        remove_filter('the_content', 'wpautop');
-    }
-    return $content;
-}, 8);
-
-/**
  * Customizer JS
  */
 add_action('customize_preview_init', function () {

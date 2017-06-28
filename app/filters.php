@@ -3,6 +3,16 @@
 namespace App;
 
 /**
+ * Fix gutenberg integration.
+ */
+add_filter('the_content', function ($content) {
+    if (strpos($content, '<!-- wp:core') !== FALSE) {
+        remove_filter('the_content', 'wpautop');
+    }
+    return $content;
+}, 8);
+
+/**
  * Remove leading and trailing whitespace.
  */
 add_filter('the_content', function ($content) {
