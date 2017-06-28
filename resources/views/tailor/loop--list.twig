@@ -4,7 +4,7 @@
   <div class="grid-x grid-margin-y">
     {% for post in posts %}
       <div class="cell">
-        {% include ['teasers/teaser-'~post.post_type~'.twig', 'teasers/teaser.twig'] %}
+        {% include ['teasers/teaser--'~post.post_type~'.twig', 'teasers/teaser.twig'] %}
       </div>
     {% endfor %}
   </div>
