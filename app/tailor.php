@@ -19,36 +19,17 @@ add_action('wp_print_scripts', function () {
 });
 
 /**
- * Block the WP Editor when Tailor is active.
+ * Hide the WP Editor when Tailor is active.
  */
-add_action('admin_notices', function () {
-    $screen = get_current_screen();
-    if ($screen->base !== 'post') {
+add_action('admin_init', function () {
+    global $pagenow;
+    if ($pagenow != 'post.php') {
         return;
     }
-    $post = get_post();
-    if (get_post_meta($post->ID, '_tailor_layout', true) == false) {
-        return;
+    $post_id = filter_input(INPUT_GET, 'post') ?: filter_input(INPUT_POST, 'post_ID');
+    if (get_post_meta($post_id, '_tailor_layout', true)) {
+        remove_post_type_support('page', 'editor');
     }
-    echo "<style>
-        .wp-editor-container:before,
-        .mce-edit-area:before {
-            content: '" . __('This page is managed by tailor and should not be edited directly. Click "Tailor this Page" in the toolbar.', 'theme-admin') . "';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2vw;
-            white-space: normal;
-            text-align: center;
-            line-height: 1.5;
-        }
-    </style>";
 });
 
 /**
