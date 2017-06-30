@@ -93,7 +93,7 @@ add_filter('tiny_mce_before_init', function ($settings) {
         [
             'title' => 'Callout',
             'items' => [
-                ['title' => 'Callout box', 'block' => 'div', 'classes' => 'callout' ],
+                ['title' => 'Callout box', 'block' => 'div', 'classes' => 'callout', 'wrapper' => true],
                 ['title' => 'Primary (Callout)', 'selector' => 'div.callout', 'classes' => 'primary'],
                 ['title' => 'Secondary (Callout)', 'selector' => 'div.callout', 'classes' => 'secondary'],
                 ['title' => 'Success (Callout)', 'selector' => 'div.callout', 'classes' => 'success'],
