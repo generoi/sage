@@ -1,3 +1,5 @@
+// @see components/hubspot for husbpot forms.
+
 // Fix for our forms as the label is larger than the input.
 input[type="radio"], input[type="checkbox"] {
   margin-top: .25em;
@@ -5,21 +7,33 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 textarea[rows] { height: 100px; }
+textarea { margin-bottom: $form-spacing; }
 
+
+// Form styles
+// ---------------------------------------------------------------------------
 /**
- * Horizontally aligned gravity form with the submit button on the same level
- * as the fields.
+ * Horizontally aligned forms with the submit button on the same level as the
+ * fields.
  */
 .form--horizontal {
-  display: flex;
-  flex-flow: row wrap;
+  form#{&}, .hs-form {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .hs-form-field .input {
+    margin-right: 0 !important;
+  }
 
   .gform_heading {
     flex: 1 0 100%;
   }
-  .gform_body {
+  .gform_body, .hs-form-field {
     flex: 1 0 auto;
   }
+
+  .hs-button,
   .gform_footer .gform_button {
     border-radius: 0 $button-radius $button-radius 0;
     border-left-width: 1px;
@@ -27,11 +41,12 @@ textarea[rows] { height: 100px; }
     $input-height: ($input-font-size * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1);
 
     $button-size: map-get($button-sizes, tiny);
-    $padding: (($input-height - $button-size)/2) - rem-calc(.5px); // border
+    $padding: (($input-height - $button-size)/2) - rem-calc(1px); // border
 
-    padding-top: $padding;
-    padding-bottom: $padding;
-    font-size: $button-size;
+    // Important to override HubSpot styling
+    padding-top: $padding !important;
+    padding-bottom: $padding !important;
+    font-size: $button-size !important;
     line-height: 1;
   }
 }

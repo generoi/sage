@@ -1,0 +1,43 @@
+// Call to Action
+// ---------------------------------------------------------------------------
+.cta_button {
+  @extend .button;
+}
+
+// Forms
+// ---------------------------------------------------------------------------
+.hs-form {
+  .hs-button {
+    @extend .button;
+  }
+  fieldset {
+    max-width: none !important;
+    margin-right: -$form-spacing;
+  }
+
+  span:empty + .hs-form-required {
+    display: none;
+  }
+
+  .form-columns-1 .hs-input {
+    width: 100% !important;
+  }
+
+  .input {
+    margin-right: $form-spacing !important;
+  }
+
+  .hs-input.error {
+    @include form-input-error;
+  }
+  .hs-error-msgs {
+    @include form-error;
+    margin-right: $form-spacing !important;
+    margin-left: 0rem;
+
+    label {
+      display: inline;
+      color: inherit;
+    }
+  }
+}
