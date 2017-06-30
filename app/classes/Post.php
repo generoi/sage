@@ -3,10 +3,11 @@
 namespace App;
 
 use Timber;
-use TimberHelper;;
+use TimberHelper;
 
 class Post extends Timber\Post
 {
+    /** @var int The duration any template cache should stay fresh */
     public $cache_duration = DAY_IN_SECONDS;
 
     /**
@@ -25,7 +26,7 @@ class Post extends Timber\Post
 
         $post = $this;
         $this->related[$cid] = TimberHelper::transient($cid, function () use ($post, $posts_per_page, $args) {
-            if (function_exists('get_crp_posts_id')) {
+            if ($this->is_crp_active()) {
                 return $post->get_related_by_crp($posts_per_page, $args);
             } else {
                 return $post->get_related_by_terms($posts_per_page);
@@ -35,6 +36,9 @@ class Post extends Timber\Post
         return $this->related[$cid];
     }
 
+    /**
+     * Return related posts based on Contextual Related Posts result.
+     */
     protected function get_related_by_crp($posts_per_page = 3, $args = []) {
         $related = get_crp_posts_id(array_merge($args, [
             'post_id' => $this->ID,
@@ -47,7 +51,10 @@ class Post extends Timber\Post
         return (new Timber\PostQuery($related))->get_posts();
     }
 
-    protected function get_related_by_terms($posts_per_page) {
+    /**
+     * Return related posts based on terms.
+     */
+    protected function get_related_by_terms($posts_per_page = 3) {
         global $wpdb;
         $terms = $this->terms();
         $tids = implode(',', array_column($terms, 'id'));
@@ -68,6 +75,26 @@ class Post extends Timber\Post
         return (new Timber\PostQuery($posts))->get_posts();
     }
 
+    /**
+     * Check if post has Contextual Related Post functionality active.
+     */
+    protected function is_crp_active() {
+        if (!function_exists('get_crp_posts_id')) {
+            return false;
+        }
+        // @see https://github.com/WebberZone/contextual-related-posts/blob/ec1ec84df057dca5f1b61695fd450776cc181dbe/includes/content.php#L57
+        global $crp_settings;
+        if (!empty( $crp_settings['exclude_on_post_types']) && strpos($crp_settings['exclude_on_post_types'], '=') === false) {
+            $exclude_on_post_types = explode(',', $crp_settings['exclude_on_post_types']);
+        } else {
+            parse_str($crp_settings['exclude_on_post_types'], $exclude_on_post_types);
+        }
+        return in_array($this->type, $exclude_on_post_types);
+    }
+
+    /**
+     * Generate a unique cahe id based on a prefix and arguments.
+     */
     protected function generate_cid($prefix, $args = []) {
         return $prefix . '_' . $this->ID . '_' . substr(md5(json_encode($args)), 0, 6);
     }
