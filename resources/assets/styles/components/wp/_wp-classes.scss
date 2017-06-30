@@ -1,73 +1,101 @@
-.wp-caption {
+%wp-caption {
   @include thumbnail;
   // remove figure margin.
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
+}
 
-  &-text {
-    font-size: $small-font-size;
-    line-height: $global-lineheight;
+%wp-caption-text {
+  font-size: $small-font-size;
+  line-height: $global-lineheight;
 
-    $border: if(length($thumbnail-border) > 1, nth($thumbnail-border, 2), 0);
-    @if ($border == 0) and ($thumbnail-shadow != none) {
-      $border: $global-padding/2;
+  $border: if(length($thumbnail-border) > 1, nth($thumbnail-border, 2), 0);
+  @if ($border == 0) and ($thumbnail-shadow != none) {
+    $border: $global-padding/2;
+  }
+  padding-left: $border;
+  padding-right: $border;
+  padding-top: if($border == 0, 4px, $border);
+}
+
+/**
+ * Stretch to the edges of the viewport regardless of it's size.
+ */
+%alignfull {
+  // Always stretch it, even if the uploaded image is too small.
+  max-width: none;
+
+  // Negate the padding from a grid container.
+  .grid-container-padded & {
+    @include xy-gutters($gutters: $grid-padding-gutters, $negative: true);
+    @each $breakpoint, $gutter in $grid-margin-gutters {
+      width: calc(100% + #{get-side($gutter, left) + #{get-side($gutter, right)}});
     }
-    padding-left: $border;
-    padding-right: $border;
-    padding-top: if($border == 0, 4px, $border);
   }
 }
 
-.alignfull {
-  @if $c-grid-container-gutter {
-    .grid-container .grid-margin-x &,
-    .grid-container .grid-padding-x & {
-      @include xy-gutters($gutters: $grid-padding-gutters, $negative: true);
-      @each $breakpoint, $gutter in $grid-margin-gutters {
-        max-width: calc(100% + #{get-side($gutter, left) + #{get-side($gutter, right)}});
-      }
-    }
-  }
+/**
+ * No alignment and no stretching, limited to the content width.
+ */
+%alignnone {
+  display: block;
 }
 
-.alignnone {
-  width: auto !important;
-  &, &.wp-block-image {
-    @extend %u-paragraph;
-    display: block;
-  }
+/**
+ * Ensure image is as large as the content area but let it stretch 20% on each
+ * side if possible.
+ */
+%alignwide {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: #{$c-paragraph-max-width};
+  max-width: calc(#{$c-paragraph-max-width} + 20%);
 }
 
-.alignwide {
-  width: auto !important;
-  &, &.wp-block-image {
-    @extend %u-paragraph;
-    display: block;
-    max-width: calc(#{$c-paragraph-max-width} + 20%);
-  }
-}
-
-.aligncenter {
+/**
+ * Center align image but not more than the content area.
+ */
+%aligncenter {
   display: block;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  max-width: #{$c-paragraph-max-width};
 }
 
-@include breakpoint(medium) {
-  $width: $c-paragraph-max-width/2;
-  .alignleft {
+/**
+ * Left/Rigth aligning images should never take up more than 50% of the content
+ * area. Also only apply on larger screens.
+ */
+$sidealign-width: ($c-paragraph-max-width/2);
+$sidealign-image-width: ($sidealign-width/2) + ($global-margin/2);
+%alignleft {
+  @include breakpoint(medium) {
     float: left;
-    margin-right: $global-margin !important;
-    margin-left: calc(50% - #{$width}) !important;
-    max-width: calc(50% - #{$width/2} - #{$global-margin}) !important;
-  }
-
-  .alignright {
-    float: right;
-    margin-left: $global-margin !important;
-    margin-right: calc(50% - #{$width}) !important;
-    max-width: calc(50% - #{$width/2} - #{$global-margin}) !important;
+    margin-right: $global-margin;
+    margin-left: calc(50% - #{$sidealign-width});
+    max-width: calc(50% - #{$sidealign-image-width});
   }
 }
+%alignright {
+  @include breakpoint(medium) {
+    float: right;
+    margin-left: $global-margin;
+    margin-right: calc(50% - #{$sidealign-width});
+    max-width: calc(50% - #{$sidealign-image-width});
+  }
+}
+
+/**
+ * Add the classes.
+ */
+.wp-caption { @extend %wp-caption; }
+.wp-caption-text { @extend %wp-caption-text; }
+.alignfull { @extend %alignfull; }
+.alignnone { @extend %alignnone; }
+.alignwide { @extend %alignwide; }
+.aligncenter { @extend %aligncenter; }
+.alignleft { @extend %alignleft; }
+.alignright { @extend %alignright; }

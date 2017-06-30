@@ -32,7 +32,8 @@ add_action('wp_enqueue_scripts', function () {
  * Dequeue stylesheets.
  */
 add_action('wp_print_styles', function () {
-     wp_dequeue_style('ext-widget-opts');
+    wp_dequeue_style('ext-widget-opts'); // widget-options
+    wp_dequeue_style('wp-blocks'); // gutenberg
 }, 100);
 
 /**

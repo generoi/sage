@@ -1,10 +1,23 @@
+/**
+ * An image, but unlike regular WP Core, there's no wrapping <figure> unless
+ * there's also a caption.
+ */
 .wp-block-image {
-  @extend .wp-caption;
+  @extend %wp-caption;
+
   figcaption {
-    @extend .wp-caption-text;
+    @extend %wp-caption-text;
+  }
+
+  // Override any values inherited from .wp-caption when aligning.
+  @each $alignment in alignnone, alignwide, aligncenter {
+    &.#{$alignment} { @extend %#{$alignment}; }
   }
 }
 
+/**
+ * Pull quote.
+ */
 .wp-block-pullquote {
   text-align: center;
   border: 0;
@@ -14,8 +27,11 @@
   }
 }
 
+/**
+ * Hero image.
+ */
 .wp-block-cover-image {
-  $overlay: "black";
+  $overlay: 'black';
   .cover-image {
     background-size: cover;
     height: 30vw;
@@ -40,8 +56,12 @@
   }
 }
 
+/**
+ * Gallery of multiple images, use Xy-grid gutters on large screens.
+ */
 .wp-block-gallery {
   @include xy-grid;
+
   .blocks-gallery-image {
     margin-left: auto;
     margin-right: auto;
@@ -53,6 +73,9 @@
   }
 }
 
+/**
+ * Button.
+ */
 .wp-block-button {
   > a {
     @extend .button;

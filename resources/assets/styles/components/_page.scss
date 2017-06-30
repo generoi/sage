@@ -6,26 +6,16 @@
   }
 
   &__footer,
-  &__title-wrapper {
-    > *:not(img):not(video) {
-      @extend %u-paragraph;
-    }
-  }
+  &__title-wrapper,
   &__content {
-    > *:not(img):not(video):not(.no-container) {
-      @extend %u-paragraph;
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-    }
+    @extend %u-content-area;
   }
+
   // Tailor edit UI
   #canvas {
     max-width: none;
-    > div > *:not(img):not(video):not(.no-container) {
-      @extend %u-paragraph;
+    > div {
+      @extend %u-content-area;
     }
   }
 

@@ -90,10 +90,36 @@ $c-paragraph-max-width: 45rem !default;
   margin-left: auto;
   margin-right: auto;
 
+  // If within a form, stretch to the forms full size.
   form & {
     max-width: none;
   }
+
+  // Avoid center aligning in WP Editor.
   body#tinymce & {
     margin-left: 0;
+  }
+}
+
+/**
+ * Set the container as a content area taking into account Gutenberg/Tailor
+ * classes and allowing content to stretch past the regular grid.
+ */
+%u-content-area {
+  > *:not(.no-container):not(.alignfull):not(.alignwide):not(.alignleft):not(.alignright) {
+    @extend %u-paragraph;
+  }
+
+  // Add a gutter to headers in content.
+  > h1, > h2, > h3, > h4 {
+    &:not(:first-child) {
+      @extend %u-spacing-gutter--top;
+    }
+  }
+
+  // Tailor images.
+  .no-container .tailor-image img {
+    width: 100%;
+
   }
 }
