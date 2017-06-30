@@ -70,8 +70,6 @@ $c-spacings: (
   }
   %u-spacing-#{$name}--horizontal {
     @include spacing($name, horizontal);
-    @extend %u-spacing-#{$name}--left;
-    @extend %u-spacing-#{$name}--right;
   }
   %u-spacing-#{$name} {
     @include spacing($name, all);
