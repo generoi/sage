@@ -2355,9 +2355,9 @@ formidable@1.0.x:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.0.17.tgz#ef5491490f9433b705faa77249c99029ae348559"
 
-foundation-sites@6.4.0-rc5:
-  version "6.4.0-rc5"
-  resolved "https://registry.yarnpkg.com/foundation-sites/-/foundation-sites-6.4.0-rc5.tgz#63a7214bb5ceb4352c08367c3f429278f32922d8"
+foundation-sites@~6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/foundation-sites/-/foundation-sites-6.4.0.tgz#55abea7af9b3d623470ad8bf88972b98d8b159b7"
   dependencies:
     jquery ">=3.0.0"
     what-input "^4.1.3"
