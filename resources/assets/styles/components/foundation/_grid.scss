@@ -1,5 +1,3 @@
-$c-grid-container-gutter: true !default;
-
 /**
  * Streth cell content.
  */
@@ -13,11 +11,4 @@ $c-grid-container-gutter: true !default;
  */
 .cell.align-middle {
   display: flex;
-}
-
-@if $c-grid-container-gutter {
-  .grid-container {
-    // Add a gutter between the grid and the viewport.
-    @include xy-gutters($gutters: $grid-padding-gutters, $gutter-type: padding);
-  }
 }

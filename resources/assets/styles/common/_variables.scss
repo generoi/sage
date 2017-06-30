@@ -28,9 +28,6 @@ $contrast-warnings:         false;
 // Limit paragraph lengths.
 // $c-paragraph-max-width: 45rem;
 
-// Add a gutter between grid containers and the viewport.
-// $c-grid-container-gutter: true;
-
 // // Transparent image overlay styles.
 // // @see components/overlay
 // $c-overlay-palette: (
@@ -908,4 +905,8 @@ $c-header-sizes: (
 //   medium: 30px
 // );
 // $grid-padding-gutters: $grid-margin-gutters;
+// $grid-container-padding: $grid-padding-gutters;
+$-grid-container-gutters: rem-calc(get-side(nth($grid-container-padding, -1), left)) + rem-calc(get-side(nth($grid-margin-gutters, -1), right));
+$-grid-container-negative-margins: $-grid-container-gutters;
+$grid-container-max: (rem-calc($global-width) + $-grid-container-gutters + $-grid-container-negative-margins);
 // $block-grid-max: 8;
