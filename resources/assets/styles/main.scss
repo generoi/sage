@@ -1,10 +1,9 @@
 // Utilities and variables.
-@import "~foundation-sites/scss/util/util";
+@import "~foundation-sites/scss/foundation";
 @import "../fonts/fontello/fontello"; // required for variables used in slick.
 @import "common/variables";
 
 // Import npm dependencies
-@import "~foundation-sites/scss/foundation";
 @import "~motion-ui/src/motion-ui";
 @import "~sass-burger/burger";
 @import "~spinthatshit/src/loaders";
@@ -61,7 +60,6 @@
 @include foundation-top-bar;
 @include foundation-visibility-classes;
 @include foundation-float-classes;
-@include foundation-global-styles;
 @include foundation-flex-classes;
 
 // @include foundation-prototype-typescale;
