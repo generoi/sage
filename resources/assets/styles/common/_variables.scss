@@ -523,8 +523,8 @@ $list-style-position: inside;
 // $menu-item-background-active: get-color(primary);
 // $menu-icon-spacing: 0.25rem;
 // $menu-item-background-hover: $light-gray;
-// $menu-state-back-compat: true;
-// $menu-centered-back-compat: true;
+$menu-state-back-compat: false;
+$menu-centered-back-compat: false;
 
 // 24. Meter
 // ---------
@@ -851,10 +851,10 @@ $list-style-position: inside;
 // 52. Thumbnail
 // -------------
 
-// $thumbnail-border: solid 4px $white;
+$thumbnail-border: 0;
 // $thumbnail-margin-bottom: $global-margin;
-// $thumbnail-shadow: 0 0 0 1px rgba($black, 0.2);
-// $thumbnail-shadow-hover: 0 0 6px 1px rgba($primary-color, 0.5);
+$thumbnail-shadow: none;
+$thumbnail-shadow-hover: none;
 // $thumbnail-transition: box-shadow 200ms ease-out;
 // $thumbnail-radius: $global-radius;
 
