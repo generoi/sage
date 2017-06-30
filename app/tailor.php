@@ -139,12 +139,12 @@ add_action('tailor_shortcode_html_attributes', function ($html_atts, $atts, $tag
  */
 add_action('tailor_register_elements', function ($elements) {
     foreach ([
-        // 'tailor_carousel',
-        // 'tailor_carousel_item',
+        'tailor_carousel',
+        'tailor_carousel_item',
         // 'tailor_grid',
         // 'tailor_grid_item',
-        // 'tailor_list',
-        // 'tailor_list_item',
+        'tailor_list',
+        'tailor_list_item',
         // 'tailor_map',
         // 'tailor_map_marker',
         // 'tailor_row',
