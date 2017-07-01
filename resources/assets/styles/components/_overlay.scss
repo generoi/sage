@@ -25,9 +25,10 @@ $c-global-transition: all 0.3s ease 0s !default;
   position: relative;
   background-size: cover;
 
-  a#{&}{
+  a#{&} {
     display: block;
     transition: $c-global-transition;
+
     @extend %u-link-no-state;
   }
 
@@ -88,6 +89,7 @@ $c-global-transition: all 0.3s ease 0s !default;
     &.is-editing,
     &.is-selected {
       > div { z-index: 1000; }
+
       @at-root {
         .tailor-ui .tools .select-container { z-index: 1000; }
       }
@@ -99,8 +101,9 @@ $c-global-transition: all 0.3s ease 0s !default;
   }
 
   // The overlay.
-  &:before { content: ''; }
-  &:before,
+  &::before { content: ''; }
+
+  &::before,
   &__background {
     @include overlay-background();
   }

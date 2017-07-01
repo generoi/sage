@@ -11,7 +11,7 @@
   width: 5.4em;
   font-family: 'FontAwesome';
 
-  &:before {
+  &::before {
     content: '#{$fa-var-star-empty}#{$fa-var-star-empty}#{$fa-var-star-empty}#{$fa-var-star-empty}#{$fa-var-star-empty}';
     color: $primary-color;
     float: left;
@@ -28,7 +28,7 @@
     position: absolute;
     padding-top: 1.5em;
 
-    &:before {
+    &::before {
       content: '#{$fa-var-star}#{$fa-var-star}#{$fa-var-star}#{$fa-var-star}#{$fa-var-star}';
       top: 0;
       position: absolute;
@@ -46,7 +46,7 @@ p.stars {
     display: inline-block;
     text-decoration: none;
 
-    &:before {
+    &::before {
       display: block;
       position: absolute;
       top: 0;
@@ -59,19 +59,19 @@ p.stars {
       text-indent: 0;
     }
 
-    &:hover ~ a:before { content: '#{$fa-var-star-empty}'; }
+    &:hover ~ a::before { content: '#{$fa-var-star-empty}'; }
   }
 
   &:hover {
-    a:before { content: '#{$fa-var-star}'; }
+    a::before { content: '#{$fa-var-star}'; }
   }
 
   &.selected {
     a.active {
-      &:before { content: '#{$fa-var-star}'; }
-      ~ a:before { content: '#{$fa-var-star-empty}'; }
+      &::before { content: '#{$fa-var-star}'; }
+      ~ a::before { content: '#{$fa-var-star-empty}'; }
     }
 
-    a:not(.active):before { content: '#{$fa-var-star}'; }
+    a:not(.active)::before { content: '#{$fa-var-star}'; }
   }
 }

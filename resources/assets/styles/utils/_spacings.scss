@@ -28,20 +28,19 @@ $c-spacings: (
     @include breakpoint($size) {
       @if ($side == all) {
         $values: ();
+
         @each $value in $spacing {
           $values: append($values, $multiplier * $value);
         }
+
         #{$property}: $values;
-      }
-      @else if ($side == vertical) {
+      } @else if ($side == vertical) {
         #{$property}-top: $multiplier * get-side($spacing, top);
         #{$property}-bottom: $multiplier * get-side($spacing, bottom);
-      }
-      @else if ($side == horizontal) {
+      } @else if ($side == horizontal) {
         #{$property}-left: $multiplier * get-side($spacing, left);
         #{$property}-right: $multiplier * get-side($spacing, right);
-      }
-      @else {
+      } @else {
         #{$property}-#{$side}: $multiplier * get-side($spacing, $side);
       }
     }
@@ -61,19 +60,13 @@ $c-spacings: (
 }
 
 @each $name, $breakpoints in $c-spacings {
-  %u-spacing-#{$name}--top    { @include spacing($name, top); }
+  %u-spacing-#{$name}--top { @include spacing($name, top); }
   %u-spacing-#{$name}--bottom { @include spacing($name, bottom); }
-  %u-spacing-#{$name}--left   { @include spacing($name, left); }
-  %u-spacing-#{$name}--right  { @include spacing($name, right); }
-  %u-spacing-#{$name}--vertical {
-    @include spacing($name, vertical);
-  }
-  %u-spacing-#{$name}--horizontal {
-    @include spacing($name, horizontal);
-  }
-  %u-spacing-#{$name} {
-    @include spacing($name, all);
-  }
+  %u-spacing-#{$name}--left { @include spacing($name, left); }
+  %u-spacing-#{$name}--right { @include spacing($name, right); }
+  %u-spacing-#{$name}--vertical { @include spacing($name, vertical); }
+  %u-spacing-#{$name}--horizontal { @include spacing($name, horizontal); }
+  %u-spacing-#{$name} { @include spacing($name, all); }
 }
 
 @each $side in top, bottom, left, right {
@@ -81,14 +74,17 @@ $c-spacings: (
     padding-#{$side}: 0;
   }
 }
+
 %u-no-spacing--vertical {
   padding-top: 0;
   padding-bottom: 0;
 }
+
 %u-no-spacing--horizontal {
   padding-left: 0;
   padding-right: 0;
 }
+
 %u-no-spacing {
   padding: 0;
 }

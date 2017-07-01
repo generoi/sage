@@ -10,5 +10,9 @@
 // Slightly more specific to override utils/colors.
 a.button {
   color: $button-color;
-  &, &:hover { text-decoration: none; }
+
+  &,
+  &:hover {
+    text-decoration: none;
+  }
 }

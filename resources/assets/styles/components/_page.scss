@@ -14,6 +14,7 @@
   // Tailor edit UI
   #canvas {
     max-width: none;
+
     > div {
       @extend %u-content-area;
     }
@@ -23,6 +24,7 @@
     &--next .page__nav_link {
       margin-left: -1 * get-side($menu-items-padding, left);
     }
+
     &--prev .page__nav_link {
       margin-right: -1 * get-side($menu-items-padding, right);
       text-align: right;
@@ -30,20 +32,24 @@
   }
 
   &__listing {
+    //
   }
 
   // Post type: Page
   // ---------------
   &--type-page {
+    //
   }
 
   // Post type: Post
   // ---------------
   &--type-post {
+    //
   }
 
   // Term type: Category
   // -------------------
   &--type-category {
+    //
   }
 }

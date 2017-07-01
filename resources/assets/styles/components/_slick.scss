@@ -4,28 +4,36 @@ $c-slick-nav-size: 40px !default;
 .slick {
   // Not actually a slider (single item).
   &--no-slider { text-align: center; }
+
   // Use flexbox to expand all containers.
-  &-list, &-track { display: flex; }
+  &-list,
+  &-track { display: flex; }
+
   // Prevent FOUC by hiding content until initialized.
-  &--no-slider, &-initialized {
+  &--no-slider,
+  &-initialized {
     .slick__caption { display: block !important; }
     .slick__slide { display: flex !important; }
   }
 
-  &-prev, &-next {
+  &-prev,
+  &-next {
     z-index: 1;
-    &:before { font-size: $c-slick-nav-size; }
+    &::before { font-size: $c-slick-nav-size; }
   }
   &-prev { left: $global-margin; }
   &-next { right: $global-margin; }
 
   &-dots {
     li {
-      &, button, button:before {
+      &,
+      button,
+      button::before {
         width: $c-slick-dot-size;
         height: $c-slick-dot-size;
       }
-      button:before {
+
+      button::before {
         font-size: $c-slick-dot-size;
       }
     }
@@ -51,7 +59,7 @@ $c-slick-nav-size: 40px !default;
     width: 100%;
 
     // Span full width
-    .slick-initialized  & img {
+    .slick-initialized & img {
       width: 100%;
       max-width: none;
     }
@@ -64,7 +72,6 @@ $c-slick-nav-size: 40px !default;
     width: 100%;
     color: inherit !important;
   }
-
 
   // Center align content.
   &__caption-wrapper {
@@ -92,12 +99,9 @@ $c-slick-nav-size: 40px !default;
     position: relative;
     margin: 0; // reset figure styling.
 
-    &--cover {
-    }
-
     &--boxed {
       // Hide the overlay.
-      &:before { display: none; }
+      &::before { display: none; }
 
       .slick__caption-wrapper {
         right: 20%;
@@ -122,6 +126,7 @@ $c-slick-nav-size: 40px !default;
       &--boxed {
         &.overlay--#{$name} {
           background: transparent;
+
           .slick__caption-wrapper {
             background-color: $color;
           }
@@ -138,6 +143,7 @@ $c-slick-nav-size: 40px !default;
       @include xy-gutters($negative: true);
       // @todo width?
     }
+
     .slick__slide {
       @include xy-gutters($gutters: $grid-padding-gutters, $gutter-type: padding);
     }
@@ -145,7 +151,8 @@ $c-slick-nav-size: 40px !default;
 
   // Do not expand slick slides, let the height be adaptive.
   &--adaptive-height {
-    .slick-list, .slick-track { align-items: flex-start; }
+    .slick-list,
+    .slick-track { align-items: flex-start; }
   }
 
   // Hero style
@@ -155,9 +162,9 @@ $c-slick-nav-size: 40px !default;
     &.slick-dotted {
       margin-bottom: 0;
     }
+
     .slick-dots {
       bottom: $global-margin;
     }
   }
-
 }

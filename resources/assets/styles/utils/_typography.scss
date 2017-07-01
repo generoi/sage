@@ -51,10 +51,13 @@ $c-paragraph-max-width: 45rem !default;
   @include breakpoint($breakpoint) {
     %u-text {
       $font-size-temp: 1rem;
+
       @if map-has-key($font-defs, font-size) {
         $font-size-temp: rem-calc(map-get($font-defs, font-size), 16px);
+
         font-size: $font-size-temp;
       }
+
       @if map-has-key($font-defs, line-height) {
         line-height: unitless-calc(map-get($font-defs, line-height), $font-size-temp);
       }
@@ -111,7 +114,10 @@ $c-paragraph-max-width: 45rem !default;
   }
 
   // Add a gutter to headers in content.
-  > h1, > h2, > h3, > h4 {
+  > h1,
+  > h2,
+  > h3,
+  > h4 {
     &:not(:first-child) {
       @extend %u-spacing-gutter--top;
     }
@@ -120,6 +126,5 @@ $c-paragraph-max-width: 45rem !default;
   // Tailor images.
   .no-container .tailor-image img {
     width: 100%;
-
   }
 }

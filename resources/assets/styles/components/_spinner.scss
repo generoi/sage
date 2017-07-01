@@ -5,10 +5,11 @@
  * Loaders that intersect the above: 02, 03, 05.
  */
 .spinner {
-  &:before {
+  &::before {
+    @include loader02();
+
     content: '';
     display: block;
-    @include loader02();
     left: 50%;
     margin-left: -1 * ($loader-size/2);
     position: absolute;
@@ -19,17 +20,17 @@
     opacity: 1;
   }
 
-  &.button:before {
+  &.button::before {
     opacity: 1;
     position: relative;
     left: 0;
-    margin-left: .5em;
-    border-width: .2em;
-    border-color: rgba(0, 0, 0, .33);
+    margin-left: 0.5em;
+    border-width: 0.2em;
+    border-color: rgba(0, 0, 0, 0.33);
     border-right-color: transparent;
-    margin-top: .1em;
-    width: .9em;
-    height: .9em;
+    margin-top: 0.1em;
+    width: 0.9em;
+    height: 0.9em;
     float: right;
   }
 }

@@ -11,9 +11,11 @@
   line-height: $global-lineheight;
 
   $border: if(length($thumbnail-border) > 1, nth($thumbnail-border, 2), 0);
+
   @if ($border == 0) and ($thumbnail-shadow != none) {
     $border: $global-padding/2;
   }
+
   padding-left: $border;
   padding-right: $border;
   padding-top: if($border == 0, 4px, $border);
@@ -29,6 +31,7 @@
   // Negate the padding from a grid container.
   .grid-container-padded & {
     @include xy-gutters($gutters: $grid-padding-gutters, $negative: true);
+
     @each $breakpoint, $gutter in $grid-margin-gutters {
       width: calc(100% + #{get-side($gutter, left) + #{get-side($gutter, right)}});
     }
@@ -71,6 +74,7 @@
  */
 $sidealign-width: ($c-paragraph-max-width/2);
 $sidealign-image-width: ($sidealign-width/2) + ($global-margin/2);
+
 %alignleft {
   @include breakpoint(medium) {
     float: left;
@@ -79,6 +83,7 @@ $sidealign-image-width: ($sidealign-width/2) + ($global-margin/2);
     max-width: calc(50% - #{$sidealign-image-width});
   }
 }
+
 %alignright {
   @include breakpoint(medium) {
     float: right;

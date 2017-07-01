@@ -8,7 +8,8 @@
 // ---------------------------------------------------------------------------
 .hs-form {
   // Be specific to override HubSpot.
-  .hs-button, input.hs-button.large {
+  .hs-button,
+  input.hs-button.large {
     @extend .button;
   }
 
@@ -24,10 +25,11 @@
     flex-direction: column;
 
     .hs-field-desc {
-      order: 3;
-      // Remove field margin and move it below description.
       @extend .help-text;
+
+      // Remove field margin and move it below description.
       margin-bottom: $form-spacing;
+      order: 3;
     }
   }
 
@@ -39,7 +41,9 @@
   // Expand all input fields.
   .hs-input {
     width: 100% !important;
-    &[type="checkbox"], &[type="radio"] {
+
+    &[type="checkbox"],
+    &[type="radio"] {
       width: auto !important;
     }
   }
@@ -65,10 +69,12 @@
   .hs-input.error {
     @include form-input-error;
   }
+
   .hs-error-msgs {
     @include form-error;
+
     margin-right: $form-spacing !important;
-    margin-left: 0rem;
+    margin-left: 0;
 
     label {
       display: inline;

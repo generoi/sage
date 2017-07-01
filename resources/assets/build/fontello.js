@@ -54,7 +54,7 @@ fetchFontelloFonts(CONFIG_PATH, OUTPUT_PATH, () => {
 
   lineReader.on('close', () => {
     const scss = getVariablesSCSS(charCodes);
-    fs.writeFileSync(SCSS_PATH, scss);
+    fs.writeFileSync(SCSS_PATH, `${scss}\n`);
     console.info('generated scss file with font variables in %s', SCSS_PATH);
   });
 });

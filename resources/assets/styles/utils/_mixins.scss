@@ -10,6 +10,7 @@ $c-underline-height: 2px !default;
 $c-underline-size: 75% !default;
 $c-underline-offset: 0.5rem !default;
 $c-underline-hover-color: false !default;
+
 @mixin underline(
   $color: $c-underline-color,
   $size: $c-underline-size,
@@ -20,7 +21,7 @@ $c-underline-hover-color: false !default;
   position: relative;
   display: inline-block; // @todo questionable.
 
-  &:after {
+  &::after {
     content: '';
     display: block;
     background-color: $color;
@@ -34,9 +35,11 @@ $c-underline-hover-color: false !default;
 
   @if $hover-color {
     @if variable-exists($c-global-transition) {
-      &:after { transition: $c-global-transition; }
+      &::after { transition: $c-global-transition; }
     }
-    &:hover:after, &:focus:after {
+
+    &:hover::after,
+    &:focus::after {
       background-color: $hover-color;
     }
   }
@@ -74,13 +77,17 @@ $c-underline-hover-color: false !default;
 
   @if map-has-key($styles, font-size) {
     $font-size-temp: rem-calc(map-get($styles, font-size));
+
     font-size: $font-size-temp;
   } @else if map-has-key($styles, fs) {
     $font-size-temp: rem-calc(map-get($styles, fs));
+
     font-size: $font-size-temp;
   } @else if $base {
     font-size: $font-size-temp;
   }
+
+  // Line
   @if map-has-key($styles, line-height) {
     line-height: unitless-calc(map-get($styles, line-height), $font-size-temp);
   } @else if map-has-key($styles, lh) {
@@ -89,6 +96,7 @@ $c-underline-hover-color: false !default;
     line-height: unitless-calc($header-lineheight, $font-size-temp);
   }
 
+  // Margin top
   @if map-has-key($styles, margin-top) {
     margin-top: rem-calc(map-get($styles, margin-top));
   } @else if map-has-key($styles, mt) {
@@ -96,6 +104,8 @@ $c-underline-hover-color: false !default;
   } @else if $base {
     margin-top: 0;
   }
+
+  // Margin bottom
   @if map-has-key($styles, margin-bottom) {
     margin-bottom: rem-calc(map-get($styles, margin-bottom));
   } @else if map-has-key($styles, mb) {
@@ -111,17 +121,19 @@ $c-underline-hover-color: false !default;
   @if $child {
     body.admin-bar & {
       @content;
+
       @include breakpoint($c-admin-bar-breakpoint) {
         $-admin-bar-height: 32px !global;
+
         @content;
       }
     }
-  }
-  @else {
+  } @else {
     @content;
 
     @include breakpoint($c-admin-bar-breakpoint) {
       $-admin-bar-height: 32px !global;
+
       @content;
     }
   }

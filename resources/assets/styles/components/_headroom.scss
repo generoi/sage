@@ -26,9 +26,8 @@ $c-admin-bar-breakpoint: 783px !default;
   }
 
   // Admin bar support
-  .admin-bar & {
-    top: 46px;
-    @include breakpoint($c-admin-bar-breakpoint) { top: 32px; }
+  @include admin-bar() {
+    top: $-admin-bar-height;
   }
 
   // Offset the content by the hardcoded header height. Useful to avoid a

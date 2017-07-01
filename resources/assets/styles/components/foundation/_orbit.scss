@@ -9,6 +9,7 @@
   &-image {
     display: block;
   }
+
   &-link {
     display: block;
   }
@@ -33,12 +34,14 @@
       // Use .orbit-caption as the overlay backgrond, otherwise it wont
       // grow with the content.
       &.overlay {
-        &:before { display: none; }
+        &::before { display: none; }
+
         @include overlay-styles($c-overlay-palette, '.orbit-caption');
       }
 
       .orbit-caption {
         @include overlay-background();
+
         width: 600px;
         max-width: 100%;
         left: 50%;
@@ -54,22 +57,25 @@
   &-previous,
   &-next {
     @include fa-icon();
+
     outline: none;
     color: $black;
     font-size: 1rem;
+
     @include breakpoint(medium) {
       font-size: 2rem;
     }
   }
-  &-previous:before { content: $fa-var-left-open; }
-  &-next:before { content: $fa-var-right-open; }
+
+  &-previous::before { content: $fa-var-left-open; }
+  &-next::before { content: $fa-var-right-open; }
 
   &-caption {
     // Override foundation.
     background-color: transparent;
     color: inherit;
-
     z-index: 1;
+
     p:last-child { margin-bottom: 0; }
   }
 

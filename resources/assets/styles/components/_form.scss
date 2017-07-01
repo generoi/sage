@@ -1,8 +1,9 @@
 // @see components/hubspot for husbpot forms.
 
 // Fix for our forms as the label is larger than the input.
-input[type="radio"], input[type="checkbox"] {
-  margin-top: .25em;
+input[type="radio"],
+input[type="checkbox"] {
+  margin-top: 0.25em;
   margin-bottom: 0;
 }
 
@@ -10,12 +11,14 @@ textarea[rows] { height: 100px; }
 
 // Form styles
 // ---------------------------------------------------------------------------
+
 /**
  * Horizontally aligned forms with the submit button on the same level as the
  * fields.
  */
 .form--horizontal {
-  form#{&}, .hs-form {
+  form#{&},
+  .hs-form {
     display: flex;
     flex-flow: row wrap;
   }
@@ -27,7 +30,9 @@ textarea[rows] { height: 100px; }
   .gform_heading {
     flex: 1 0 100%;
   }
-  .gform_body, .hs-form-field {
+
+  .gform_body,
+  .hs-form-field {
     flex: 1 0 auto;
   }
 

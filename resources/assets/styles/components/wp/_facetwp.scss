@@ -2,8 +2,10 @@ div.facetwp {
   &-facet {
     margin-bottom: 0;
   }
+
   &-type-hierarchy_select {
     display: flex;
+
     > select:first-child {
       width: auto;
     }
@@ -14,8 +16,10 @@ div.facetwp {
   &-type-autocomplete {
     display: flex;
   }
+
   &-autocomplete-update {
     @extend .button;
+
     padding-left: 1rem;
     padding-right: 1rem;
   }

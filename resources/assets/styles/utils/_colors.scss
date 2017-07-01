@@ -17,6 +17,7 @@ $c-background-palette: (
     @if map-has-key($defs, background) {
       background-color: map-get($defs, background);
     }
+
     @if map-has-key($defs, color) {
       color: map-get($defs, color);
     }
@@ -38,8 +39,10 @@ $c-background-palette: (
     }
 
     @if map-has-key($defs, anchor-hover) {
-      a:hover, a:focus {
+      a:hover,
+      a:focus {
         color: map-get($defs, anchor-hover);
+
         @if map-has-key($defs, anchor-hover-decoration) {
           text-decoration: map-get($defs, anchor-hover-decoration);
         }

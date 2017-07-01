@@ -31,10 +31,11 @@ img.gform_ajax_spinner {
 // Align radio lists other alternative
 ul.gfield_radio {
   > li { display: flex; }
+
   input[value="gf_other_choice"] {
     margin-right: $form-spacing/2;
     // Rought estimate to center it vertically with the input
-    margin-top: .9em;
+    margin-top: 0.9em;
   }
 }
 
@@ -58,6 +59,7 @@ table.gfield_list {
 // Style eg. the address-components validation message.
 .gfield_description.validation_message {
   @include form-error();
+
   display: block;
 }
 

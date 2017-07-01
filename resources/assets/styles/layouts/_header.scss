@@ -54,12 +54,12 @@
   // Desktop menu
   // ------------
   &__nav--desktop {
-    .primary_navigation {
-      &__item {
-        &--current {}
-      }
-      &__link {}
-    }
+    // .primary_navigation {
+    //   &__item {
+    //     &--current {}
+    //   }
+    //   &__link {}
+    // }
   }
 
   // Toggle button
@@ -72,7 +72,7 @@
     margin-right: -2rem !important; // override .title-bar .menu-icon
     > span { margin-left: -1rem; }
 
-    &.menu-icon:after { display: none; }
+    &.menu-icon::after { display: none; }
 
     > span {
       @include burger(
@@ -82,9 +82,9 @@
         $color: $titlebar-icon-color
       );
     }
+
     &.active > span {
       @include burger-to-cross();
     }
   }
-
 }

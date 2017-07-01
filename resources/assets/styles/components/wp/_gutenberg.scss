@@ -21,6 +21,7 @@
 .wp-block-pullquote {
   text-align: center;
   border: 0;
+
   p {
     @extend %u-header;
     @extend %u-h2;
@@ -32,6 +33,7 @@
  */
 .wp-block-cover-image {
   $overlay: 'black';
+
   .cover-image {
     background-size: cover;
     height: 30vw;
@@ -43,11 +45,13 @@
     background-attachment: fixed;
     position: relative;
 
-    &:before {
-      content: '';
+    &::before {
       @include overlay-background;
+
+      content: '';
       background-color: map-get($c-overlay-palette, $overlay);
     }
+
     @extend %u-bg--#{$overlay};
 
     h2 {

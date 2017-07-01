@@ -16,7 +16,9 @@
   &__content {
     flex-grow: 1;
   }
-  &__footer, &__header {
+
+  &__footer,
+  &__header {
     width: 100%;
   }
 }
