@@ -52,7 +52,8 @@ function build_url($parts)
  * Return the domain used for the upload directory. Useful if `upload_url_path`
  * is set to a subdomain.
  */
-function get_upload_dir_domain() {
+function get_upload_dir_domain()
+{
     $upload_dir = wp_upload_dir();
     $parts = parse_url($upload_dir['url']);
     $url = $parts['scheme'] . '://' . $parts['host'];
@@ -68,7 +69,7 @@ function sort_terms_hierarchicaly(&$cats, &$into = null, $parent_id = 0)
 {
     $has_target = isset($into);
     if (!$has_target) {
-      $into = [];
+        $into = [];
     }
     foreach ($cats as $i => $cat) {
         if ($cat->parent == $parent_id) {
@@ -96,7 +97,8 @@ function sort_terms_hierarchicaly(&$cats, &$into = null, $parent_id = 0)
  *     return Utils\get_value_hierarchicaly('product_description', reset($terms));
  * }
  */
-function get_value_hierarchicaly($field, $hierarchy, $child_property = 'children') {
+function get_value_hierarchicaly($field, $hierarchy, $child_property = 'children')
+{
     $found = null;
     if (is_array($hierarchy)) {
         if (!empty($hierarchy[$field])) {
@@ -110,8 +112,7 @@ function get_value_hierarchicaly($field, $hierarchy, $child_property = 'children
                 }
             }
         }
-    }
-    elseif (is_object($hierarchy)) {
+    } elseif (is_object($hierarchy)) {
         if (!empty($hierarchy->$field)) {
             $found = $hierarchy->$field;
         }

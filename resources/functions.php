@@ -50,7 +50,7 @@ if (!class_exists('Roots\\Sage\\Container')) {
 /**
  * Ensure plugin requirements are activated.
  */
-foreach([
+foreach ([
     'Timber' => 'timber-library/timber.php',
     'TimberExtended' => 'wp-timber-extended/wp-timber-extended.php',
     'acf' => 'advanced-custom-fields-pro/acf.php',

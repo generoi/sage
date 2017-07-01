@@ -39,7 +39,8 @@ class Post extends Timber\Post
     /**
      * Return related posts based on Contextual Related Posts result.
      */
-    protected function get_related_by_crp($posts_per_page = 3, $args = []) {
+    protected function get_related_by_crp($posts_per_page = 3, $args = [])
+    {
         $related = get_crp_posts_id(array_merge($args, [
             'post_id' => $this->ID,
             'limit' => $posts_per_page,
@@ -54,7 +55,8 @@ class Post extends Timber\Post
     /**
      * Return related posts based on terms.
      */
-    protected function get_related_by_terms($posts_per_page = 3) {
+    protected function get_related_by_terms($posts_per_page = 3)
+    {
         global $wpdb;
         $terms = $this->terms();
         $tids = implode(',', array_column($terms, 'id'));
@@ -78,13 +80,14 @@ class Post extends Timber\Post
     /**
      * Check if post has Contextual Related Post functionality active.
      */
-    protected function is_crp_active() {
+    protected function is_crp_active()
+    {
         if (!function_exists('get_crp_posts_id')) {
             return false;
         }
         // @see https://github.com/WebberZone/contextual-related-posts/blob/ec1ec84df057dca5f1b61695fd450776cc181dbe/includes/content.php#L57
         global $crp_settings;
-        if (!empty( $crp_settings['exclude_on_post_types']) && strpos($crp_settings['exclude_on_post_types'], '=') === false) {
+        if (!empty($crp_settings['exclude_on_post_types']) && strpos($crp_settings['exclude_on_post_types'], '=') === false) {
             $exclude_on_post_types = explode(',', $crp_settings['exclude_on_post_types']);
         } else {
             parse_str($crp_settings['exclude_on_post_types'], $exclude_on_post_types);
@@ -95,7 +98,8 @@ class Post extends Timber\Post
     /**
      * Generate a unique cahe id based on a prefix and arguments.
      */
-    protected function generate_cid($prefix, $args = []) {
+    protected function generate_cid($prefix, $args = [])
+    {
         return $prefix . '_' . $this->ID . '_' . substr(md5(json_encode($args)), 0, 6);
     }
 }

@@ -6,7 +6,7 @@ namespace App;
  * Fix gutenberg integration.
  */
 add_filter('the_content', function ($content) {
-    if (strpos($content, '<!-- wp:core') !== FALSE) {
+    if (strpos($content, '<!-- wp:core') !== false) {
         remove_filter('the_content', 'wpautop');
     }
     return $content;
@@ -44,7 +44,7 @@ add_filter('body_class', function (array $classes) {
     }, $classes);
 
     /** Rename archive body class as it's the same as the archive content template. */
-    if (($key = array_search('archive', $classes)) !== FALSE) {
+    if (($key = array_search('archive', $classes)) !== false) {
         $classes[$key] = 'archive-page';
     }
 
@@ -68,14 +68,13 @@ add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
     }
 
     if (!empty($src) && !empty($url)) {
-        if (strpos($url, 'youtube') !== FALSE) {
+        if (strpos($url, 'youtube') !== false) {
             $args = [
                 'rel' => 0,
                 'showinfo' => 0,
                 'modestbranding' => 1,
             ];
-        }
-        else if (strpos($url, 'vimeo') !== FALSE) {
+        } elseif (strpos($url, 'vimeo') !== false) {
             $args = [
                 'title' => 0,
                 'byline' => 0,

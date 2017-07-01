@@ -9,7 +9,9 @@ namespace App;
  */
 add_filter('post_link', __NAMESPACE__ . '\\custom_post_permalinks', 10, 3);
 add_filter('post_type_link', __NAMESPACE__ . '\\custom_post_permalinks', 10, 3);
-function custom_post_permalinks($post_link, $post, $leavename) {
+
+function custom_post_permalinks($post_link, $post, $leavename)
+{
     if (preg_match('/%([^%]+)%/', $post_link, $matches)) {
         list($replace, $category) = $matches;
         $terms = wp_get_post_terms($post->ID, $category);

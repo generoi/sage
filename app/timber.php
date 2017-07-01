@@ -56,7 +56,7 @@ add_filter('timber_extended/class_name', function ($class_name, $types, $widget 
  * Use custom TimberPost subclasses.
  */
 add_filter('Timber\PostClassMap', function ($post_class) {
-    foreach(get_post_types(['_builtin' => false], 'objects') as $post_type) {
+    foreach (get_post_types(['_builtin' => false], 'objects') as $post_type) {
         $map[$post_type->name] = __NAMESPACE__ . '\\Post';
     };
     $map['post'] = __NAMESPACE__ . '\\Post';
@@ -132,7 +132,7 @@ add_filter('get_twig', function ($twig) {
      * @example
      * {% include 'parts/slideshow' with { items: posts, options: get_slick_options(3) } %}
      */
-    $twig->addFunction('get_slick_options', new Twig_SimpleFunction('get_slick_options', function ($slides_to_show = 1, $extra_options = null) {
+    $twig->addFunction('get_slick_options', new Twig_SimpleFunction('get_slick_options', function ($slides_to_show = 1, $extra_options = null) { // @codingStandardsIgnoreLine
         $tablet_slides = $mobile_slides = $desktop_slides = 1;
 
         if (is_array($slides_to_show)) {
@@ -167,8 +167,7 @@ add_filter('get_twig', function ($twig) {
                     ],
                 ],
             ];
-        }
-        else {
+        } else {
             $options = [
                 'slidesToShow' => (int) $desktop_slides,
             ];

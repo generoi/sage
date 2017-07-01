@@ -52,11 +52,11 @@ remove_action('admin_notices', 'widgetopts_admin_notices');
  * Fix debug-bar-js.dev.js referencing jQuery without depending on it.
  */
 add_action('wp_print_scripts', function () {
-     if (wp_script_is('debug-bar-js', 'enqueued')) {
+    if (wp_script_is('debug-bar-js', 'enqueued')) {
         wp_dequeue_script('debug-bar-js');
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
         wp_enqueue_script('debug-bar-js', plugins_url("js/debug-bar-js$suffix.js", WP_PLUGIN_DIR . '/debug-bar'), ['jquery'], '20111216', true);
-     }
+    }
 }, 999);
 
 /**

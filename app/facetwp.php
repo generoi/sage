@@ -28,7 +28,7 @@ add_filter('facetwp_is_main_query', function ($is_main_query, $query) {
         $is_main_query = true;
     }
     return $is_main_query;
-}, 10, 2 );
+}, 10, 2);
 
 /**
  * Allow for custom post types to be indexed using FacetWP.
@@ -66,7 +66,7 @@ add_filter('facetwp_pager_html', function ($output, $params) {
             $output .= __('Previous', 'theme');
         }
         $output .= '</li>';
-        if ( 3 < $page ) {
+        if (3 < $page) {
             $output .= '<li class="pager__item">';
             $output .= '<a class="pager__link facetwp-page" data-page="1">1</a>';
             $output .= '</li>';
@@ -89,7 +89,7 @@ add_filter('facetwp_pager_html', function ($output, $params) {
                 $output .= '</li>';
             }
         }
-        if ( $total_pages > ( $page + 2 ) ) {
+        if ($total_pages > ($page + 2)) {
             $output .= '<li class="pager__item ellipsis"></li>';
             $output .= '<li class="pager__item">';
             $output .= '<a class="pager__link facetwp-page" data-page="' . $total_pages . '">' . $total_pages . '</a>';

@@ -52,7 +52,7 @@ function strip_content_styling($html)
  */
 function remove_wrapper_tag($node)
 {
-    while($node->hasChildNodes()) {
+    while ($node->hasChildNodes()) {
         $child = $node->removeChild($node->firstChild);
         $node->parentNode->insertBefore($child, $node);
     }
