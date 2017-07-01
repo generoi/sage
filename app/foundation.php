@@ -8,10 +8,10 @@ namespace App\Foundation;
 function palette($type = 'all')
 {
     $palette = [
-        'primary'   => __('Primary', 'theme-admin'),
-        'secondary' => __('Secondary', 'theme-admin'),
-        'white'     => __('White', 'theme-admin'),
-        'black'     => __('Black', 'theme-admin'),
+        'primary'   => __('Primary', '<example-project>'),
+        'secondary' => __('Secondary', '<example-project>'),
+        'white'     => __('White', '<example-project>'),
+        'black'     => __('Black', '<example-project>'),
     ];
 
     switch ($type) {

@@ -98,7 +98,7 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
-        'primary_navigation' => __('Primary Navigation', 'sage')
+        'primary_navigation' => __('Primary Navigation', '<example-project>')
     ]);
 
     /**
@@ -137,15 +137,15 @@ add_action('widgets_init', function () {
         'after_title'   => '</span>'
     ];
     register_sidebar([
-        'name'          => __('Primary', 'theme-admin'),
+        'name'          => __('Primary', '<example-project>'),
         'id'            => 'sidebar-primary'
     ] + $config);
     register_sidebar([
-        'name'          => __('Footer', 'theme-admin'),
+        'name'          => __('Footer', '<example-project>'),
         'id'            => 'sidebar-footer'
     ] + $config);
     register_sidebar([
-        'name'          => __('Below Content', 'theme-admin'),
+        'name'          => __('Below Content', '<example-project>'),
         'id'            => 'sidebar-content_below'
     ] + $config);
 });

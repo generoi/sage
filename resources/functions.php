@@ -14,7 +14,7 @@ use Roots\Sage\Container;
  * @param string $title
  */
 $sage_error = function ($message, $subtitle = '', $title = '') {
-    $title = $title ?: __('Sage &rsaquo; Error', 'sage');
+    $title = $title ?: __('Sage &rsaquo; Error', '<example-project>');
     $footer = '<a href="https://roots.io/sage/docs/">roots.io/sage/docs/</a>';
     $message = "<h1>{$title}<br><small>{$subtitle}</small></h1><p>{$message}</p><p>{$footer}</p>";
     wp_die($message, $title);
@@ -24,14 +24,14 @@ $sage_error = function ($message, $subtitle = '', $title = '') {
  * Ensure compatible version of PHP is used
  */
 if (version_compare('5.6.4', phpversion(), '>=')) {
-    $sage_error(__('You must be using PHP 5.6.4 or greater.', 'sage'), __('Invalid PHP version', 'sage'));
+    $sage_error(__('You must be using PHP 5.6.4 or greater.', '<example-project>'), __('Invalid PHP version', '<example-project>'));
 }
 
 /**
  * Ensure compatible version of WordPress is used
  */
 if (version_compare('4.7.0', get_bloginfo('version'), '>=')) {
-    $sage_error(__('You must be using WordPress 4.7.0 or greater.', 'sage'), __('Invalid WordPress version', 'sage'));
+    $sage_error(__('You must be using WordPress 4.7.0 or greater.', '<example-project>'), __('Invalid WordPress version', '<example-project>'));
 }
 
 /**
@@ -40,8 +40,8 @@ if (version_compare('4.7.0', get_bloginfo('version'), '>=')) {
 if (!class_exists('Roots\\Sage\\Container')) {
     if (!file_exists($composer = __DIR__.'/../vendor/autoload.php')) {
         $sage_error(
-            __('You must run <code>composer install</code> from the Sage directory.', 'sage'),
-            __('Autoloader not found.', 'sage')
+            __('You must run <code>composer install</code> from the Sage directory.', '<example-project>'),
+            __('Autoloader not found.', '<example-project>')
         );
     }
     require_once $composer;
@@ -59,8 +59,8 @@ foreach ([
         $plugin_path = WP_CONTENT_DIR . '/plugins/' . $plugin;
         if (!file_exists($plugin_path)) {
             $sage_error(
-                sprintf(__('You must download the %s (%s) plugin to use this theme', 'theme-admin'), $class_name, $plugin),
-                __('Unable to find required plugin', 'theme-admin')
+                sprintf(__('You must download the %s (%s) plugin to use this theme', '<example-project>'), $class_name, $plugin),
+                __('Unable to find required plugin', '<example-project>')
             );
         }
         require_once ABSPATH . '/wp-admin/includes/plugin.php';
@@ -70,13 +70,13 @@ foreach ([
         if (class_exists($class_name)) {
             add_action('admin_notices', function () use ($class_name) {
                 echo '<div class="notice notice-success is-dismissible">';
-                echo '<p>' . sprintf(__('Activated plugin %s', 'theme-admin'), $class_name) . '</p>';
+                echo '<p>' . sprintf(__('Activated plugin %s', '<example-project>'), $class_name) . '</p>';
                 echo '</div>';
             });
         } else {
             $sage_error(
-                sprintf(__('Unable to activate the plugin %s. This might be due to a breaking structural plugin change.', 'theme-admin'), $plugin),
-                __('Unable to activate plugin', 'theme-admin')
+                sprintf(__('Unable to activate the plugin %s. This might be due to a breaking structural plugin change.', '<example-project>'), $plugin),
+                __('Unable to activate plugin', '<example-project>')
             );
         }
     }
@@ -91,7 +91,7 @@ foreach ([
 array_map(function ($file) use ($sage_error) {
     $file = "../app/{$file}.php";
     if (!locate_template($file, true, true)) {
-        $sage_error(sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file), 'File not found');
+        $sage_error(sprintf(__('Error locating <code>%s</code> for inclusion.', '<example-project>'), $file), 'File not found');
     }
 }, [
     'helpers',

@@ -61,9 +61,9 @@ add_filter('facetwp_pager_html', function ($output, $params) {
         $output .= '<ul class="pager pagination" role="navigation">';
         $output .= '<li class="pager__item pager__item--previous pagination-previous ' . ($page == 1 ? 'disabled' : '') . '">';
         if ($page > 1) {
-            $output .= '<a class="pager__link facetwp-page" data-page="' . ($page - 1) . '">' . __('Previous', 'theme') . '</a>';
+            $output .= '<a class="pager__link facetwp-page" data-page="' . ($page - 1) . '">' . __('Previous', '<example-project>') . '</a>';
         } else {
-            $output .= __('Previous', 'theme');
+            $output .= __('Previous', '<example-project>');
         }
         $output .= '</li>';
         if (3 < $page) {
@@ -97,9 +97,9 @@ add_filter('facetwp_pager_html', function ($output, $params) {
         }
         $output .= '<li class="pager__item pager__item--next pagination-next ' . ($page == $total_pages ? 'disabled' : '') . '">';
         if ($page < $total_pages) {
-            $output .= '<a class="pager__link facetwp-page" data-page="' . ($page + 1) . '">' . __('Next', 'theme') . '</a>';
+            $output .= '<a class="pager__link facetwp-page" data-page="' . ($page + 1) . '">' . __('Next', '<example-project>') . '</a>';
         } else {
-            $output .= __('Next', 'theme');
+            $output .= __('Next', '<example-project>');
         }
         $output .= '</li>';
         $output .= '</ul>';

@@ -48,8 +48,8 @@ add_action('after_setup_theme', function () {
  */
 add_filter('image_size_names_choose', function ($sizes) {
     return array_merge($sizes, [
-        'mobile' => __('Mobile', 'theme-admin'),
-        'tablet' => __('Tablet', 'theme-admin'),
+        'mobile' => __('Mobile', '<example-project>'),
+        'tablet' => __('Tablet', '<example-project>'),
     ]);
 });
 

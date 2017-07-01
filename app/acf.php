@@ -34,7 +34,7 @@ add_action('after_switch_theme', function () use ($options) {
  * Add foundation palette colors for hero overlays.
  */
 add_filter('acf/load_field/name=slide_overlay', function ($field) {
-    $field['choices'] = ['none' => __('None', 'theme-admin')] + Foundation\palette('overlay');
+    $field['choices'] = ['none' => __('None', '<example-project>')] + Foundation\palette('overlay');
     return $field;
 });
 

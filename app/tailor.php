@@ -50,14 +50,14 @@ add_action('tailor_element_register_controls', function ($element) {
             $priority = 24;
             $element->add_control('background_theme', [
                 'type' => 'select',
-                'label' => __('Background', 'theme-admin'),
+                'label' => __('Background', '<example-project>'),
                 'section' => 'attributes',
                 'choices' => ['' => ''] + Foundation\palette('background'),
                 'priority' => $priority++,
             ]);
             $element->add_control('overlay_theme', [
                 'type' => 'select',
-                'label' => __('Overlay', 'theme-admin'),
+                'label' => __('Overlay', '<example-project>'),
                 'section' => 'attributes',
                 'choices' => ['' => ''] + Foundation\palette('overlay'),
                 'priority' => $priority++,
@@ -96,7 +96,7 @@ add_action('tailor_element_register_controls', function ($element) {
             $element->add_setting('style', $setting);
             $element->add_control('style', [
                 'type' => 'select',
-                'label' => __('Style', 'theme-admin'),
+                'label' => __('Style', '<example-project>'),
                 'section' => 'general',
                 'choices' => ['' => ''] + Foundation\palette(),
                 'priority' => 25,
