@@ -44,9 +44,11 @@ add_action('wp_head', function () {
     Utils\print_async_stylesheet(asset_path('styles/icons.css'));
     // Use loadCSS as a fallback for asynchronously loading CSS in older browsers.
     // @see https://github.com/filamentgroup/loadCSS
-    $loadcss_path = get_stylesheet_directory() . '/dist/scripts/loadcss.js';
+    $loadcss_path = get_stylesheet_directory() . '/dist/scripts/icons.js';
     if (file_exists($loadcss_path)) {
-        echo '<script>' . file_get_contents($loadcss_path) . '</script>';
+        echo sprintf('<script>%s</script>', file_get_contents($loadcss_path));
+    } else {
+        echo sprintf('<script src="%s"></script>', asset_path('scripts/icons.js'));
     }
 });
 

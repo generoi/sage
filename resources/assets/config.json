@@ -9,13 +9,11 @@
       "./styles/admin.scss"
     ],
     "icons": [
-      "./styles/icons.scss"
+      "./styles/icons.scss",
+      "./scripts/loadcss.js"
     ],
     "customizer": [
       "./scripts/customizer.js"
-    ],
-    "loadcss": [
-      "./scripts/loadcss.js"
     ],
     "vendor": [
       "./scripts/vendor.js"
