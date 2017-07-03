@@ -5632,9 +5632,9 @@ schema-utils@^0.3.0:
   dependencies:
     ajv "^5.0.0"
 
-scroll-depth@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/scroll-depth/-/scroll-depth-0.9.1.tgz#39e9d909d5e7cef9b6a2741b9fd53ca33e1ab8c6"
+scroll-depth@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/scroll-depth/-/scroll-depth-1.0.0.tgz#57ab0f8127ddf4c821c1eec2522d8075c8b4de19"
   dependencies:
     jquery ">=1.8"
 
