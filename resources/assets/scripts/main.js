@@ -7,6 +7,7 @@ import 'jquery.scrollto';
 import 'jquery.localscroll';
 import 'fastdom/fastdom';
 import 'motion-ui/dist/motion-ui';
+import 'lazysizes';
 
 // Import components
 import gform from './components/gform';

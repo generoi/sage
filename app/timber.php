@@ -69,6 +69,11 @@ add_filter('Timber\PostClassMap', function ($post_class) {
  * Configure twig with functions and filters.
  */
 add_filter('get_twig', function ($twig) {
+    // macros/image.twig
+    $twig->addGlobal('global_img_lazyload', true);
+    $twig->addGlobal('global_img_retina', true);
+    $twig->addGlobal('global_img_crop', true);
+
     // Provide a `linkify` filter which transforms URL addresses to HTML links.
     // @example
     // {{ footnote|linkify }}

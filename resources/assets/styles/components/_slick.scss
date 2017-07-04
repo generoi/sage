@@ -59,7 +59,7 @@ $c-slick-nav-size: 40px !default;
     width: 100%;
 
     // Span full width
-    .slick-initialized & img {
+    img {
       width: 100%;
       max-width: none;
     }

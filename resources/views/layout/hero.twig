@@ -134,14 +134,14 @@
           {% endif %}
 
           <picture class="slick__image {{is_smartcrop? 'smartcrop__container'}}">
-            <source srcset="{{image_desktop}} 1x, {{image_desktop_retina}} 2x" media="(min-width: 1000px)" />
-            <source srcset="{{image_tablet}} 1x, {{image_tablet_retina}} 2x" media="(min-width: 700px)" />
-            <img
-              {% if is_smartcrop %}{{img.smartcrop_attributes(image)}}{% endif %}
-              srcset="
-                {{image_mobile}} 1x,
-                {{image_mobile_retina}} 2x
-              " />
+            <source data-srcset="{{image_desktop}} 1x, {{image_desktop_retina}} 2x" media="(min-width: 1000px)" />
+            <source data-srcset="{{image_tablet}} 1x, {{image_tablet_retina}} 2x" media="(min-width: 700px)" />
+
+            {{img.tag(image, {
+              'src': image_mobile,
+              'lazyload': true,
+              'srcset': image_mobile ~ '1x, ' ~ image_mobile_retina ~ '2x',
+            })}}
           </picture>
 
           {# Prevent FOUC #}
