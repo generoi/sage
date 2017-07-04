@@ -73,6 +73,10 @@ add_filter('get_twig', function ($twig) {
     $twig->addGlobal('global_img_lazyload', true);
     $twig->addGlobal('global_img_retina', true);
     $twig->addGlobal('global_img_crop', true);
+    // layout/hero.twig
+    $twig->addGlobal('global_video_poster', 'data:image/gif;base64,R0lGODlhAQABAIAAAP7//wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==');
+    $twig->addGlobal('global_slide_fallback', true);
+    $twig->addGlobal('global_slide_defaults', ['slide_theme' => 'cover', 'slide_type' => 'image']);
 
     // Provide a `linkify` filter which transforms URL addresses to HTML links.
     // @example

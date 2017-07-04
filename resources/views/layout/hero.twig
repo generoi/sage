@@ -1,15 +1,15 @@
 {% import 'macros/image.twig' as img %}
 
 {# Variables can be overridden in templates #}
-{% set object = post ? (post) : (term ? term : false) %}
-{% set slides = slides ?: object.get_field('hero_slide') %}
-{% set force_crop = force_crop ?: (object.get_field('hero_crop') or (slides|length == 0)) %}
-{% set slide_enable_fallback = slide_enable_fallback|default(true) %}
-{% set default_video_poster = default_video_poster ?: 'data:image/gif;base64,R0lGODlhAQABAIAAAP7//wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' %}
-{% set slide_defaults = slide_defaults ?: { slide_theme: 'cover', slide_type: 'image', slide_overlay: 'black', slide_title: object.name } %}
+{% set object         = post           is defined ? post           : (term is defined ? term : false) %}
+{% set slides         = slides         is defined ? slides         : object.get_field('hero_slide') %}
+{% set force_crop     = force_crop     is defined ? fore_crop      : (object.get_field('hero_crop') or (slides|length == 0)) %}
+{% set slide_fallback = slide_fallback is defined ? slide_fallback : global_slide_fallback %}
+{% set video_poster   = video_poster   is defined ? video_poster   : global_video_poster %}
+{% set slide_defaults = slide_defaults is defined ? slide_defaults : global_slide_defaults %}
 
 {# Fallback support if no slides are set #}
-{% if slides|length == 0 and slide_enable_fallback %}
+{% if (slides|length == 0) and (slide_fallback) %}
   {# Use featured image #}
   {% if post.get_thumbnail %}
     {% set slide = slide_defaults|merge({ slide_image: post.thumbnail }) %}
@@ -30,7 +30,7 @@
   {% endif %}
 
   {# Use fallback image #}
-  {% if not slide and options.hero_default_image %}
+  {% if (not slide) and (options.hero_default_image) %}
      {% set slide = slide_defaults|merge({ slide_image: options.hero_default_image }) %}
   {% endif %}
 
@@ -65,7 +65,7 @@
         {% if video.src %}
           <div class="slick__image">
             <div class="responsive-embed">
-              <video width="{{slide.slide_video_width}}" height="{{slide.slide_video_height}}" autoplay poster="{{default_video_poster}}">
+              <video width="{{slide.slide_video_width}}" height="{{slide.slide_video_height}}" autoplay poster="{{video_poster}}">
                 <source src="{{video.src}}" type="{{video.post_mime_type}}">
               </video>
             </div>
