@@ -20,7 +20,8 @@ add_filter('tailor-foundation/grid', function () {
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
-    // wp_enqueue_style('font_css', '//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800', false, null);
+    // wp_enqueue_style('font/google', 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800', false, null);
+    // wp_enqueue_style('font/typekit', 'https://use.typekit.net', false, null);
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
 
     // Scripts which are loaded synchronously
@@ -34,6 +35,10 @@ add_action('wp_enqueue_scripts', function () {
 add_action('wp_print_styles', function () {
     wp_dequeue_style('ext-widget-opts'); // widget-options
     wp_dequeue_style('wp-blocks'); // gutenberg
+    wp_dequeue_style('crp-style-rounded-thumbs'); // contextual related posts
+    wp_dequeue_style('wp-smart-crop-renderer'); // wp-smartcrop
+    wp_dequeue_script('jquery.wp-smartcrop'); // wp-smartcrop
+    wp_dequeue_style('dashicons'); // wp core
 }, 100);
 
 /**

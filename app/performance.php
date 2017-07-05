@@ -42,17 +42,27 @@ add_filter('autoptimize_filter_toolbar_show', '__return_false');
  * Prefetch DNS for external resources.
  */
 add_filter('wp_resource_hints', function ($hints, $relation_type) {
-    switch ($relation_type) {
-        case 'dns-prefetch':
-            // $hints[] = 'https://use.typekit.net';
-
-            // $upload_dir_domain = Utils\get_upload_dir_domain();
-            // // If upload dir is on a separate domain, prefetch the dns.
-            // if (strpos(site_url(), $upload_dir_domain) == false) {
-            //     $hints[] = $upload_dir_domain;
-            // }
-            break;
+    if ($relation_type == 'preconnect') {
+        if (wp_style_is('font/google', 'queue')) {
+            $hints[] = [
+                'href' => 'https://fonts.gstatic.com',
+                'crossorigin',
+            ];
+        }
+        if (wp_style_is('font/typekit', 'queue')) {
+            $hints[] = [
+                'href' => 'https://use.typekit.net',
+                'crossorigin',
+            ];
+        }
+        // If upload dir is on a separate domain, preconnect.
+        if (strpos(site_url(), Utils\get_upload_dir_domain()) === false) {
+            $hints[] = [
+                'href' => Utils\get_upload_dir_domain(),
+            ];
+        }
     }
+
     return $hints;
 }, 10, 2);
 
@@ -83,8 +93,15 @@ add_action('init', function () {
     remove_filter('comment_text_rss', 'wp_staticize_emoji');
     add_filter('tiny_mce_plugins', function ($plugins) {
         if (is_array($plugins)) {
-            return array_diff($plugins, array('wpemoji'));
+            return array_diff($plugins, ['wpemoji']);
         }
-        return array();
+        return [];
     });
+    add_filter('wp_resource_hints', function ($hints, $relation_type) {
+        if ($relation_type == 'dns-prefetch') {
+            $emoji_svg_url = apply_filters('emoji_svg_url', 'https://s.w.org/images/core/emoji/2.2.1/svg/');
+            $hints = array_diff($hints, [$emoji_svg_url]);
+        }
+        return $hints;
+    }, 10, 2);
 });
