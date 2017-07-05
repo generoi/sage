@@ -140,6 +140,7 @@
             {{img.tag(image, {
               'src': image_mobile,
               'lazyload': true,
+              'smartcrop': is_smartcrop,
               'srcset': image_mobile ~ ' 1x, ' ~ image_mobile_retina ~ '2x',
             })}}
           </picture>
