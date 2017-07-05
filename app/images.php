@@ -10,7 +10,7 @@ use Timber;
  */
 global $content_width;
 if (!isset($content_width)) {
-    $content_width = 800;
+    $content_width = intval(Foundation\paragraph_width('large'));
 }
 
 /**
@@ -68,11 +68,27 @@ add_filter('max_srcset_image_width', function () {
 
 /**
  * Sort srcset according to sizes so it's be more readable.
+ * @note by default Wordpress excludes images that have a different aspect ratio.
  */
 add_filter('wp_calculate_image_srcset', function ($sources, $size_array, $image_src, $image_meta) {
     ksort($sources, SORT_NUMERIC);
     return $sources;
 }, 10, 4);
+
+/**
+ * Tell Wordpress about the paragraph width in different viewport sizes.
+ */
+add_filter('wp_calculate_image_sizes', function ($sizes, $size) {
+    $width = $size[0];
+    if ($width >= Foundation\breakpoint('medium')) {
+        $sizes = [];
+        $sizes[] = '(max-width: ' . Foundation\breakpoint('medium') . 'px) ' . Foundation\paragraph_width('small');
+        $sizes[] = '(max-width: ' . Foundation\breakpoint('large') . 'px) ' . Foundation\paragraph_width('medium');
+        $sizes[] = Foundation\paragraph_width('large');
+        $sizes = implode(', ', $sizes);
+    }
+    return $sizes;
+}, 10, 2);
 
 /**
  * Make all content images lazyloaded (unless they omit the class attribute).

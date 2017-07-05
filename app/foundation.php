@@ -37,3 +37,36 @@ function breakpoint($type = null)
     ];
     return isset($type) ? $breakpoints[$type] : $breakpoints;
 }
+
+/**
+ * Return the font size in pixels.
+ */
+function fontsize($breakpoint = 'small')
+{
+    if (breakpoint($breakpoint) >= breakpoint('large')) {
+        return 18;
+    }
+    return 16;
+}
+
+/**
+ * Return the length of a paragraph.
+ */
+function paragraph_width($breakpoint = 'small')
+{
+    $max_width = (45 * fontsize($breakpoint));
+    $breakpoints = breakpoint();
+    if (!isset($breakpoints[$breakpoint])) {
+        return null;
+    }
+    // Advance until the requested breakpoint
+    while (key($breakpoints) !== $breakpoint) next($breakpoints);
+
+    // Check if this breakpoint spans beyond the max width.
+    if (next($breakpoints) > $max_width) {
+        return $max_width . 'px';
+    }
+
+    // Return approximate viewport based width.
+    return '95vw';
+}
