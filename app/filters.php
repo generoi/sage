@@ -59,7 +59,7 @@ add_filter('excerpt_more', function () {
 });
 
 /**
- * Wrap oEmbeds in foundations responsive wrapper.
+ * Wrap oEmbeds in foundations responsive wrapper with minimal UI options.
  */
 add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
     preg_match('/src="([^"]*)"/i', $cache, $sources);
@@ -68,13 +68,15 @@ add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
     }
 
     if (!empty($src) && !empty($url)) {
-        if (strpos($url, 'youtube') !== false) {
+        $is_youtube = strpos($url, 'youtube') !== false;
+        $is_vimeo = strpos($url, 'vimeo') !== false;
+        if ($is_youtube) {
             $args = [
                 'rel' => 0,
                 'showinfo' => 0,
                 'modestbranding' => 1,
             ];
-        } elseif (strpos($url, 'vimeo') !== false) {
+        } elseif ($is_vimeo) {
             $args = [
                 'title' => 0,
                 'byline' => 0,
@@ -88,6 +90,11 @@ add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
             $query = array_merge($query, $attr);
             // Add in defaults unless they are already defined.
             $query = array_merge($args, $query);
+            // Force /embed endpoint for youtube.
+            if ($is_youtube && $parts['path'] == '/watch') {
+                $parts['path'] = '/embed/' . $query['v'];
+                unset($query['v']);
+            }
             // Use schemeless URL and re-build the query.
             $parts['scheme'] = null;
             $parts['query'] = build_query($query);
