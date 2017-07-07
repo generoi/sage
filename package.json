@@ -75,7 +75,11 @@
           "newIsCap": true,
           "newIsCapExceptions": [],
           "capIsNew": false,
-          "capIsNewExceptions": ["Immutable.Map", "Immutable.Set", "Immutable.List"],
+          "capIsNewExceptions": [
+            "Immutable.Map",
+            "Immutable.Set",
+            "Immutable.List"
+          ],
           "properties": false
         }
       ]
@@ -89,16 +93,28 @@
     "rules": {
       "no-empty-source": null,
       "at-rule-empty-line-before": [
-        "always", {
-          "ignoreAtRules": ["else"],
-          "ignore": ["after-comment"],
-          "except": ["first-nested", "blockless-after-same-name-blockless"]
+        "always",
+        {
+          "ignoreAtRules": [
+            "else"
+          ],
+          "ignore": [
+            "after-comment"
+          ],
+          "except": [
+            "first-nested",
+            "blockless-after-same-name-blockless"
+          ]
         }
       ],
       "block-opening-brace-space-before": "always",
       "block-closing-brace-newline-after": [
-        "always", {
-          "ignoreAtRules": ["if", "else"]
+        "always",
+        {
+          "ignoreAtRules": [
+            "if",
+            "else"
+          ]
         }
       ],
       "at-rule-name-space-after": "always",
