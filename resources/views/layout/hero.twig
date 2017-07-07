@@ -93,6 +93,18 @@
             {% set image_tablet_retina  = image_tablet|retina_url %}
             {% set image_mobile_retina  = image_mobile|retina_url %}
 
+            {# Re-init images so we can retrieve the new dimensions #}
+            {% set image_desktop = TimberImage(image_desktop) %}
+            {% set image_tablet  = TimberImage(image_tablet) %}
+            {% set image_mobile  = TimberImage(image_mobile) %}
+            {# @see https://github.com/timber/timber/issues/1458 #}
+            {% set image_desktop = image_desktop|obj_merge({'file_loc': image_desktop.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_desktop = image_desktop|obj_merge({'file': image_desktop.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_tablet  = image_tablet|obj_merge({'file_loc': image_tablet.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_tablet  = image_tablet|obj_merge({'file': image_tablet.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_mobile  = image_mobile|obj_merge({'file_loc': image_mobile.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+            {% set image_mobile  = image_mobile|obj_merge({'file': image_mobile.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+
           {# Disable WP thumbnails and use Timber to resize images instead #}
           {% else %}
             {% set image_desktop = image.src|resize(dimensions_desktop.width) %}
@@ -133,22 +145,32 @@
             {% set ratio_mobile  = (image_mobile.height / image_mobile.width) %}
           {% endif %}
 
-          <picture class="slick__image {{is_smartcrop? 'smartcrop__container'}}">
-            <source data-srcset="{{image_desktop}} 1x, {{image_desktop_retina}} 2x" media="(min-width: 1000px)" />
-            <source data-srcset="{{image_tablet}} 1x, {{image_tablet_retina}} 2x" media="(min-width: 700px)" />
+          <picture class="slick__image responsive-embed responsive-embed--nomargin">
+            <source data-srcset="{{image_desktop}} {{image_desktop.width}}w {{image_desktop_retina ? ', ' ~ image_desktop_retina ~ ' 2x'}}" data-sizes="auto" media="(min-width: 1000px)" />
+            <source data-srcset="{{image_tablet}} {{image_tablet.width}}w {{image_tablet_retina ? ', ' ~ image_desktop_retina ~ ' 2x'}}" data-sizes="auto" media="(min-width: 700px)" />
+
+            {% set srcset = [
+              image_mobile|resize(400) ~ ' 400w',
+              image_mobile ~ ' ' ~ image_mobile.width ~ 'w',
+            ] %}
+            {% if image_mobile_retina %}
+              {% set srcset = srcset|merge([
+                image_mobile_retina ? ', ' ~ image_mobile_retina ~ ' ' ~ (image_mobile.width*2) ~'w',
+                image_mobile_retina ? ', ' ~ image_mobile_retina ~ ' 2x',
+              ]) %}
+            {% endif %}
 
             {{img.tag(image, {
               'lazyload': true,
               'smartcrop': is_smartcrop,
-              'srcset': image_mobile ~ ' 1x, ' ~ image_mobile_retina ~ '2x',
               'class': 'blur',
+              'srcset': srcset|join(', '),
               'placeholder': image_mobile|resize(30)|datauri,
             })}}
           </picture>
 
           {# Prevent FOUC #}
           <style>
-            #slick-slide-{{loop.index}} .slick__image { height: 0; display: block; overflow: hidden; }
             #slick-slide-{{loop.index}} .slick__image { padding-bottom: {{ratio_mobile*100}}%; }
             @media screen and (min-width: 700px) {
               #slick-slide-{{loop.index}} .slick__image { padding-bottom: {{ratio_tablet*100}}%; }

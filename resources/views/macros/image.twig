@@ -7,7 +7,7 @@
 {% endmacro %}
 
 {# Output an image tag #}
-{% macro image(thumbnail, dimensions, crop, is_retina, is_smartcrop) %}
+{% macro image(thumbnail, dimensions, crop, is_smartcrop) %}
   {% import _self as image %}
 
   {% set thumbnail = (not thumbnail.src) ? TimberImage(thumbnail) : thumbnail %}
@@ -17,41 +17,51 @@
     {% set width        = dimensions[0] %}
     {% set height       = dimensions[1] %}
     {% set is_crop      = crop      is not null ? crop      : global_img_crop %}
-    {% set is_retina    = retina    is not null ? retina    : global_img_retina %}
     {% set is_smartcrop = smartcrop is not null ? smartcrop : ((thumbnail._wpsmartcrop_enabled) and (width) and (height)) %}
     {% set is_lazyload  = lazyload  is not null ? lazyload  : global_img_lazyload %}
 
     {# Smarcrop plugin support #}
     {% if (is_smartcrop) %}
       {% set img_1x = img|resize(width) %}
-      {% set img_2x = img_1x %}
+      {% set img_2x = img|resize(width * 2) %}
     {# User defined a size #}
     {% elseif (width or height) %}
       {% set img_1x = img|resize(width, height, is_crop) %}
-
-      {# Serve retina image. #}
-      {% if (is_retina) %}
-        {% set img_2x = img|resize(width ? (width * 2), height ? (height * 2), is_crop) %}
-      {% endif %}
+      {% set img_2x = img|resize(width ? (width * 2), height ? (height * 2), is_crop) %}
     {# Output image as is. #}
     {% else %}
       {% set img_1x = img %}
     {% endif %}
 
-    {% if (is_smartcrop and is_crop) %}
-      <div class="smartcrop__container" style="width: 100%; height: 0; padding-bottom:{{ (height/width) * 100 }}%;">
+    {% set img_resized = TimberImage(img_1x) %}
+    {% set img_resized = img_resized|obj_merge({'file_loc': img_resized.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+    {% set img_resized = img_resized|obj_merge({'file': img_resized.file_loc|replace({'web/wp/app': 'web/app'})}) %}
+
+    {% if (not is_smartcrop) %}
+      {% set width = img_resized.width %}
+      {% set height = img_resized.height %}
     {% endif %}
 
-    {{image.tag(thumbnail, {
-      'width': width,
-      'height': height,
-      'smartcrop': is_smartcrop,
-      'lazyload': is_lazyload,
-      'src': img_1x,
-      'srcset': is_retina ? (img_1x ~ ' 1x, ' ~ img_2x ~ ' 2x') : false
-    })}}
+    {% if (img_resized.width and img_resized.height) %}
+      {% set img_05x = img_1x|resize(img_resized.width/2) %}
+      {% set srcset = [
+        img_05x ~ ' ' ~ (img_resized.width/2)|round ~'w',
+        img_1x ~ ' ' ~ img_resized.width ~'w',
+        img_2x ? img_2x ~ ' ' ~ (img_resized.width*2) ~'w',
+      ] %}
+      <div class="responsive-embed responsive-embed--nomargin" style="padding-bottom:{{ (height/width) * 100 }}%;">
+        {{image.tag(thumbnail, {
+          'width': img_resized.width,
+          'height': img_resized.height,
+          'smartcrop': is_smartcrop,
+          'lazyload': is_lazyload,
+          'srcset': srcset|filter|join(', '),
+        })}}
+      </div>
+    {% else %}
+      <img data-twig-error="no image dimensions detected" />
+    {% endif %}
 
-    {% if is_smartcrop %}</div>{% endif %}
   {# Prevent those annoying OOM and MySQL crashes when the source doesn't exist. #}
   {% else %}
     <img data-twig-error="no image source attribute" />
@@ -77,6 +87,7 @@
       {% elseif options.src %}
         data-src="{{options.src}}"
       {% endif %}
+      data-sizes="{{options.sizes?:'auto'}}"
     {# Regular, not lazyloaded #}
     {% else %}
       {% if options.srcset %}
@@ -84,6 +95,7 @@
       {% elseif options.src %}
         src="{{options.src}}"
       {% endif %}
+      {% if options.sizes %}sizes="{{options.sizes}}"{% endif %}
     {% endif %}
     {# Smartcrop #}
     {% if options.smartcrop %}
@@ -100,14 +112,12 @@
   {% set width = dimensions[0]|default(400) %}
   {% set height = dimensions[1]|default(width / 1.5)|round %}
 
-  {% spaceless %}
-    <img
-      width="{{width}}"
-      height="{{height}}"
-      srcset="
-        https://unsplash.it/{{width}}/{{height}}?random 1x,
-        https://unsplash.it/{{width*2}}/{{height*2}}?random 2x
-      "
-    >
-  {% endspaceless %}
+  <img
+    width="{{width}}"
+    height="{{height}}"
+    srcset="
+      https://placehold.it/{{width}}x{{height}},
+      https://placehold.it/{{width*2}}x{{height*2}} 2x
+    "
+  >
 {% endmacro %}

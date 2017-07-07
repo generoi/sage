@@ -71,7 +71,6 @@ add_filter('Timber\PostClassMap', function ($post_class) {
 add_filter('get_twig', function ($twig) {
     // macros/image.twig
     $twig->addGlobal('global_img_lazyload', true);
-    $twig->addGlobal('global_img_retina', true);
     $twig->addGlobal('global_img_crop', true);
     // layout/hero.twig
     $twig->addGlobal('global_video_poster', 'data:image/gif;base64,R0lGODlhAQABAIAAAP7//wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==');
@@ -132,7 +131,7 @@ add_filter('get_twig', function ($twig) {
         if (function_exists('wr2x_get_retina_from_url')) {
             return wr2x_get_retina_from_url($image);
         }
-        return $image;
+        return false;
     }));
 
     /**

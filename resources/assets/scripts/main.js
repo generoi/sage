@@ -7,7 +7,6 @@ import 'jquery.scrollto';
 import 'jquery.localscroll';
 import 'fastdom/fastdom';
 import 'motion-ui/dist/motion-ui';
-import 'lazysizes';
 
 // Import components
 import gform from './components/gform';
@@ -15,9 +14,11 @@ import slick from './components/slick';
 import headroom from './components/headroom';
 import analytics from './components/analytics';
 import magnificpopup from './components/magnificpopup';
+import lazysizes from './components/lazysizes';
 
 // Ensure correct images are set before plugins such as orbit begins measuring
 // dimensions.
+lazysizes();
 picturefill();
 $(document).foundation();
 
