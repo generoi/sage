@@ -33,7 +33,7 @@
     @include xy-gutters($gutters: $grid-padding-gutters, $negative: true);
 
     @each $breakpoint, $gutter in $grid-margin-gutters {
-      width: calc(100% + #{get-side($gutter, left) + #{get-side($gutter, right)}});
+      width: calc(100% + #{rem-calc(get-side($gutter, left) + get-side($gutter, right))});
     }
   }
 }
@@ -50,11 +50,19 @@
  * side if possible.
  */
 %alignwide {
+  $-max-width: calc(#{$c-paragraph-max-width} + 20%);
+
   display: block;
   margin-left: auto;
   margin-right: auto;
-  min-width: #{$c-paragraph-max-width};
-  max-width: calc(#{$c-paragraph-max-width} + 20%);
+
+  @media print, screen and (min-width: #{$-max-width}) {
+    max-width: $-max-width;
+  }
+
+  @include breakpoint($c-paragraph-max-width) {
+    min-width: $c-paragraph-max-width;
+  }
 }
 
 /**
@@ -65,22 +73,35 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  max-width: #{$c-paragraph-max-width};
+
+  @include breakpoint($c-paragraph-max-width) {
+    max-width: $c-paragraph-max-width;
+  }
 }
 
 /**
- * Left/Rigth aligning images should never take up more than 50% of the content
- * area. Also only apply on larger screens.
+ * Left/Rigth aligning images should only apply on larger screens.
  */
-$sidealign-width: ($c-paragraph-max-width/2);
-$sidealign-image-width: ($sidealign-width/2) + ($global-margin/2);
-
 %alignleft {
   @include breakpoint(medium) {
     float: left;
     margin-right: $global-margin;
-    margin-left: calc(50% - #{$sidealign-width});
-    max-width: calc(50% - #{$sidealign-image-width});
+
+    // Because floated the wrapping paragraph will have 0 height but still a
+    // margin pushing down the content on teh right on the image. Push down
+    // image to align.
+    p > &:only-child,
+    p > a:only-child > & {
+      margin-top: $paragraph-margin-bottom;
+    }
+  }
+
+  // Caption shortcode is a figure while regular images are wrapped within a
+  // paragraph.
+  @include breakpoint($c-paragraph-max-width) {
+    &.wp-caption {
+      margin-left: calc(50% - #{($c-paragraph-max-width/2)});
+    }
   }
 }
 
@@ -88,8 +109,22 @@ $sidealign-image-width: ($sidealign-width/2) + ($global-margin/2);
   @include breakpoint(medium) {
     float: right;
     margin-left: $global-margin;
-    margin-right: calc(50% - #{$sidealign-width});
-    max-width: calc(50% - #{$sidealign-image-width});
+
+    // Because floated the wrapping paragraph will have 0 height but still a
+    // margin pushing down the content on teh right on the image. Push down
+    // image to align.
+    p > &:only-child,
+    p > a:only-child > & {
+      margin-top: $paragraph-margin-bottom;
+    }
+  }
+
+  // Caption shortcode is a figure while regular images are wrapped within a
+  // paragraph.
+  @include breakpoint($c-paragraph-max-width) {
+    &.wp-caption {
+      margin-right: calc(50% - #{($c-paragraph-max-width/2)});
+    }
   }
 }
 

@@ -13,6 +13,19 @@
   @each $alignment in alignnone, alignwide, aligncenter {
     &.#{$alignment} { @extend %#{$alignment}; }
   }
+
+  $-sidealign-width: ($c-paragraph-max-width/2);
+  $-sidealign-image-width: ($-sidealign-width/2) + ($global-margin/2);
+
+  &.alignleft {
+    margin-left: calc(50% - #{$-sidealign-width});
+    max-width: calc(50% - #{$-sidealign-image-width});
+  }
+
+  &.alignright {
+    margin-right: calc(50% - #{$-sidealign-width});
+    max-width: calc(50% - #{$-sidealign-image-width});
+  }
 }
 
 /**
