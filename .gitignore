@@ -8,6 +8,7 @@ npm-debug.log
 yarn-error.log
 vendor
 resources/assets/config-local.json
+.cache-loader
 
 # Fontello build files we don't need.
 assets/fonts/fontello/animation.css

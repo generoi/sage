@@ -128,6 +128,7 @@ let webpackConfig = {
     jquery: 'jQuery',
   },
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new CleanPlugin([config.paths.dist], {
       root: config.paths.root,
       verbose: false,
