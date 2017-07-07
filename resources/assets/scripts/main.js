@@ -14,6 +14,7 @@ import gform from './components/gform';
 import slick from './components/slick';
 import headroom from './components/headroom';
 import analytics from './components/analytics';
+import magnificpopup from './components/magnificpopup';
 
 // Ensure correct images are set before plugins such as orbit begins measuring
 // dimensions.
@@ -21,6 +22,7 @@ picturefill();
 $(document).foundation();
 
 // Custom components
+magnificpopup('#content');
 headroom('.headroom');
 gform();
 slick('.slick', { arrows: false, dots: true });

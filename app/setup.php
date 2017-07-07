@@ -25,8 +25,20 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
 
     // Scripts which are loaded synchronously
-    wp_enqueue_script('theme/js/vendor', asset_path('scripts/vendor.js'), ['jquery'], false, true);
-    wp_enqueue_script('theme/js/main', asset_path('scripts/main.js'), ['jquery', 'theme/js/vendor'], null, true);
+    wp_enqueue_script('sage/vendor.js', asset_path('scripts/vendor.js'), ['jquery'], false, true);
+    wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery', 'sage/vendor.js'], null, true);
+
+    wp_localize_script('sage/main.js', 'Sage', [
+        'l10n' => [
+            'close' => __('Close', '<example-project>'),
+            'loading' => __('Loading...', '<example-project>'),
+            'previous' => __('Previous', '<example-project>'),
+            'next' => __('Next', '<example-project>'),
+            'counter' => __('%curr% of %total%', '<example-project>'),
+            'image_not_loaded' => __('<a href="%url%">The image</a> could not be loaded', '<example-project>'),
+            'content_not_loaded' => __('<a href="%url%">The content</a> could not be loaded', '<example-project>'),
+        ],
+    ]);
 }, 100);
 
 /**

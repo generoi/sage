@@ -71,7 +71,7 @@ add_filter('wp_resource_hints', function ($hints, $relation_type) {
  */
 add_filter('script_loader_tag', function ($tag, $handle) {
     $async_handles = [
-        'theme/js/main',
+        'sage/main.js',
     ];
     if (in_array($handle, $async_handles)) {
         return str_replace(' src', ' async="async" src', $tag);
