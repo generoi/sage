@@ -18,7 +18,7 @@ add_filter('the_content', function ($content) {
 add_filter('the_content', function ($content) {
     // @see https://stackoverflow.com/a/22004695/319855
     $whitespace = '<br\s*/?>|\s|&nbsp;|<p>&nbsp;</p>';
-    $content = preg_replace('#^(' . $whitespace . ')*(.+?)(' . $whitespace . ')*$#mi', '$2', $content);
+    $content = preg_replace('#^(' . $whitespace . ')*(.+?)(' . $whitespace . ')*$#s', '$2', $content);
     return trim($content);
 });
 
