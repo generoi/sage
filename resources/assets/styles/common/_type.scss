@@ -2,7 +2,7 @@ $c-size-adjustment: 0.5 !default;
 
 // Responsive font size.
 // @see utils/_typography.scss
-html { @extend %u-text; }
+body { @extend %u-text; }
 
 body,
 h1,
