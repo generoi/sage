@@ -64,12 +64,12 @@
   <img
     alt="{{options.alt|default(thumbnail._wp_attachment_image_alt)|default(thumbnail.title)|default(wp_title)}}"
     title="{{options.title|default(thumbnail.title)}}"
-    class="{{options.smartcrop ? 'smartcrop '}}{{options.lazyload ? 'lazyload blur '}}{{options.class}}"
+    class="{{options.smartcrop ? 'smartcrop '}}{{options.lazyload ? 'lazyload '}}{{options.class}}"
     {% if options.width %}width="{{options.width}}"{% endif %}
     {% if options.height %}height="{{options.height}}"{% endif %}
     {# Lazyload #}
     {% if options.lazyload %}
-      {% if options.src %}src="{{options.src('tiny-lazy')|datauri}}"{% endif %}
+      src="{{options.placeholder?:'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='}}"
       {# Retina takes priority #}
       {% if options.srcset %}
         data-srcset="{{options.srcset}}"

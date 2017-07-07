@@ -138,10 +138,11 @@
             <source data-srcset="{{image_tablet}} 1x, {{image_tablet_retina}} 2x" media="(min-width: 700px)" />
 
             {{img.tag(image, {
-              'src': image_mobile,
               'lazyload': true,
               'smartcrop': is_smartcrop,
               'srcset': image_mobile ~ ' 1x, ' ~ image_mobile_retina ~ '2x',
+              'class': 'blur',
+              'placeholder': image_mobile|resize(30)|datauri,
             })}}
           </picture>
 
