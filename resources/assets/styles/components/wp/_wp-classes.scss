@@ -139,3 +139,31 @@
 .aligncenter { @extend %aligncenter; }
 .alignleft { @extend %alignleft; }
 .alignright { @extend %alignright; }
+
+/** Video embed */
+.wp-video {
+  max-width: 100% !important;
+
+  @include breakpoint($c-paragraph-max-width) {
+    max-width: $c-paragraph-max-width !important;
+  }
+}
+
+/**
+ * Video embeds, the wrapping .wp-video sets the paragraph width so the
+ * responsive-embed wrapper needs to be set on it's child.
+ */
+.mejs-container {
+  @include responsive-embed(widescreen);
+
+  width: 100% !important;
+  height: 0 !important;
+
+  > .mejs-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
