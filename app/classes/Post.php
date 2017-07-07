@@ -11,6 +11,14 @@ class Post extends Timber\Post
     public $cache_duration = DAY_IN_SECONDS;
 
     /**
+     * Disable expensive get_post_class() funciton call which we do not use.
+     */
+    public function post_class($class = '')
+    {
+        return $class;
+    }
+
+    /**
      * Return related posts.
      */
     public function get_related($posts_per_page = 3, $args = [])
