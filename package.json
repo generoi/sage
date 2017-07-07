@@ -19,9 +19,9 @@
   ],
   "browserslist": [
     "last 2 versions",
-    "ie >= 9",
-    "Android >= 2.3",
-    "ios >= 7"
+    "ie >= 11",
+    "Android >= 4.4",
+    "ios >= 8"
   ],
   "eslintConfig": {
     "root": true,
