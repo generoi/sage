@@ -34,6 +34,16 @@ add_filter('autoptimize_filter_js_exclude', function ($exclude) {
 });
 
 /**
+ * Exclude certain CSS files from Autoptimize.
+ */
+add_filter('autoptimize_filter_css_exclude', function ($exclude) {
+    $styles = [
+        'dist/styles/icons.css',
+    ];
+    return $exclude . ', ' . implode(', ', $styles);
+});
+
+/**
  * Remove Autoptimize from the admin toolbar.
  */
 add_filter('autoptimize_filter_toolbar_show', '__return_false');
