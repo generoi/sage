@@ -109,6 +109,9 @@ $c-paragraph-max-width: 45rem !default;
  * classes and allowing content to stretch past the regular grid.
  */
 %u-content-area {
+  // Break all floats for content following this.
+  @include clearfix();
+
   > *:not(.no-container):not(.alignfull):not(.alignwide):not(.alignleft):not(.alignright) {
     @extend %u-paragraph;
   }
