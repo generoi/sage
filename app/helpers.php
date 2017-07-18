@@ -46,69 +46,12 @@ function config($key = null, $default = null)
 }
 
 /**
- * @param string $file
- * @param array $data
- * @return string
- */
-function template($file, $data = [])
-{
-    return sage('blade')->render($file, $data);
-}
-
-/**
- * Retrieve path to a compiled blade view
- * @param $file
- * @param array $data
- * @return string
- */
-function template_path($file, $data = [])
-{
-    return sage('blade')->compiledPath($file, $data);
-}
-
-/**
  * @param $asset
  * @return string
  */
 function asset_path($asset)
 {
     return sage('assets')->getUri($asset);
-}
-
-/**
- * @param string|string[] $templates Possible template files
- * @return array
- */
-function filter_templates($templates)
-{
-    return collect($templates)
-        ->map(function ($template) {
-            return preg_replace('#\.(blade\.)?php$#', '', ltrim($template));
-        })
-        ->flatMap(function ($template) {
-            $paths = apply_filters('sage/filter_templates/paths', ['views', 'resources/views']);
-            return collect($paths)
-                ->flatMap(function ($path) use ($template) {
-                    return [
-                        "{$path}/{$template}.blade.php",
-                        "{$path}/{$template}.php",
-                        "{$template}.blade.php",
-                        "{$template}.php",
-                    ];
-                });
-        })
-        ->filter()
-        ->unique()
-        ->all();
-}
-
-/**
- * @param string|string[] $templates Relative path to possible template files
- * @return string Location of the template
- */
-function locate_template($templates)
-{
-    return \locate_template(filter_templates($templates));
 }
 
 /**
