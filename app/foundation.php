@@ -46,7 +46,8 @@ function fontsize($breakpoint = 'small')
         if ($breakpoint == $_breakpoint) {
             return $fontsize;
         }
-        if (breakpoint($breakpoint) > breakpoint($_breakpoint)) {
+        // If `small` and `large` are configured, `medium` should return `large`
+        if (breakpoint($_breakpoint) > breakpoint($breakpoint)) {
             return $fontsize;
         }
     }
