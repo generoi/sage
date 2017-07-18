@@ -143,7 +143,6 @@ Container::getInstance()
         return new Config([
             'assets' => require dirname(__DIR__).'/config/assets.php',
             'theme' => require dirname(__DIR__).'/config/theme.php',
-            'view' => require dirname(__DIR__).'/config/view.php',
             'timber' => require dirname(__DIR__).'/config/timber.php',
             'foundation' => require dirname(__DIR__).'/config/foundation.php',
         ]);
