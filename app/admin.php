@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains configurations of the WP Admin interface.
+ */
+
 namespace App;
 
 /**

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains various integrations for Polylang and WPML.
+ */
+
 namespace App;
 
 use Genero\Sage\Acf;

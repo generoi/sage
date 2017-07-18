@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains App\Controller\ProductPost class used for WooCommerce products.
+ */
+
 namespace App\Controller;
 
 use App;

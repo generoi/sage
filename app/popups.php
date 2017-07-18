@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains option additions for the Popups and Popup Extended plugins.
+ */
+
 namespace App;
 
 /**

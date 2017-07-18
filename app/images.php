@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains image size definitions and other image related filters.
+ */
+
 namespace App;
 
 use Timber;

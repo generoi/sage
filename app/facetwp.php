@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains configurations of the FacetWP plugin.
+ */
+
 namespace App;
 
 /**

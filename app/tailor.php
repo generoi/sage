@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @file
+ * Contains integrations for the Tailor plugin. Among other things usability
+ * fixes and Foundation color/theme integrations.
+ */
+
 namespace App;
 
 /**

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains sage helpers.
+ */
+
 namespace App;
 
 use Roots\Sage\Container;

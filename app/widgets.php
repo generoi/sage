@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains custom widgets and widget whitelisting.
+ */
+
 namespace App;
 
 /**

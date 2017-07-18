@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains Gravityform configurations and field defaults.
+ */
+
 use Genero\Sage\GravityFormTwig;
 
 /**

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @file
+ * Contains Timber and Twig configurations and theme specific twig
+ * filters/functions.
+ */
+
 namespace App;
 
 use Timber;

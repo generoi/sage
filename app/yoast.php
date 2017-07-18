@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains custom Yoast placeholders.
+ */
+
 namespace App;
 
 /**

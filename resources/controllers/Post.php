@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @file
+ * Contains App\Controller\Post class used as a default extension of
+ * Timber\Post.
+ */
+
 namespace App\Controller;
 
 use App;

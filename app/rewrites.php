@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains permalink rewrites.
+ */
+
 namespace App;
 
 /**

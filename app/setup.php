@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @file
+ * Contains main setup logic for the theme. Here assets, regions and
+ * theme-support's are defined.
+ */
+
 namespace App;
 
 use Roots\Sage\Container;

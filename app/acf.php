@@ -1,11 +1,15 @@
 <?php
 
+/**
+ * @file
+ * Contains Advanced Custom Fields additions and field defaults.
+ */
+
 namespace App;
 
 use Genero\Component\AcfFieldLoader;
 use Genero\Component\HeroComponent;
 use Genero\Component\ArchivePageComponent;
-
 use Genero\Sage\OptionsPage;
 
 /**

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains utility functions.
+ */
+
 namespace App\Utils;
 
 /**

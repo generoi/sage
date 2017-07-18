@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains performance enhancing configurations.
+ */
+
 namespace App;
 
 /**

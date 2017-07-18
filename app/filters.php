@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @file
+ * Contains markup filters, among other things to modify output to use
+ * Foundation classes.
+ */
+
 namespace App;
 
 /**

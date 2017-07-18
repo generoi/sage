@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @file
+ * Contains utility functions for Foundation in PHP. Values are configured in
+ * config/foundation.php
+ */
+
 namespace App\Foundation;
 
 use App;
