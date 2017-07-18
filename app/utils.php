@@ -4,6 +4,8 @@ namespace App\Utils;
 
 /**
  * Format a phone number according to finnish system. Not perfect.
+ * @param string $number
+ * @return string
  */
 function format_phone($number)
 {
@@ -23,6 +25,9 @@ function format_phone($number)
 /**
  * Print an asynchronously loaded stylesheet.
  * @see https://github.com/filamentgroup/loadCSS
+ *
+ * @param string $path
+ * @return void
  */
 function print_async_stylesheet($path)
 {
@@ -31,8 +36,11 @@ function print_async_stylesheet($path)
 }
 
 /**
- * Build a URL string based on the URL parts returned from `parse_url`.
+ * Build a URL string based on URL parts.
  * @see https://stackoverflow.com/a/35207936/319855
+ *
+ * @param array $parts Parts of the URL as returned by `parse_url`
+ * @return string
  */
 function build_url($parts)
 {
@@ -51,6 +59,7 @@ function build_url($parts)
 /**
  * Return the domain used for the upload directory. Useful if `upload_url_path`
  * is set to a subdomain.
+ * @return string
  */
 function get_upload_dir_domain()
 {
@@ -64,25 +73,30 @@ function get_upload_dir_domain()
  * Sort a list of terms hierarchicaly  Child terms will be placed under the
  * `children` property.
  * @see http://wordpress.stackexchange.com/a/99516
+ *
+ * @param WP_Term[] $categories The term objects to sort
+ * @param array $into Optional result array to put them into
+ * @param int $parent_id The current parent ID to put them in
+ * @return void
  */
-function sort_terms_hierarchicaly(&$cats, &$into = null, $parent_id = 0)
+function sort_terms_hierarchicaly(&$categories, &$into = null, $parent_id = 0)
 {
     $has_target = isset($into);
     if (!$has_target) {
         $into = [];
     }
-    foreach ($cats as $i => $cat) {
+    foreach ($categories as $i => $cat) {
         if ($cat->parent == $parent_id) {
             $into[$cat->term_id] = $cat;
-            unset($cats[$i]);
+            unset($categories[$i]);
         }
     }
     foreach ($into as $top_cat) {
         $top_cat->children = array();
-        sort_terms_hierarchicaly($cats, $top_cat->children, $top_cat->term_id);
+        sort_terms_hierarchicaly($categories, $top_cat->children, $top_cat->term_id);
     }
     if (!$has_target) {
-        $cats = $into;
+        $categories = $into;
     }
 }
 
@@ -96,6 +110,11 @@ function sort_terms_hierarchicaly(&$cats, &$into = null, $parent_id = 0)
  * if ($terms) {
  *     return Utils\get_value_hierarchicaly('product_description', reset($terms));
  * }
+ *
+ * @param string $field The property/attribute to retrieve
+ * @param string $hierarchy Hierarchicaly sorted list if objects to search in
+ * @param string $child_proeprty Property where child objects are accessed.
+ * @return mixed
  */
 function get_value_hierarchicaly($field, $hierarchy, $child_property = 'children')
 {

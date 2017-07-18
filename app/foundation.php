@@ -5,7 +5,9 @@ namespace App\Foundation;
 use App;
 
 /**
- * Return a option list of the available palette colors the theme has.
+ * Get a option list of the available palette colors the theme has.
+ * @param string $type
+ * @return array
  */
 function palette($type = 'all')
 {
@@ -21,16 +23,20 @@ function palette($type = 'all')
 }
 
 /**
- * Return a Foundation media breakpoint.
+ * Get a Foundation media breakpoint in pixels.
+ * @param string $name
+ * @return int|array
  */
-function breakpoint($type = null)
+function breakpoint($name = null)
 {
     $breakpoints = App\config('foundation.breakpoint');
-    return isset($type) ? $breakpoints[$type] : $breakpoints;
+    return isset($name) ? $breakpoints[$name] : $breakpoints;
 }
 
 /**
- * Return the font size in pixels.
+ * Get Return the font size for the specified breakpoint in pixels.
+ * @param string $breakpoint
+ * @return int|array
  */
 function fontsize($breakpoint = 'small')
 {
@@ -47,7 +53,9 @@ function fontsize($breakpoint = 'small')
 }
 
 /**
- * Return the length of a paragraph.
+ * Get the length of a paragraph as a CSS value including it's unit.
+ * @param string $breakpoint
+ * @return string
  */
 function paragraph_width($breakpoint = 'small')
 {
