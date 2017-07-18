@@ -6,7 +6,7 @@ use Genero\Sage\GravityFormTwig;
  * Use twig templates to style Gravity Forms.
  * @see templates/forms/form.twig
  */
-new GravityFormTwig();
+// new GravityFormTwig();
 
 /**
  * Preselect a selet choice.

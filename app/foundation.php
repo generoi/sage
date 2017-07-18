@@ -2,17 +2,14 @@
 
 namespace App\Foundation;
 
+use App;
+
 /**
  * Return a option list of the available palette colors the theme has.
  */
 function palette($type = 'all')
 {
-    $palette = [
-        'primary'   => __('Primary', '<example-project>'),
-        'secondary' => __('Secondary', '<example-project>'),
-        'white'     => __('White', '<example-project>'),
-        'black'     => __('Black', '<example-project>'),
-    ];
+    $palette = App\config('foundation.palette');
 
     switch ($type) {
         case 'button':
@@ -28,13 +25,7 @@ function palette($type = 'all')
  */
 function breakpoint($type = null)
 {
-    $breakpoints = [
-        'small'   => 0,
-        'medium'  => 640,
-        'large'   => 1024,
-        'xlarge'  => 1200,
-        'xxlarge' => 1440,
-    ];
+    $breakpoints = App\config('foundation.breakpoint');
     return isset($type) ? $breakpoints[$type] : $breakpoints;
 }
 
@@ -43,10 +34,16 @@ function breakpoint($type = null)
  */
 function fontsize($breakpoint = 'small')
 {
-    if (breakpoint($breakpoint) >= breakpoint('large')) {
-        return 18;
+    $fontsizes = App\config('foundation.fontsize');
+
+    foreach ($fontsizes as $_breakpoint => $fontsize) {
+        if ($breakpoint == $_breakpoint) {
+            return $fontsize;
+        }
+        if (breakpoint($breakpoint) > breakpoint($_breakpoint)) {
+            return $fontsize;
+        }
     }
-    return 16;
 }
 
 /**
@@ -54,11 +51,8 @@ function fontsize($breakpoint = 'small')
  */
 function paragraph_width($breakpoint = 'small')
 {
-    $max_width = (45 * fontsize($breakpoint));
+    $max_width = (App\config('foundation.paragraph_width') * fontsize($breakpoint));
     $breakpoints = breakpoint();
-    if (!isset($breakpoints[$breakpoint])) {
-        return null;
-    }
     // Advance until the requested breakpoint
     while (key($breakpoints) !== $breakpoint) next($breakpoints);
 

@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Controller;
 
+use App;
 use Timber;
 use TimberHelper;
 
@@ -39,7 +40,7 @@ class Post extends Timber\Post
             } else {
                 return $post->get_related_by_terms($posts_per_page);
             }
-        }, Timber::$cache ? $this->cache_duration : false);
+        }, App\config('timber.cache') ? $this->cache_duration : false);
 
         return $this->related[$cid];
     }
@@ -111,3 +112,4 @@ class Post extends Timber\Post
         return $prefix . '_' . $this->ID . '_' . substr(md5(json_encode($args)), 0, 6);
     }
 }
+

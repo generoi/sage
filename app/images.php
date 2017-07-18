@@ -5,19 +5,16 @@ namespace App;
 use Timber;
 
 /**
- * Set the maximum allowed width for any content (eg. oEmbeds, images). This
- * should be the width of the content area.
- */
-global $content_width;
-if (!isset($content_width)) {
-    $content_width = intval(Foundation\paragraph_width('large'));
-}
-
-/**
  * Define image sizes
  */
 add_action('after_setup_theme', function () {
     global $content_width;
+
+    // Set the maximum allowed width for any content (eg. oEmbeds, images).
+    // This should be the width of the content area.
+    if (!isset($content_width)) {
+        $content_width = intval(Foundation\paragraph_width('large'));
+    }
 
     // Modify Core sizes.
     if (get_option('large_size_w') != $content_width) {

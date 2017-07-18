@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Controller;
 
+use App;
 use Timber;
 use TimberHelper;
 use WC_Product_Variable;
@@ -86,7 +87,7 @@ class ProductPost extends Post
 
         $this->upsell_products = TimberHelper::transient($cid, function () use ($product) {
             return (new Timber\PostQuery($product->get_upsell_ids()))->get_posts();
-        }, Timber::$cache ? $this->cache_duration : false);
+        }, App\config('timber.cache') ? $this->cache_duration : false);
 
         return $this->upsell_products;
     }
@@ -111,7 +112,7 @@ class ProductPost extends Post
                 $related_products[$idx] = Timber\PostGetter::get_post($related->get_id());
             }
             return $related_products;
-        }, Timber::$cache ? $this->cache_duration : false);
+        }, App\config('timber.cache') ? $this->cache_duration : false);
 
         return $this->related_products[$cid];
     }

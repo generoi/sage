@@ -10,14 +10,13 @@ use Genero\Sage\TwigExtensionLinkify;
 
 /**
  * Define where to look for twig templates.
- *
- * Rather than adding a multitude of directories, consider prefixing the
- * included templates with the directory name: `parts/hero.twig`
  */
-if (class_exists('Timber')) {
-    Timber::$dirname = ['views', 'views/pages'];
-    Timber::$cache = defined('WP_CACHE') ? WP_CACHE : false;
-}
+add_action('after_setup_theme', function () {
+    if (class_exists('Timber')) {
+        Timber::$dirname = config('timber.dirname');
+        Timber::$cache = config('timber.cache');
+    }
+});
 
 /**
  * Site components injected into every timber context.
@@ -36,7 +35,7 @@ add_filter('timber/context', function ($context) {
 
     // @todo inject somehow.
     if (is_tax() || is_tag() || is_category()) {
-        $context['term'] = new Term();
+        $context['term'] = new Controller\Term();
     }
 
     return $context;
@@ -57,11 +56,11 @@ add_filter('timber_extended/class_name', function ($class_name, $types, $widget 
  */
 add_filter('Timber\PostClassMap', function ($post_class) {
     foreach (get_post_types(['_builtin' => false], 'objects') as $post_type) {
-        $map[$post_type->name] = __NAMESPACE__ . '\\Post';
+        $map[$post_type->name] = __NAMESPACE__ . '\\Controller\\Post';
     };
-    $map['post'] = __NAMESPACE__ . '\\Post';
-    $map['page'] = __NAMESPACE__ . '\\Post';
-    // $map['product'] = __NAMESPACE__ . '\\ProductPost';
+    $map['post'] = __NAMESPACE__ . '\\Controller\\Post';
+    $map['page'] = __NAMESPACE__ . '\\Controller\\Post';
+    // $map['product'] = __NAMESPACE__ . '\\Controller\\ProductPost';
     return $map;
 });
 

@@ -114,9 +114,6 @@ array_map(function ($file) use ($sage_error) {
     // 'facetwp',
     // 'gravityform',
     // 'woocommerce-hooks',
-    // Custom classes
-    'classes/Post',
-    'classes/Term',
 ]);
 
 /**
@@ -147,5 +144,7 @@ Container::getInstance()
             'assets' => require dirname(__DIR__).'/config/assets.php',
             'theme' => require dirname(__DIR__).'/config/theme.php',
             'view' => require dirname(__DIR__).'/config/view.php',
+            'timber' => require dirname(__DIR__).'/config/timber.php',
+            'foundation' => require dirname(__DIR__).'/config/foundation.php',
         ]);
     }, true);
