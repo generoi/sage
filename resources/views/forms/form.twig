@@ -1,105 +1,85 @@
-{% import 'macros/gform.twig' as gform %}
+{#
+ # Template for outputing Gravityforms through wp-gravityforms-timber.
+ #
+ # @example
+ # {% include 'forms/form.twig' with {
+ #   form: gform(1),
+ #   form_title: __('Sign up for our newsletter', '<example-project>')
+ # } %}
+ #}
+{% import 'macros/form.twig' as helper %}
 
-{% block form %}
-  <div class='gform_wrapper {{form.cssClass}} {{validation_messages|length ? 'gform_validation_error'}}' id='gform_wrapper_{{id}}'>
-    <a id='gf_{{id}}' class='gform_anchor'></a>
-    <form {{gform.form_attributes(form)}}>
-      {% block form__header %}
-        <div class='gform_heading'>
-          {% if display_title %}
-            <h3 class='gform_title'>{{title}}</h3>
-          {% endif %}
-          {% if display_description %}
-            <p class='gform_description'>{{description}}</p>
-          {% endif %}
-        </div>
-      {% endblock form__header %}
+{% set title = form_title is defined ? form_title : form.title %}
+{% set description = form_description is defined ? form_description : form.description %}
 
-      {% for message in validation_messages %}
-        <div data-abide-error="" class="alert callout" style="display: block;">
-          <p><i class="fa fa-exclamation-circle"></i> {{message}}</p>
-        </div>
-      {% endfor %}
+{% block form__wrapper %}
+  <form
+    {{helper.attributes(form)}}
+    action="{{site.url}}/wp-json/gf/v2/forms/{{form.id}}/submissions"
+    data-ajax
+  >
+    {% block form__header %}
+      {% if title %}
+        <h5>{{title}}</h5>
+      {% endif %}
+      {% if description %}
+        <p>{{description}}</p>
+      {% endif %}
+    {% endblock %}
 
-      {% block form__content %}
-        <div class='gform_body'>
-          <div id='gform_fields_{{id}}' class='grid-x grid-margin-x {{gform.fields_wrapper_classes(form)}}'>
+    {% block form__content %}
+      <div class="form__messages alert callout is-hidden"></div>
 
-          {% for field in fields %}
-            {% set label_left_align = (field.labelPlacement == 'left_label') or (field.labelPlacement == 'hidden_label' and form.labelPlacement == 'left_label') %}
-
-            {% block form__field %}
-              <div id='{{gform.field_id(field)}}' class='cell {{field.cssClass}} {{gform.field_wrapper_classes(field)}}'>
-                <div class="grid-x grid-margin-x">
-                  <div class="cell {{label_left_align ? 'small-3'}}">
-                    {% block form__field_label %}
-                      <label for='{{gform.input_id(field)}}' class='{{gform.field_label_classes(field)}} {{label_left_align ? 'text-right middle'}}'>
-                        {{field.label}}
-                        {% if field.isRequired %}<span class="form-required">*</span>{% endif %}
-                      </label>
-                    {% endblock form__field_label %}
-                  </div>
-
-                  <div class='cell auto {{gform.field_container_classes(field)}} '>
-                    {% block form__field_input %}
-                      {% if field.type in ['text', 'number', 'email', 'phone', 'website', 'hidden'] %}
-                        {{gform.text(field)}}
-                      {% elseif field.type == 'select' %}
-                        {{gform.select(field)}}
-                      {% elseif field.type == 'multiselect' %}
-                        <p>Multiselects do not work currently -Oskar</p>
-                        {# {{gform.multiselect(field)}} #}
-                      {% elseif field.type == 'checkbox' %}
-                        {{gform.checkbox(field)}}
-                      {% elseif field.type == 'radio' %}
-                        {{gform.radio(field)}}
-                      {% elseif field.type == 'textarea' %}
-                        {{gform.textarea(field)}}
-                      {% elseif field.type == 'html' %}
-                        {{field.content}}
-                      {% elseif field.type == 'section' %}
-                        {{gform.section(field)}}
-                      {% elseif field.type == 'date' %}
-                        {{gform.date(field)}}
-                      {% elseif field.type == 'fileupload' %}
-                        {{gform.fileupload(field)}}
-                      {% elseif field.type == 'honeypot' %}
-                        {{gform.honeypot(field)}}
-                      {% else %}
-                        <p>{{field.type}} do no not work currently -Oskar</p>
-                      {% endif %}
-
-                    {% endblock form__field_input %}
-
-                    {% if field.failed_validation %}
-                      <span class="form-error is-visible">{{field.validation_message}}</span>
-                    {% endif %}
-
-                    {% block form__field_description %}
-                      {% if field.description %}
-                        <p class="help-text">{{field.description}}</p>
-                      {% endif %}
-                    {% endblock form__field_description %}
-                  </div>
-                </div>
-
+      <div class="grid-x grid-margin-x">
+        {% for field in form.fields %}
+          {% set label_left_align = (field.labelPlacement == 'left_label') or (form.labelPlacement == 'left_label') %}
+          <div class="cell form__element {{field.cssClass}}">
+            <div class="grid-x grid-margin-x">
+              <div class="cell {{label_left_align ? 'small-3'}}">
+                {% block form__field_label helper.label(field) %}
               </div>
-            {% endblock form__field %}
-          {% endfor %}
+              <div class="cell auto">
+                {% block form__field_input helper.gform_field(field) %}
+
+                {% block form__field_description %}
+                  {% if field.description %}
+                    <p class="help-text">{{field.description}}</p>
+                  {% endif %}
+                {% endblock %}
+              </div>
+            </div>
           </div>
-        </div>
-      {% endblock form__content %}
-      {% block form__footer %}
-        <div class="gform__footer grid-x grid-margin-x">
-          <div class="cell {{form.labelPlacement == 'left_label' ? 'auto small-offset-3'}}">
-            {{gform.submit(form)}}
+        {% endfor %}
+
+        {% block form__actions %}
+          <div class="cell">
+            <div class="grid-x grid-margin-x">
+              {% if form.labelPlacement == 'left_label' %}<div class="cell small-3"></div>{% endif %}
+              <div class="cell auto">
+                {% block form__submit helper.submit(form.button.text) %}
+              </div>
+            </div>
           </div>
-        </div>
-      {% endblock form__footer %}
-      {% block form__gform_footer %}
-        {{footer}}
-      {% endblock form__gform_footer %}
-    </form>
-  </div>
-  {{footer_after}}
-{% endblock form %}
+        {% endblock %}
+      <div>
+    {% endblock %}
+
+    {% block form__footer %}
+      <input type="hidden" name="source_url" value="{{current_url()}}">
+      <input type="hidden" name="form_id" value="{{form.id}}">
+    {% endblock %}
+  </form>
+{% endblock %}
+
+{% block form__confirmations %}
+  {% for confirmation in form.confirmations %}
+    <script>
+      window.formConfirmation = window.formConfirmation || {};
+      window.formConfirmation['form--{{form.id}}'] = {
+        'type': '{{ confirmation.type }}',
+        'html': '<div class="callout success">{{ confirmation.message|e('js') }}</div>',
+        'redirect': '{{confirmation.type == 'page' ? wpml_url(confirmation.page) : confirmation.url}}'
+      };
+    </script>
+  {% endfor %}
+{% endblock %}

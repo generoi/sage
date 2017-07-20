@@ -33,8 +33,11 @@ add_action('wp_enqueue_scripts', function () {
     // Scripts which are loaded synchronously
     wp_enqueue_script('sage/vendor.js', asset_path('scripts/vendor.js'), ['jquery'], false, true);
     wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery', 'sage/vendor.js'], null, true);
+    // We use wp-gravityforms-timber directly and not only through shortcodes.
+    wp_enqueue_script('wp-gravityforms-timber/js');
 
     wp_localize_script('sage/main.js', 'Sage', [
+        'language' => get_locale(),
         'l10n' => [
             'close' => __('Close', '<example-project>'),
             'loading' => __('Loading...', '<example-project>'),

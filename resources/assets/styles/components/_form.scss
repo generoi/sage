@@ -7,7 +7,7 @@ input[type="checkbox"] {
   margin-bottom: 0;
 }
 
-textarea[rows] { height: 100px; }
+textarea[rows] { height: 150px; }
 
 // Form styles
 // ---------------------------------------------------------------------------
@@ -15,6 +15,7 @@ textarea[rows] { height: 100px; }
 /**
  * Horizontally aligned forms with the submit button on the same level as the
  * fields.
+ * @note it's easier to use forms/form--horizontal.twig
  */
 .form--horizontal {
   form#{&},

@@ -27,6 +27,8 @@
     </div>
 
     <div class="cell shrink">
+      {# {% include 'forms/form--horizontal.twig' with { form: gform(1), form_title: __('Sign up for our newsletter', '<example-project>') } %} #}
+
       <ul class="menu l-footer__social-menu">
         {% for network in ['facebook', 'twitter', 'linkedin', 'instagram'] %}
           {% if options[network] %}

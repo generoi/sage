@@ -118,4 +118,3 @@ class Post extends Timber\Post
         return $prefix . '_' . $this->ID . '_' . substr(md5(json_encode($args)), 0, 6);
     }
 }
-

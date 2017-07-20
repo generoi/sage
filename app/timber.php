@@ -139,6 +139,22 @@ add_filter('get_twig', function ($twig) {
         return false;
     }));
 
+    $twig->addFunction('gform_field', new Twig_SimpleFunction('gform_field', function ($machine_name, $form_id) {
+        $form = \GFFormsModel::get_form_meta($form_id);
+        if (!isset($form['fields'])) {
+            return 'form-not-found';
+        }
+        $field = wp_list_filter($form['fields'], ['machineName' => $machine_name]);
+        if (empty($field)) {
+            return 'field-not-found';
+        }
+        return reset($field);
+    }));
+
+    $twig->addFunction('gform', new Twig_SimpleFunction('gform', function ($form_id) {
+        return \GFFormsModel::get_form_meta($form_id);
+    }));
+
     /**
      * Return slick options based on how many slides to show at a time on
      * desktop.
