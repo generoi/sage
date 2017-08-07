@@ -1,5 +1,7 @@
 {% extends 'teasers/teaser.twig' %}
 
+{% import 'macros/image.twig' as img %}
+
 {% block teaser %}
   <article class="card teaser teaser--{{term.taxonomy}}" id="teaser-{{term.ID}}">
     <a class="teaser__link" href="{{term.link}}">

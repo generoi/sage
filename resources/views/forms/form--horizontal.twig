@@ -9,6 +9,8 @@
  #}
 {% extends 'forms/form.twig' %}
 
+{% import 'macros/form.twig' as helper %}
+
 {# Output the fields in a horizontal stack #}
 {% block form__content %}
   <div class="form__messages alert callout is-hidden"></div>

@@ -10,7 +10,6 @@ namespace App;
 
 use Timber;
 use TimberExtended;
-use Twig_SimpleFunction;
 use Twig_SimpleFilter;
 use Genero\Sage\TwigExtensionLinkify;
 
@@ -95,21 +94,21 @@ add_filter('get_twig', function ($twig) {
     // Get the asset path using Sage logic
     // @example
     // {{ asset_path('images/foo.svg') }}
-    $twig->addFunction('asset_path', new Twig_SimpleFunction('asset_path', function ($filename) {
+    $twig->addFunction(new Timber\Twig_Function('asset_path', function ($filename) {
         return asset_path($filename);
     }));
 
     // Wrap the asset in a TimberImage object.
     // @example
     // {{ asset_image('images/foo.svg') }}
-    $twig->addFunction('asset_image', new Twig_SimpleFunction('asset_image', function ($filename) {
+    $twig->addFunction(new Timber\Twig_Function('asset_image', function ($filename) {
         return new Timber\Image(asset_path($filename));
     }));
 
     // Format a phone number string.
     // @example
     // {{ post.phone|format_phone }}
-    $twig->addFilter('format_phone', new Twig_SimpleFilter('format_phone', function ($number) {
+    $twig->addFilter(new Twig_SimpleFilter('format_phone', function ($number) {
         return Utils\format_phone($number);
     }));
 
@@ -118,28 +117,28 @@ add_filter('get_twig', function ($twig) {
      * @example
      * <a href="tel:{{post.phone|tel}}">
      */
-    $twig->addFilter('tel', new Twig_SimpleFilter('tel', function ($number) {
+    $twig->addFilter(new Twig_SimpleFilter('tel', function ($number) {
         return preg_replace('/[^\+0-9]/', '', $number);
     }));
 
     /**
      * Return the value of a breakpoint in pixels without the unit.
      */
-    $twig->addFunction('breakpoint', new Twig_SimpleFunction('breakpoint', function ($breakpoint) {
+    $twig->addFunction(new Timber\Twig_Function('breakpoint', function ($breakpoint) {
         return Foundation\breakpoint($breakpoint);
     }));
 
     /**
      * Return the retina image URL as set by wp-retina-2x.
      */
-    $twig->addFilter('retina_url', new Twig_SimpleFilter('retina_url', function ($image) {
+    $twig->addFilter(new Twig_SimpleFilter('retina_url', function ($image) {
         if (function_exists('wr2x_get_retina_from_url')) {
             return wr2x_get_retina_from_url($image);
         }
         return false;
     }));
 
-    $twig->addFunction('gform_field', new Twig_SimpleFunction('gform_field', function ($machine_name, $form_id) {
+    $twig->addFunction(new Timber\Twig_Function('gform_field', function ($machine_name, $form_id) {
         $form = \GFFormsModel::get_form_meta($form_id);
         if (!isset($form['fields'])) {
             return 'form-not-found';
@@ -151,7 +150,7 @@ add_filter('get_twig', function ($twig) {
         return reset($field);
     }));
 
-    $twig->addFunction('gform', new Twig_SimpleFunction('gform', function ($form_id) {
+    $twig->addFunction(new Timber\Twig_Function('gform', function ($form_id) {
         return \GFFormsModel::get_form_meta($form_id);
     }));
 
@@ -161,7 +160,7 @@ add_filter('get_twig', function ($twig) {
      * @example
      * {% include 'parts/slideshow' with { items: posts, options: get_slick_options(3) } %}
      */
-    $twig->addFunction('get_slick_options', new Twig_SimpleFunction('get_slick_options', function ($slides_to_show = 1, $extra_options = null) { // @codingStandardsIgnoreLine
+    $twig->addFunction(new Timber\Twig_Function('get_slick_options', function ($slides_to_show = 1, $extra_options = null) { // @codingStandardsIgnoreLine
         $tablet_slides = $mobile_slides = $desktop_slides = 1;
 
         if (is_array($slides_to_show)) {
