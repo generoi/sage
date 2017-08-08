@@ -120,6 +120,11 @@ add_action('after_setup_theme', function () {
     // add_theme_support('wc-product-gallery-lightbox');
 
     /**
+     * Other plugins
+     */
+    add_theme_support('yoast-seo-breadcrumbs');
+
+    /**
      * Register navigation menus
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */

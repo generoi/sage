@@ -15,7 +15,11 @@
 {% block content %}
   <article class="{{page_classes|join(' ')}}" id="post-{{post.ID}}">
     <div class="grid-x grid-margin-x grid-margin-y align-center">
+
       <div class="cell auto">
+        {% block breadcrumb %}
+          {% include 'parts/breadcrumb.twig' %}
+        {% endblock %}
         <div class="page__content-wrapper grid-x grid-margin-x grid-margin-y">
           {# Heading #}
           {% block page__header %}

@@ -43,6 +43,19 @@ add_filter('timber/context', function ($context) {
         $context['term'] = new Controller\Term();
     }
 
+    if (function_exists('woocommerce_breadcrumb')) {
+        $context['breadcrumb'] = Timber\Helper::ob_function('woocommerce_breadcrumb', [[
+            'delimiter' => '',
+            'wrap_before' => '<ul class="woocommerce-breadcrumb breadcrumbs">',
+            'wrap_after' => '</ul>',
+            'before' => '<li>',
+            'after' => '</li>',
+        ]]);
+    }
+    elseif (function_exists('yoast_breadcrumb')) {
+        $context['breadcrumb'] = yoast_breadcrumb('', '', false);
+    }
+
     return $context;
 });
 

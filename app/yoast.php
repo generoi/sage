@@ -23,3 +23,26 @@ add_filter('wpseo_replacements', function ($replacements) {
     }
     return $replacements;
 });
+
+/**
+ * Breacrumbs using Foundation markup.
+ */
+add_filter('wpseo_breadcrumb_separator', function ($separator) {
+    return '';
+});
+add_filter('wpseo_breadcrumb_single_link_wrapper', function ($element) {
+    return 'li';
+});
+add_filter('wpseo_breadcrumb_output_wrapper', function ($wrapper) {
+    return 'ul';
+});
+add_filter('wpseo_breadcrumb_output_class', function ($class) {
+    return 'breadcrumbs';
+});
+add_filter('wpseo_breadcrumb_single_link', function ($link_output, $link) {
+    // The last non-link breadcrumb is inserted into the previous breadcrumb.
+    if (strpos($link_output, 'breadcrumb_last') !== FALSE) {
+        $link_output = '</li><li>' . $link_output;
+    }
+    return $link_output;
+}, 10, 2);
