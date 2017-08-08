@@ -42,7 +42,9 @@
             {% if sidebar__content_below %}
               <div class="page__footer cell">
                 <div class="grid-x grid-margin-y">
-                  {% block sidebar__content_below include ['layout/sidebar--content_below.twig'] %}
+                  {% block sidebar__content_below %}
+                    {% include ['layout/sidebar--content_below.twig'] %}
+                  {% endblock %}
                 </div>
               </div>
             {% endif %}
@@ -54,7 +56,9 @@
       {% block page__sidebar %}
         {% if sidebar__primary %}
           <div class="page__sidebar cell large-3">
-            {% block sidebar__primary include ['layout/sidebar--primary.twig'] %}
+            {% block sidebar__primary %}
+              {% include ['layout/sidebar--primary.twig'] %}
+            {% endblock %}
           </div>
         {% endif %}
       {% endblock %}

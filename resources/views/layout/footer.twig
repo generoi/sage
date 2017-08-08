@@ -1,7 +1,9 @@
 <div class="grid-container grid-container-padded">
   <div class="grid-x grid-margin-x grid-margin-y align-justify">
 
-    {% block sidebar__footer include ['layout/sidebar--footer.twig'] %}
+    {% block sidebar__footer %}
+      {% include ['layout/sidebar--footer.twig'] %}
+    {% endblock %}
 
     <div class="cell shrink align-middle">
       <div class="grid-x grid-margin-x grid-margin-y">
