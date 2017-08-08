@@ -95,6 +95,6 @@
  */
 .wp-block-button {
   > a {
-    @extend .button;
+    @extend %u-button;
   }
 }

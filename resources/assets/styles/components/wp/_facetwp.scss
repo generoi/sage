@@ -18,7 +18,7 @@ div.facetwp {
   }
 
   &-autocomplete-update {
-    @extend .button;
+    @extend %u-button;
 
     padding-left: 1rem;
     padding-right: 1rem;

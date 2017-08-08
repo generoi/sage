@@ -1,7 +1,7 @@
 // Call to Action
 // ---------------------------------------------------------------------------
 .cta_button {
-  @extend .button;
+  @extend %u-button;
 }
 
 // Forms
@@ -10,7 +10,7 @@
   // Be specific to override HubSpot.
   .hs-button,
   input.hs-button.large {
-    @extend .button;
+    @extend %u-button;
   }
 
   fieldset {

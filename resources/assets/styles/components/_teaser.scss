@@ -1,7 +1,9 @@
 .teaser {
   text-align: left;
 
-  a { color: inherit; }
+  a:not(.button) {
+    color: inherit;
+  }
 
   &__image {
     img { @extend %u-img-expand; }

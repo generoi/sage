@@ -1,8 +1,20 @@
+%u-button {
+  @include button();
+}
+
+@each $name, $color in $foundation-palette {
+  %u-button--#{$name} {
+    @extend %u-button;
+
+    @include button-style($color, auto, auto);
+  }
+}
+
 .button {
   // Provide BEM classes.
   @each $name, $color in $foundation-palette {
     &--#{$name} {
-      @include button-style($color, auto, auto);
+      @extend %u-button--#{$name};
     }
   }
 }
