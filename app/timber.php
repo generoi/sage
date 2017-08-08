@@ -78,7 +78,7 @@ add_filter('Timber\PostClassMap', function ($post_class) {
     };
     $map['post'] = __NAMESPACE__ . '\\Controller\\Post';
     $map['page'] = __NAMESPACE__ . '\\Controller\\Post';
-    // $map['product'] = __NAMESPACE__ . '\\Controller\\ProductPost';
+    $map['product'] = __NAMESPACE__ . '\\Controller\\ProductPost';
     return $map;
 });
 

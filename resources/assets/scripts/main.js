@@ -15,6 +15,7 @@ import headroom from './components/headroom';
 import analytics from './components/analytics';
 import magnificpopup from './components/magnificpopup';
 import lazysizes from './components/lazysizes';
+import woo from './components/woocommerce';
 
 // Ensure correct images are set before plugins such as orbit begins measuring
 // dimensions.
@@ -40,3 +41,4 @@ analytics.scrolldepth({
   percentage: false,
   pixelDepth: false,
 });
+woo();

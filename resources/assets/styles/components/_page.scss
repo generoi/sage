@@ -35,6 +35,26 @@
     //
   }
 
+  // Post type: Product
+  &--type-product {
+    .page__title-wrapper {
+      position: relative;
+    }
+
+    .onsale {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .woocommerce-product-rating {
+      .star-rating {
+        float: none;
+        display: inline-block;
+      }
+    }
+  }
+
   // Post type: Page
   // ---------------
   &--type-page {

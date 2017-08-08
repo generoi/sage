@@ -24,6 +24,23 @@ class ProductPost extends Post
     {
         parent::__construct($pid);
         $this->product = WC()->product_factory->get_product($this->ID);
+        $this->in_stock = $this->product->is_in_stock();
+    }
+
+    public function categories()
+    {
+        if (!isset($this->categories)) {
+            $this->categories = $this->terms('product_cat');
+        }
+        return $this->categories;
+    }
+
+    public function tags()
+    {
+        if (!isset($this->tags)) {
+            $this->tags = $this->terms('product_tag');
+        }
+        return $this->tags;
     }
 
     /**
@@ -128,16 +145,6 @@ class ProductPost extends Post
         if (is_woocommerce()) {
             $product = $this->product;
         }
-    }
-
-    public function get_product_images()
-    {
-        return TimberHelper::ob_function('woocommerce_show_product_images');
-    }
-
-    public function get_add_to_cart()
-    {
-        return TimberHelper::ob_function('woocommerce_template_single_add_to_cart');
     }
 
     public function get_attributes($name = null)
