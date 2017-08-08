@@ -1,7 +1,7 @@
 {% import 'macros/image.twig' as img %}
 
 {# Variables #}
-{% set options  = options|default({ infinite: false, dots: true, arrows: false }) %}
+{% set slick    = slick|default({ infinite: false, dots: true, arrows: false }) %}
 {% set width    = width|default(400) %}
 {% set height   = height|default(300) %}
 {% set crop     = crop|default(true) %}
@@ -12,10 +12,10 @@
   <div
     class="
       {{items|length > 1 ? 'slick' : 'slick--no-slider'}}
-      {{options.adaptiveHeight ? 'slick--adaptive-height'}}
+      {{slick.adaptiveHeight ? 'slick--adaptive-height'}}
       {{slick_class?:'slick--grid'}}
     "
-    data-slick='{{fn('json_encode', options)}}'
+    data-slick='{{fn('json_encode', slick)}}'
   >
   {% for item in items %}
     {# item can an image path/object or an object with: #}
