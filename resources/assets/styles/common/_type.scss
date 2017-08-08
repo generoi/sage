@@ -27,7 +27,6 @@ h6,
 .h5,
 .h6 {
   @extend %u-header;
-  @extend %u-paragraph;
 
   > a {
     color: inherit;
