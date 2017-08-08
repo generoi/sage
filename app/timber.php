@@ -56,6 +56,13 @@ add_filter('timber/context', function ($context) {
         $context['breadcrumb'] = yoast_breadcrumb('', '', false);
     }
 
+    // WooCommerce Menu Bar Cart integration.
+    if (class_exists('WpMenuCart')) {
+        $wp_menu_cart = new \WpMenuCart();
+        $wp_menu_cart->load_classes();
+        $context['wp_menu_cart'] = $wp_menu_cart->wpmenucart_menu_item();
+    }
+
     return $context;
 });
 

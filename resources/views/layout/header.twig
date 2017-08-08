@@ -7,6 +7,13 @@
         <a href="{{item.get_link}}" class="{{item.link_class}}">{{item.title}}</a>
       </li>
     {% endfor %}
+
+    {# woocommerce-menu-bar-cart integration #}
+    {% if wp_menu_cart %}
+      <li class="menu-item {{primary_menu.class}}__item wpmenucartli" id="wpmenucartli">
+        {{wp_menu_cart}}
+      </li>
+    {% endif %}
   </ul>
 {% endset %}
 
