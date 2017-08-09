@@ -25,7 +25,7 @@
     data-multi-open="false"
   >
     {% for item in primary_menu.get_items %}
-      {{menu.recursive_item(item)}}
+      {{menu.recursive_item(item, '', 1, 2)}}
     {% endfor %}
   </ul>
 {% endset %}

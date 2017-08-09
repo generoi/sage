@@ -44,10 +44,34 @@
     }
 
     .primary_navigation {
-      max-height: 100%;
-      // Prevent momentum scrolling on iOS. Scrollbars are not visible on mobile.
+      // Scroll within the container so as not to trigger Headroom.
+      height: 100%;
       overflow: scroll;
+      // Prevent momentum scrolling on iOS. Scrollbars are not visible on mobile.
       -webkit-overflow-scrolling: touch;
+
+      // Vertically center
+      // @note space-around causes overflow issues
+      justify-content: space-between;
+      // Emulate space-around with space-between.
+      &::before,
+      &::after {
+        content: '';
+      }
+
+      text-align: center;
+      padding-bottom: $global-margin;
+
+      // Remove the offset from drilldown menus which is set because of the
+      // drilldown toggler.
+      .has-submenu-toggle > a {
+        margin-right: 0;
+      }
+
+      // Distinguish submenu items.
+      .submenu a {
+        color: $medium-gray;
+      }
     }
   }
 
