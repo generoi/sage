@@ -8,6 +8,16 @@
 namespace App\Utils;
 
 /**
+ * Get the current absolute URL of the page.
+ * @return string
+ */
+function current_url()
+{
+    global $wp;
+    return home_url(add_query_arg([], $wp->request));
+}
+
+/**
  * Format a phone number according to finnish system. Not perfect.
  * @param string $number
  * @return string
