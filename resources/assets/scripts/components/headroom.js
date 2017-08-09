@@ -21,12 +21,7 @@ class HeadroomComponent {
 
     this.$headroom.headroom(Object.assign({
       offset: 205,
-      tolerance: 5,
-      classes: {
-        initial: 'is-animating',
-        pinned: 'slide-in-down',
-        unpinned: 'slide-out-up',
-      },
+      tolerance: 10,
       onPin: () => this.$headroom.trigger('headroom.pinned'),
       onUnpin: () => this.$headroom.trigger('headroom.unpinned'),
     }, options));

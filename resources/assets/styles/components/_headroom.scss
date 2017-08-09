@@ -20,9 +20,17 @@ $c-admin-bar-breakpoint: 783px !default;
   right: 0;
   left: 0;
   top: 0;
+  bottom: 0;
+  transition: all 1s ease 0s;
+  transform: translateY(0);
 
+  &--unpinned {
+    transform: translateY(-100%);
+  }
+
+  // When toggler opens the menu, force headroom to be open.
   &.active {
-    bottom: 0;
+    transform: translateY(0);
   }
 
   // Admin bar support
