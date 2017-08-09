@@ -79,6 +79,8 @@
     label {
       display: inline;
       color: inherit;
+      position: static; // reset .has-float-labels.
+      padding: 0;
     }
   }
 }

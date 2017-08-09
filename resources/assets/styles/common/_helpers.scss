@@ -37,3 +37,17 @@
   p:last-child,
   p > .button:last-child { margin-bottom: 0; }
 }
+
+/**
+ * Helper to set the size of an element equal to that of an input field.
+ */
+%u-input-size {
+  $height: ($input-font-size * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1);
+
+  height: $height;
+  box-sizing: border-box;
+  margin: 0 0 $form-spacing;
+  padding: $input-padding;
+  font-size: $input-font-size;
+  line-height: $input-line-height;
+}

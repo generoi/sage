@@ -16,6 +16,7 @@ import analytics from './components/analytics';
 import magnificpopup from './components/magnificpopup';
 import lazysizes from './components/lazysizes';
 import woo from './components/woocommerce';
+import floatlabels from './components/float-labels';
 
 // Ensure correct images are set before plugins such as orbit begins measuring
 // dimensions.
@@ -42,3 +43,4 @@ analytics.scrolldepth({
   pixelDepth: false,
 });
 woo();
+floatlabels('.form__element--vertical, .hs-form-field');

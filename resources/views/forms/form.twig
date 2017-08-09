@@ -33,12 +33,12 @@
       <div class="grid-x grid-margin-x">
         {% for field in form.fields %}
           {% set label_left_align = (field.labelPlacement == 'left_label') or (form.labelPlacement == 'left_label') %}
-          <div class="cell form__element {{field.cssClass}}">
+          <div class="cell form__element {{field.cssClass}} form__element--{{label_left_align ? 'horizontal' : 'vertical'}}">
             <div class="grid-x grid-margin-x">
-              <div class="cell {{label_left_align ? 'small-3'}}">
+              <div class="cell form__label {{label_left_align ? 'small-3'}}">
                 {% block form__field_label helper.label(field) %}
               </div>
-              <div class="cell auto">
+              <div class="cell form__field auto">
                 {% block form__field_input helper.gform_field(field) %}
 
                 {% block form__field_description %}
