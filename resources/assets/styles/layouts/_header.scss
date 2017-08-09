@@ -56,28 +56,58 @@
       overflow: scroll;
       // Prevent momentum scrolling on iOS. Scrollbars are not visible on mobile.
       -webkit-overflow-scrolling: touch;
+      display: flex;
 
-      // Vertically center
-      // @note space-around causes overflow issues
-      justify-content: space-between;
-      // Emulate space-around with space-between.
-      &::before,
-      &::after {
-        content: '';
+      // Let each item take up as much space as possible
+      &__item,
+      &__link {
+        flex: 1 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        // Vertically center any content that isnt grown, eg buttons.
+        justify-content: center;
       }
 
-      text-align: center;
-      padding-bottom: $global-margin;
+      &__link {
+        // Horizontally center content.
+        align-items: center;
 
-      // Remove the offset from drilldown menus which is set because of the
-      // drilldown toggler.
-      .has-submenu-toggle > a {
-        margin-right: 0;
+        // Don't grow button links.
+        &.button {
+          flex: 0 1 auto;
+          align-self: center;
+          // Remove margins set for buttons in desktop menu
+          margin-left: 0 !important;
+        }
       }
 
-      // Leave some space between toggler and viewport.
-      .submenu-toggle {
-        right: 10px;
+      .has-submenu-toggle {
+        $submenu-toggle-width: 50px;
+
+        > a {
+          // Grow with as much space as there is
+          flex: 1 0 auto;
+          // align horizontally offsetting by the toggle buttons size.
+          text-indent: $submenu-toggle-width;
+          margin-right: 0; // remove foundation margin
+        }
+
+        > .submenu-toggle {
+          // Disable foundation absolute positioning
+          position: static;
+          height: auto;
+          padding-right: 10px;
+
+          // Fixed width without growing.
+          flex: 0 1 0;
+          min-width: $submenu-toggle-width;
+        }
+
+        // Submenus take up the full row width.
+        > .submenu {
+          flex: 1 0 100%;
+          margin-left: 0; // remove nested indent.
+        }
       }
 
       // Distinguish submenu items.
