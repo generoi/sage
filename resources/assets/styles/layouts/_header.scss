@@ -17,6 +17,11 @@
   &__bar--mobile {
     position: relative;
     z-index: 2;
+
+    // Expand the child without using `.cell`
+    > .grid-x {
+      flex: 1 0 auto;
+    }
   }
 
   // Mobile menu
