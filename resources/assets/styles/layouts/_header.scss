@@ -1,6 +1,8 @@
 .l-header {
-
-  a { outline: none; }
+  button,
+  a {
+    outline: none;
+  }
 
   // Static header bar on desktop
   // ----------------------------
@@ -71,6 +73,11 @@
       // drilldown toggler.
       .has-submenu-toggle > a {
         margin-right: 0;
+      }
+
+      // Leave some space between toggler and viewport.
+      .submenu-toggle {
+        right: 10px;
       }
 
       // Distinguish submenu items.
