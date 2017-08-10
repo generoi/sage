@@ -160,7 +160,7 @@ add_filter('post_gallery', function ($output, $attr, $instance) {
 
     $itemtag = tag_escape($atts['itemtag']);
     $captiontag = tag_escape($atts['captiontag']);
-    $icontag = tag_escape($atts['icontag'] );
+    $icontag = tag_escape($atts['icontag']);
     $valid_tags = wp_kses_allowed_html('post');
 
     $columns = intval($atts['columns']);
@@ -179,7 +179,7 @@ add_filter('post_gallery', function ($output, $attr, $instance) {
         $attr = (trim($attachment->post_excerpt)) ? ['aria-describedby' => "$selector-$id"] : '';
         if (!empty($atts['link']) && 'file' === $atts['link']) {
             $image_output = wp_get_attachment_link($id, $atts['size'], false, false, false, $attr);
-        } elseif (!empty($atts['link']) && 'none' === $atts['link'] ) {
+        } elseif (!empty($atts['link']) && 'none' === $atts['link']) {
             $image_output = wp_get_attachment_image($id, $atts['size'], false, $attr);
         } else {
             $image_output = wp_get_attachment_link($id, $atts['size'], true, false, false, $attr);

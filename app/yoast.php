@@ -41,7 +41,7 @@ add_filter('wpseo_breadcrumb_output_class', function ($class) {
 });
 add_filter('wpseo_breadcrumb_single_link', function ($link_output, $link) {
     // The last non-link breadcrumb is inserted into the previous breadcrumb.
-    if (strpos($link_output, 'breadcrumb_last') !== FALSE) {
+    if (strpos($link_output, 'breadcrumb_last') !== false) {
         $link_output = '</li><li>' . $link_output;
     }
     return $link_output;

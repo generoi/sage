@@ -51,8 +51,7 @@ add_filter('timber/context', function ($context) {
             'before' => '<li>',
             'after' => '</li>',
         ]]);
-    }
-    elseif (function_exists('yoast_breadcrumb')) {
+    } elseif (function_exists('yoast_breadcrumb')) {
         $context['breadcrumb'] = yoast_breadcrumb('', '', false);
     }
 

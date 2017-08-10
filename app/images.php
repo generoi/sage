@@ -93,7 +93,8 @@ add_filter('wp_calculate_image_sizes', function ($sizes, $size) {
  * Make all content images lazyloaded (unless they omit the class attribute).
  */
 add_filter('the_content', __NAMESPACE__ . '\\filter_lazyload_images', PHP_INT_MAX);
-function filter_lazyload_images($content) {
+function filter_lazyload_images($content)
+{
     $matches = $search = $replace = [];
     $placeholder_url = 'data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=';
 

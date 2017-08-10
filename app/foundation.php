@@ -69,7 +69,9 @@ function paragraph_width($breakpoint = 'small')
     $max_width = (App\config('foundation.paragraph_width') * fontsize($breakpoint));
     $breakpoints = breakpoint();
     // Advance until the requested breakpoint
-    while (key($breakpoints) !== $breakpoint) next($breakpoints);
+    while (key($breakpoints) !== $breakpoint) {
+        next($breakpoints);
+    }
 
     // Check if this breakpoint spans beyond the max width.
     if (next($breakpoints) > $max_width) {
