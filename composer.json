@@ -41,11 +41,16 @@
     "generoi/acf-genero-components": "^1.0.0-alpha"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^2.8.0"
+    "squizlabs/php_codesniffer": "^2.8.0",
+    "asm89/twig-lint": "^1.0"
   },
   "scripts": {
+    "lint:twig": "twig-lint lint --only-print-errors resources/views/",
+    "lint:php": "phpcs",
+    "lint:theme": "yarn run test",
     "test": [
-      "phpcs"
+      "@lint:php",
+      "@lint:twig"
     ]
   }
 }
