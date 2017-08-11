@@ -136,7 +136,7 @@
     "lint:styles": "stylelint resources/assets/styles/**/*.{css,sass,scss,sss,less}",
     "fonts:edit": "fontello-cli --config resources/assets/fonts/fontello.json open",
     "fonts:build": "node resources/assets/build/fontello.js",
-    "test": "npm run -s lint"
+    "test": "npm run -s lint && composer test"
   },
   "engines": {
     "node": ">= 6.9.4"
