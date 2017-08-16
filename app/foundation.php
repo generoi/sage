@@ -40,7 +40,7 @@ function breakpoint($name = null)
 }
 
 /**
- * Get Return the font size for the specified breakpoint in pixels.
+ * Get the font size for the specified breakpoint in pixels.
  * @param string $breakpoint
  * @return int|array
  */

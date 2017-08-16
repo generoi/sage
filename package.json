@@ -133,10 +133,10 @@
     "rmdist": "rimraf dist",
     "lint": "npm run -s lint:scripts && npm run -s lint:styles",
     "lint:scripts": "eslint resources/assets/scripts resources/assets/build",
-    "lint:styles": "stylelint resources/assets/styles/**/*.{css,sass,scss,sss,less}",
+    "lint:styles": "stylelint resources/assets/{styles,fonts}/{,*/,*/*/}*.scss",
     "fonts:edit": "fontello-cli --config resources/assets/fonts/fontello.json open",
     "fonts:build": "node resources/assets/build/fontello.js",
-    "test": "npm run -s lint"
+    "test": "npm run -s lint && composer test"
   },
   "engines": {
     "node": ">= 6.9.4"
@@ -188,6 +188,7 @@
     "font-awesome": "^4.7.0",
     "fontello-cli": "^0.4.0",
     "foundation-sites": "~6.4.0",
+    "friendly-errors-webpack-plugin": "^1.6.1",
     "headroom.js": "^0.9.3",
     "jquery": "1.12.4 - 3",
     "jquery.localscroll": "^1.4.0",

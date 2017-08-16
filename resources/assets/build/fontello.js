@@ -5,6 +5,7 @@ const spawn = require('child_process').spawn;
 const fs = require('fs');
 const readline = require('readline');
 const path = require('path');
+const os = require('os');
 
 const config = require('./config');
 
@@ -54,7 +55,7 @@ fetchFontelloFonts(CONFIG_PATH, OUTPUT_PATH, () => {
 
   lineReader.on('close', () => {
     const scss = getVariablesSCSS(charCodes);
-    fs.writeFileSync(SCSS_PATH, `${scss}\n`);
+    fs.writeFileSync(SCSS_PATH, scss + os.EOL);
     console.info('generated scss file with font variables in %s', SCSS_PATH);
   });
 });
