@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
 
@@ -26,8 +25,8 @@ let webpackConfig = {
     version: false,
     timings: false,
     children: false,
-    errors: false,
-    errorDetails: false,
+    errors: true,
+    errorDetails: true,
     warnings: false,
     chunks: false,
     modules: false,
@@ -129,7 +128,6 @@ let webpackConfig = {
     jquery: 'jQuery',
   },
   plugins: [
-    new FriendlyErrorsWebpackPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new CleanPlugin([config.paths.dist], {
       root: config.paths.root,
@@ -177,6 +175,8 @@ let webpackConfig = {
     }),
     new StyleLintPlugin({
       failOnError: !config.enabled.watcher,
+      emitErrors: true,
+      quiet: false,
       syntax: 'scss',
     }),
   ],
