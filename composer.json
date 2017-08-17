@@ -48,6 +48,7 @@
     "lint:twig": "twig-lint lint --only-print-errors resources/views/",
     "lint:php": "phpcs",
     "lint:theme": "yarn run test",
+    "lint:fix": "phpcbf",
     "test": [
       "@lint:php",
       "@lint:twig"

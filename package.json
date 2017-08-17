@@ -134,6 +134,7 @@
     "lint": "npm run -s lint:scripts && npm run -s lint:styles",
     "lint:scripts": "eslint resources/assets/scripts resources/assets/build",
     "lint:styles": "stylelint 'resources/assets/styles/**/*.{css,sass,scss,sss,less}'",
+    "lint:fix": "npm run lint:styles -- --fix; npm run lint:scripts -- --fix",
     "fonts:edit": "fontello-cli --config resources/assets/fonts/fontello.json open",
     "fonts:build": "node resources/assets/build/fontello.js",
     "test": "npm run -s lint && composer test"
