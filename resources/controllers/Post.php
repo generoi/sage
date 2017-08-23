@@ -74,22 +74,25 @@ class Post extends Timber\Post
     {
         global $wpdb;
         $terms = $this->terms();
-        $tids = implode(',', array_column($terms, 'id'));
-        $querystr = "
-            SELECT      p.*, COUNT(t.term_id) AS score
-            FROM        $wpdb->posts AS p
-            INNER JOIN  $wpdb->term_relationships AS tr ON p.ID = tr.object_id
-            INNER JOIN  $wpdb->terms AS t ON tr.term_taxonomy_id = t.term_id
-            WHERE       p.post_type = '{$this->type}'
-                        AND t.term_id IN ({$tids})
-                        AND p.ID NOT IN ({$this->ID})
-                        AND p.post_status = 'publish'
-            GROUP BY    p.ID
-            ORDER BY    score DESC
-            LIMIT       $posts_per_page
-        ";
-        $posts = $wpdb->get_results($querystr, OBJECT);
-        return (new Timber\PostQuery($posts))->get_posts();
+        if (!empty($terms))
+        {
+            $tids = implode(',', array_column($terms, 'id'));
+            $querystr = "
+                SELECT      p.*, COUNT(t.term_id) AS score
+                FROM        $wpdb->posts AS p
+                INNER JOIN  $wpdb->term_relationships AS tr ON p.ID = tr.object_id
+                INNER JOIN  $wpdb->terms AS t ON tr.term_taxonomy_id = t.term_id
+                WHERE       p.post_type = '{$this->type}'
+                            AND t.term_id IN ({$tids})
+                            AND p.ID NOT IN ({$this->ID})
+                            AND p.post_status = 'publish'
+                GROUP BY    p.ID
+                ORDER BY    score DESC
+                LIMIT       $posts_per_page
+            ";
+            $posts = $wpdb->get_results($querystr, OBJECT);
+            return (new Timber\PostQuery($posts))->get_posts();
+        }
     }
 
     /**
