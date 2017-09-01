@@ -14,11 +14,21 @@ use Roots\Sage\Config;
 use Genero\Sage\Foundation;
 
 /**
- * Use slide fallback for all single posts except for products.
+ * Use slide fallback for all single posts.
  */
 add_filter('wp-hero/fallback', function () {
-    return is_single() && !is_singular('product');
+    return is_single();
 });
+
+/**
+ * Disable hero on the following types.
+ */
+add_filter('wp-hero/visible/post_type', function ($match, $post_type) {
+  if ($post_type === 'product') {
+    $match = false;
+  }
+  return $match;
+}, 10, 2);
 
 /**
  * Use Foundation XY-grid.
@@ -128,7 +138,9 @@ add_action('after_setup_theme', function () {
      * Woocommerce support.
      */
     add_theme_support('woocommerce');
-    // add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-zoom');
+    add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-slider');
 
     /**
      * Other plugins

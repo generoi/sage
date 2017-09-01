@@ -11,6 +11,7 @@ namespace App;
 use Timber;
 use TimberExtended;
 use Twig_SimpleFilter;
+use GeneroWP\Hero\Hero;
 
 /**
  * Define where to look for twig templates.

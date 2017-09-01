@@ -54,6 +54,7 @@ foreach ([
     'Timber' => 'timber-library/timber.php',
     'TimberExtended' => 'wp-timber-extended/wp-timber-extended.php',
     'acf' => 'advanced-custom-fields-pro/acf.php',
+    'GeneroWP\\Hero\\Plugin' => 'wp-hero/wp-hero.php',
 ] as $class_name => $plugin) {
     if (!class_exists($class_name)) {
         $plugin_path = WP_CONTENT_DIR . '/plugins/' . $plugin;
