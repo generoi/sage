@@ -70,6 +70,9 @@ add_filter('timber/context', function ($context) {
     // wp-hero
     $context['hero'] = new Hero();
 
+    // ACF Options
+    $context['options'] = get_fields('option');
+
     if (function_exists('woocommerce_breadcrumb')) {
         $context['breadcrumb'] = Timber\Helper::ob_function('woocommerce_breadcrumb', [[
             'delimiter' => '',

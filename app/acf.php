@@ -8,7 +8,6 @@
 namespace App;
 
 use Genero\Component\ArchivePageComponent;
-use Genero\Sage\OptionsPage;
 
 /**
  * Associate pages with post types emulating archive pages.
@@ -16,12 +15,9 @@ use Genero\Sage\OptionsPage;
 $archive_pages = new ArchivePageComponent();
 
 /**
- * Activate ACF Options Page.
+ * Add options page.
  */
-$options = new OptionsPage();
-add_action('after_switch_theme', function () use ($options) {
-    $options->addAcfFieldgroup();
-});
+add_filter('acf/init', 'acf_add_options_page');
 
 /**
  * Add foundation palette colors for hero overlays.
