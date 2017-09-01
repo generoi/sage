@@ -24,10 +24,10 @@ add_filter('wp-hero/fallback', function () {
  * Disable hero on the following types.
  */
 add_filter('wp-hero/visible/post_type', function ($match, $post_type) {
-  if ($post_type === 'product') {
-    $match = false;
-  }
-  return $match;
+    if ($post_type === 'product') {
+        $match = false;
+    }
+    return $match;
 }, 10, 2);
 
 /**

@@ -28,11 +28,12 @@ add_action('after_setup_theme', function () {
  */
 add_filter('timber_extended/class', function ($class_name, $type, $object = null) {
     switch ($type) {
-        case 'post': return __NAMESPACE__ . '\\Controller\\Post';
-        case 'term': return __NAMESPACE__ . '\\Controller\\Term';
-        // case 'user': return __NAMESPACE__ . '\\Controller\\User';
-        case 'image': return __NAMESPACE__ . '\\Controller\\Image';
-        // case 'widget': return __NAMESPACE__ . '\\Controller\\Widget';
+        case 'post':
+            return __NAMESPACE__ . '\\Controller\\Post';
+        case 'term':
+            return __NAMESPACE__ . '\\Controller\\Term';
+        case 'image':
+            return __NAMESPACE__ . '\\Controller\\Image';
     }
     return $class_name;
 }, 10, 3);
