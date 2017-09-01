@@ -2,7 +2,7 @@
 
 {% block comments %}
   <section class="page__comments comments--{{template_type}} comments--type-{{post.post_type}}" id="comments">
-    {% if post.get_comments()|length %}
+    {% if post.comments|length %}
       {% block comments__listing_loop parent() %}
     {% else %}
       <p>{{__('There are no reviews yet.', 'woocommerce')}}</p>
@@ -10,7 +10,7 @@
 
     {% block comments__form %}
       <div class="page__comments_form">
-        {{post.get_review_form() }}
+        {{post.review_form}}
       </div>
     {% endblock %}
   </section>

@@ -43,6 +43,7 @@ add_action('admin_init', function () {
  */
 add_action('tailor_element_register_controls', function ($element) {
     $setting = ['sanitize_callback' => 'tailor_sanitize_text'];
+    $foundation = sage('foundation');
 
     // Add background and overlay color integration.
     switch ($element->tag) {
@@ -58,14 +59,14 @@ add_action('tailor_element_register_controls', function ($element) {
                 'type' => 'select',
                 'label' => __('Background', '<example-project>'),
                 'section' => 'attributes',
-                'choices' => ['' => ''] + Foundation\palette('background'),
+                'choices' => ['' => ''] + $foundation->palette('background'),
                 'priority' => $priority++,
             ]);
             $element->add_control('overlay_theme', [
                 'type' => 'select',
                 'label' => __('Overlay', '<example-project>'),
                 'section' => 'attributes',
-                'choices' => ['' => ''] + Foundation\palette('overlay'),
+                'choices' => ['' => ''] + $foudnation->palette('overlay'),
                 'priority' => $priority++,
             ]);
             break;
@@ -95,7 +96,7 @@ add_action('tailor_element_register_controls', function ($element) {
         // Integrate Foundation palette styles.
         case 'tailor_button':
             $style = $element->get_control('style');
-            $style->choices = ['default'   => 'Default'] + Foundation\palette('button');
+            $style->choices = ['default'   => 'Default'] + $foundation->palette('button');
             break;
         // Integrate Foundation palette styles.
         case 'tailor_hero':
@@ -104,7 +105,7 @@ add_action('tailor_element_register_controls', function ($element) {
                 'type' => 'select',
                 'label' => __('Style', '<example-project>'),
                 'section' => 'general',
-                'choices' => ['' => ''] + Foundation\palette(),
+                'choices' => ['' => ''] + $foundation->palette(),
                 'priority' => 25,
             ]);
             break;

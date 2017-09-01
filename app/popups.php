@@ -39,6 +39,6 @@ add_filter('popups-extended/types', function ($types) {
  * Add custom themes.
  */
 add_filter('popups-extended/themes', function ($themes) {
-    $themes = $themes + Foundation\palette();
+    $themes = $themes + sage('foundation')->palette('overlay');
     return $themes;
 });

@@ -90,8 +90,8 @@
               {% if tabs.reviews %}
                 <li class="h4 tabs-title">
                   <a href="#reviews">
-                    {% if post.get_comments()|length %}
-                      {{__('Reviews (%d)', '<example-project>')|format(post.get_comments()|length)}}
+                    {% if post.comments|length %}
+                      {{__('Reviews (%d)', '<example-project>')|format(post.comments|length)}}
                     {% else %}
                       {{__('Reviews')}}
                     {% endif %}
@@ -113,7 +113,7 @@
               {% endif %}
               {% if tabs.reviews %}
                 <div class="tabs-panel" id="reviews">
-                  {% include 'parts/post__reviews.twig' %}
+                  {% include ['parts/post__reviews.twig'] %}
                 </div>
               {% endif %}
             </div>
@@ -135,11 +135,11 @@
         {% set related_products = [] %}
         {% set related_title = __('Related products') %}
 
-        {% if post.get_upsell_products()|length %}
-          {% set related_products = post.get_upsell_products() %}
+        {% if post.upsell_products|length %}
+          {% set related_products = post.upsell_products %}
           {% set related_title =  __('You might also like the following products') %}
-        {% elseif post.get_related_products(3)|length %}
-          {% set related_products = post.get_related_products() %}
+        {% elseif post.related_products(3)|length %}
+          {% set related_products = post.related_products(3) %}
         {% endif %}
 
 
@@ -149,7 +149,9 @@
             <div class="grid-x grid-margin-x grid-margin-y small-up-2 medium-up-3">
               {% for item in related_products %}
                 <div class="cell">
-                  {% include ['teasers/teaser--'~item.post_type~'.twig', 'teasers/teaser.twig'] with { post: item } %}
+                  {% embed ['teasers/teaser--'~item.post_type~'.twig', 'teasers/teaser.twig'] with { post: item } %}
+                    {% block thumbnail post.thumbnail.src_sizes(foundation_sizes('medium-6 large-4')) ~ parent() %}
+                  {% endembed %}
                 </div>
               {% endfor %}
             </div>

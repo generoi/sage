@@ -166,5 +166,10 @@ $c-slick-nav-size: 40px !default;
     .slick-dots {
       bottom: $global-margin;
     }
+
+    // Hide play button on iOS
+    video::-webkit-media-controls-start-playback-button {
+      display: none;
+    }
   }
 }

@@ -1,5 +1,3 @@
-{% import 'macros/image.twig' as img %}
-
 {# Variables #}
 {% set slick    = slick|default({ infinite: false, dots: true, arrows: false }) %}
 {% set width    = width|default(400) %}
@@ -10,8 +8,8 @@
 
 {% if items|length %}
   <div
-    class="
-      {{items|length > 1 ? 'slick' : 'slick--no-slider'}}
+    class="slick
+      {{items|length == 1 ? 'slick--no-slider'}}
       {{slick.adaptiveHeight ? 'slick--adaptive-height'}}
       {{slick_class?:'slick--grid'}}
     "
@@ -29,7 +27,7 @@
         {% set image = item.image ?: item %}
         {% set is_lightbox = lightbox and image.src %}
         {% set is_linked = item.link or is_lightbox %}
-        {% set image = (image.src) ? image : TimberImage(image) %}
+        {% set image = (image.src) ? image : TImage(image) %}
 
         {% if is_linked %}
           <a
@@ -45,7 +43,7 @@
         {% block slide__image %}
           {% if image.src %}
             <div class="slick__image">
-              {{img.image(image, [width, height], crop)}}
+              {{image.render(width, height, crop)}}
             </div>
           {% endif %}
         {% endblock %}
