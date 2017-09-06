@@ -59,55 +59,6 @@ add_filter('facetwp_is_main_query', function ($is_main_query, $query) {
  * Foundation themed pager output.
  */
 add_filter('facetwp_pager_html', function ($output, $params) {
-    $output = '';
-    $page = (int) $params['page'];
-    $total_pages = (int) $params['total_pages'];
-    if ($total_pages > 1) {
-        $output .= '<ul class="pager pagination" role="navigation">';
-        $output .= '<li class="pager__item pager__item--previous pagination-previous ' . ($page == 1 ? 'disabled' : '') . '">';
-        if ($page > 1) {
-            $output .= '<a class="pager__link facetwp-page" data-page="' . ($page - 1) . '">' . __('Previous', '<example-project>') . '</a>';
-        } else {
-            $output .= __('Previous', '<example-project>');
-        }
-        $output .= '</li>';
-        if (3 < $page) {
-            $output .= '<li class="pager__item">';
-            $output .= '<a class="pager__link facetwp-page" data-page="1">1</a>';
-            $output .= '</li>';
-            $output .= '<li class="pager__item ellipsis"></li>';
-        }
-        for ($i = 2; $i > 0; $i--) {
-            if (($page - $i) > 0) {
-                $output .= '<li class="pager__item">';
-                $output .= '<a class="pager__link facetwp-page" data-page="' . ($page - $i) . '">' . ($page - $i) . '</a>';
-                $output .= '</li>';
-            }
-        }
-        // Current page
-        $output .= '<li class="pager__item pager__item--current">';
-        $output .= '<span class="current">' . $page . '</span>';
-        for ($i = 1; $i <= 2; $i++) {
-            if ($total_pages >= ($page + $i)) {
-                $output .= '<li class="pager__item">';
-                $output .= '<a class="pager__link facetwp-page" data-page="' . ($page + $i) . '">' . ($page + $i) . '</a>';
-                $output .= '</li>';
-            }
-        }
-        if ($total_pages > ($page + 2)) {
-            $output .= '<li class="pager__item ellipsis"></li>';
-            $output .= '<li class="pager__item">';
-            $output .= '<a class="pager__link facetwp-page" data-page="' . $total_pages . '">' . $total_pages . '</a>';
-            $output .= '</li>';
-        }
-        $output .= '<li class="pager__item pager__item--next pagination-next ' . ($page == $total_pages ? 'disabled' : '') . '">';
-        if ($page < $total_pages) {
-            $output .= '<a class="pager__link facetwp-page" data-page="' . ($page + 1) . '">' . __('Next', '<example-project>') . '</a>';
-        } else {
-            $output .= __('Next', '<example-project>');
-        }
-        $output .= '</li>';
-        $output .= '</ul>';
-    }
+    $output = Timber::fetch(['facets/pager.twig'], $params);
     return $output;
 }, 10, 2);
