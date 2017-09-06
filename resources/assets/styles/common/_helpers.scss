@@ -42,7 +42,7 @@
  * Helper to set the size of an element equal to that of an input field.
  */
 %u-input-size {
-  $height: ($input-font-size * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1);
+  $height: input-height();
 
   height: $height;
   box-sizing: border-box;
@@ -50,4 +50,15 @@
   padding: $input-padding;
   font-size: $input-font-size;
   line-height: $input-line-height;
+}
+
+/**
+ * Get the height of an input field.
+ */
+@function input-height(
+  $font-size: $input-font-size,
+  $line-height: $input-line-height,
+  $padding: $input-padding
+) {
+  @return ($font-size * unitless-calc($line-height)) + (get-side($padding, 'top') + get-side($padding, 'bottom')) - rem-calc(1);
 }

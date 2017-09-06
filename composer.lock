@@ -244,12 +244,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/generoi/sage-foundation.git",
-                "reference": "8e00f1b536f39f92cce1d9f75b176caf5e333043"
+                "reference": "5998a8d9f27ae4dfbbc1de1e9c0cac4d96e1a790"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/generoi/sage-foundation/zipball/8e00f1b536f39f92cce1d9f75b176caf5e333043",
-                "reference": "8e00f1b536f39f92cce1d9f75b176caf5e333043",
+                "url": "https://api.github.com/repos/generoi/sage-foundation/zipball/5998a8d9f27ae4dfbbc1de1e9c0cac4d96e1a790",
+                "reference": "5998a8d9f27ae4dfbbc1de1e9c0cac4d96e1a790",
                 "shasum": ""
             },
             "archive": {
@@ -292,11 +292,11 @@
                 "issues": "https://github.com/generoi/sage-foundation/issues",
                 "source": "https://github.com/generoi/sage-foundation/tree/master"
             },
-            "time": "2017-09-01 14:37:12"
+            "time": "2017-09-05 17:29:22"
         },
         {
             "name": "illuminate/config",
-            "version": "v5.5.0",
+            "version": "v5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -340,7 +340,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.5.0",
+            "version": "v5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -384,7 +384,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.5.0",
+            "version": "v5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -428,7 +428,7 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v5.5.0",
+            "version": "v5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -473,7 +473,7 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v5.5.0",
+            "version": "v5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
@@ -523,16 +523,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v5.5.0",
+            "version": "v5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "8fd54c43171117146f7de7d5d24d59747f41bd77"
+                "reference": "6a1c08c4e89429a0333ad86c489088ceeadbcced"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/8fd54c43171117146f7de7d5d24d59747f41bd77",
-                "reference": "8fd54c43171117146f7de7d5d24d59747f41bd77",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/6a1c08c4e89429a0333ad86c489088ceeadbcced",
+                "reference": "6a1c08c4e89429a0333ad86c489088ceeadbcced",
                 "shasum": ""
             },
             "require": {
@@ -576,11 +576,11 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2017-08-29T07:40:48+00:00"
+            "time": "2017-09-04T14:00:07+00:00"
         },
         {
             "name": "illuminate/view",
-            "version": "v5.5.0",
+            "version": "v5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/view.git",

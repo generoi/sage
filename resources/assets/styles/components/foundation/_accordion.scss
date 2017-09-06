@@ -1,10 +1,10 @@
-.tabs {
-  &-title > a {
+.accordion {
+  &-title {
     outline: none;
     text-decoration: none;
   }
 
-  &-panel {
+  &-content {
     @extend %u-strip-bottom-paddings;
   }
 }

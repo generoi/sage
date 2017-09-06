@@ -3,9 +3,8 @@
 {% extends 'pages/page.twig' %}
 
 {# Support ArchivePageComponent #}
-{% set object = object ?: term|default(post) %}
+{% set post = post ?: term|default(post) %}
 {% set taxonomy = term.taxonomy|default(post.archive__post_type) %}
-{% set content = term.description|default(post.content)|the_content %}
 
 {%
   set page_classes = page_classes ?: [
@@ -19,7 +18,7 @@
 %}
 
 {% block content %}
-  <div class="{{page_classes|join(' ')}}" id="archive-{{object.ID}}">
+  <div class="{{page_classes|join(' ')}}" id="archive-{{post.ID}}">
     <div class="grid-x grid-margin-x grid-margin-y">
       {# Archive term or post #}
       {% block term %}
@@ -27,22 +26,8 @@
           <div class="cell auto">
             {% block breadcrumb parent() %}
             <div class="page__content-wrapper grid-x grid-margin-x grid-margin-y">
-
-              {# Heading #}
-              {% block page__header %}
-                <div class="page__title-wrapper cell">
-                  <h1 class="page__title">{% block page__title object.title|default(wp_title) %}</h1>
-                </div>
-              {% endblock %}
-
-              {# Content #}
-              {% block page__content %}
-                {% if content %}
-                  <div class="page__content cell">
-                    {{content}}
-                  </div>
-                {% endif %}
-              {% endblock %}
+              {% block page__header parent() %}
+              {% block page__content parent() %}
               {% block page__footer parent() %}
             </div><!-- .page__content-wrapper -->
           </div><!-- .cell.auto -->

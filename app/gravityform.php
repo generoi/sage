@@ -6,6 +6,11 @@
  */
 
 /**
+ * Allow field labels to be hidden.
+ */
+add_filter('gform_enable_field_label_visibility_settings', '__return_true');
+
+/**
  * Preselect a selet choice.
  * @see https://www.gravityhelp.com/documentation/article/gform_field_value_parameter_name/
  * @todo untested with Genero\Sage\GravityFormTwig
