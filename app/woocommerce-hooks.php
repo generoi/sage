@@ -23,13 +23,14 @@ namespace App;
 /**
  * Adjust the content of WP Menu Cart.
  */
-// add_filter('wpmenucart_menu_item_a_content', function ($menu_item_a_content, $menu_item_icon, $cart_contents, $item_data) {
-//     $content = $menu_item_icon . __('Cart', '<example-project>');
-//     if ($item_data['cart_contents_count'] > 0) {
-//         $content .= ' (<span class="cartcontents">' . $cart_contents . '</span> <span class="amount">' . $item_data['cart_total'] . '</span>)';
-//     }
-//     return $content;
-// }, 10, 4);
+add_filter('wpmenucart_menu_item_a_content', function ($menu_item_a_content, $menu_item_icon, $cart_contents, $item_data) {
+    $menu_item_icon = '<i class="fa fa-basket"></i>';
+    $content = $menu_item_icon . __('Cart', '<example-project>');
+    if ($item_data['cart_contents_count'] > 0) {
+        $content .= ' (<span class="cartcontents">' . $cart_contents . '</span> <span class="amount">' . $item_data['cart_total'] . '</span>)';
+    }
+    return $content;
+}, 10, 4);
 
 /**
  * Disable all default styles.

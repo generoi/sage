@@ -78,6 +78,8 @@ add_action('wp_print_styles', function () {
     wp_dequeue_style('wp-smart-crop-renderer'); // wp-smartcrop
     wp_dequeue_script('jquery.wp-smartcrop'); // wp-smartcrop
     wp_dequeue_style('dashicons'); // wp core
+    wp_dequeue_style('wpmenucart-icons'); // woocommerce-menu-bar-cart
+    wp_dequeue_style('wpmenucart'); // woocommerce-menu-bar-cart
 }, 100);
 
 /**

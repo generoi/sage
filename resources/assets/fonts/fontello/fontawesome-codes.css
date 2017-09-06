@@ -59,6 +59,7 @@
 .fa-ok:before { content: '\e839'; } /* '' */
 .fa-user:before { content: '\e83a'; } /* '' */
 .fa-clock:before { content: '\e83b'; } /* '' */
+.fa-basket:before { content: '\e83c'; } /* '' */
 .fa-check-empty:before { content: '\f096'; } /* '' */
 .fa-bookmark-empty:before { content: '\f097'; } /* '' */
 .fa-twitter:before { content: '\f099'; } /* '' */
@@ -138,6 +139,8 @@
 .fa-share-squared:before { content: '\f1e1'; } /* '' */
 .fa-toggle-off:before { content: '\f204'; } /* '' */
 .fa-toggle-on:before { content: '\f205'; } /* '' */
+.fa-cart-plus:before { content: '\f217'; } /* '' */
+.fa-cart-arrow-down:before { content: '\f218'; } /* '' */
 .fa-facebook-official:before { content: '\f230'; } /* '' */
 .fa-pinterest:before { content: '\f231'; } /* '' */
 .fa-whatsapp:before { content: '\f232'; } /* '' */
