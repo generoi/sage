@@ -125,8 +125,8 @@ add_action('after_setup_theme', function () {
         /** Use double dashes as the template variation separator. */
         'bem_templates',
         'widget',
-        // 'tailor',
-        // 'woocommerce',
+        'tailor',
+        'woocommerce',
     ]);
     /** If a post parent is password protected, so are it's children. */
     add_theme_support('timber-extended-password-inheritance');
