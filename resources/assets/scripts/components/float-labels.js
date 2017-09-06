@@ -37,7 +37,8 @@ class FloatLabelComponent {
     this.$wrapper.on('blur', 'input, textarea, select', this.blur.bind(this));
     this.$wrapper.on('change', 'select', this.checkActive.bind(this));
     this.$wrapper.on('blur', 'input, textarea, select', this.hubspotErrorLabelFix.bind(this));
-    this.$wrapper.find('input, textarea, select').trigger('checkval');
+    this.$wrapper.find('input, textarea').trigger('checkval');
+    this.$wrapper.find('select').trigger('change');
   }
 
   /**
