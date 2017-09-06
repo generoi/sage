@@ -204,12 +204,9 @@
  * Shop page.
  */
 .woocommerce {
-  &-result-count {
-    float: left;
-  }
-
-  &-ordering {
-    float: right;
+  &-result-count,
+  &-ordering select {
+    margin-bottom: 0;
   }
 }
 
@@ -254,8 +251,6 @@
       color: inherit;
       background-color: transparent;
       font-size: 1rem;
-
-      label { font-size: inherit; }
     }
 
     .reset_variations {
@@ -326,7 +321,7 @@
       float: left;
 
       label { display: none; }
-      .input-text { width: 80px; }
+      .input-text { width: 120px; }
     }
   }
 
@@ -490,6 +485,10 @@
       @include card-divider;
 
       justify-content: flex-end;
+
+      .button {
+        margin-bottom: 0;
+      }
     }
   }
 }

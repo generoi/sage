@@ -21,6 +21,17 @@
 namespace App;
 
 /**
+ * Adjust the content of WP Menu Cart.
+ */
+// add_filter('wpmenucart_menu_item_a_content', function ($menu_item_a_content, $menu_item_icon, $cart_contents, $item_data) {
+//     $content = $menu_item_icon . __('Cart', '<example-project>');
+//     if ($item_data['cart_contents_count'] > 0) {
+//         $content .= ' (<span class="cartcontents">' . $cart_contents . '</span> <span class="amount">' . $item_data['cart_total'] . '</span>)';
+//     }
+//     return $content;
+// }, 10, 4);
+
+/**
  * Disable all default styles.
  */
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
@@ -29,6 +40,11 @@ add_filter('woocommerce_enqueue_styles', '__return_empty_array');
  * Remove Wistia.
  */
 add_filter('woocommerce_enable_admin_help_tab', '__return_false');
+
+/**
+ * Remove heading from Product description tab.
+ */
+add_filter('woocommerce_product_description_heading', '__return_empty_string');
 
 // remove_filter('body_class', 'wc_body_class');
 // remove_filter('post_class', 'wc_product_post_class', 20, 3 );
@@ -88,8 +104,8 @@ remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0
  * @see woocommerce_result_count()
  * @see woocommerce_catalog_ordering()
  */
-// remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
-// remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
+remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
+remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
 // remove_action('woocommerce_no_products_found', 'wc_no_products_found');
 
 /**

@@ -78,46 +78,24 @@
 
           {# Tabs: Content, Additional, Reviews #}
           <div class="cell">
-            {% set tabs = fn('woocommerce_default_product_tabs') %}
-
-            <ul id="product__tabs" class="tabs" data-tabs data-deep-link="true">
-              {% if tabs.description %}
-                <li class="h4 tabs-title is-active"><a href="#description" aria-selected="true">{{__('Description', '<example-project>')}}</a></li>
-              {% endif %}
-              {% if tabs.additional_information %}
-                <li class="h4 tabs-title"><a href="#additional-information">{{__('Additional information', '<example-project>')}}</a></li>
-              {% endif %}
-              {% if tabs.reviews %}
-                <li class="h4 tabs-title">
-                  <a href="#reviews">
-                    {% if post.comments|length %}
-                      {{__('Reviews (%d)', '<example-project>')|format(post.comments|length)}}
-                    {% else %}
-                      {{__('Reviews')}}
-                    {% endif %}
-                  </a>
-                </li>
-              {% endif %}
-            </ul>
-
-            <div class="tabs-content" data-tabs-content="product__tabs">
-              {% if tabs.description %}
-                <div class="tabs-panel is-active" id="description">
-                  {{post.content}}
-                </div>
-              {% endif %}
-              {% if tabs.additional_information %}
-                <div class="tabs-panel" id="additional-information">
-                  {% do action('woocommerce_product_additional_information', post.product) %}
-                </div>
-              {% endif %}
-              {% if tabs.reviews %}
-                <div class="tabs-panel" id="reviews">
-                  {% include ['parts/post__reviews.twig'] %}
-                </div>
-              {% endif %}
-            </div>
-
+            {% if post.tabs|length %}
+              <ul
+                id="product__tabs"
+                class="accordion"
+                data-responsive-accordion-tabs="accordion medium-tabs"
+                data-deep-link="true"
+                data-allow-all-closed="true"
+              >
+                {% for tab in post.tabs %}
+                  <li class="accordion-item {{loop.first ? 'is-active'}}" data-accordion-item>
+                    <a href="#{{tab.name}}" class="accordion-title">{{tab.title}}</a>
+                    <div id="{{tab.name}}" class="accordion-content" data-tab-content>
+                      {{tab.content}}
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
           </div><!-- .cell -->
 
           {% block page__footer %}

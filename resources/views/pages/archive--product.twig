@@ -15,6 +15,10 @@
 {% block listing %}
   {# Sorting #}
   <div class="cell">
+    <div class="grid-x grid-margin-x grid-margin-y align-middle align-justify">
+      <div class="cell shrink">{{fn('woocommerce_result_count')}}</div>
+      <div class="cell shrink">{{fn('woocommerce_catalog_ordering')}}</div>
+    </div>
     {% do action('woocommerce_before_shop_loop') %}
   </div>
 
