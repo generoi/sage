@@ -26,8 +26,7 @@
   "watch": [
     "app/**/*.php",
     "config/**/*.php",
-    "resources/controllers/**/*.php",
-    "resources/views/**/*.twig"
+    "resources/views/**/*.{twig,php}"
   ],
   "rsync": {
     "hostname": "<example-project>.dev",
@@ -37,8 +36,7 @@
       "resources/assets/scripts/**/*.js",
       "app/**/*.php",
       "config/**/*.php",
-      "resources/controllers/**/*.php",
-      "resources/views/**/*.twig"
+      "resources/views/**/*.{twig,php}"
     ]
   }
 }

@@ -1,14 +1,12 @@
 {% extends 'teasers/teaser.twig' %}
 
-{% import 'macros/image.twig' as img %}
-
 {% block teaser %}
   <article class="card teaser teaser--{{term.taxonomy}}" id="teaser-{{term.ID}}">
     <a class="teaser__link" href="{{term.link}}">
       {% block teaser__thumbnail %}
         {% if term.thumbnail %}
           <div class="teaser__image">
-            {{img.image(term.thumbnail, [300, 200])}}
+            {% block thumbnail term.thumbnail.render(300, 200) %}
           </div>
         {% endif %}
       {% endblock %}

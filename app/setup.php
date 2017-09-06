@@ -11,15 +11,33 @@ namespace App;
 use Roots\Sage\Container;
 use Roots\Sage\Assets\JsonManifest;
 use Roots\Sage\Config;
+use Genero\Sage\Foundation;
+
+/**
+ * Use slide fallback for all single posts.
+ */
+add_filter('wp-hero/fallback', function () {
+    return is_single();
+});
+
+/**
+ * Disable hero on the following types.
+ */
+add_filter('wp-hero/visible/post_type', function ($match, $post_type) {
+    if ($post_type === 'product') {
+        $match = false;
+    }
+    return $match;
+}, 10, 2);
 
 /**
  * Use Foundation XY-grid.
  */
 add_filter('widget-options-extended/grid', function () {
-    return 'xy-grid';
+    return config('foundation.grid');
 });
 add_filter('tailor-foundation/grid', function () {
-    return 'xy-grid';
+    return config('foundation.grid');
 });
 
 /**
@@ -106,6 +124,9 @@ add_action('after_setup_theme', function () {
     add_theme_support('timber-extended-templates', [
         /** Use double dashes as the template variation separator. */
         'bem_templates',
+        'widget',
+        // 'tailor',
+        // 'woocommerce',
     ]);
     /** If a post parent is password protected, so are it's children. */
     add_theme_support('timber-extended-password-inheritance');
@@ -117,7 +138,9 @@ add_action('after_setup_theme', function () {
      * Woocommerce support.
      */
     add_theme_support('woocommerce');
-    // add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-zoom');
+    add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-slider');
 
     /**
      * Other plugins
@@ -190,5 +213,12 @@ add_action('after_setup_theme', function () {
      */
     sage()->singleton('sage.assets', function () {
         return new JsonManifest(config('assets.manifest'), config('assets.uri'));
+    });
+
+    /**
+     * Add Foundation to Sage container
+     */
+    sage()->singleton('sage.foundation', function () {
+        return new Foundation(config('foundation'));
     });
 });

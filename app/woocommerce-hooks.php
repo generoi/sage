@@ -25,6 +25,11 @@ namespace App;
  */
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
+/**
+ * Remove Wistia.
+ */
+add_filter('woocommerce_enable_admin_help_tab', '__return_false');
+
 // remove_filter('body_class', 'wc_body_class');
 // remove_filter('post_class', 'wc_product_post_class', 20, 3 );
 

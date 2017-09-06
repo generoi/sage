@@ -6,7 +6,7 @@
 
   {# Support object ID's #}
   {% if (not is_object) and (item matches '/^\\d+$/') %}
-    {% set item = (object_type == 'term') ? TimberTerm(item) : post(item) %}
+    {% set item = (object_type == 'term') ? TTerm(item) : TPost(item) %}
   {% endif %}
 
   {# TimberPost objects were passed as items #}

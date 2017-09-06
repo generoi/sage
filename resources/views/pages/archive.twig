@@ -60,7 +60,9 @@
               {% for archive_post in posts %}
                 {% block listing__item %}
                   <div class="cell">
-                    {% include ['teasers/teaser--'~archive_post.post_type~'.twig', 'teasers/teaser.twig'] with { post: archive_post } %}
+                    {% embed ['teasers/teaser--'~archive_post.post_type~'.twig', 'teasers/teaser.twig'] with { post: archive_post } %}
+                      {% block thumbnail post.thumbnail.src_sizes(foundation_sizes('medium-6 large-4')) ~ parent() %}
+                    {% endembed %}
                   </div>
                 {% endblock %}
               {% endfor %}

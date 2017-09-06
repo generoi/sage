@@ -14,19 +14,27 @@ use WC_Product_Variable;
 
 class ProductPost extends Post
 {
-
+    /** @var WC_Product $product Product object */
     public $product;
-    public $variations;
+    /** @var array $attributes Product attributes */
     public $attributes;
-    public $animal;
+    /** @var bool $in_stock */
+    public $in_stock;
 
+    /** @inheritdoc */
     public function __construct($pid = null)
     {
         parent::__construct($pid);
+
         $this->product = WC()->product_factory->get_product($this->ID);
         $this->in_stock = $this->product->is_in_stock();
     }
 
+    /**
+     * Get product categories.
+     *
+     * @return Term[]
+     */
     public function categories()
     {
         if (!isset($this->categories)) {
@@ -35,6 +43,11 @@ class ProductPost extends Post
         return $this->categories;
     }
 
+    /**
+     * Get product tags.
+     *
+     * @return Term[]
+     */
     public function tags()
     {
         if (!isset($this->tags)) {
@@ -44,11 +57,37 @@ class ProductPost extends Post
     }
 
     /**
+     * Get product attributes.
+     *
+     * @param string $name Attribute type or null for all
+     * @return array
+     */
+    public function attributes($name = null)
+    {
+        if (!isset($this->attributes)) {
+            $this->attributes = [];
+            $attributes = $this->product->get_attributes();
+            foreach ($attributes as $idx => $attribute) {
+                if ($attribute->is_taxonomy()) {
+                    $this->attributes[$idx] = $this->get_terms($attribute->get_name());
+                } else {
+                    $this->attributes[$idx] = $attribute->get_options();
+                }
+            }
+        }
+        if (isset($name)) {
+            return isset($this->attributes[$name]) ? $this->attributes[$name] : null;
+        }
+        return $this->attributes;
+    }
+
+    /**
      * Simplified review form using Foundation classes.
      *
      * @see https://github.com/woocommerce/woocommerce/blob/master/templates/single-product-reviews.php
+     * @return string
      */
-    public function get_review_form()
+    public function review_form()
     {
         if (get_option('woocommerce_review_rating_verification_required') !== 'no' && !wc_customer_bought_product('', get_current_user_id(), $this->product->get_id())) {
             return '<p class="woocommerce-verification-required">' . __('Only logged in customers who have purchased this product may leave a review.', 'woocommerce') . '</p>';
@@ -95,10 +134,17 @@ class ProductPost extends Post
         }
         $comment_form['comment_field'] .= '<div class="comment-form-comment"><label for="comment">' . esc_html__('Your review', 'woocommerce') . ' <span class="form-required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></div>';
 
-        return comment_form(apply_filters('woocommerce_product_review_comment_form_args', $comment_form));
+        $this->review_form = comment_form(apply_filters('woocommerce_product_review_comment_form_args', $comment_form));
+
+        return $this->review_form;
     }
 
-    public function get_upsell_products()
+    /**
+     * Get upsell products.
+     *
+     * @return Post[]
+     */
+    public function upsell_products()
     {
         if (isset($this->upsell_products)) {
             return $this->upsell_products;
@@ -109,12 +155,17 @@ class ProductPost extends Post
 
         $this->upsell_products = TimberHelper::transient($cid, function () use ($product) {
             return (new Timber\PostQuery($product->get_upsell_ids()))->get_posts();
-        }, App\config('timber.cache') ? $this->cache_duration : false);
+        }, $this->cache_duration);
 
         return $this->upsell_products;
     }
 
-    public function get_related_products($posts_per_page = 4, $orderby = 'rand', $order = 'desc')
+    /**
+     * Get related products.
+     *
+     * @return Post[]
+     */
+    public function related_products($posts_per_page = 4, $orderby = 'rand', $order = 'desc')
     {
         $cid = $this->generate_cid('related', func_get_args());
 
@@ -134,11 +185,15 @@ class ProductPost extends Post
                 $related_products[$idx] = Timber\PostGetter::get_post($related->get_id());
             }
             return $related_products;
-        }, App\config('timber.cache') ? $this->cache_duration : false);
+        }, $this->cache_duration);
 
         return $this->related_products[$cid];
     }
 
+    /**
+     * Set the global product from the loop. This needs to run before a product
+     * template is rendered.
+     */
     public function set_loop_product()
     {
         global $product;
@@ -147,27 +202,10 @@ class ProductPost extends Post
         }
     }
 
-    public function get_attributes($name = null)
-    {
-        if (!isset($this->attributes)) {
-            $this->attributes = [];
-            $attributes = $this->product->get_attributes();
-            foreach ($attributes as $idx => $attribute) {
-                if ($attribute->is_taxonomy()) {
-                    $this->attributes[$idx] = $this->get_terms($attribute->get_name());
-                } else {
-                    $this->attributes[$idx] = $attribute->get_options();
-                }
-            }
-        }
-        if (isset($name)) {
-            return isset($this->attributes[$name]) ? $this->attributes[$name] : null;
-        }
-        return $this->attributes;
-    }
-
+    /** @inheritdoc */
     protected function generate_cid($prefix, $args = [])
     {
+        // Cache by product id rather than post id.
         return $prefix . '_' . $this->product_get_id() . '_' . substr(md5(json_encode($args)), 0, 6);
     }
 }

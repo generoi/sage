@@ -23,8 +23,8 @@ $sage_error = function ($message, $subtitle = '', $title = '') {
 /**
  * Ensure compatible version of PHP is used
  */
-if (version_compare('5.6.4', phpversion(), '>=')) {
-    $sage_error(__('You must be using PHP 5.6.4 or greater.', '<example-project>'), __('Invalid PHP version', '<example-project>'));
+if (version_compare('7', phpversion(), '>=')) {
+    $sage_error(__('You must be using PHP 7 or greater.', 'sage'), __('Invalid PHP version', 'sage'));
 }
 
 /**
@@ -54,6 +54,7 @@ foreach ([
     'Timber' => 'timber-library/timber.php',
     'TimberExtended' => 'wp-timber-extended/wp-timber-extended.php',
     'acf' => 'advanced-custom-fields-pro/acf.php',
+    'GeneroWP\\Hero\\Plugin' => 'wp-hero/wp-hero.php',
 ] as $class_name => $plugin) {
     if (!class_exists($class_name)) {
         $plugin_path = WP_CONTENT_DIR . '/plugins/' . $plugin;
@@ -99,7 +100,6 @@ array_map(function ($file) use ($sage_error) {
     'filters',
     'admin',
     // Site specific.
-    'foundation',
     'images',
     'timber',
     'utils',
@@ -110,7 +110,6 @@ array_map(function ($file) use ($sage_error) {
     'tailor',
     // 'rewrites',
     'yoast',
-    // 'multilingual',
     // 'facetwp',
     // 'gravityform',
     // 'woocommerce-hooks',
