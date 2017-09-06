@@ -6747,6 +6747,12 @@ webpack-merge@^4.1.0, webpack-merge@~4.1:
   dependencies:
     lodash "^4.17.4"
 
+"webpack-rsync-watcher@https://github.com/generoi/webpack-rsync-watcher.git":
+  version "0.1.0"
+  resolved "https://github.com/generoi/webpack-rsync-watcher.git#08c9459c12b7af53544f863fc72d6300f9ea0bf8"
+  dependencies:
+    webpack-merge "^4.1.0"
+
 webpack-sources@1.0.1, webpack-sources@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.0.1.tgz#c7356436a4d13123be2e2426a05d1dad9cbe65cf"

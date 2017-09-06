@@ -1,7 +1,7 @@
 const url = require('url');
 const webpack = require('webpack');
 const BrowserSyncPlugin = require('browsersync-webpack-plugin');
-const RsyncWatcher = require('./rsync-watcher');
+const RsyncWatcher = require('webpack-rsync-watcher');
 
 const config = require('./config');
 
