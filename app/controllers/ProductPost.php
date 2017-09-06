@@ -82,6 +82,44 @@ class ProductPost extends Post
     }
 
     /**
+     * Get product tabs.
+     *
+     * @return array
+     */
+    public function tabs()
+    {
+        $tabs = [];
+        $tabs = apply_filters('woocommerce_product_tabs', $tabs);
+
+        // Remove default tabs.
+        // $tabs = array_diff_key($tabs, array_flip([
+        //     'additional_information',
+        // ]));
+
+        // Fill content.
+        foreach ($tabs as $name => $tab) {
+            $tabs[$name]['name'] = $name;
+            $tabs[$name]['title'] = apply_filters('woocommerce_product_' . $name . '_tab_title', $tab['title']);
+
+            if (isset($tab['callback'])) {
+                $tabs[$name]['content'] = Timber\Helper::ob_function($tab['callback'], [$name, $tab]);
+            }
+
+            $context = $tabs[$name];
+            $context['post'] = $this;
+
+            $tabs[$name]['content'] = Timber::fetch([
+                'product/tab--' . $name . '.twig',
+                'product/tab.twig',
+            ], $context);
+        }
+
+        $this->tabs = $tabs;
+
+        return $this->tabs;
+    }
+
+    /**
      * Simplified review form using Foundation classes.
      *
      * @see https://github.com/woocommerce/woocommerce/blob/master/templates/single-product-reviews.php
