@@ -107,8 +107,8 @@ $c-header-sizes: (
 //   ),
 // );
 
-// Latest version is 6.4.0
-// https://github.com/zurb/foundation-sites/compare/v6.4.0-rc2...v6.4.0
+// Latest version is 6.4.3
+// https://github.com/zurb/foundation-sites/compare/v6.4.0...v6.4.3
 // Foundation for Sites Settings
 // -----------------------------
 
@@ -145,6 +145,7 @@ $c-header-sizes: (
 // $global-text-direction: ltr;
 // $global-flexbox: true;
 // $global-prototype-breakpoints: false;
+// $global-button-cursor: auto;
 // $global-color-pick-contrast-tolerance: 0;
 // $print-transparent-backgrounds: true;
 
@@ -527,6 +528,7 @@ $form-label-color: inherit;
 // $menu-item-background-hover: $light-gray;
 $menu-state-back-compat: false;
 $menu-centered-back-compat: false;
+$menu-icons-back-compat: false;
 
 // 24. Meter
 // ---------
@@ -541,8 +543,12 @@ $menu-centered-back-compat: false;
 // 25. Off-canvas
 // --------------
 
-// $offcanvas-size: 250px;
-// $offcanvas-vertical-size: 250px;
+// $offcanvas-sizes: (
+//   small: 250px,
+// );
+// $offcanvas-vertical-sizes: (
+//   small: 250px,
+// );
 // $offcanvas-background: $light-gray;
 // $offcanvas-shadow: 0 0 10px rgba($black, 0.7);
 // $offcanvas-inner-shadow-size: 20px;
@@ -908,7 +914,5 @@ $thumbnail-shadow-hover: none;
 // );
 // $grid-padding-gutters: $grid-margin-gutters;
 // $grid-container-padding: $grid-padding-gutters;
-$-grid-container-gutters: rem-calc(get-side(nth($grid-container-padding, -1), left)) + rem-calc(get-side(nth($grid-margin-gutters, -1), right));
-$-grid-container-negative-margins: $-grid-container-gutters;
-$grid-container-max: (rem-calc($global-width) + $-grid-container-gutters + $-grid-container-negative-margins);
-// $block-grid-max: 8;
+// $grid-container-max: $global-width;
+// $xy-block-grid-max: 8;
