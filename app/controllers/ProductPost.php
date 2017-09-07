@@ -234,10 +234,7 @@ class ProductPost extends Post
      */
     public function set_loop_product()
     {
-        global $product;
-        if (is_woocommerce()) {
-            $product = $this->product;
-        }
+        $GLOBALS['product'] = $this->product;
     }
 
     /** @inheritdoc */
