@@ -10,7 +10,7 @@
     ],
     "icons": [
       "./styles/icons.scss",
-      "./scripts/loadcss.js"
+      "./scripts/icons.js"
     ],
     "customizer": [
       "./scripts/customizer.js"

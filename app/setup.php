@@ -47,12 +47,17 @@ add_action('wp_enqueue_scripts', function () {
     // wp_enqueue_style('font/google', 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800', false, null);
     // wp_enqueue_style('font/typekit', 'https://use.typekit.net', false, null);
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
+    wp_enqueue_style('sage/icons.css', asset_path('styles/icons.css'), false, null);
 
     // Scripts which are loaded synchronously
     wp_enqueue_script('sage/vendor.js', asset_path('scripts/vendor.js'), ['jquery'], false, true);
     wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery', 'sage/vendor.js'], null, true);
     // We use wp-gravityforms-timber directly and not only through shortcodes.
     wp_enqueue_script('wp-gravityforms-timber/js');
+
+    if (WP_ENV === 'development') {
+        wp_enqueue_script('sage/icons.js', asset_path('scripts/icons.js'), [], null, true);
+    }
 
     wp_localize_script('sage/main.js', 'Sage', [
         'language' => get_locale(),
@@ -81,22 +86,6 @@ add_action('wp_print_styles', function () {
     wp_dequeue_style('wpmenucart-icons'); // woocommerce-menu-bar-cart
     wp_dequeue_style('wpmenucart'); // woocommerce-menu-bar-cart
 }, 100);
-
-/**
- * Asynchronously loaded CSS.
- */
-add_action('wp_head', function () {
-    // Load some styles asynchronously.
-    Utils\print_async_stylesheet(asset_path('styles/icons.css'));
-    // Use loadCSS as a fallback for asynchronously loading CSS in older browsers.
-    // @see https://github.com/filamentgroup/loadCSS
-    $loadcss_path = get_stylesheet_directory() . '/dist/scripts/icons.js';
-    if (file_exists($loadcss_path)) {
-        echo sprintf('<script>%s</script>', file_get_contents($loadcss_path));
-    } else {
-        echo sprintf('<script src="%s"></script>', asset_path('scripts/icons.js'));
-    }
-});
 
 /**
  * Theme setup

@@ -38,19 +38,6 @@ function format_phone($number)
 }
 
 /**
- * Print an asynchronously loaded stylesheet.
- * @see https://github.com/filamentgroup/loadCSS
- *
- * @param string $path
- * @return void
- */
-function print_async_stylesheet($path)
-{
-    echo '<link rel="preload" href="' . $path . '" as="style" onload="this.rel=\'stylesheet\'">';
-    echo '<noscript><link rel="stylesheet" href="' . $path . '"></noscript>';
-}
-
-/**
  * Build a URL string based on URL parts.
  * @see https://stackoverflow.com/a/35207936/319855
  *
