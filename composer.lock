@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0cd932a104b1b50b3457e8ef05d20e43",
+    "content-hash": "49e74b8c690473a0b6fb6a6a63a5f916",
     "packages": [
         {
             "name": "composer/installers",
@@ -293,6 +293,62 @@
                 "source": "https://github.com/generoi/sage-foundation/tree/master"
             },
             "time": "2017-09-05 17:29:22"
+        },
+        {
+            "name": "generoi/sage-polylang",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/generoi/sage-polylang.git",
+                "reference": "1f65749a9a25e134475958ef8f5d8f45e8a3c909"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/generoi/sage-polylang/zipball/1f65749a9a25e134475958ef8f5d8f45e8a3c909",
+                "reference": "1f65749a9a25e134475958ef8f5d8f45e8a3c909",
+                "shasum": ""
+            },
+            "archive": {
+                "exclude": [
+                    ".gitignore"
+                ]
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "~3.0"
+            },
+            "type": "theme-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Genero\\Sage\\": "src/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpcs --ignore=vendor --extensions=php --standard=PSR2 ."
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oskar Schöldström",
+                    "email": "public@oxy.fi"
+                }
+            ],
+            "homepage": "https://github.com/generoi/sage-polylang",
+            "keywords": [
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/generoi/sage-polylang/issues",
+                "source": "https://github.com/generoi/sage-polylang/tree/master"
+            },
+            "time": "2017-09-07 18:01:48"
         },
         {
             "name": "illuminate/config",
@@ -1374,6 +1430,7 @@
     "stability-flags": {
         "roots/sage-lib": 10,
         "generoi/sage-foundation": 20,
+        "generoi/sage-polylang": 20,
         "generoi/acf-genero-components": 15
     },
     "prefer-stable": false,

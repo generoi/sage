@@ -12,6 +12,7 @@ use Roots\Sage\Container;
 use Roots\Sage\Assets\JsonManifest;
 use Roots\Sage\Config;
 use Genero\Sage\Foundation;
+use Genero\Sage\Polylang;
 
 /**
  * Use slide fallback for all single posts.
@@ -91,6 +92,11 @@ add_action('wp_print_styles', function () {
  * Theme setup
  */
 add_action('after_setup_theme', function () {
+    /**
+     * Activate custom theme integration plugins.
+     */
+    sage('integration.polylang');
+
     /**
      * Enable features from Soil when plugin is activated
      * @link https://roots.io/plugins/soil/
@@ -211,5 +217,14 @@ add_action('after_setup_theme', function () {
      */
     sage()->singleton('sage.foundation', function () {
         return new Foundation(config('foundation'));
+    });
+
+    /**
+     * Add Polylang to Sage container
+     */
+    sage()->singleton('sage.integration.polylang', function () {
+        if (function_exists('pll')) {
+            return new Polylang(config('theme.dir'));
+        }
     });
 });

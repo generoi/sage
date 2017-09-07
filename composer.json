@@ -41,6 +41,7 @@
     "illuminate/support": "~5.4",
     "roots/sage-lib": "~9.0.0-beta.4",
     "generoi/sage-foundation": "dev-master",
+    "generoi/sage-polylang": "dev-master",
     "generoi/acf-genero-components": "^1.0.0-alpha"
   },
   "require-dev": {
