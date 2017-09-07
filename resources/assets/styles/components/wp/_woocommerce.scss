@@ -421,16 +421,18 @@
  */
 .woocommerce {
   // Multiple column layout
-  @include breakpoint(medium) {
-    .col2-set {
-      @include xy-grid;
-      @include xy-grid-layout(2, '.col-1, .col-2', false, $gutter-type: margin);
-      @include xy-gutters($negative: true);
-    }
+  .col2-set {
+    @include xy-grid;
+    @include xy-gutters($negative: true, $gutter-position: top left bottom right);
+  }
 
-    .col-1,
-    .col-2 {
-      @include xy-gutters;
+  .col-1,
+  .col-2 {
+    @include xy-gutters($gutter-position: top left bottom right);
+    @include xy-cell(12);
+
+    @include breakpoint(medium) {
+      @include xy-cell(6);
     }
   }
 
@@ -542,25 +544,32 @@
  * My account page.
  */
 .woocommerce-MyAccount {
-  &-navigation {
-    @include breakpoint(medium) {
+  &-navigation ul {
+    @include menu-base;
+    @include menu-direction(vertical);
+
+    margin-bottom: $global-margin;
+    text-align: center;
+  }
+
+  @include breakpoint(medium) {
+    &-navigation {
       @include xy-cell-static(3, false, $gutter-type: padding);
       @include xy-gutters($gutter-position: right, $gutter-type: padding);
 
       float: left;
+
+      ul {
+        text-align: left;
+      }
     }
 
-    ul {
-      @include menu-base;
-      @include menu-direction(vertical);
+    &-content {
+      @include xy-cell-static(9, false, $gutter-type: padding);
+      @include xy-gutters($gutter-position: left, $gutter-type: padding);
+
+      float: left;
     }
-  }
-
-  &-content {
-    @include xy-cell-static(9, false, $gutter-type: padding);
-    @include xy-gutters($gutter-position: left, $gutter-type: padding);
-
-    float: left;
   }
 }
 
