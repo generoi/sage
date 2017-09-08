@@ -474,6 +474,21 @@
   &-checkout-payment {
     @include card-container;
 
+    .payment_box {
+      margin-top: $global-margin;
+    }
+
+    // As the input can be hidden, the margin should be on the input rather
+    // than the label
+    [type='checkbox'] + label,
+    [type='radio'] + label {
+      margin-left: 0;
+    }
+
+    [type='radio'] {
+      margin-right: 0.5rem;
+    }
+
     .methods {
       @include card-section;
 

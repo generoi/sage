@@ -241,6 +241,6 @@ class ProductPost extends Post
     protected function generate_cid($prefix, $args = [])
     {
         // Cache by product id rather than post id.
-        return $prefix . '_' . $this->product_get_id() . '_' . substr(md5(json_encode($args)), 0, 6);
+        return $prefix . '_' . $this->product->get_id() . '_' . substr(md5(json_encode($args)), 0, 6);
     }
 }
