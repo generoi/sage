@@ -12,10 +12,11 @@
         {% if slide.slide_link %}
           <a
             class="slick__link"
-            href="{{slide.slide_link}}"
+            href="{{slide.slide_link.url?:slide.slide_link}}"
+            target="{{slide.slide_link.target}}"
             data-category="Hero"
             data-action="Click Link"
-            data-label="{{slide.slide_title}}"
+            data-label="{{slide.slide_link.title?:slide.slide_title|striptags}}"
           >
         {% endif %}
 
