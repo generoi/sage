@@ -113,6 +113,20 @@ add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
 }, 10, 4);
 
 /**
+ * Wrap iframes in foundations responsive wrappers.
+ */
+add_filter('the_content', function ($content) {
+    preg_match_all('~(?!<div[^>]+class="[^"]*responsive-embed[^"]*">)<iframe.+?</iframe>~mi', $content, $matches);
+    foreach ($matches[0] as $match) {
+        if (strpos($match, 'youtube') || strpos($match, 'vimeo')) {
+            $wrapped = '<div class="responsive-embed widescreen">' . $match . '</div>';
+            $content = str_replace($match, $wrapped, $content);
+        }
+    }
+    return $content;
+}, 0);
+
+/**
  * WP Gallery and Foundation integration.
  * @see https://developer.wordpress.org/reference/functions/gallery_shortcode/
  */
