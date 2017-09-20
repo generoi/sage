@@ -62,3 +62,35 @@ add_filter('facetwp_pager_html', function ($output, $params) {
     $output = Timber::fetch(['facets/pager.twig'], $params);
     return $output;
 }, 10, 2);
+
+/**
+ * FacetWP sort options are missing translations in most languages.
+ */
+add_filter('facetwp_sort_options', function ($options, $params) {
+    $options['default']['label'] = __('Sort by', '<example-project>');
+    $options['title_asc']['label'] = __('Title (A-Z)', '<example-project>');
+    $options['title_desc']['label'] = __('Title (Z-A)', '<example-project>');
+    $options['date_asc']['label'] = __('Date (Oldest)', '<example-project>');
+    $options['date_desc']['label'] = __('Date (Newest)', '<example-project>');
+    return $options;
+}, 10, 2);
+
+/**
+ * Add support between facetwp-polylang and facetwp-hierarchy-select.
+ */
+add_action('admin_init', function () {
+    if (!function_exists('FWP') || !function_exists('PLL')) {
+        return;
+    }
+
+    $facets = FWP()->helper->get_facets();
+    if (!empty($facets)) {
+        foreach ($facets as $facet) {
+            if (!empty($facet['levels'])) {
+                foreach ($facet['levels'] as $level) {
+                    pll_register_string('FacetWP', $level);
+                }
+            }
+        }
+    }
+});
