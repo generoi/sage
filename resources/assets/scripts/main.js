@@ -1,5 +1,4 @@
 // import external dependencies
-import 'console-polyfill';
 import 'babel-polyfill';
 import $ from 'jquery';
 import picturefill from 'picturefill';
