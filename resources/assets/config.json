@@ -20,7 +20,7 @@
     ]
   },
   "publicPath": "/app/themes/<example-project>",
-  "devUrl": "http://<example-project>.dev",
+  "devUrl": "http://<example-project>.test",
   "proxyUrl": "http://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",
   "watch": [
@@ -29,7 +29,7 @@
     "resources/views/**/*.{twig,php}"
   ],
   "rsync": {
-    "hostname": "<example-project>.dev",
+    "hostname": "<example-project>.test",
     "username": "vagrant",
     "destination": "/var/www/wordpress/web/app/themes/<example-project>",
     "watch": [
