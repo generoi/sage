@@ -29,7 +29,7 @@ magnificpopup('#content');
 headroom('.headroom');
 gform();
 slick('.slick', { arrows: false, dots: true });
-$.localScroll({ duration: 200 });
+$.localScroll({ duration: 200, lazy: true });
 analytics.scrolldepth({
   elements: [
     '#header',
