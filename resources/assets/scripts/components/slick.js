@@ -15,7 +15,7 @@ class SlickComponent {
       this.init();
     }
 
-    $(window).on('changed.zf.mediaquery', () => {
+    $(window).on('changed.zf.mediaquery down.zf.accordion', () => {
       if (!this.isVisible() && this.checkVisibility()) {
         this.init();
       }
