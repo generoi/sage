@@ -7,6 +7,8 @@
 
 namespace App;
 
+use Timber;
+
 /**
  * Index all woocommerce variations.
  */
