@@ -45,6 +45,7 @@ add_filter('tailor-foundation/grid', function () {
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
+    wp_enqueue_script('sage/polyfill', 'https://cdn.polyfill.io/v2/polyfill.min.js', [], null, true);
     // wp_enqueue_style('font/google', 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800', false, null);
     // wp_enqueue_style('font/typekit', 'https://use.typekit.net', false, null);
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
