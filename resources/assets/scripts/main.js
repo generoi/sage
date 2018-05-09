@@ -16,6 +16,7 @@ import magnificpopup from './components/magnificpopup';
 import lazysizes from './components/lazysizes';
 import woo from './components/woocommerce';
 import floatlabels from './components/float-labels';
+// import gmap from './components/gmap';
 
 // Ensure correct images are set before plugins such as orbit begins measuring
 // dimensions.
@@ -43,3 +44,4 @@ analytics.scrolldepth({
 });
 woo();
 floatlabels('.form__element--vertical, .hs-form-field');
+// gmap('[data-gmap]');
