@@ -26,6 +26,12 @@
     "issues": "https://github.com/roots/sage/issues",
     "forum": "https://discourse.roots.io/"
   },
+  "config": {
+    "platform": {
+      "php": "7.0.10"
+    },
+    "preferred-install": "dist"
+  },
   "autoload": {
     "psr-4": {
       "App\\": "app/",
@@ -40,8 +46,8 @@
     "composer/installers": "~1.0",
     "illuminate/support": "~5.4",
     "roots/sage-lib": "~9.0.0-beta.4",
-    "generoi/sage-foundation": "dev-master",
-    "generoi/sage-polylang": "dev-master",
+    "generoi/sage-foundation": "~1.0",
+    "generoi/sage-polylang": "~1.0",
     "generoi/acf-genero-components": "^1.0.0-alpha"
   },
   "require-dev": {
