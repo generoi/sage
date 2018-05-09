@@ -131,7 +131,13 @@
 /**
  * Add the classes.
  */
-.wp-caption { @extend %wp-caption; }
+.wp-caption {
+  @extend %wp-caption;
+
+  &.alignnone {
+    width: auto !important;
+  }
+}
 .wp-caption-text { @extend %wp-caption-text; }
 .alignfull { @extend %alignfull; }
 .alignnone { @extend %alignnone; }
