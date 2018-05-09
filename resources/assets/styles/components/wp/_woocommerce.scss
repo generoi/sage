@@ -1,3 +1,10 @@
+$c-woocommerce-dot-size:    13px !default;
+$c-woocommerce-nav-size:    30px !default;
+$c-woocommerce-star:        $fa-var-star !default;
+$c-woocommerce-star-empty:  $fa-var-star !default;
+$c-woocommerce-star-color:  $primary-color !default;
+$c-woocommerce-star-empty-color: $light-gray !default;
+
 /**
  * Product gallery
  */
@@ -602,8 +609,8 @@
   font-family: 'FontAwesome';
 
   &::before {
-    content: '#{$fa-var-star-empty}#{$fa-var-star-empty}#{$fa-var-star-empty}#{$fa-var-star-empty}#{$fa-var-star-empty}';
-    color: $primary-color;
+    content: '#{$c-woocommerce-star-empty}#{$c-woocommerce-star-empty}#{$c-woocommerce-star-empty}#{$c-woocommerce-star-empty}#{$c-woocommerce-star-empty}';
+    color: $c-woocommerce-star-empty-color;
     float: left;
     top: 0;
     left: 0;
@@ -619,7 +626,8 @@
     padding-top: 1.5em;
 
     &::before {
-      content: '#{$fa-var-star}#{$fa-var-star}#{$fa-var-star}#{$fa-var-star}#{$fa-var-star}';
+      content: '#{$c-woocommerce-star}#{$c-woocommerce-star}#{$c-woocommerce-star}#{$c-woocommerce-star}#{$c-woocommerce-star}';
+      color: $c-woocommerce-star-color;
       top: 0;
       position: absolute;
       left: 0;
@@ -645,23 +653,40 @@ p.stars {
       height: 1em;
       line-height: 1;
       font-family: 'FontAwesome';
-      content: '#{$fa-var-star-empty}';
+      content: $c-woocommerce-star-empty;
+      color: $c-woocommerce-star-empty-color;
       text-indent: 0;
     }
 
-    &:hover ~ a::before { content: '#{$fa-var-star-empty}'; }
+    &:hover ~ a::before {
+      content: $c-woocommerce-star-empty;
+      color: $c-woocommerce-star-empty-color;
+    }
   }
 
   &:hover {
-    a::before { content: '#{$fa-var-star}'; }
+    a::before {
+      content: $c-woocommerce-star;
+      color: $c-woocommerce-star-color;
+    }
   }
 
   &.selected {
     a.active {
-      &::before { content: '#{$fa-var-star}'; }
-      ~ a::before { content: '#{$fa-var-star-empty}'; }
+      &::before {
+        content: $c-woocommerce-star;
+        color: $c-woocommerce-star-color;
+      }
+
+      ~ a::before {
+        content: $c-woocommerce-star-empty;
+        color: $c-woocommerce-star-empty-color;
+      }
     }
 
-    a:not(.active)::before { content: '#{$fa-var-star}'; }
+    a:not(.active)::before {
+      content: $c-woocommerce-star;
+      color: $c-woocommerce-star-color;
+    }
   }
 }

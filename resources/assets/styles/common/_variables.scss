@@ -1,25 +1,3 @@
-// Vendor variables
-// -----------------------------
-$fa-font-path:              '~font-awesome/fonts';
-
-$slick-loader-path:         '../images/';
-$slick-font-family:         'FontAwesome';
-$slick-dot-color:           #333;
-$slick-prev-character:      $fa-var-left-dir;
-$slick-next-character:      $fa-var-right-dir;
-$slick-dot-character:       $fa-var-circle;
-
-$c-slick-dot-size:          10px;
-$c-slick-nav-size:          40px;
-
-$loader-color:              #0072ce;
-$loader-animation-duration: 0.75s;
-
-$contrast-warnings:         false;
-
-$c-woocommerce-dot-size:          15px;
-$c-woocommerce-nav-size:          30px;
-
 // Site Settings
 // -----------------------------
 
@@ -918,3 +896,29 @@ $thumbnail-shadow-hover: none;
 // $grid-container-padding: $grid-padding-gutters;
 // $grid-container-max: $global-width;
 // $xy-block-grid-max: 8;
+
+// Vendor variables
+// -----------------------------
+$fa-font-path:              '~font-awesome/fonts';
+
+$slick-loader-path:         '../images/';
+$slick-font-family:         'FontAwesome';
+$slick-dot-color:           #333;
+$slick-prev-character:      $fa-var-left-dir;
+$slick-next-character:      $fa-var-right-dir;
+$slick-dot-character:       $fa-var-circle;
+
+$c-slick-dot-size:          13px;
+$c-slick-nav-size:          40px;
+
+$loader-color:              $primary-color;
+$loader-animation-duration: 0.75s;
+
+$contrast-warnings:         false;
+
+$c-woocommerce-dot-size:    13px;
+$c-woocommerce-nav-size:    30px;
+$c-woocommerce-star:        $fa-var-star;
+$c-woocommerce-star-empty:  $fa-var-star;
+$c-woocommerce-star-color:  $primary-color;
+$c-woocommerce-star-empty-color: $light-gray;
