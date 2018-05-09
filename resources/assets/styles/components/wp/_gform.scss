@@ -30,7 +30,14 @@ img.gform_ajax_spinner {
 
 // Align radio lists other alternative
 ul.gfield_radio {
-  > li { display: flex; }
+  > li {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  input[type="radio"] {
+    flex: 0 0 auto;
+  }
 
   input[value="gf_other_choice"] {
     margin-right: $form-spacing/2;
