@@ -76,3 +76,37 @@ table.gfield_list {
 }
 
 .hidden_label .gfield_label { display: none; }
+
+// Grid
+// ---------------
+
+ul.gform_fields {
+  @include xy-grid;
+  @include xy-gutters($negative: true, $gutter-position: left right);
+
+  > .gfield {
+    @include xy-cell-base;
+    @include xy-cell-static($vertical: false);
+  }
+
+  $vertical: false;
+
+  // base styles need to all be before the auto and shrink styles
+  @include -zf-each-breakpoint() {
+    @if (type-of($grid-margin-gutters) == 'map' and map-has-key($grid-margin-gutters, $-zf-size) and $-zf-size != $-zf-zero-breakpoint) {
+      > .gfield {
+        @include xy-cell-static($breakpoint: $-zf-size, $vertical: $vertical);
+      }
+    }
+  }
+
+  @include -zf-each-breakpoint() {
+    @if (type-of($grid-margin-gutters) == 'map' and map-has-key($grid-margin-gutters, $-zf-size)) {
+      @each $bp in -zf-breakpoints-less-than($-zf-size) {
+        @include -xy-breakpoint-cell-classes($bp, $-zf-size, $vertical);
+      }
+    }
+
+    @include -xy-breakpoint-cell-classes($-zf-size, $-zf-size, $vertical);
+  }
+}
