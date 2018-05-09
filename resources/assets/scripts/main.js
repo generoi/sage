@@ -30,7 +30,7 @@ headroom('.headroom');
 gform();
 // @see https://github.com/kenwheeler/slick/issues/3110
 slick('.slick', { arrows: false, dots: true, rows: 0 });
-$.localScroll({ duration: 200, lazy: true });
+$.localScroll({ duration: 200, lazy: true, filter: ':not(.accordion-title)' });
 analytics.scrolldepth({
   elements: [
     '#header',
