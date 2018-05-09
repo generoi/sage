@@ -31,7 +31,7 @@ add_filter('acf/load_field/name=slide_overlay', function ($field) {
  * Configure our Google Maps API key.
  */
 add_filter('acf/settings/google_api_key', function ($value) {
-    return '';
+    return config('app.gmap.api_key');
 });
 
 /**

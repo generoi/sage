@@ -140,6 +140,7 @@ array_map(
 Container::getInstance()
     ->bindIf('config', function () {
         return new Config([
+            'app' => require dirname(__DIR__).'/config/app.php',
             'assets' => require dirname(__DIR__).'/config/assets.php',
             'theme' => require dirname(__DIR__).'/config/theme.php',
             'timber' => require dirname(__DIR__).'/config/timber.php',
