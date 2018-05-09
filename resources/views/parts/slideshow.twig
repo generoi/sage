@@ -9,7 +9,6 @@
 {% if items|length %}
   <div
     class="slick
-      {{items|length == 1 ? 'slick--no-slider'}}
       {{slick.adaptiveHeight ? 'slick--adaptive-height'}}
       {{slick_class?:'slick--grid'}}
     "

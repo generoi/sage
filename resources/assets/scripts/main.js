@@ -28,7 +28,8 @@ $(document).foundation();
 magnificpopup('#content');
 headroom('.headroom');
 gform();
-slick('.slick', { arrows: false, dots: true });
+// @see https://github.com/kenwheeler/slick/issues/3110
+slick('.slick', { arrows: false, dots: true, rows: 0 });
 $.localScroll({ duration: 200, lazy: true });
 analytics.scrolldepth({
   elements: [
