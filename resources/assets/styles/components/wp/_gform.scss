@@ -75,7 +75,12 @@ table.gfield_list {
   display: none;
 }
 
-.hidden_label .gfield_label { display: none; }
+.hidden_label {
+  .gfield_label,
+  .hidden_sub_label {
+    display: none;
+  }
+}
 
 // Grid
 // ---------------
