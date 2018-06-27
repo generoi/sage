@@ -104,6 +104,10 @@ add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
                 $parts['path'] = '/embed/' . $query['v'];
                 unset($query['v']);
             }
+            if ($is_vimeo && is_numeric(substr($parts['path'], 1))) {
+                $parts['host'] = 'player.vimeo.com';
+                $parts['path'] = "/video{$parts['path']}";
+            }
             // Use schemeless URL and re-build the query.
             $parts['scheme'] = null;
             $parts['query'] = build_query($query);
