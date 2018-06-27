@@ -135,7 +135,7 @@
     // Make the target area larger.
     padding: 2rem;
     margin-top: -1rem;
-    margin-right: -2rem !important; // override .title-bar .menu-icon
+    margin-right: -1rem !important; // override .title-bar .menu-icon
     > span { margin-left: -1rem; }
 
     &.menu-icon::after { display: none; }
