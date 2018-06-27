@@ -42,10 +42,10 @@
     { "type": "composer", "url": "https://packagist.minasithil.genero.fi/" }
   ],
   "require": {
-    "php": ">=7",
+    "php": ">=7.1",
     "composer/installers": "~1.0",
-    "illuminate/support": "~5.4",
-    "roots/sage-lib": "~9.0.0-beta.4",
+    "illuminate/support": "~5.6",
+    "roots/sage-lib": "~9.0.1",
     "generoi/sage-foundation": "~1.0",
     "generoi/sage-polylang": "~1.0",
     "generoi/acf-genero-components": "^1.0.0-alpha"
