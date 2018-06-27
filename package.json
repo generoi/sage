@@ -106,7 +106,7 @@
     "jquery.scrollto": "^2.1.2",
     "lazysizes": "^4.0.0-rc3",
     "magnific-popup": "^1.1.0",
-    "motion-ui": "^1.2.2",
+    "motion-ui": "^2.0.3",
     "normalize-scss": "^6.0.0",
     "picturefill": "^3.0.2",
     "sass-burger": "^1.3.1",
