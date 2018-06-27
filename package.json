@@ -23,67 +23,15 @@
     "Android >= 4.4",
     "ios >= 8"
   ],
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "plugin:genero/recommended",
+      "plugin:genero/wordpress"
+    ]
+  },
   "stylelint": {
-    "extends": "stylelint-config-standard",
-    "plugins": [
-      "stylelint-scss"
-    ],
-    "rules": {
-      "no-empty-source": null,
-      "at-rule-no-unknown": [
-        true,
-        {
-          "ignoreAtRules": [
-            "extend",
-            "at-root",
-            "debug",
-            "warn",
-            "error",
-            "if",
-            "else",
-            "for",
-            "each",
-            "while",
-            "mixin",
-            "include",
-            "content",
-            "return",
-            "function"
-          ]
-        }
-      ],
-      "at-rule-empty-line-before": [
-        "always",
-        {
-          "ignoreAtRules": [
-            "else"
-          ],
-          "ignore": [
-            "after-comment"
-          ],
-          "except": [
-            "first-nested",
-            "blockless-after-same-name-blockless"
-          ]
-        }
-      ],
-      "block-opening-brace-space-before": "always",
-      "block-closing-brace-newline-after": [
-        "always",
-        {
-          "ignoreAtRules": [
-            "if",
-            "else"
-          ]
-        }
-      ],
-      "at-rule-name-space-after": "always",
-      "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
-      "scss/at-else-closing-brace-space-after": "always-intermediate",
-      "scss/at-else-empty-line-before": "never",
-      "scss/at-if-closing-brace-newline-after": "always-last-in-chain",
-      "scss/at-if-closing-brace-space-after": "always-intermediate"
-    }
+    "extends": "stylelint-config-genero"
   },
   "scripts": {
     "build": "webpack --progress --config resources/assets/build/webpack.config.js",
@@ -115,6 +63,7 @@
     "cssnano": "~v4.0.0-rc.2",
     "eslint": "~4.19.1",
     "eslint-loader": "~1.9",
+    "eslint-plugin-genero": "git+https://github.com/generoi/eslint-plugin-genero.git",
     "eslint-plugin-import": "~2.11.0",
     "extract-text-webpack-plugin": "~3.0.2",
     "file-loader": "^1.1.6",
@@ -130,13 +79,14 @@
     "sage-fontello": "https://github.com/generoi/sage-fontello.git",
     "sass-loader": "~6.0",
     "style-loader": "^0.20.1",
-    "stylelint": "^8.4.0",
+    "stylelint": "^9.3.0",
+    "stylelint-config-genero": "git+https://github.com/generoi/stylelint-config-genero.git",
     "stylelint-config-standard": "~18.2.0",
     "stylelint-scss": "^2.2.0",
-    "stylelint-webpack-plugin": "^0.10.1",
+    "stylelint-webpack-plugin": "git+https://github.com/webpack-contrib/stylelint-webpack-plugin.git#5ae9467ef6eaabfb42bd2e77ce34f8d380095601",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^0.6.2",
-    "webpack": "~3.10.0",
+    "webpack": "^3.12.0",
     "webpack-assets-manifest": "^1.0.0",
     "webpack-dev-middleware": "~2.0.4",
     "webpack-hot-middleware": "~2.22.0",
