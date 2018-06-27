@@ -2,11 +2,11 @@
 
 /**
  * @file
- * Contains App\Controller\Image class used as an extension of
+ * Contains App\Controllers\Image class used as an extension of
  * TimberExtended\Image.
  */
 
-namespace App\Controller;
+namespace App\Controllers;
 
 use Timber;
 use TimberExtended;

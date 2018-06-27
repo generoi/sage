@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Traits;
+namespace App\Controllers\Traits;
 
 trait Reviewable
 {

@@ -2,11 +2,11 @@
 
 /**
  * @file
- * Contains App\Controller\Post class used as a default extension of
+ * Contains App\Controllers\Post class used as a default extension of
  * TimberExtended\Post.
  */
 
-namespace App\Controller;
+namespace App\Controllers;
 
 use App;
 use Timber;

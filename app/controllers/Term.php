@@ -2,11 +2,11 @@
 
 /**
  * @file
- * Contains App\Controller\Term class used as an extension of
+ * Contains App\Controllers\Term class used as an extension of
  * TimberExtended\Term.
  */
 
-namespace App\Controller;
+namespace App\Controllers;
 
 use Timber;
 use TimberExtended;

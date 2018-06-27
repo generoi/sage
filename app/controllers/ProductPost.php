@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains App\Controller\ProductPost class used for WooCommerce products.
+ * Contains App\Controllers\ProductPost class used for WooCommerce products.
  */
 
-namespace App\Controller;
+namespace App\Controllers;
 
 use App;
 use Timber;

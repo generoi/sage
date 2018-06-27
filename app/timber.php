@@ -29,11 +29,11 @@ add_action('after_setup_theme', function () {
 add_filter('timber_extended/class', function ($class_name, $type, $object = null) {
     switch ($type) {
         case 'post':
-            return __NAMESPACE__ . '\\Controller\\Post';
+            return __NAMESPACE__ . '\\Controllers\\Post';
         case 'term':
-            return __NAMESPACE__ . '\\Controller\\Term';
+            return __NAMESPACE__ . '\\Controllers\\Term';
         case 'image':
-            return __NAMESPACE__ . '\\Controller\\Image';
+            return __NAMESPACE__ . '\\Controllers\\Image';
     }
     return $class_name;
 }, 10, 3);
@@ -45,12 +45,12 @@ add_filter('Timber\PostClassMap', function ($post_class) {
     static $map;
     if (!isset($map)) {
         foreach (get_post_types(['_builtin' => false], 'objects') as $post_type) {
-            $map[$post_type->name] = __NAMESPACE__ . '\\Controller\\Post';
+            $map[$post_type->name] = __NAMESPACE__ . '\\Controllers\\Post';
         };
 
-        $map['post'] = __NAMESPACE__ . '\\Controller\\Post';
-        $map['page'] = __NAMESPACE__ . '\\Controller\\Post';
-        $map['product'] = __NAMESPACE__ . '\\Controller\\ProductPost';
+        $map['post'] = __NAMESPACE__ . '\\Controllers\\Post';
+        $map['page'] = __NAMESPACE__ . '\\Controllers\\Post';
+        $map['product'] = __NAMESPACE__ . '\\Controllers\\ProductPost';
     }
     return $map;
 });
@@ -112,7 +112,7 @@ add_filter('timber/twig', function ($twig) {
 
     // Wrap the asset in a TimberImage object.
     $twig->addFunction(new Timber\Twig_Function('asset_image', function ($filename) {
-        return new App\Controller\Image(asset_path($filename));
+        return new App\Controllers\Image(asset_path($filename));
     }));
 
     // Format a phone number string.
