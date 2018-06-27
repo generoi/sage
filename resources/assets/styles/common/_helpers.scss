@@ -62,3 +62,7 @@
 ) {
   @return ($font-size * unitless-calc($line-height)) + (get-side($padding, 'top') + get-side($padding, 'bottom')) - rem-calc(1);
 }
+
+%u-icon {
+  @include fa-icon;
+}

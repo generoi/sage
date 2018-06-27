@@ -138,3 +138,9 @@ $c-underline-hover-color: false !default;
     }
   }
 }
+
+@mixin u-icon($var) {
+  @extend %u-icon;
+
+  content: $var;
+}
