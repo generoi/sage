@@ -17,6 +17,20 @@ function current_url()
     return home_url(add_query_arg([], $wp->request));
 }
 
+
+/**
+ * Get the ISO language code.
+ * @param string $locale
+ * @return string
+ */
+function langcode($locale = null)
+{
+    if (!$locale) {
+        $locale = get_locale();
+    }
+    return strstr($locale, '_', true) ?? $locale;
+}
+
 /**
  * Format a phone number according to finnish system. Not perfect.
  * @param string $number

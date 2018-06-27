@@ -87,6 +87,9 @@ add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
                 'title' => 0,
                 'byline' => 0,
                 'portrait' => 0,
+                'controls' => 0,
+                'hl' => Utils\langcode(),
+                'iv_load_policy' => 3,
             ];
         }
 

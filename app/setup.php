@@ -63,6 +63,7 @@ add_action('wp_enqueue_scripts', function () {
 
     wp_localize_script('sage/main.js', 'Sage', [
         'language' => get_locale(),
+        'langcode' => Utils\langcode(),
         'gmap_api_key' => config('app.gmap.api_key'),
         'l10n' => [
             'close' => __('Close', '<example-project>'),
