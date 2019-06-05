@@ -32,13 +32,6 @@ add_filter('tiny_mce_before_init', function ($settings) {
     ];
     $settings['style_formats'] = json_encode($style_formats);
     $settings['style_formats_merge'] = true;
-
-    // Fix constantly growing editor.
-    if (!isset($settings['content_style'])) {
-        $settings['content_style'] = '';
-    }
-    $settings['content_style'] = 'html { height: auto !important; min-height: initial !important; max-height: initial !important; }';
-
     return $settings;
 });
 
