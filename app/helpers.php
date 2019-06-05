@@ -3,13 +3,10 @@
 namespace App;
 
 /**
- * Build a URL string based on URL parts.
+ * Build a URL string based on URL parts as returned by `parse_url()`
  * @see https://stackoverflow.com/a/35207936/319855
- *
- * @param array $parts Parts of the URL as returned by `parse_url`
- * @return string
  */
-function build_url($parts)
+function build_url(array $parts): string
 {
     return (isset($parts['scheme']) ? "{$parts['scheme']}:" : '') .
         ((isset($parts['user']) || isset($parts['host'])) ? '//' : '') .
