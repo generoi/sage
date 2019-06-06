@@ -53,3 +53,21 @@ add_filter('mce_buttons_2', function ($buttons) {
 add_action('customize_preview_init', function () {
     wp_enqueue_script('sage/customizer.js', asset('scripts/customizer.js'), ['customize-preview'], null, true);
 });
+
+/**
+ * Theme assets for the Admin Interface.
+ */
+add_action('admin_enqueue_scripts', function () {
+    wp_enqueue_style('sage/admin.css', asset('styles/admin.css')->uri(), false, null);
+    wp_enqueue_script('sage/admin', asset('scripts/admin.js')->uri(), ['jquery'], null);
+    wp_add_inline_script('sage/admin', asset('scripts/manifest.js')->contents(), 'before');
+});
+
+/**
+ * Block editor assets.
+ */
+add_action('enqueue_block_editor_assets', function () {
+    wp_enqueue_style('sage/editor.css', asset('styles/editor.css')->uri(), ['wp-edit-blocks']);
+    wp_enqueue_script('sage/editor', asset('scripts/editor.js')->uri(), ['wp-dom-ready', 'wp-edit-post', 'wp-blocks', 'wp-i18n', 'wp-hooks', 'wp-components', 'wp-compose']);
+    wp_add_inline_script('sage/editor', asset('scripts/manifest.js')->contents(), 'before');
+});

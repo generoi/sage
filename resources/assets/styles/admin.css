@@ -1,0 +1,14 @@
+/* Fix Popup jQuery UI dialog bug. */
+.ui-dialog[aria-describedby="spu_editor"] {
+  z-index: 100102;
+}
+
+/* Allow the term edit form to span the entire page width */
+#edittag {
+  max-width: none;
+}
+
+/* Fix Popups editor when Gutenberg is enabled */
+body.post-type-spucpt .editor-styles-wrapper {
+  background-color: #ededed !important;
+}

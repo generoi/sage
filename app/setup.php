@@ -19,14 +19,13 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('comment-reply');
     }
 
-    $styles = ['styles/app.css'];
-
-    foreach ($styles as $stylesheet) {
-        if (asset($stylesheet)->exists()) {
-            wp_enqueue_style('sage/'.basename($stylesheet, '.css'), asset($stylesheet)->uri(), false, null);
-        }
-    }
+    wp_enqueue_style('sage/reset.css', asset('styles/reset.css')->uri(), false, null);
+    wp_enqueue_style('sage/app.css', asset('styles/app.css')->uri(), ['sage/reset.css'], null);
 }, 100);
+
+add_action('enqueue_block_assets', function () {
+    wp_enqueue_script('sage/blocks', asset('scripts/blocks.js')->uri(), ['sage/vendor']);
+});
 
 /**
  * Theme setup
