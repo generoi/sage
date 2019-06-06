@@ -20,8 +20,8 @@ body.post-type-spucpt .editor-styles-wrapper {
   border-bottom: solid 1px #e5e5e5;
 }
 
-/* adjustments to ACF fields so they fit better in the editor sidebar */
-/* for complicated repeaters use the Block style rather to fit the most */
+/* adjustments to ACF fields so they fit better in the editor sidebar
+ * for complicated repeaters use the Block style rather to fit the most */
 .edit-post-sidebar {
   .acf-repeater {
     /* align the field to the corner of the sidebar */

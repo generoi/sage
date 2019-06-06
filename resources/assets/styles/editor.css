@@ -10,8 +10,8 @@
   pointer-events: none;
 }
 
-/* @todo remove in next version of Gutenberg */
-/* @see https://github.com/WordPress/gutenberg/pull/15939 */
+/* @todo remove in next version of Gutenberg
+ * @see https://github.com/WordPress/gutenberg/pull/15939 */
 .wp-block-cover {
   /* changing the background color doesnt apply the has-background-* classes */
   &[style*="background-color:"] {
