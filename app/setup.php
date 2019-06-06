@@ -74,6 +74,73 @@ add_action('after_setup_theme', function () {
     add_theme_support('customize-selective-refresh-widgets');
 
     /**
+     * Gutenberg support
+     * @link https://wordpress.org/gutenberg/handbook/extensibility/theme-support/
+     */
+    add_theme_support('editor-styles');
+    add_theme_support('wp-block-styles');
+    add_theme_support('align-wide');
+    add_theme_support('disable-custom-colors');
+    add_theme_support('disable-custom-font-sizes');
+    add_theme_support('responsive-embeds');
+
+    add_theme_support('editor-color-palette', [
+        [
+            'name' => __('Primary', 'sage'),
+            'slug' => 'primary',
+            'color' => tailwind('theme.colors.primary'),
+        ],
+        [
+            'name' => __('Secondary', 'sage'),
+            'slug' => 'secondary',
+            'color' => tailwind('theme.colors.secondary'),
+        ],
+        [
+            'name' => __('Black', 'sage'),
+            'slug' => 'black',
+            'color' => tailwind('theme.colors.black'),
+        ],
+        [
+            'name' => __('White', 'sage'),
+            'slug' => 'white',
+            'color' => tailwind('theme.colors.white'),
+        ],
+    ]);
+
+    add_theme_support('editor-font-sizes', [
+        [
+            'name' => __('xsmall', 'sage'),
+            'shortName' => __('XS', 'sage'),
+            'slug' => 'xs',
+            'size' => tailwind('theme.fontSize.xs'),
+        ],
+        [
+            'name' => __('small', 'sage'),
+            'shortName' => __('S', 'sage'),
+            'slug' => 'sm',
+            'size' => tailwind('theme.fontSize.sm'),
+        ],
+        [
+            'name' => __('regular', 'sage'),
+            'shortName' => __('R', 'sage'),
+            'slug' => 'base',
+            'size' => tailwind('theme.fontSize.base'),
+        ],
+        [
+            'name' => __('large', 'sage'),
+            'shortName' => __('L', 'sage'),
+            'slug' => 'xl',
+            'size' => tailwind('theme.fontSize.xl'),
+        ],
+        [
+            'name' => __('xlarge', 'sage'),
+            'shortName' => __('XL', 'sage'),
+            'slug' => 'xxl',
+            'size' => tailwind('theme.fontSize.2xl'),
+        ],
+    ]);
+
+    /**
      * Use main stylesheet for visual editor
      * @see resources/assets/styles/layouts/tinymce.scss
      */

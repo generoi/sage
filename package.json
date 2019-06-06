@@ -39,6 +39,7 @@
     "stylelint": "^9.9",
     "stylelint-config-standard": "^18.2",
     "tailwindcss": "^1.0.1",
+    "tailwindcss-gutenberg": "git+https://github.com/generoi/tailwindcss-gutenberg.git",
     "vue-template-compiler": "^2.6.10",
     "write-webpack-plugin": "^1.1.0"
   },

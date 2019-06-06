@@ -17,7 +17,7 @@ module.exports = {
       generators: false,
       objectLiteralDuplicateProperties: false
     },
-    ecmaVersion: 2017,
+    ecmaVersion: 9,
     sourceType: 'module'
   },
   plugins: ['import'],
