@@ -69,6 +69,8 @@ return [
 
     'providers' => [
         App\Providers\ThemeServiceProvider::class,
+        // ApprovedDigital\LaravelTailwindConfig\LaravelTailwindConfigServiceProvider::class,
+        App\Providers\LaravelTailwindConfigServiceProvider::class,
         // App\SomeService\SomeServiceServiceProvider::class,
     ],
 

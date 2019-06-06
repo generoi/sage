@@ -6,6 +6,8 @@ const publicPath = path => `${mix.config.publicPath}/${path}`;
 // Source path helper
 const src = path => `resources/assets/${path}`;
 
+require('laravel-mix-export-tailwind-config');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -30,7 +32,7 @@ mix.browserSync({
 });
 
 // Styles
-mix.sass(src`styles/app.scss`, 'styles');
+mix.postCss(src`styles/app.css`, 'styles');
 
 // JavaScript
 mix.js(src`scripts/app.js`, 'scripts')
@@ -48,7 +50,17 @@ mix.autoload({
 
 // Options
 mix.options({
-  processCssUrls: false,
+  processCssUrls: true,
+  extractVueStyles: true,
+  autoprefixer: false,
+  postCss: [
+    require('postcss-import'),
+    require('postcss-inline-svg')({path: mix.config.publicPath}),
+    require('tailwindcss')(src`styles/tailwind.js`),
+    require('postcss-preset-env'),
+    require('postcss-nested'),
+    require('autoprefixer'),
+  ],
 });
 
 // Source maps when not in production.
@@ -60,3 +72,5 @@ if (!mix.inProduction()) {
 if (mix.inProduction()) {
   mix.version();
 }
+
+mix.exportTailwindConfig(src`styles/tailwind.js`, 'tailwind.json');
