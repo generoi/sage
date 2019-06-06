@@ -19,6 +19,14 @@ add_action('customize_register', function (\WP_Customize_Manager $wp_customize) 
 });
 
 /**
+ * Limit available buttons in teenyMCE basic editor.
+ * @see https://developer.wordpress.org/reference/classes/_wp_editors/editor_settings/
+ */
+add_filter('teeny_mce_buttons', function ($teeny_mce_buttons) {
+    return ['bold', 'italic', 'undo', 'redo', 'wplink'];
+});
+
+/**
  * Add styling classes to TinyMCE.
  */
 add_filter('tiny_mce_before_init', function ($settings) {

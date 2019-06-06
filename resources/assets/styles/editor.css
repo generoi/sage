@@ -1,3 +1,10 @@
+/* limit the acf block field wrapper size especially for wide and full */
+.wp-block .acf-block-component .acf-block-fields {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Disable links rendered in ACF blocks */
 .acf-block-preview a[href] {
   pointer-events: none;
