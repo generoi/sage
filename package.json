@@ -15,6 +15,13 @@
     "lint:styles": "stylelint \"resources/assets/**/*.{vue,css,sass,scss,sss,less}\"",
     "test": "run-s -c lint"
   },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "plugin:genero/recommended",
+      "plugin:genero/wordpress"
+    ]
+  },
   "devDependencies": {
     "@wordpress/babel-preset-default": "^4.2.0",
     "browser-sync": "^2.26.5",
@@ -22,6 +29,7 @@
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
     "eslint": "^5.11",
+    "eslint-plugin-genero": "git+https://github.com/generoi/eslint-plugin-genero.git",
     "eslint-plugin-import": "^2.14",
     "laravel-mix": "^4.0.15",
     "laravel-mix-export-tailwind-config": "^0.1.2",
