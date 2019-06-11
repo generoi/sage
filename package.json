@@ -20,7 +20,8 @@
     "parser": "babel-eslint",
     "extends": [
       "plugin:genero/recommended",
-      "plugin:genero/wordpress"
+      "plugin:genero/wordpress",
+      "plugin:vue/essential"
     ]
   },
   "devDependencies": {
@@ -33,7 +34,8 @@
     "cross-env": "^5.2",
     "eslint": "^5.11",
     "eslint-plugin-genero": "git+https://github.com/generoi/eslint-plugin-genero.git",
-    "eslint-plugin-import": "^2.17",
+    "eslint-plugin-import": "^2.14",
+    "eslint-plugin-vue": "^5.2.2",
     "laravel-mix": "^4.0",
     "laravel-mix-export-tailwind-config": "^0.1.2",
     "laravel-mix-wp-blocks": "^0.1.4",
@@ -56,6 +58,8 @@
   },
   "dependencies": {
     "jquery": "^3.4",
-    "js-dom-router": "^1.0"
+    "js-dom-router": "^1.0",
+    "vue": "^2.6.10",
+    "vue-a11y-utils": "^0.6.1"
   }
 }

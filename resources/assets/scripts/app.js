@@ -2,6 +2,8 @@
  * External Dependencies
  */
 import { router } from 'js-dom-router';
+import { ready } from './utils';
+import { addComponents } from './components/components';
 
 /**
  * DOM-based routing
@@ -26,3 +28,5 @@ router
   .on('about-us', about)
   .on('home', async (event) => (await home()).default(event))
   .ready();
+
+ready(() => addComponents('#app'));

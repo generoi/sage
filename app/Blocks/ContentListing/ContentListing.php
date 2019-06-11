@@ -20,7 +20,9 @@ class ContentListing extends Block
         'icon' => 'excerpt-view',
         'keywords' => ['post', 'query'],
         'supports' => [],
-        'styles' => [],
+        'styles' => [
+            'accordion' => 'Accordion',
+        ],
     ];
 
     /**

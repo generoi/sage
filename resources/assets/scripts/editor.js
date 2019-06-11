@@ -3,6 +3,8 @@ import {
   unregisterBlockStyle,
 } from '@wordpress/blocks';
 
+import { addComponents } from './components/components';
+
 // For whatever reasy domReady is not relying when using Gutenberg plugin
 window._wpLoadBlockEditor.then(() => {
   unregisterBlockStyle('core/button', 'squared');
@@ -26,4 +28,8 @@ window._wpLoadBlockEditor.then(() => {
   ];
 
   removeBlocks.forEach((block) => unregisterBlockType(block));
+});
+
+window.acf.addAction('render_block_preview', ($el) => {
+  addComponents($el[0]);
 });
