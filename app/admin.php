@@ -88,6 +88,7 @@ add_action('admin_enqueue_scripts', function () {
  */
 add_action('enqueue_block_editor_assets', function () {
     wp_enqueue_style('sage/editor.css', asset('styles/editor.css')->uri(), ['wp-edit-blocks']);
-    wp_enqueue_script('sage/editor', asset('scripts/editor.js')->uri(), ['wp-dom-ready', 'wp-edit-post', 'wp-blocks', 'wp-i18n', 'wp-hooks', 'wp-components', 'wp-compose']);
-    wp_add_inline_script('sage/editor', asset('scripts/manifest.js')->contents(), 'before');
+    wp_enqueue_script('sage/vendor', asset('scripts/vendor.js')->uri(), []);
+    wp_enqueue_script('sage/editor', asset('scripts/editor.js')->uri(), ['sage/vendor', 'wp-dom-ready', 'wp-edit-post', 'wp-blocks', 'wp-block-library', 'wp-i18n', 'wp-hooks', 'wp-components', 'wp-compose']);
+    wp_add_inline_script('sage/vendor', asset('scripts/manifest.js')->contents(), 'before');
 });
