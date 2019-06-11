@@ -5,6 +5,18 @@ namespace App;
 use function Roots\asset;
 
 /**
+ * Add a custom Block category for the theme
+ */
+add_filter('block_categories', function ($categories, $post) {
+    $categories[] = [
+        'slug' => 'sage',
+        'title' => __('Theme blocks', 'sage'),
+        'icon' => 'wordpress',
+    ];
+    return $categories;
+}, 10, 2);
+
+/**
  * Theme customizer
  */
 add_action('customize_register', function (\WP_Customize_Manager $wp_customize) {
