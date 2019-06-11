@@ -14,6 +14,18 @@ use WP_Customize_Manager;
 use function Roots\asset;
 
 /**
+ * Add a custom Block category for the theme
+ */
+add_filter('block_categories', function ($categories, $post) {
+    $categories[] = [
+        'slug' => 'sage',
+        'title' => __('Theme blocks', 'sage'),
+        'icon' => 'wordpress',
+    ];
+    return $categories;
+}, 10, 2);
+
+/**
  * Register the `.brand` selector as the blogname.
  *
  * @param  \WP_Customize_Manager $wp_customize
