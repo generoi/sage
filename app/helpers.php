@@ -2,6 +2,21 @@
 
 namespace App;
 
+use function Roots\app;
+
+/**
+ * Get a list of all post types that the user might care about.
+ */
+function post_types(): array
+{
+    return collect(get_post_types(['_builtin' => false], 'objects'))
+        ->pluck('label', 'name')
+        ->except(['acf-field', 'acf-field-group', 'wp_stream_alerts', 'spucpt'])
+        ->prepend(get_post_type_object('page')->labels->name, 'page')
+        ->prepend(get_post_type_object('post')->labels->name, 'post')
+        ->all();
+}
+
 /**
  * Build a URL string based on URL parts as returned by `parse_url()`
  * @see https://stackoverflow.com/a/35207936/319855

@@ -36,6 +36,7 @@
   "require": {
     "php": "^7.1.3",
     "approvedio/laravel-tailwind-config": "^0.1",
+    "generoi/sage-acfblocks": "dev-master",
     "roots/acorn": "dev-master"
   },
   "require-dev": {
