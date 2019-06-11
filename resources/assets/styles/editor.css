@@ -6,7 +6,7 @@
 }
 
 /* Disable links rendered in ACF blocks */
-.acf-block-preview a[href] {
+.acf-block-preview a[href]:not([href^="#"]) {
   pointer-events: none;
 }
 
