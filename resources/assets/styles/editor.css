@@ -9,16 +9,3 @@
 .acf-block-preview a[href]:not([href^="#"]) {
   pointer-events: none;
 }
-
-/* @todo remove in next version of Gutenberg
- * @see https://github.com/WordPress/gutenberg/pull/15939 */
-.wp-block-cover {
-  /* changing the background color doesnt apply the has-background-* classes */
-  &[style*="background-color:"] {
-    @apply text-white;
-  }
-
-  &[style*="background-color: rgb(255, 255, 255)"] {
-    @apply text-black;
-  }
-}
