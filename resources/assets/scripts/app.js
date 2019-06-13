@@ -1,9 +1,4 @@
 /**
- * External Dependencies
- */
-import 'jquery';
-
-/**
  * Local Dependencies
  */
 import Router from './util/Router';

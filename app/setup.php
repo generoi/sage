@@ -6,12 +6,14 @@ use function Roots\asset;
 use function Roots\config;
 use function Roots\view;
 
+add_filter('acorn/globals', '__return_true');
+
 /**
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_script('sage/vendor', asset('scripts/vendor.js')->uri(), ['jquery'], null, true);
-    wp_enqueue_script('sage/app', asset('scripts/app.js')->uri(), ['sage/vendor', 'jquery'], null, true);
+    wp_enqueue_script('sage/vendor', asset('scripts/vendor.js')->uri(), [], null);
+    wp_enqueue_script('sage/app', asset('scripts/app.js')->uri(), ['sage/vendor'], null);
 
     wp_add_inline_script('sage/vendor', asset('scripts/manifest.js')->contents(), 'before');
 
@@ -19,13 +21,9 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('comment-reply');
     }
 
-    $styles = ['styles/app.css'];
+    wp_enqueue_style('sage/reset.css', asset('styles/reset.css')->uri(), false, null);
+    wp_enqueue_style('sage/app.css', asset('styles/app.css')->uri(), ['sage/reset.css'], null);
 
-    foreach ($styles as $stylesheet) {
-        if (asset($stylesheet)->exists()) {
-            wp_enqueue_style('sage/'.basename($stylesheet, '.css'), asset($stylesheet)->uri(), false, null);
-        }
-    }
 }, 100);
 
 /**
@@ -73,6 +71,73 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/themes/advanced-topics/customizer-api/#theme-support-in-sidebars
      */
     add_theme_support('customize-selective-refresh-widgets');
+
+    /**
+     * Gutenberg support
+     * @link https://wordpress.org/gutenberg/handbook/extensibility/theme-support/
+     */
+    add_theme_support('editor-styles');
+    add_theme_support('wp-block-styles');
+    add_theme_support('align-wide');
+    add_theme_support('disable-custom-colors');
+    add_theme_support('disable-custom-font-sizes');
+    add_theme_support('responsive-embeds');
+
+    add_theme_support('editor-color-palette', [
+        [
+            'name' => __('Primary', 'sage'),
+            'slug' => 'primary',
+            'color' => tailwind('theme.colors.primary'),
+        ],
+        [
+            'name' => __('Secondary', 'sage'),
+            'slug' => 'secondary',
+            'color' => tailwind('theme.colors.secondary'),
+        ],
+        [
+            'name' => __('Black', 'sage'),
+            'slug' => 'black',
+            'color' => tailwind('theme.colors.black'),
+        ],
+        [
+            'name' => __('White', 'sage'),
+            'slug' => 'white',
+            'color' => tailwind('theme.colors.white'),
+        ],
+    ]);
+
+    add_theme_support('editor-font-sizes', [
+        [
+            'name' => __('xsmall', 'sage'),
+            'shortName' => __('XS', 'sage'),
+            'slug' => 'xs',
+            'size' => tailwind('theme.fontSize.xs'),
+        ],
+        [
+            'name' => __('small', 'sage'),
+            'shortName' => __('S', 'sage'),
+            'slug' => 'sm',
+            'size' => tailwind('theme.fontSize.sm'),
+        ],
+        [
+            'name' => __('regular', 'sage'),
+            'shortName' => __('R', 'sage'),
+            'slug' => 'base',
+            'size' => tailwind('theme.fontSize.base'),
+        ],
+        [
+            'name' => __('large', 'sage'),
+            'shortName' => __('L', 'sage'),
+            'slug' => 'xl',
+            'size' => tailwind('theme.fontSize.xl'),
+        ],
+        [
+            'name' => __('xlarge', 'sage'),
+            'shortName' => __('XL', 'sage'),
+            'slug' => 'xxl',
+            'size' => tailwind('theme.fontSize.2xl'),
+        ],
+    ]);
 
     /**
      * Use main stylesheet for visual editor

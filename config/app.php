@@ -71,6 +71,7 @@ return [
         App\Providers\ThemeServiceProvider::class,
         // ApprovedDigital\LaravelTailwindConfig\LaravelTailwindConfigServiceProvider::class,
         App\Providers\LaravelTailwindConfigServiceProvider::class,
+        Genero\Sage\AcfBlocks\AcfBlockServiceProvider::class,
         // App\SomeService\SomeServiceServiceProvider::class,
     ],
 

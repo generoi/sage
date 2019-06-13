@@ -38,6 +38,18 @@ add_filter('get_search_form', function () {
 });
 
 /**
+ * Remove wpautop filter if there are blocks found.
+ */
+foreach (['the_content', 'spu/popup/content'] as $filter) {
+    add_filter($filter, function ($content) use ($filter) {
+        if (has_blocks($content)) {
+            remove_filter($filter, 'wpautop');
+        }
+        return $content;
+    }, 8);
+}
+
+/**
  * Modify oEmbed URL parameters.
  */
 add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {

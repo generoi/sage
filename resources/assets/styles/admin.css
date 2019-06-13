@@ -1,0 +1,94 @@
+/* Fix Popup jQuery UI dialog bug. */
+.ui-dialog[aria-describedby="spu_editor"] {
+  z-index: 100102;
+}
+
+/* Allow the term edit form to span the entire page width */
+#edittag {
+  max-width: none;
+}
+
+/* Fix Popups editor when Gutenberg is enabled */
+body.post-type-spucpt .editor-styles-wrapper {
+  background-color: #ededed !important;
+}
+
+/* Basic TinyMCE instances  small enough to fit in editor sidebar */
+[data-toolbar="basic"] {
+  max-height: 150px;
+  overflow-y: hidden;
+  border-bottom: solid 1px #e5e5e5;
+}
+
+/* adjustments to ACF fields so they fit better in the editor sidebar
+ * for complicated repeaters use the Block style rather to fit the most */
+.edit-post-sidebar {
+  .acf-repeater {
+    /* align the field to the corner of the sidebar */
+    margin-left: -17px;
+
+    &,
+    input,
+    textarea,
+    select {
+      font-size: 12px !important;
+    }
+
+    /* remove the negative margin from nested repeaters */
+    .acf-repeater {
+      margin-left: 0;
+    }
+
+    /* make handles tighter */
+    .acf-row-handle {
+      padding: 3px;
+
+      /* the handle for remove and add needs a bit more space to fit buttons */
+      &.remove {
+        padding: 6px;
+      }
+
+      /* move the remove button up rather than vertically centered */
+      .acf-icon.-minus {
+        top: 21px;
+      }
+    }
+
+    .acf-row > .acf-fields {
+      width: 100%;
+
+      .acf-field {
+        padding: 5px;
+      }
+    }
+  }
+
+  /* tabs */
+  .acf-block-component .acf-block-fields .acf-tab-wrap .acf-tab-group {
+    padding: 5px 5px 0;
+  }
+
+  /* relationship */
+  .acf-relationship {
+    .filters .filter input,
+    .filters .filter select {
+      font-size: 12px;
+    }
+
+    .selection {
+      display: flex;
+      flex-direction: column;
+
+      .choices {
+        border-bottom: #dfdfdf solid 1px;
+
+        .list { border-right: 0; }
+      }
+
+      .choices,
+      .values {
+        width: 100%;
+      }
+    }
+  }
+}

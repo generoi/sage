@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const gutenberg = require('tailwindcss-gutenberg');
 
 module.exports = {
   important: true,
@@ -9,6 +10,11 @@ module.exports = {
       md: '768px',
       lg: '1024px',
       xl: '1280px',
+    },
+    maxWidth: {
+      content: '672px',
+      container: '1200px',
+      ...defaultTheme.maxWidth,
     },
     colors: {
       transparent: 'transparent',
@@ -47,7 +53,47 @@ module.exports = {
       '5': '32px',
       '6': '48px',
     },
+    gutenberg: (theme) => ({
+      colors: {
+        primary: theme('colors.primary'),
+        secondary: theme('colors.secondary'),
+        black: theme('colors.black'),
+        white: theme('colors.white'),
+      },
+      foregroundColors: [
+        theme('colors.black'),
+        theme('colors.white'),
+      ],
+      fontSizes: {
+        xs: theme('fontSize.xs'),
+        sm: theme('fontSize.sm'),
+        base: theme('fontSize.base'),
+        xl: theme('fontSize.xl'),
+        xxl: theme('fontSize.2xl'),
+      },
+      alignments: {
+        scrollbarWidth: '0px',
+        contentWidth: theme('maxWidth.content'),
+        maxWidth: '1600px',
+
+        alignfull: true,
+        alignwide: {
+          gutter: theme('spacing.1'),
+          sizer: 1.25,
+        },
+        alignleftright: {
+          minWidth: theme('screens.sm'),
+          margin: theme('spacing.2'),
+        },
+      },
+    }),
   },
   variants: {},
-  plugins: [],
-}
+  plugins: [
+    gutenberg.colors,
+    gutenberg.fontSizes,
+    gutenberg.foregroundColors,
+    gutenberg.alignments,
+    gutenberg.admin,
+  ],
+};

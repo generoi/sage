@@ -1,0 +1,9 @@
+/**
+ * File containg CSS resets and base styling which should not be loaded in the
+ * editor.
+ */
+@tailwind base;
+
+html {
+  overflow-x: hidden;
+}

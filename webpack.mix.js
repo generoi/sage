@@ -7,6 +7,7 @@ const publicPath = path => `${mix.config.publicPath}/${path}`;
 const src = path => `resources/assets/${path}`;
 
 require('laravel-mix-export-tailwind-config');
+require('laravel-mix-wp-blocks');
 
 /*
  |--------------------------------------------------------------------------
@@ -32,10 +33,16 @@ mix.browserSync({
 });
 
 // Styles
-mix.postCss(src`styles/app.css`, 'styles');
+mix
+  .postCss(src`styles/app.css`, 'styles')
+  .postCss(src`styles/reset.css`, 'styles')
+  .postCss(src`styles/admin.css`, 'styles')
+  .postCss(src`styles/editor.css`, 'styles');
 
 // JavaScript
 mix.js(src`scripts/app.js`, 'scripts')
+   .js(src`scripts/admin.js`, 'scripts')
+   .block(src`scripts/editor.js`, 'scripts')
    .js(src`scripts/customizer.js`, 'scripts')
    .extract();
 
@@ -61,6 +68,12 @@ mix.options({
     require('postcss-nested'),
     require('autoprefixer'),
   ],
+});
+
+mix.webpackConfig({
+  externals: {
+    'acf': 'acf',
+  },
 });
 
 // Source maps when not in production.
