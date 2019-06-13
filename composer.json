@@ -28,6 +28,16 @@
     "issues": "https://github.com/roots/sage/issues",
     "forum": "https://discourse.roots.io/"
   },
+  "repositories": {
+    "laravel-tailwind-config": {
+      "type": "vcs",
+      "url": "https://github.com/approvedio/laravel-tailwind-config.git"
+    },
+    "sage-acfblocks": {
+      "type": "vcs",
+      "url": "https://github.com/generoi/sage-acfblocks.git"
+    }
+  },
   "autoload": {
     "psr-4": {
       "App\\": "app/"
@@ -35,9 +45,9 @@
   },
   "require": {
     "php": "^7.1.3",
-    "approvedio/laravel-tailwind-config": "^0.1",
+    "approvedio/laravel-tailwind-config": "^0.1.1",
     "generoi/sage-acfblocks": "dev-master",
-    "roots/acorn": "dev-master"
+    "roots/acorn": "dev-master#f780638145c930a330d4450c062f2539efa79270"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.4"
