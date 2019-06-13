@@ -6,6 +6,8 @@ use function Roots\asset;
 use function Roots\config;
 use function Roots\view;
 
+add_filter('acorn/globals', '__return_true');
+
 /**
  * Theme assets
  */
