@@ -72,7 +72,7 @@ module.exports = {
         xxl: theme('fontSize.2xl'),
       },
       alignments: {
-        scrollbarWidth: '15px',
+        scrollbarWidth: '0px',
         contentWidth: theme('maxWidth.content'),
         maxWidth: '1600px',
 
