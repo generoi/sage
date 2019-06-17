@@ -34,3 +34,17 @@ function build_url(array $parts): string
         (isset($parts['query']) ? "?{$parts['query']}" : '') .
         (isset($parts['fragment']) ? "#{$parts['fragment']}" : '');
 }
+
+/**
+ * Retrieve config values from tailwind configuration.
+ *
+ * @link https://github.com/approvedio/laravel-tailwind-config/blob/master/src/helpers.php
+ */
+function tailwind($key = null, $default = null)
+{
+    if (is_null($key)) {
+        return app('tailwind');
+    }
+
+    return app('tailwind')->get($key, $default);
+}
