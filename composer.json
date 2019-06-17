@@ -60,8 +60,11 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
-    "test": [
+    "lint": [
       "phpcs"
+    ],
+    "post-autoload-dump": [
+      "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
     ]
   }
 }

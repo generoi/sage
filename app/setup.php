@@ -23,7 +23,6 @@ add_action('wp_enqueue_scripts', function () {
 
     wp_enqueue_style('sage/reset.css', asset('styles/reset.css')->uri(), false, null);
     wp_enqueue_style('sage/app.css', asset('styles/app.css')->uri(), ['sage/reset.css'], null);
-
 }, 100);
 
 /**

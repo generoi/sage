@@ -17,24 +17,27 @@
   },
   "eslintConfig": {
     "root": true,
+    "parser": "babel-eslint",
     "extends": [
       "plugin:genero/recommended",
       "plugin:genero/wordpress"
     ]
   },
   "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2",
     "@wordpress/babel-preset-default": "^4.2.0",
-    "browser-sync": "^2.26.5",
-    "browser-sync-webpack-plugin": "2.0.1",
+    "babel-eslint": "^10.0.1",
+    "browser-sync": "^2.26",
+    "browser-sync-webpack-plugin": "2.2",
     "classnames": "^2.2.6",
-    "cross-env": "^5.2.0",
+    "cross-env": "^5.2",
     "eslint": "^5.11",
     "eslint-plugin-genero": "git+https://github.com/generoi/eslint-plugin-genero.git",
-    "eslint-plugin-import": "^2.14",
-    "laravel-mix": "^4.0.15",
+    "eslint-plugin-import": "^2.17",
+    "laravel-mix": "^4.0",
     "laravel-mix-export-tailwind-config": "^0.1.2",
     "laravel-mix-wp-blocks": "^0.1.4",
-    "npm-run-all": "^4.1.5",
+    "npm-run-all": "^4.1",
     "postcss-import": "^12.0.1",
     "postcss-inline-svg": "^3.1.1",
     "postcss-nested": "^4.1.2",
@@ -42,9 +45,9 @@
     "postcss-scss": "^2.0.0",
     "prop-types": "^15.7.2",
     "rimraf": "^2.6",
-    "sass": "^1.19.0",
+    "sass": "^1.21",
     "sass-loader": "7.*",
-    "stylelint": "^9.9",
+    "stylelint": "^10.1",
     "stylelint-config-standard": "^18.2",
     "tailwindcss": "^1.0.1",
     "tailwindcss-gutenberg": "git+https://github.com/generoi/tailwindcss-gutenberg.git",
@@ -52,6 +55,7 @@
     "write-webpack-plugin": "^1.1.0"
   },
   "dependencies": {
-    "jquery": "^3.4.0"
+    "jquery": "^3.4",
+    "js-dom-router": "^1.0"
   }
 }
