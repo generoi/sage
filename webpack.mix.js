@@ -29,6 +29,8 @@ mix.js('resources/assets/scripts/app.js', 'scripts')
 mix.copyWatched('resources/assets/images', 'dist/images')
    .copyWatched('resources/assets/fonts', 'dist/fonts');
 
+mix.copy('resources/assets/scripts/polyfill.js', 'dist/scripts/polyfill.js');
+
 mix.autoload({
   jquery: ['$', 'window.jQuery'],
 });
