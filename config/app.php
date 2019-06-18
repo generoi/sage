@@ -69,8 +69,7 @@ return [
 
     'providers' => [
         App\Providers\ThemeServiceProvider::class,
-        // ApprovedDigital\LaravelTailwindConfig\LaravelTailwindConfigServiceProvider::class,
-        App\Providers\LaravelTailwindConfigServiceProvider::class,
+        ApprovedDigital\LaravelTailwindConfig\LaravelTailwindConfigServiceProvider::class,
         Genero\Sage\AcfBlocks\AcfBlockServiceProvider::class,
         // App\SomeService\SomeServiceServiceProvider::class,
     ],

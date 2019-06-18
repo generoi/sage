@@ -6,6 +6,9 @@ use function Roots\asset;
 use function Roots\config;
 use function Roots\view;
 
+/**
+ * Register global helpers and aliases.
+ */
 add_filter('acorn/globals', '__return_true');
 
 /**
