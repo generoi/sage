@@ -45,6 +45,8 @@ mix.js(src`scripts/app.js`, 'scripts')
    .js(src`scripts/customizer.js`, 'scripts')
    .extract();
 
+mix.copy(src`scripts/polyfill.js`, publicPath`scripts/polyfill.js`);
+
 // Assets
 mix.copyDirectory(src`images`, publicPath`images`)
    .copyDirectory(src`fonts`, publicPath`fonts`);

@@ -18,6 +18,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('sage/vendor', asset('scripts/vendor.js')->uri(), [], null);
     wp_enqueue_script('sage/app', asset('scripts/app.js')->uri(), ['sage/vendor'], null);
 
+    wp_add_inline_script('sage/vendor', asset('scripts/polyfill.js')->contents(), 'before');
     wp_add_inline_script('sage/vendor', asset('scripts/manifest.js')->contents(), 'before');
 
     if (is_single() && comments_open() && get_option('thread_comments')) {
