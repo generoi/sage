@@ -18,6 +18,7 @@ mix.setPublicPath('./dist')
    .browserSync('sage.test');
 
 mix.sass('resources/assets/styles/app.scss', 'styles')
+   .sass('resources/assets/styles/admin.scss', 'styles')
    .sass('resources/assets/styles/editor.scss', 'styles')
    .purgeCss();
 

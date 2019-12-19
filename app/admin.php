@@ -78,3 +78,10 @@ add_filter('mce_buttons_2', function ($buttons) {
 add_action('customize_preview_init', function () {
     wp_enqueue_script('sage/customizer.js', asset('scripts/customizer.js')->uri(), ['customize-preview'], null, true);
 });
+
+/**
+ * Theme assets for the admin interface.
+ */
+add_action('admin_enqueue_scripts', function () {
+    wp_enqueue_style('sage/admin.css', asset('styles/admin.css')->uri(), false, null);
+});

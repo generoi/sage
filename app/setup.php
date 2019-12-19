@@ -28,6 +28,13 @@ add_action('wp_enqueue_scripts', function () {
     }
 
     wp_enqueue_style('sage/app.css', asset('styles/app.css')->uri(), false, null);
+
+    wp_localize_script('sage/app.js', 'Sage', [
+        'locale' => get_locale(),
+        'WP_DEBUG' => WP_DEBUG,
+        'site_url' => home_url('/'),
+        'ajax_url' => admin_url('admin-ajax.php'),
+    ]);
 }, 100);
 
 /**
