@@ -2,15 +2,29 @@
  * Editor
  */
 
-@import 'config/variables';
+@import "~foundation-sites/scss/foundation";
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@import 'config/variables';
+@import 'config/external';
 
 .editor-styles-wrapper > * {
-  @import 'common/global';
-  @import 'components';
+  @import 'common/foundation';
 
-  font-family: $font-family-base;
+  .foundation-mq {
+    font-family: '#{-zf-bp-serialize($breakpoints)}';
+  }
+
+  font-size: $global-font-size;
+  font-family: $body-font-family;
+  font-weight: $global-weight-normal;
+  line-height: $global-lineheight;
+  color: $body-font-color;
+
+  .editor-post-title__input {
+    font-family: $header-font-family;
+  }
+
+  @import 'common/global';
+
+  @import 'components';
 }
