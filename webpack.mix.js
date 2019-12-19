@@ -18,6 +18,7 @@ mix.setPublicPath('./dist')
    .browserSync('sage.test');
 
 mix.sass('resources/assets/styles/app.scss', 'styles')
+   .sass('resources/assets/styles/admin.scss', 'styles')
    .sass('resources/assets/styles/editor.scss', 'styles')
    .purgeCss();
 
@@ -29,7 +30,9 @@ mix.js('resources/assets/scripts/app.js', 'scripts')
 mix.copyWatched('resources/assets/images', 'dist/images')
    .copyWatched('resources/assets/fonts', 'dist/fonts');
 
-mix.copy('resources/assets/scripts/polyfill.js', 'dist/scripts/polyfill.js');
+mix.copy('resources/assets/scripts/polyfill.js', 'dist/scripts/polyfill.js')
+  .copy('node_modules/jquery/dist/jquery.min.js', 'dist/scripts/jquery.js');
+
 
 mix.autoload({
   jquery: ['$', 'window.jQuery'],

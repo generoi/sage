@@ -28,7 +28,24 @@ add_action('wp_enqueue_scripts', function () {
     }
 
     wp_enqueue_style('sage/app.css', asset('styles/app.css')->uri(), false, null);
+
+    wp_localize_script('sage/app.js', 'Sage', [
+        'locale' => get_locale(),
+        'WP_DEBUG' => WP_DEBUG,
+        'site_url' => home_url('/'),
+        'ajax_url' => admin_url('admin-ajax.php'),
+    ]);
 }, 100);
+
+/**
+ * Replace core jQuery with theme's jQuery.
+ */
+add_action('wp_enqueue_scripts', function () {
+    wp_deregister_script('jquery');
+    wp_deregister_script('jquery-core');
+    wp_deregister_script('jquery-migrate');
+    wp_register_script('jquery', asset('scripts/jquery.js')->uri(), false, null, true);
+});
 
 /**
  * Register the theme assets with the block editor.
@@ -120,6 +137,20 @@ add_action('after_setup_theme', function () {
             'color' => '#525ddc',
         ]
     ]);
+
+    add_theme_support('editor-font-sizes', [
+        [
+            'name' => __('normal', 'sage'),
+            'slug' => 'normal',
+            'size' => 16,
+        ],
+    ]);
+
+    add_theme_support('wp-block-styles');
+    add_theme_support('disable-custom-colors');
+    add_theme_support('disable-custom-font-sizes');
+
+    add_image_size('tiny', 50, 50, true);
 }, 20);
 
 /**
