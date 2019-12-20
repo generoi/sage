@@ -7,11 +7,15 @@
  * @see https://git.io/JeyD6
  */
 @each $color-name, $color-value in $foundation-palette {
+  .has-#{$color-name}-background-color {
+    background-color: $color-value;
+    color: color-pick-contrast($color-value, ($black, $white));
+  }
+}
+
+@each $color-name, $color-value in $foundation-palette {
   .has-#{$color-name}-color {
     color: $color-value;
   }
 
-  .has-#{$color-name}-background-color {
-    background-color: $color-value;
-  }
 }
