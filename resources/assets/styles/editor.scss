@@ -10,19 +10,23 @@
 // Disable frontend specific styles.
 $is-frontend: false;
 
+.foundation-mq {
+  font-family: '#{-zf-bp-serialize($breakpoints)}';
+}
+
 .editor-styles-wrapper > * {
-  @import 'common/foundation';
-
-  .foundation-mq {
-    font-family: '#{-zf-bp-serialize($breakpoints)}';
-  }
-
-  // Style base typography
+  // Foundation body styling extracted from foundation-global-styles().
+  background: $body-background;
   font-size: $global-font-size;
   font-family: $body-font-family;
   font-weight: $global-weight-normal;
   line-height: $global-lineheight;
   color: $body-font-color;
+
+  @if ($body-antialiased) {
+    -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+    -moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+  }
 
   // Style page title
   .editor-post-title__input {
@@ -51,6 +55,8 @@ $is-frontend: false;
     color: inherit;
   }
 
+  @import 'common/foundation-typography';
+  @import 'common/foundation';
   @import 'common/global';
 
   @import 'components';
