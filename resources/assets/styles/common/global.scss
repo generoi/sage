@@ -17,5 +17,9 @@
   .has-#{$color-name}-color {
     color: $color-value;
   }
+}
 
+// Remove empty trailing paragraphs.
+p:empty:last-child {
+  display: none;
 }
