@@ -1,0 +1,9 @@
+.wp-block-pullquote {
+  border-top: solid 2px currentColor;
+  border-bottom: solid 2px currentColor;
+
+  > blockquote {
+    // override foundation
+    margin-bottom: 0;
+  }
+}

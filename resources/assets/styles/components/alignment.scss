@@ -66,9 +66,7 @@ $content-width-max: 674px !default;
 
   // Disable floated aligns on small screens.
   .alignleft,
-  .alignright,
-  .wp-block-image .alignleft,
-  .wp-block-image .alignright {
+  .alignright {
     float: none;
     margin-left: auto;
     margin-right: auto;
@@ -76,16 +74,22 @@ $content-width-max: 674px !default;
 
   // Align float at same viewport width as WP core.
   @media (min-width: 640px) {
-    .alignleft,
-    .wp-block-image .alignleft {
+    .alignleft {
       margin-right: $global-margin;
+      margin-bottom: $global-margin;
       float: left;
     }
 
-    .alignright,
-    .wp-block-image .alignright {
+    .alignright {
       margin-left: $global-margin;
+      margin-bottom: $global-margin;
       float: right;
     }
   }
+}
+
+.alignleft:only-child,
+.alignright:only-child {
+  margin-top: 0;
+  margin-bottom: 0;
 }

@@ -1,0 +1,7 @@
+.wp-block-table {
+  &.is-style-stripes {
+    tbody tr:nth-child(odd) {
+      background-color: $table-striped-background;
+    }
+  }
+}
