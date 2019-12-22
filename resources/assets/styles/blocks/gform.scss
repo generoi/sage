@@ -1,0 +1,117 @@
+.gform_wrapper {
+  @if not $is-frontend {
+    #{text-inputs()},
+    select,
+    textarea {
+      @include form-element;
+    }
+  }
+
+  .gform_fileupload_multifile .gform_drop_area,
+  #{text-inputs()},
+  select,
+  textarea,
+  [type=file] {
+    // With gravityform we set the gutter in the container so that description
+    // fields have not whitespace above.
+    margin-bottom: 0;
+  }
+
+
+  // Override gravityform label styling
+  legend.gfield_label,
+  label.gfield_label {
+    font-size: $form-label-font-size;
+    font-weight: $form-label-font-weight;
+  }
+
+  // Description fields are essentially Foundation help text.
+  .gfield_description {
+    color: $helptext-color;
+    font-size: $helptext-font-size;
+    font-style: $helptext-font-style;
+  }
+
+  // Multiple radio and checkbox styles
+  ul.gfield_radio,
+  ul.gfield_checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      margin-bottom: 0.75em;
+    }
+
+    li {
+      margin-bottom: 0;
+    }
+
+    li label {
+      margin-left: $form-spacing * 0.5;
+      margin-right: $form-spacing;
+    }
+  }
+
+  // Add FontAwesome icon to the date field default icon
+  .ui-datepicker-trigger {
+    content: svg-load('../node_modules/@fortawesome/fontawesome-free/svgs/regular/calendar.svg');
+    margin-left: 0.5rem;
+    margin-top: -0.5rem;
+  }
+
+  // Foundation uses line-height to add some whitespace
+  .top_label .gfield_label {
+    line-height: $form-label-line-height;
+  }
+
+  // Remove container spacing
+  &.gform_wrapper .top_label div.ginput_container {
+    margin-top: 0;
+  }
+
+  // Remove container spacing between radio and checkbox alternatives
+  &.gform_wrapper ul li.field_description_below div.ginput_container_radio,
+  &.gform_wrapper ul li.field_description_below div.ginput_container_checkbox {
+    margin-top: 0;
+  }
+
+  // Description texts shown below fields
+  .field_description_below .gfield_description {
+    padding-top: rem-calc(3);
+  }
+
+
+  // Add a minor gutter above labels
+  .field_sublabel_below .ginput_complex.ginput_container label,
+  .field_sublabel_below div[class*="gfield_time_"].ginput_container label {
+    padding-top: rem-calc(3);
+    letter-spacing: inherit;
+  }
+
+  // Gravityform more weird things.
+  .field_sublabel_above,
+  .field_sublabel_below {
+    .ginput_complex.ginput_container label,
+    div[class*="gfield_time_"].ginput_container label,
+    div[class*="gfield_date_"].ginput_container label {
+      font-size: $helptext-font-size;
+      letter-spacing: inherit;
+    }
+  }
+
+  // Gravityform does some weird things that cause the arrows to disappear.
+  &.gf_browser_chrome select {
+    padding: $input-padding;
+    padding-right: 1.5rem;
+  }
+
+  // Gravityform adds letterspacing and does other weird things with the
+  // address sublabels
+  &.gf_browser_chrome .ginput_complex select,
+  &.gf_browser_chrome .ginput_complex .ginput_right select {
+    text-indent: 0;
+    line-height: $input-line-height;
+    margin: 0;
+  }
+}

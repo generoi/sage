@@ -1,0 +1,53 @@
+.contact-form,
+.wp-block-jetpack-contact-form {
+  @if not $is-frontend {
+    .components-textarea-control__input,
+    .components-text-control__input {
+      @include form-element;
+    }
+
+    // Foundation adds an ol padding
+    .jetpack-field-multiple__list {
+      padding-left: 0;
+    }
+  }
+
+  // Grunion sets it to 50%
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='url'] {
+    width: 100%;
+  }
+}
+
+// Labels
+.contact-form .grunion-field-label,
+.wp-block-jetpack-contact-form .jetpack-field-label__input {
+  @if not $is-frontend {
+    @include form-label;
+  }
+
+  font-weight: $form-label-font-weight;
+  line-height: $form-label-line-height;
+  margin-bottom: 0;
+}
+
+// Required note within labels
+.contact-form .grunion-field-label span,
+.wp-block-jetpack-contact-form .jetpack-field-label .required {
+  float: right;
+  color: get-color(alert);
+}
+
+// Grunion sets textarea rows to 20 which Foundation renders as specified.
+.contact-form textarea,
+.wp-block-jetpack-contact-form .components-textarea-control__input {
+  height: 200px;
+}
+
+// Editor has a wp-block-button wrapper which sets the default color that is
+// then inherited. Frontend does not.
+.contact-form .contact-submit {
+  color: $button-color;
+}
