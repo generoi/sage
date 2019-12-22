@@ -6,9 +6,12 @@ import $ from 'jquery';
 /**
  * Internal Dependencies
  */
-import { init } from './common/foundation';
+import { init as initFoundation } from './common/foundation';
+import { init as initFontawesome } from './common/fontawesome';
 
-init();
+
+initFoundation();
+initFontawesome();
 
 $(document).ready(() => {
   // console.log('Hello world');

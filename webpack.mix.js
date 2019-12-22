@@ -37,6 +37,9 @@ mix.autoload({
 
 mix.options({
   processCssUrls: false,
+  postCss: [
+    require('postcss-inline-svg')({paths: [mix.config.publicPath]}),
+  ]
 });
 
 mix.sourceMaps(false, 'source-map')
