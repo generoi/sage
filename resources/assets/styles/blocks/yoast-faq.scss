@@ -1,0 +1,21 @@
+.schema-faq {
+  &-section {
+    @extend .accordion-item;
+  }
+
+  &-question {
+    @extend .accordion-title;
+
+    font-weight: inherit;
+    cursor: pointer;
+  }
+
+  &-answer {
+    @extend .accordion-content;
+
+    .schema-faq-section.is-active & {
+      display: block;
+      margin-bottom: 0;
+    }
+  }
+}
