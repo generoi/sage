@@ -1,3 +1,5 @@
+@import 'foundation-typography';
+
 // Global styles
 @if $is-frontend {
   // @note breaks block editor
@@ -5,7 +7,8 @@
   @include foundation-forms;
 }
 
-@include foundation-typography;
+
+@include custom-foundation-typography;
 
 // Grids
 // @include foundation-grid;

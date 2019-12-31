@@ -1,5 +1,12 @@
+@mixin custom-foundation-typography {
+  @include custom-foundation-typography-base;
+  @include foundation-typography-helpers;
+  @include foundation-text-alignment;
+  @include foundation-print-styles;
+}
+
 // Override foundation core mixin to exclude certain styling in block editor.
-@mixin foundation-typography-base {
+@mixin custom-foundation-typography-base {
   // Typography resets
   @if $is-frontend {
     // @note this breaks the block editor
