@@ -6,16 +6,14 @@ import $ from 'jquery';
 /**
  * Internal Dependencies
  */
-import { init as initFoundation } from './common/foundation';
-import { init as initFontawesome } from './common/fontawesome';
-import { accordion } from './components/accordion';
+import { init as foundation } from './common/foundation';
+import { init as fontawesome } from './common/fontawesome';
+import { init as accordion } from './components/accordion';
 
 
-initFoundation();
-initFontawesome();
-
-accordion('.schema-faq', {titleSelector: '.schema-faq-question'});
+foundation();
+fontawesome();
 
 $(document).ready(() => {
-  // console.log('Hello world');
+  accordion('.schema-faq', {itemSelector: '.schema-faq-section', titleSelector: '.schema-faq-question'});
 });

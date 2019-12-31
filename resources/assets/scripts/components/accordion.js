@@ -1,24 +1,46 @@
-export class Accordion {
+import $ from 'jquery';
+
+class AccordionComponent {
   constructor(el, options = {}) {
     this.options = Object.assign({}, options);
-    this.$wrapper = $(el);
-    this.$list = this.$wrapper.children();
-    this.$activeItem = null;
-    this.$wrapper.on('click', this.options.titleSelector, this.onClick.bind(this));
+    this.wrapper = el;
+    this.items = this.wrapper.querySelectorAll(options.itemSelector);
+    this.activeItem = null;
+    this.wrapper.addEventListener('click', this.onClick.bind(this));
   }
 
   onClick(e) {
-    this.$activeItem = $(e.currentTarget).parent();
-    if (this.$activeItem.hasClass('is-active')) {
-      this.$activeItem.removeClass('is-active');
+    if (e.target.matches(this.options.itemSelector)) {
+      this.activeItem = e.target;
     } else {
-      this.$list.removeClass('is-active');
-      this.$activeItem.addClass('is-active');
+      const clickedTitle = e.target.closest(this.options.titleSelector);
+      if (!clickedTitle) {
+        return;
+      }
+      this.activeItem = clickedTitle.closest(this.options.itemSelector);
+    }
+
+    if (!this.activeItem) {
+      return;
+    }
+
+    if (this.activeItem.classList.contains('is-active')) {
+      this.activeItem.classList.remove('is-active');
+    } else {
+      this.activeItem.classList.add('is-active');
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i] === this.activeItem) {
+          continue;
+        }
+        this.items[i].classList.remove('is-active');
+      }
     }
   }
 }
 
-export function accordion(selector = '.schema-faq', options = {}) {
-  $(selector)
-    .each((i, el) => new Accordion(el, options));
+export function init(selector = '.schema-faq', options = {}) {
+  const elements = document.querySelectorAll(selector);
+  for (let i = 0; i < elements.length; i++) {
+    elements[i]._accordion = new AccordionComponent(elements[i], options);
+  }
 }
