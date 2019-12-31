@@ -739,15 +739,15 @@ $button-background-hover: scale-color($button-background, $lightness: 15%);
 // // 50. Table
 // // ---------
 
-// $table-background: $white;
+$table-background: transparent;
 // $table-color-scale: 5%;
-// $table-border: 1px solid smart-scale($table-background, $table-color-scale);
+$table-border: 1px solid rgba(0, 0, 0, 0.1);
 // $table-padding: rem-calc(8 10 10);
 // $table-hover-scale: 2%;
-// $table-row-hover: darken($table-background, $table-hover-scale);
-// $table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
+$table-row-hover: darken($white, $table-hover-scale);
+$table-row-stripe-hover: darken($white, $table-color-scale + $table-hover-scale);
 $table-is-striped: false;
-// $table-striped-background: smart-scale($table-background, $table-color-scale);
+$table-striped-background: smart-scale($white, $table-color-scale);
 $table-stripe: odd;
 $table-head-background: inherit;
 $table-head-row-hover: inherit;
