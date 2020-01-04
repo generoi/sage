@@ -81,13 +81,3 @@ add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
     }
     return $cache;
 }, 10, 4);
-
-/**
- * Provide demo content when visting /wp/wp-admin/post-new.php?gutenberg-demo
- */
-add_filter('default_content', function ($content) {
-    if (isset($_GET['gutenberg-demo'])) {
-        $content = file_get_contents(get_stylesheet_directory() . '/resources/demo-gutenberg.html');
-    }
-    return $content;
-}, 11);
