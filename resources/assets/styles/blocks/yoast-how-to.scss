@@ -1,0 +1,22 @@
+.schema-how-to {
+  @if not $is-frontend {
+    &-steps {
+      padding-left: 0;
+    }
+
+    &-step {
+      border: 0;
+      padding-left: $list-side-margin;
+    }
+
+    &-step-number {
+      left: -0.5rem;
+    }
+  }
+
+  &-step-text {
+    img {
+      display: block;
+    }
+  }
+}

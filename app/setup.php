@@ -54,10 +54,11 @@ add_action('wp_enqueue_scripts', function () {
  */
 add_action('enqueue_block_editor_assets', function () {
     if ($manifest = asset('scripts/manifest.asset.php')->get()) {
+        wp_enqueue_script('sage/vendor.js', asset('scripts/vendor.js')->uri(), ['jquery'], null, true);
         wp_enqueue_script(
             'sage/editor.js',
             asset('scripts/editor.js')->uri(),
-            $manifest['dependencies'],
+            array_merge($manifest['dependencies'], ['sage/vendor.js']),
             $manifest['version']
         );
 

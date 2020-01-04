@@ -3,7 +3,7 @@
   @include('partials.head')
 
   <body @php(body_class())>
-    <div id="app">
+    <div id="app" class="grid-container">
       @php(wp_body_open())
       @php(do_action('get_header'))
       @include('partials.header')

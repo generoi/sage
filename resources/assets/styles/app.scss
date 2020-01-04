@@ -6,13 +6,15 @@
 @import 'config/external';
 
 /** Common */
-@import 'common/foundation-global';
 @import 'common/foundation';
 @import 'common/frontend';
 @import 'common/global';
 
 /** Components */
 @import 'components';
+
+/** Blocks */
+@import 'blocks';
 
 /** Partials */
 @import 'partials/header';

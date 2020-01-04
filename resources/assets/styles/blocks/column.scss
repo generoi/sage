@@ -1,0 +1,9 @@
+.wp-block-column {
+  // column blocks can contain other aligned blocks.
+  .alignwide,
+  .alignfull {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

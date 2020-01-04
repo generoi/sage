@@ -1,0 +1,32 @@
+/**
+ * Button
+ */
+
+.wp-block-button {
+  color: $button-color;
+
+  &__link {
+    border-radius: 0;
+  }
+
+  &__link {
+    background-color: $button-background;
+
+    &:hover,
+    &:focus {
+      background-color: $button-background-hover;
+    }
+  }
+
+  &.is-style-outline .wp-block-button__link {
+    color: $button-background;
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+      color: $button-background-hover;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+  }
+}

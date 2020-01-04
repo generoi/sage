@@ -1,0 +1,38 @@
+.wp-block-group {
+  // group blocks can contain other aligned blocks.
+  &:not(.alignwide):not(.alignfull) {
+    .alignwide,
+    .alignfull {
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &.alignwide,
+  &.alignfull {
+    // non-aligned content within alignwide and alignfull should have contentWidth.
+    .wp-block-group__inner-container > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright) {
+      max-width: $content-width-max;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  // Blocks with backgrounds have a padding.
+  &.has-background {
+    @include -zf-breakpoint-value(auto, $grid-container-padding) {
+      $gutter: rem-calc($-zf-bp-value);
+
+      padding: ($gutter / 2) $gutter;
+
+      // Let alignfull stretch to the edge.
+      // @note increase specificity to override earlier :not():not()
+      .alignfull.alignfull {
+        margin-left: -$gutter;
+        margin-right: -$gutter;
+        max-width: calc(100% + #{$gutter * 2});
+      }
+    }
+  }
+}

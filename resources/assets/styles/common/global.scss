@@ -7,11 +7,19 @@
  * @see https://git.io/JeyD6
  */
 @each $color-name, $color-value in $foundation-palette {
-  .has-#{$color-name}-color {
-    color: $color-value;
-  }
-
   .has-#{$color-name}-background-color {
-    background-color: $color-value;
+    background-color: $color-value !important;
+    color: color-pick-contrast($color-value, ($black, $white)) !important;
   }
+}
+
+@each $color-name, $color-value in $foundation-palette {
+  .has-#{$color-name}-color {
+    color: $color-value !important;
+  }
+}
+
+// Remove empty trailing paragraphs.
+p:empty:last-child {
+  display: none;
 }

@@ -1,8 +1,11 @@
 // // 1. Global
 // // ---------
 
+$is-frontend: true;
+$content-width-max: rem-calc(674);
+
 // $global-font-size: 100%;
-// $global-width: rem-calc(1200);
+$global-width: rem-calc(1440);
 // $global-lineheight: 1.5;
 // $foundation-palette: (
 //   primary: #1779ba,
@@ -125,9 +128,9 @@
 // $defnlist-margin-bottom: 1rem;
 // $defnlist-term-weight: $global-weight-bold;
 // $defnlist-term-margin-bottom: 0.3rem;
-// $blockquote-color: $dark-gray;
-// $blockquote-padding: rem-calc(9 20 0 19);
-// $blockquote-border: 1px solid $medium-gray;
+$blockquote-color: inherit;
+$blockquote-padding: 0;
+$blockquote-border: 0;
 // $enable-cite-block: true;
 // $keystroke-font: $font-family-monospace;
 // $keystroke-color: $black;
@@ -177,7 +180,7 @@
 // $accordion-plusminus: true;
 // $accordion-plus-content: '\002B';
 // $accordion-minus-content: '\2013';
-// $accordion-title-font-size: rem-calc(12);
+$accordion-title-font-size: 1rem;
 // $accordion-item-color: $primary-color;
 // $accordion-item-background-hover: $light-gray;
 // $accordion-item-padding: 1.25rem 1rem;
@@ -236,8 +239,8 @@
 // $button-padding: 0.85em 1em;
 // $button-margin: 0 0 $global-margin 0;
 // $button-fill: solid;
-// $button-background: $primary-color;
-// $button-background-hover: scale-color($button-background, $lightness: -15%);
+$button-background: $body-font-color;
+$button-background-hover: scale-color($button-background, $lightness: 15%);
 // $button-color: $white;
 // $button-color-alt: $black;
 // $button-radius: $global-radius;
@@ -736,20 +739,20 @@
 // // 50. Table
 // // ---------
 
-// $table-background: $white;
+$table-background: transparent;
 // $table-color-scale: 5%;
-// $table-border: 1px solid smart-scale($table-background, $table-color-scale);
+$table-border: 1px solid rgba(0, 0, 0, 0.1);
 // $table-padding: rem-calc(8 10 10);
 // $table-hover-scale: 2%;
-// $table-row-hover: darken($table-background, $table-hover-scale);
-// $table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
-// $table-is-striped: true;
-// $table-striped-background: smart-scale($table-background, $table-color-scale);
-// $table-stripe: even;
-// $table-head-background: smart-scale($table-background, $table-color-scale / 2);
-// $table-head-row-hover: darken($table-head-background, $table-hover-scale);
-// $table-foot-background: smart-scale($table-background, $table-color-scale);
-// $table-foot-row-hover: darken($table-foot-background, $table-hover-scale);
+$table-row-hover: darken($white, $table-hover-scale);
+$table-row-stripe-hover: darken($white, $table-color-scale + $table-hover-scale);
+$table-is-striped: false;
+$table-striped-background: smart-scale($white, $table-color-scale);
+$table-stripe: odd;
+$table-head-background: inherit;
+$table-head-row-hover: inherit;
+$table-foot-background: inherit;
+$table-foot-row-hover: inherit;
 // $table-head-font-color: $body-font-color;
 // $table-foot-font-color: $body-font-color;
 // $show-header-for-stacked: false;
@@ -821,7 +824,7 @@
 // // -----------
 
 // $xy-grid: true;
-// $grid-container: $global-width;
+$grid-container: $global-width;
 // $grid-columns: 12;
 // $grid-margin-gutters: (
 //   small: 20px,
@@ -829,5 +832,5 @@
 // );
 // $grid-padding-gutters: $grid-margin-gutters;
 // $grid-container-padding: $grid-padding-gutters;
-// $grid-container-max: $global-width;
+$grid-container-max: $global-width;
 // $xy-block-grid-max: 8;
