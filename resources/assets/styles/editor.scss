@@ -3,7 +3,6 @@
  */
 
 @import "~foundation-sites/scss/foundation";
-
 @import 'config/variables';
 @import 'config/external';
 
@@ -51,7 +50,6 @@ $is-frontend: false;
 
   @import 'common/foundation';
   @import 'common/global';
-
   @import 'components';
   @import 'blocks';
 }

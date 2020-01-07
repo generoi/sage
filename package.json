@@ -26,8 +26,7 @@
     "root": true,
     "extends": [
       "plugin:genero/recommended",
-      "plugin:genero/wordpress",
-      "plugin:genero/sass"
+      "plugin:genero/wordpress"
     ]
   },
   "devDependencies": {

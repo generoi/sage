@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 class AccordionComponent {
   constructor(el, options = {}) {
     this.options = Object.assign({}, options);

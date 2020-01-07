@@ -1,7 +1,7 @@
 $content-width-max: 674px !default;
 
 @mixin expanded-alignment(
-  $gutter: 0px,
+  $gutter: 0,
   $sizer: 1,
   $max-width: 0,
   $content-width: 0,

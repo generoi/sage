@@ -7,6 +7,8 @@
 
 // Override foundation core mixin to exclude certain styling in block editor.
 @mixin custom-foundation-typography-base {
+  /* stylelint-disable declaration-empty-line-before, selector-list-comma-newline-after, rule-empty-line-before, at-rule-empty-line-before, block-closing-brace-newline-after */
+
   // Typography resets
   @if $is-frontend {
     // @note this breaks the block editor
