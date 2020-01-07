@@ -81,3 +81,15 @@ add_filter('embed_oembed_html', function ($cache, $url, $attr, $post_id) {
     }
     return $cache;
 }, 10, 4);
+
+/**
+ * Remove Sage's views directory structure from the path that Gutenberg's Block
+ * template feature uses.
+ */
+add_filter('template_include', function ($template_file) {
+    global $_wp_current_template_hierarchy;
+    if (is_array($_wp_current_template_hierarchy)) {
+        $_wp_current_template_hierarchy = array_map('basename', $_wp_current_template_hierarchy);
+    }
+    return $template_file;
+}, 19);
