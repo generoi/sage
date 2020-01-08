@@ -39,6 +39,7 @@ mix.autoload({
 });
 
 mix.options({
+  extractVueStyles: 'styles/vue.css',
   processCssUrls: false,
   postCss: [
     require('postcss-inline-svg')({paths: [mix.config.publicPath]}),
