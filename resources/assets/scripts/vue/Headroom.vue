@@ -1,5 +1,5 @@
 <template>
-  <header ref="container">
+  <header :style="{height: `${height}px`}">
     <div ref="headroom">
       <slot></slot>
     </div>
@@ -67,6 +67,11 @@ export default {
       default: 'headroom--not-bottom'
     }
   },
+  data() {
+    return {
+      height: 0,
+    };
+  },
   mounted() {
     this.$nextTick(this.initHeadroom.bind(this));
     this.resizeObserver = this.initResizeObserver();
@@ -75,11 +80,7 @@ export default {
     initResizeObserver() {
       const observer = new ResizeObserver((entry) => {
         entry = entry[0];
-
-        const height = Math.floor(entry.contentRect.height);
-        this.$nextTick(() => {
-          this.$refs.container.style.height = `${height}px`;
-        });
+        this.height = Math.floor(entry.contentRect.height);
       });
       observer.observe(this.$refs.headroom);
       return observer;
