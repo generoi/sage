@@ -3,25 +3,23 @@
   @include('partials.head')
 
   <body @php(body_class())>
-    <div id="app" class="grid-container">
-      @php(wp_body_open())
-      @php(do_action('get_header'))
-      @include('partials.header')
+    @php(wp_body_open())
+    <div id="app" class="site">
+      <headroom :tolerance="10" :offset="100" class="site-header">
+        @php(do_action('get_header'))
+        @include('partials.header')
+      </headroom>
 
-      <div class="container">
-        <main class="main">
+      <main class="site-content">
+        <div class="grid-container">
           @yield('content')
-        </main>
+        </div>
+      </main>
 
-        @hasSection('sidebar')
-          <aside class="sidebar">
-            @yield('sidebar')
-          </aside>
-        @endif
-      </div>
-
-      @php(do_action('get_footer'))
-      @include('partials.footer')
+      <footer class="site-footer">
+        @php(do_action('get_footer'))
+        @include('partials.footer')
+      </footer>
     </div>
 
     @php(wp_footer())
