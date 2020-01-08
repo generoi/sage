@@ -1,6 +1,6 @@
 <template>
   <header :style="{height: `${height}px`}">
-    <div ref="headroom">
+    <div ref="headroom" v-bind="$attrs">
       <slot></slot>
     </div>
   </header>
@@ -27,6 +27,56 @@
 
 <script>
 import Headroom from 'headroom.js'
+import { ref, onMounted } from "@vue/composition-api";
+
+function useHeadroom(props, { emit }) {
+  const headroom = ref(null);
+
+  onMounted(() => {
+    const el = headroom.value;
+    const headroomObject = new Headroom(el, {
+      offset: props.offset,
+      tolerance: props.tolerance,
+      classes: {
+        initial: props.initial,
+        pinned: props.pinned,
+        unpinned: props.unpinned,
+        top: props.top,
+        notTop: props.notTop,
+        bottom: props.bottom,
+        notBottom: props.notBottom
+      },
+      onPin: () => emit('onPin', el),
+      onUnpin: () => emit('onUnpin', el),
+      onTop: () => emit('onTop', el),
+      onNotTop: () => emit('onNotTop', el),
+      onBottom: () => emit('onBottom', el),
+      onNotBottom: () => emit('onNotBottom', el),
+    });
+    headroomObject.init();
+  });
+
+  return {
+    headroom,
+  };
+}
+
+function useResizeObserver(element) {
+  const height = ref(0);
+  const observer = new ResizeObserver((entry) => {
+    entry = entry[0];
+    height.value = Math.floor(entry.contentRect.height);
+  });
+
+  onMounted(() => {
+    observer.observe(element.value);
+  })
+
+  return {
+    height,
+  }
+}
+
 
 export default {
   props: {
@@ -67,50 +117,15 @@ export default {
       default: 'headroom--not-bottom'
     }
   },
-  data() {
+  setup(props, context) {
+    const { headroom } = useHeadroom(props, context);
+    const { height } = useResizeObserver(headroom);
+
     return {
-      height: 0,
+      headroom,
+      height
     };
   },
-  mounted() {
-    this.$nextTick(this.initHeadroom.bind(this));
-    this.resizeObserver = this.initResizeObserver();
-  },
-  methods: {
-    initResizeObserver() {
-      const observer = new ResizeObserver((entry) => {
-        entry = entry[0];
-        this.height = Math.floor(entry.contentRect.height);
-      });
-      observer.observe(this.$refs.headroom);
-      return observer;
-    },
-    initHeadroom() {
-      const el = this.$refs.headroom;
-
-
-      const headroom = new Headroom(el, {
-        offset: this.offset,
-        tolerance: this.tolerance,
-        classes: {
-          initial: this.initial,
-          pinned: this.pinned,
-          unpinned: this.unpinned,
-          top: this.top,
-          notTop: this.notTop,
-          bottom: this.bottom,
-          notBottom: this.notBottom
-        },
-        onPin: () => this.$emit('onPin', el),
-        onUnpin: () => this.$emit('onUnpin', el),
-        onTop: () => this.$emit('onTop', el),
-        onNotTop: () => this.$emit('onNotTop', el),
-        onBottom: () => this.$emit('onBottom', el),
-        onNotBottom: () => this.$emit('onNotBottom', el),
-      });
-
-      headroom.init();
-    }
-  }
 }
+
 </script>
