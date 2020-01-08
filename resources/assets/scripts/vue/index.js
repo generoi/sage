@@ -1,6 +1,9 @@
 import Vue from 'vue';
+import VueCompositionApi, { onMounted, onErrorCaptured, reactive } from "@vue/composition-api";
 
 import Headroom from './Headroom.vue';
+
+Vue.use(VueCompositionApi);
 
 export function init(element, options) {
   return new Promise((resolve, reject) => {
@@ -9,21 +12,21 @@ export function init(element, options) {
       components: {
         Headroom,
       },
-      data() {
-        return Object.assign({
-          loading: true,
+      setup() {
+        const state = reactive(Object.assign({
+          isLoading: true,
           isEditor: false,
-        }, options);
-      },
-      mounted() {
-        this.$nextTick(() => {
-          this.loading = false
+        }, options));
+
+        onMounted(() => {
+          state.isLoading = false;
           resolve(app);
         });
+
+        onErrorCaptured((err) => reject(err));
+
+        return state;
       },
-      errorCaptured(err) {
-        reject(err);
-      }
     });
   });
 }
