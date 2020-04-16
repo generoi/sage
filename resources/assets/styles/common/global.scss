@@ -19,6 +19,21 @@
   }
 }
 
+/**
+ * Block editor font size utilities
+ */
+$font-sizes: (
+  small: rem-calc(14),
+  normal: rem-calc(16),
+  large: rem-calc(22),
+) !default;
+
+@each $size-name, $size-value in $font-sizes {
+  .has-#{$size-name}-font-size {
+    font-size: $size-value !important;
+  }
+}
+
 // Remove empty trailing paragraphs.
 p:empty:last-child {
   display: none;

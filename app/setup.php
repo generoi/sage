@@ -128,9 +128,19 @@ add_action('after_setup_theme', function () {
 
     add_theme_support('editor-font-sizes', [
         [
+            'name' => __('small', 'sage'),
+            'slug' => 'small',
+            'size' => 14,
+        ],
+        [
             'name' => __('normal', 'sage'),
             'slug' => 'normal',
             'size' => 16,
+        ],
+        [
+            'name' => __('large', 'sage'),
+            'slug' => 'large',
+            'size' => 22,
         ],
     ]);
 
