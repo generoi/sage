@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import $ from 'jquery';
+// import $ from 'jquery';
 
 /**
  * Internal Dependencies

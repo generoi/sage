@@ -23,7 +23,7 @@ export function init(element, options) {
       },
       errorCaptured(err) {
         reject(err);
-      }
+      },
     });
   });
 }
