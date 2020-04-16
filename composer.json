@@ -46,6 +46,7 @@
     "generoi/sage-demo-content": "dev-master",
     "generoi/sage-polylang": "dev-master",
     "generoi/sage-woocommerce": "dev-master",
+    "log1x/navi": "^1.0",
     "roots/acorn": "^1.0.1"
   },
   "require-dev": {

@@ -324,8 +324,8 @@ $button-background-hover: scale-color($button-background, $lightness: 15%);
 // // 16. Drilldown
 // // -------------
 
+$drilldown-arrows: false;
 // $drilldown-transition: transform 0.15s linear;
-// $drilldown-arrows: true;
 // $drilldown-padding: $global-menu-padding;
 // $drilldown-nested-margin: 0;
 // $drilldown-background: $white;
@@ -352,7 +352,7 @@ $button-background-hover: scale-color($button-background, $lightness: 15%);
 // // 18. Dropdown Menu
 // // -----------------
 
-// $dropdownmenu-arrows: true;
+$dropdownmenu-arrows: false;
 // $dropdownmenu-arrow-color: $anchor-color;
 // $dropdownmenu-arrow-size: 6px;
 // $dropdownmenu-arrow-padding: 1.5rem;
