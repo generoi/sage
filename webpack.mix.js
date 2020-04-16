@@ -23,7 +23,10 @@ mix.sass('resources/assets/styles/app.scss', 'styles')
    .sass('resources/assets/styles/editor.scss', 'styles')
    .purgeCss({
      whitelist: require('purgecss-with-wordpress').whitelist,
-     whitelistPatterns: require('purgecss-with-wordpress').whitelistPatterns,
+     whitelistPatterns: [
+      ...require('purgecss-with-wordpress').whitelistPatterns,
+      ...require('purgecss-with-wordpress').foundationSitesPatterns,
+     ],
    });
 
 mix.js('resources/assets/scripts/app.js', 'scripts')
