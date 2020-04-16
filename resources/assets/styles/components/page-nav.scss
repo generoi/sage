@@ -1,0 +1,22 @@
+.page-nav {
+  @include pagination-container;
+
+  a {
+    display: inline-block;
+  }
+
+  text-align: center;
+}
+
+.post-page-numbers {
+  margin-right: $pagination-item-spacing;
+  font-size: $pagination-font-size;
+  padding: $pagination-item-padding;
+  border-radius: $pagination-radius;
+  color: $pagination-item-color;
+  text-decoration: none;
+
+  &.current {
+    @include pagination-item-current;
+  }
+}
