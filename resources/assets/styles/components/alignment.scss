@@ -1,11 +1,13 @@
 $content-width-max: 674px !default;
 
+/* stylelint-disable length-zero-no-unit */
 @mixin expanded-alignment(
-  $gutter: 0,
+  $gutter: 0px,
   $sizer: 1,
   $max-width: 0,
   $content-width: 0,
 ) {
+  /* stylelint-enable */
   // Default is full aligned with optional gutter.
   margin-left: calc(50% - 50vw + #{$gutter / 2});
   margin-right: calc(50% - 50vw + #{$gutter / 2});
