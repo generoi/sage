@@ -38,6 +38,7 @@ $content-width-max: 674px !default;
   }
 }
 
+// @todo maybe we can have this on both?
 @if $is-frontend {
   .alignwide {
     @include expanded-alignment(
@@ -64,27 +65,29 @@ $content-width-max: 674px !default;
     margin-right: 0;
   }
 
-  // Disable floated aligns on small screens.
-  .alignleft,
-  .alignright {
-    float: none;
-    margin-left: auto;
-    margin-right: auto;
+}
+
+// Disable floated aligns on small screens.
+.alignleft,
+.alignright {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Align float at same viewport width as WP core.
+// @todo blockquote has some extra spacing
+@media (min-width: 640px) {
+  .alignleft {
+    margin-right: $global-margin;
+    margin-bottom: $global-margin;
+    float: left;
   }
 
-  // Align float at same viewport width as WP core.
-  @media (min-width: 640px) {
-    .alignleft {
-      margin-right: $global-margin;
-      margin-bottom: $global-margin;
-      float: left;
-    }
-
-    .alignright {
-      margin-left: $global-margin;
-      margin-bottom: $global-margin;
-      float: right;
-    }
+  .alignright {
+    margin-left: $global-margin;
+    margin-bottom: $global-margin;
+    float: right;
   }
 }
 

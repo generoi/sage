@@ -4,21 +4,15 @@
 
 .wp-block-button {
   color: $button-color;
+  border-radius: 0;
+  background-color: $button-background;
 
-  &__link {
-    border-radius: 0;
+  &:hover,
+  &:focus {
+    background-color: $button-background-hover;
   }
 
-  &__link {
-    background-color: $button-background;
-
-    &:hover,
-    &:focus {
-      background-color: $button-background-hover;
-    }
-  }
-
-  &.is-style-outline .wp-block-button__link {
+  &.is-style-outline {
     color: $button-background;
     background-color: transparent;
 
