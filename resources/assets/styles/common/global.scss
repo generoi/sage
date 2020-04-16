@@ -38,3 +38,8 @@ $font-sizes: (
 p:empty:last-child {
   display: none;
 }
+
+// Remove trailing space below last paragraph in a container
+p:last-child {
+  margin-bottom: 0;
+}
