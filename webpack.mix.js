@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
-            require('laravel-mix-wp-blocks');
-            require('laravel-mix-purgecss');
-            require('laravel-mix-copy-watched');
+require('@tinypixelco/laravel-mix-wp-blocks');
+require('laravel-mix-purgecss');
+require('laravel-mix-copy-watched');
 
 /*
  |--------------------------------------------------------------------------
@@ -20,15 +20,18 @@ mix.setPublicPath('./dist')
 mix.sass('resources/assets/styles/app.scss', 'styles')
    .sass('resources/assets/styles/admin.scss', 'styles')
    .sass('resources/assets/styles/editor.scss', 'styles')
-   .purgeCss();
+   .purgeCss({
+     whitelist: require('purgecss-with-wordpress').whitelist,
+     whitelistPatterns: require('purgecss-with-wordpress').whitelistPatterns,
+   });
 
 mix.js('resources/assets/scripts/app.js', 'scripts')
    .js('resources/assets/scripts/customizer.js', 'scripts')
    .blocks('resources/assets/scripts/editor.js', 'scripts')
    .extract();
 
-mix.copyWatched('resources/assets/images', 'dist/images')
-   .copyWatched('resources/assets/fonts', 'dist/fonts');
+mix.copyWatched('resources/assets/images/**', 'dist/images')
+   .copyWatched('resources/assets/fonts/**', 'dist/fonts');
 
 mix.copy('resources/assets/scripts/polyfill.js', 'dist/scripts/polyfill.js')
   .copy('node_modules/jquery/dist/jquery.min.js', 'dist/scripts/jquery.js');
