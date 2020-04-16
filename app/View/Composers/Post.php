@@ -26,7 +26,16 @@ class Post extends Composer
     {
         return [
             'title' => $this->title(),
+            'printPageHeading' => $this->printPageHeading(),
         ];
+    }
+
+    /**
+     * Do not print page heading if there's an <h1> tag in the content.
+     */
+    public function printPageHeading(): bool
+    {
+        return strpos(get_the_content(), '</h1>') === false;
     }
 
     /**
