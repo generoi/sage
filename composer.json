@@ -38,8 +38,14 @@
       "App\\": "app/"
     }
   },
+  "repositories": [
+    { "type": "composer", "url": "https://packagist.minasithil.genero.fi/" }
+  ],
   "require": {
     "php": "^7.2.5",
+    "generoi/sage-demo-content": "dev-master",
+    "generoi/sage-polylang": "dev-master",
+    "generoi/sage-woocommerce": "dev-master",
     "roots/acorn": "^1.0.1"
   },
   "require-dev": {

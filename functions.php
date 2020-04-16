@@ -29,7 +29,7 @@ require $composer;
 |
 */
 
-collect(['helpers', 'setup', 'filters', 'admin', 'demo'])
+collect(['helpers', 'setup', 'filters', 'admin'])
     ->each(function ($file) {
         $file = "app/{$file}.php";
 
