@@ -2,6 +2,7 @@ const mix = require('laravel-mix');
 require('@tinypixelco/laravel-mix-wp-blocks');
 require('laravel-mix-purgecss');
 require('laravel-mix-copy-watched');
+require('palette-webpack-plugin/src/mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -36,6 +37,15 @@ mix.copyWatched('resources/assets/images/**', 'dist/images')
 mix.copy('resources/assets/scripts/polyfill.js', 'dist/scripts/polyfill.js')
   .copy('node_modules/jquery/dist/jquery.min.js', 'dist/scripts/jquery.js');
 
+mix.palette({
+  output: 'palette.json',
+  pretty: false,
+  sass: {
+    path: 'resources/assets/styles/config',
+    files: ['theme.scss'],
+    variables: ['color-palette'],
+  },
+});
 
 mix.autoload({
   jquery: ['$', 'window.jQuery'],
