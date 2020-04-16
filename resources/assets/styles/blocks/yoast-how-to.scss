@@ -1,4 +1,6 @@
 .schema-how-to {
+  text-align: left;
+
   @if not $is-frontend {
     &-steps {
       padding-left: 0;

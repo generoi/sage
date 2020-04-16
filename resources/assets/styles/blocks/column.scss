@@ -6,4 +6,10 @@
     margin-left: 0;
     margin-right: 0;
   }
+
+  // On mobile stacked columns need gutters.
+  // Note breakpoint is taken from wp core.
+  @media (max-width: 782px) {
+    margin-bottom: $global-margin;
+  }
 }

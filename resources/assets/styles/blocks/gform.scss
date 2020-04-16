@@ -1,10 +1,34 @@
 .gform_wrapper {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  .gform_heading {
+    margin-bottom: 0;
+  }
+
+  .gform_footer {
+    text-align: center;
+  }
+
+  .gform_description:empty {
+    display: none;
+  }
+
+  h3.gform_title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
   @if not $is-frontend {
     #{text-inputs()},
     select,
     textarea {
       @include form-element;
     }
+  }
+
+  .gform_fields > li.gfield:first-child {
+    margin-top: 0;
   }
 
   .gform_fileupload_multifile .gform_drop_area,

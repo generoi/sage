@@ -1,4 +1,6 @@
 .schema-faq {
+  text-align: left;
+
   @if not $is-frontend {
     // Remove the default styling
     &-section {

@@ -1,5 +1,7 @@
 .contact-form,
 .wp-block-jetpack-contact-form {
+  text-align: left;
+
   @if not $is-frontend {
     .components-textarea-control__input,
     .components-text-control__input {

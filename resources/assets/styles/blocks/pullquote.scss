@@ -8,6 +8,10 @@
     margin-bottom: 0;
   }
 
+  blockquote cite {
+    color: inherit;
+  }
+
   @if not $is-frontend {
     @at-root {
       // This is added on front-end but for some reason not back-end.
