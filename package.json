@@ -20,7 +20,8 @@
     "test": "run-s -c lint",
     "translate": "run-s -c translate:*",
     "translate:pot": "wp i18n make-pot . ./resources/languages/sage.pot --ignore-domain --include=\"app,resources/assets,resources/views\"",
-    "translate:js": "wp i18n make-json ./resources/languages --no-purge --pretty-print"
+    "translate:js": "wp i18n make-json ./resources/languages --no-purge --pretty-print",
+    "storybook": "start-storybook"
   },
   "eslintConfig": {
     "root": true,
@@ -31,11 +32,16 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-docs": "^5.3.18",
+    "@storybook/react": "^5.3.18",
     "@tinypixelco/laravel-mix-wp-blocks": "^1.0.0",
     "@wordpress/babel-preset-default": "^4.11.0",
+    "@wordpress/base-styles": "^1.6.0",
+    "@wordpress/block-library": "^2.16.1",
     "@wordpress/browserslist-config": "^2.6.0",
     "@wordpress/dependency-extraction-webpack-plugin": "^2.4.0",
     "babel-eslint": "^10.1.0",
+    "babel-preset-vue": "^2.0.2",
     "browser-sync": "^2.26.7",
     "browser-sync-webpack-plugin": "^2.0.1",
     "cross-env": "^7.0.2",
