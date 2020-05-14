@@ -1,0 +1,9 @@
+@use '~genero-design-system/src/components/gds-button' as button;
+
+/**
+ * Button
+ */
+
+.wp-block-button {
+  @include button.base;
+}

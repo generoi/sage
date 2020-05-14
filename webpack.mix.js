@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const sass = require('sass');
 require('@tinypixelco/laravel-mix-wp-blocks');
 require('laravel-mix-purgecss');
 require('laravel-mix-copy-watched');
@@ -18,9 +19,9 @@ require('palette-webpack-plugin/src/mix');
 mix.setPublicPath('./dist')
    .browserSync('sage.test');
 
-mix.sass('resources/assets/styles/app.scss', 'styles')
-   .sass('resources/assets/styles/admin.scss', 'styles')
-   .sass('resources/assets/styles/editor.scss', 'styles')
+mix.sass('resources/assets/styles/app.scss', 'styles', {implementation: sass})
+   .sass('resources/assets/styles/admin.scss', 'styles', {implementation: sass})
+   .sass('resources/assets/styles/editor.scss', 'styles', {implementation: sass})
    .purgeCss({
      whitelist: require('purgecss-with-wordpress').whitelist,
      whitelistPatterns: [

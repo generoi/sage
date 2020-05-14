@@ -1,7 +1,10 @@
 /** Config */
-@import 'config/theme';
-@import 'config/variables';
-@import 'config/external';
+@use 'config/theme';
+@use 'config/variables';
+@use 'config/external';
 
 /** Common */
-@import 'common/frontend';
+@use 'common/frontend';
+
+/** Blocks */
+@use 'blocks';
