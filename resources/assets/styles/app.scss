@@ -1,21 +1,7 @@
-/** Libraries */
-@import "~foundation-sites/scss/foundation";
-
 /** Config */
 @import 'config/theme';
 @import 'config/variables';
 @import 'config/external';
 
 /** Common */
-@import 'common/foundation';
 @import 'common/frontend';
-@import 'common/global';
-
-/** Components */
-@import 'components';
-
-/** Blocks */
-@import 'blocks';
-
-/** Partials */
-@import 'partials/header';
