@@ -2,6 +2,9 @@ import Vue from 'vue';
 
 import Headroom from './Headroom.vue';
 
+// Ignore all components prefixed with 'gds'
+Vue.config.ignoredElements = [/gds-\w*/];
+
 export function init(element, options) {
   return new Promise((resolve, reject) => {
     const app = new Vue({

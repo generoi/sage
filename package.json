@@ -43,7 +43,7 @@
     "eslint-plugin-genero": "git+https://github.com/generoi/eslint-plugin-genero.git",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.1.2",
-    "genero-design-system": "github:generoi/genero-design-system#sass",
+    "genero-design-system": "0.0.2-beta.0",
     "laravel-mix": "^5.0.4",
     "laravel-mix-copy-watched": "^2.2.3",
     "laravel-mix-purgecss": "^5.0.0-rc.1",
