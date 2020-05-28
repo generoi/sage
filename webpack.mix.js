@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const path = require('path');
 require('@tinypixelco/laravel-mix-wp-blocks');
 require('laravel-mix-purgecss');
 require('laravel-mix-copy-watched');
@@ -22,6 +23,9 @@ mix.sass('resources/assets/styles/app.scss', 'styles')
    .sass('resources/assets/styles/admin.scss', 'styles')
    .sass('resources/assets/styles/editor.scss', 'styles')
    .purgeCss({
+     extend: {
+       content: [path.join(__dirname, 'index.php')],
+     },
      whitelist: require('purgecss-with-wordpress').whitelist,
      whitelistPatterns: [
       ...require('purgecss-with-wordpress').whitelistPatterns,
