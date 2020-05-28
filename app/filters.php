@@ -16,6 +16,15 @@ add_filter('excerpt_more', function () {
 });
 
 /**
+ * Disable Drop Cap feature on paragraph blocks.
+ */
+add_filter('block_editor_settings', function ($settings) {
+    $settings['__experimentalDisableDropCap'] = true;
+
+    return $settings;
+});
+
+/**
  * Remove wpautop filter if there are blocks found.
  */
 foreach (['the_content', 'spu/popup/content'] as $filter) {
